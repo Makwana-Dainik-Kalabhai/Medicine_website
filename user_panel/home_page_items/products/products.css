@@ -1,0 +1,184 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Mukta:wght@200;300;400;500;600;700;800&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
+#heading {
+    color: #0000cc;
+    font-size: 35px;
+    text-align: center;
+}
+
+/* //! product_shop by category */
+#product_shop_category {
+    width: 100%;
+    padding: 0.5% 2% 2% 2%;
+    margin: 0 auto;
+    margin-bottom: 2.5%;
+    background: linear-gradient(#f2f2f2, #da7171);
+    font-size: 30px;
+}
+
+#product_shop_category>div {
+    display: flex;
+    align-items: center;
+}
+
+#product_shop_category div::-webkit-scrollbar {
+    display: none;
+}
+
+#product_shop_category>p {
+    color: #1e5162;
+    margin: 1% 0;
+    font-family: "Ubuntu", sans-serif;
+}
+
+#product_shop_category #products {
+    display: flex;
+    align-items: center;
+    overflow: auto;
+    padding: 1% 2%;
+    padding-left: 0.5%;
+    margin-left: 5%;
+    border: 3px solid;
+    border-radius: 5px;
+}
+
+#product_shop_category img {
+    display: block !important;
+}
+
+#product_shop_category .box {
+    padding: 1.7%;
+    margin: 0 0.7%;
+    width: 250px;
+    height: 320px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+#product_shop_category .box>a {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+}
+
+#product_shop_category img {
+    height: 210px;
+}
+
+#product_shop_category .category {
+    width: 100%;
+    display: block;
+    color: white;
+    font-size: 0.7em;
+    line-height: 1.5;
+    padding: 0.5% 2%;
+    margin-top: 2%;
+    background-color: #30819c;
+    text-align: center;
+    border-radius: 3px;
+}
+
+
+
+/* //! Popular Products */
+#popular_product {
+    width: 100%;
+    padding: 0.5% 2% 2% 2%;
+    margin: 0 auto;
+    margin-bottom: 2.5%;
+    font-size: 30px;
+    background: linear-gradient(to left bottom, white, #ffa500);
+}
+
+#popular_product>div {
+    display: flex;
+    align-items: center;
+}
+
+#popular_product div::-webkit-scrollbar {
+    display: none;
+}
+
+#popular_product>p {
+    color: #1e5162;
+    margin: 1% 0;
+    font-family: "Ubuntu", sans-serif;
+}
+
+#popular_product>div>img {
+    border-radius: 50%;
+}
+
+#popular_product #products {
+    display: flex;
+    align-items: center;
+    overflow: auto;
+    border-radius: 7x;
+    padding: 1%;
+    margin-right: 5%;
+    border: 3px solid white;
+    border-radius: 5px;
+}
+
+#popular_product .box {
+    height: fit-content;
+    padding: 1%;
+    margin: 0 1%;
+    border: 3px solid #30819c;
+    border-top: 7px solid #30819c;
+    border-radius: 5px;
+    background-color: white;
+}
+
+#popular_product .box>a {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    width: 230px;
+    height: 310px;
+}
+
+#popular_product .box img {
+    width: 100%;
+}
+
+#popular_product .box div {
+    line-height: 1;
+    width: 95%;
+    margin: 0 auto;
+}
+
+#popular_product #name {
+    width: 95%;
+    margin: 0 auto;
+    color: black;
+    font-size: 0.55em;
+    line-height: 1.25;
+    margin-top: 2%;
+    border-radius: 3px;
+}
+#popular_product #price {
+    color: gray;
+    display: inline;
+    font-size: 0.6em;
+    text-decoration: line-through;
+}
+#popular_product #off_price {
+    color: red;
+    display: inline;
+    font-size: 0.65em;
+}
+
+#popular_product .box a:last-of-type {
+    width: 95%;
+    height: fit-content;
+    margin: 0 auto;
+    margin-top: 10%;
+    display: block;
+    font-size: 0.7em;
+    padding: 0.5% 2%;
+    color: white;
+    background-color: #30819c;
+    border-radius: 2.5px;
+    text-align: center;
+}

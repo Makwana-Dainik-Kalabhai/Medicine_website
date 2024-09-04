@@ -1,0 +1,166 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    width: 100%;
+    background-color: #f2f2f2 !important;
+}
+
+main {
+    width: 100%;
+    font-size: 30px;
+    padding: 4% 0;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: gray;
+    border-radius: 25px;
+}
+
+/* Wishlist main div */
+#wishlist {
+    width: 70%;
+    margin: 3% auto;
+}
+
+/* Wishlist Header */
+#wishlist_header {
+    margin: 0.1% 0;
+    padding: 2% 4%;
+    border-radius: 5px;
+    background-color: white;
+}
+
+#wishlist_header h1 {
+    color: #2a7189;
+    font-size: 0.92em;
+}
+
+
+/* Wishlist products */
+#wishlist_products {
+    width: 100%;
+}
+
+#box {
+    width: 96%;
+    padding: 1.5% 3%;
+    display: flex;
+    text-decoration: none;
+}
+
+ 
+#products {
+    position: relative;
+    width: 100%;
+    margin: 0.7% 0;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: white;
+}
+
+#products:hover {
+    background-color: rgba(173, 216, 230, 0.5);
+}
+
+/* Item Image */
+#product_img {
+    width: 20%;
+    border-radius: 20px;
+}
+
+#product_img img {
+    width: 100%;
+    border-radius: 20px;
+}
+
+
+/* //! Product Details */
+#product_details {
+    width: 80%;
+    margin-left: 5%;
+    text-align: justify;
+}
+
+#product_details #name {
+    color: black;
+    display: block;
+    font-size: 0.8em;
+    font-weight: 500;
+    line-height: 1.5;
+    text-transform: capitalize;
+}
+
+#product_details #off_price {
+    color: red;
+    font-size: 0.77em;
+}
+
+#product_details #price {
+    color: gray;
+    font-size: 0.7em;
+    text-decoration: line-through;
+}
+
+/* Discount */
+#product_details #dis {
+    color: green;
+    font-size: 0.6em;
+}
+
+#product_details #def {
+    display: block;
+    color: gray;
+    font-size: 0.65em;
+    line-height: 1.3;
+    margin-top: 1.5%;
+}
+
+/* Remove btn */
+#products #remove_btn {
+    position: absolute;
+    top: 9%;
+    right: 2%;
+    font-size: 1.2vw;
+    color: #2a7189;
+}
+
+#products #remove_btn:hover {
+    color: #1e5162;
+}
+
+
+/* If wishlist is empty, then dispay that */
+#empty_wishlist {
+    width: 65%;
+    padding: 5% 7%;
+    margin: 3% auto;
+    background-color: white;
+    display: grid;
+    place-items: center;
+    border-radius: 10px;
+}
+
+#empty_wishlist h1 {
+    font-size: 1em;
+    font-weight: 600;
+    margin-bottom: 10%;
+}
+
+#empty_wishlist a {
+    color: white;
+    border: none;
+    font-size: 0.8em;
+    font-weight: 600;
+    padding: 0.3% 2.5%;
+    background-color: #30819c;
+    text-decoration: none;
+    border-radius: 3px;
+}

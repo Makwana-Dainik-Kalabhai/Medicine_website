@@ -1,0 +1,203 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#main_footer {
+    width: 100%;
+    padding: 1% 0;
+    font-size: 30px;
+    background: linear-gradient(white, #76bdd5);
+    border-top: 1px solid rgba(128, 128, 128, 0.2);
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+
+#main_footer>div {
+    width: 85%;
+    padding: 1%;
+    margin: 0 auto;
+    font-family: "Josefin Sans", sans-serif;
+}
+
+/* //! Footer-1 */
+/* First Company logo */
+#company {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 95%;
+    padding: 1.5%;
+    margin: auto;
+}
+
+
+
+/* Footer-1 logo */
+#company #logo {
+    display: flex;
+    align-items: center;
+    width: 3%;
+    height: 100%;
+    text-shadow: 3.5px 2px 0px white;
+    font-weight: 600;
+}
+
+#company #logo img {
+    width: 100%;
+    animation: none;
+}
+
+#logo span {
+    color: #0000b3;
+}
+
+#company #description {
+    width: 75%;
+}
+
+#company #description span {
+    color: gray;
+    font-size: 0.7em;
+}
+
+
+/* //! Footer-2 */
+#footer2 {
+    width: 100%;
+    padding: 1%;
+    padding-top: 3% !important;
+}
+
+#footer2 #all_links {
+    display: flex;
+}
+
+#footer2 #all_links>div {
+    display: block;
+    width: 100%;
+}
+
+#footer2 #all_links span, #footer2 #all_links a {
+    color: black;
+    display: block;
+    text-decoration: none;
+}
+
+#footer2 #all_links span {
+    font-size: 0.67em;
+    font-weight: 600;
+}
+
+#footer2 #all_links a {
+    font-size: 0.58em;
+    font-weight: 100;
+    line-height: 1.5;
+}
+
+#footer2 #all_links a:first-of-type {
+    margin-top: 5px;
+}
+
+#footer2 #office_address p {
+    color: gray;
+    font-size: 0.65em;
+    margin-top: 5px;
+}
+
+#footer2 #cus_care {
+    margin-top: 7%;
+}
+
+#footer2 #cus_care span {
+    font-size: 0.9em;
+    font-weight: 400;
+}
+
+#footer2 #cus_care p {
+    color: red;
+    font-size: 1em;
+}
+
+
+
+/* //! Footer-3 */
+#footer3 {
+    width: 95%;
+    padding: 1%;
+}
+
+#payment span {
+    display: block;
+    font-size: 0.9em;
+}
+
+#payment {
+    display: flex;
+    align-items: center;
+}
+
+#payment img {
+    width: 10.5%;
+    margin-top: -1.5%;
+    margin-right: 1.5%;
+}
+
+#payment #paytm {
+    width: 5.5%;
+}
+
+#payment #cash {
+    width: 6.5%;
+    transform: rotate(45deg);
+}
+
+
+
+
+/* //! Footer-4 */
+#footer4 {
+    width: 100%;
+}
+
+#footer4>div {
+    width: 100%;
+    margin-top: 1%;
+    display: flex;
+    align-items: center;
+}
+
+#footer4>div>div {
+    width: 100%;
+}
+
+#footer4 #copy_right span {
+    font-size: 0.7em;
+}
+
+
+/* Social Meadia */
+#footer4 #social_media {
+    display: flex;
+    justify-content: flex-end;
+}
+
+#footer4 #social_media a {
+    display: grid;
+    place-items: center;
+    color: black;
+    font-size: 0.75em;
+    width: 37px;
+    height: 37px;
+    margin-right: 3%;
+    border: 1.5px solid black;
+    border-radius: 50%;
+    text-decoration: none;
+}
+
+#footer4 #social_media a:hover {
+    color: black;
+    background-color: white;
+    border: none;
+    transition: 0.3s linear;
+}

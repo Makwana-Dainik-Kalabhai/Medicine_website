@@ -1,0 +1,201 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    width: 100%;
+}
+
+main {
+    width: 100%;
+    padding: 4% 0 7% 0;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Mukta:wght@200;300;400;500;600;700;800&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+/* signUp and Login Forms */
+.regi_form {
+    display: flex;
+    margin: 3% auto;
+    width: 65%;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px 1px gray;
+    overflow: hidden;
+}
+
+.regi_form>div {
+    width: 100%;
+    position: relative;
+    padding: 1% 2%;
+    font-size: 30px;
+    font-family: "Mukta", sans-serif;
+}
+
+
+/* //! Left Image */
+.left_img {
+    width: 100%;
+    padding: 2%;
+}
+
+.left_img img {
+    width: 100%;
+}
+
+
+/* //! Main Form */
+/* Form Error */
+#form_error,
+#form_succ {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    color: white;
+    padding: 1.5%;
+    margin-bottom: 2%;
+    font-size: 0.6em;
+    animation: slide 0.3s linear;
+}
+
+@keyframes slide {
+    from {
+        top: -8%;
+    }
+
+    to {
+        top: 0;
+    }
+}
+
+#form_error {
+    background-color: #ef000f;
+}
+
+#form_succ {
+    background-color: #04aa6d;
+}
+
+
+#form_error i {
+    margin: 0 2%;
+}
+
+.regi_form span {
+    display: block;
+}
+
+.regi_form .max_try {
+    color: red;
+}
+
+.regi_form .heading {
+    color: #30819c;
+    font-size: 1em;
+    font-weight: 600;
+}
+
+.regi_form  .description {
+    color: gray;
+    font-size: 0.6em;
+    margin-top: 3%;
+}
+
+.regi_form form {
+    margin-top: 7%;
+    height: 350px;
+}
+
+/* //! Input types */
+.regi_form label {
+    color: #30819c;
+    display: block;
+    font-size: 0.65em;
+    font-weight: 600;
+    margin-top: 3%;
+}
+
+.regi_form input {
+    width: 90%;
+    padding: 1% 0;
+    font-size: 0.65em;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid gray;
+}
+
+.pass_div {
+    position: relative;
+}
+
+.pass_div i {
+    position: absolute;
+    top: 50%;
+    right: 13%;
+    transform: translate(0, -50%);
+    color: #0000b3;
+    font-size: 0.6em;
+}
+
+#pass_des {
+    color: green;
+    font-size: 0.55em;
+}
+
+.regi_form input::placeholder {
+    font-size: 0.9em;
+}
+
+.regi_form input:focus {
+    border-bottom: 2px solid gray;
+}
+
+#forget_pass_link {
+    font-size: 0.6em;
+}
+
+
+.btns {
+    position: absolute;
+    bottom: 3%;
+    width: 100%;
+}
+
+.regi_form .btns input {
+    color: white;
+    background-color: #30819c;
+    width: fit-content;
+    padding: 0.3% 5%;
+    font-size: 0.65em;
+    border-radius: 3.5px;
+}
+
+.btns a {
+    font-size: 0.65em;
+}
+
+
+/* //! If email id is exist in admin & user both */
+#admin_user {
+    width: 100%;
+    margin: 0;
+    background-color: #f2f2f2;
+}
+
+#admin_user span:first-of-type {
+    font-size: 0.85em;
+    margin-top: 5%;
+    color: #30819c;
+}
+
+#admin_user span:last-of-type {
+    font-size: 0.75em;
+    margin-top: 10%;
+}
+
+#admin_user a {
+    font-size: 0.7em;
+    margin-right: 5%;
+}

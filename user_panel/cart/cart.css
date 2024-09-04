@@ -1,0 +1,357 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    background-color: #f2f2f2 !important;
+}
+
+main {
+    width: 100%;
+    font-size: 25px;
+    padding: 4% 0;
+}
+
+#cart {
+    padding: 3% 0;
+    width: 100%;
+    display: flex !important;
+}
+
+#cart #product {
+    width: 65%;
+    height: 100%;
+    margin: 0 2%;
+}
+
+#cart #cart_header {
+    padding: 1% 0;
+    padding-left: 2%;
+    margin-bottom: 1%;
+    background-color: white;
+    border-radius: 3px;
+}
+
+#cart #cart_header h1 {
+    font-size: 0.93em;
+}
+
+/* //! All Products */
+#products {
+    width: 100%;
+    display: flex;
+    background-color: white;
+    border-bottom: 1.5px solid #1e5162;
+    border-radius: 3px;
+}
+
+#products #box {
+    color: black;
+    text-decoration: none;
+}
+
+#products #product_img {
+    width: 20%;
+    padding: 2%;
+}
+
+#products #product_img img {
+    width: 100%;
+}
+
+/* Increment and Decrement Quantity */
+#products form {
+    width: 110px;
+    height: 25px;
+    margin: auto;
+    margin-top: 5%;
+    display: flex;
+    align-items: center;
+}
+
+#products form input {
+    font-size: 0.7em;
+    width: 100%;
+    height: 100%;
+    padding-left: 3%;
+    margin: 0 6%;
+    outline: none;
+    border: none;
+    border-radius: 2px;
+    box-shadow: 0px 0px 1px 0.5px rgba(128, 128, 128, 1);
+}
+
+#products form button {
+    width: 50px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0px 0px 1px 0.5px rgba(128, 128, 128, 1);
+}
+
+/* //! Product Details */
+#product_details {
+    position: relative;
+    width: 80%;
+    padding: 3%;
+}
+
+#product_details #name {
+    color: black;
+    display: block;
+    font-size: 0.8em;
+    font-weight: 500;
+    line-height: 1.5;
+    text-transform: capitalize;
+}
+
+#product_details #off_price {
+    color: red;
+    font-size: 0.77em;
+}
+
+#product_details #price {
+    color: gray;
+    font-size: 0.7em;
+    text-decoration: line-through;
+}
+
+/* Discount */
+#product_details #dis {
+    color: green;
+    font-size: 0.6em;
+}
+
+#product_details #def {
+    display: block;
+    color: gray;
+    font-size: 0.65em;
+    line-height: 1.3;
+    margin-top: 1.5%;
+    text-align: justify;
+}
+#product_details #delivery {
+    color: green;
+    position: absolute;
+    right: 3%;
+    bottom: 5%;
+    font-size: 0.65em;
+}
+#product_details #remove_btn {
+    position: absolute;
+    bottom: 5%;
+    font-size: 0.78em;
+    padding: 0.2% 3%;
+    color: white;
+    background-color: #3ca1c3;
+    text-decoration: none;
+    border-radius: 2px;
+}
+
+
+/* //! Total Bill */
+#bill {
+    width: 430px;
+    height: auto;
+    max-height: 550px;
+    border-radius: 3px;
+    background-color: white;
+    overflow: hidden;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+    height: 2px;
+}
+
+#bill_header {
+    color: white;
+    background-color: #3ca1c3;
+}
+
+#bill_header h1 {
+    width: 100%;
+    text-align: center;
+    padding: 1% 2%;
+    font-size: 0.85em;
+    font-weight: 500;
+}
+
+/* Bill Values */
+#bill_values {
+    max-height: 250px;
+    margin: 0 5%;
+    padding: 2% 1%;
+    border-bottom: 2px solid gray;
+    overflow: auto;
+}
+
+::-webkit-scrollbar {
+    width: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: gray;
+    border-radius: 25px;
+}
+
+#bill_values tr {
+    border-bottom: 1px solid rgba(129, 128, 128, 0.5);
+}
+#bill table {
+    width: 100%;
+}
+
+#bill th {
+    font-weight: 500;
+    padding-bottom: 1.5%;
+}
+
+#bill td {
+    text-align: right;
+    padding-bottom: 1.5%;
+}
+
+
+#bill_values th {
+    width: 76%;
+    font-size: 0.7em;
+    font-weight: 400 !important;
+    text-transform: capitalize;
+}
+
+#bill_values th span {
+    color: gray;
+    font-size: 0.95em;
+    font-weight: 600;
+}
+
+#bill_values td {
+    vertical-align: bottom;
+    font-size: 0.78em;
+}
+
+
+/* Total value before add charges */
+#total_value {
+    margin: 0 5%;
+    padding: 0.5% 1%;
+}
+
+#total_value th {
+    color: #404040;
+    font-size: 0.78em;
+}
+
+#total_value td {
+    font-size: 0.77em;
+    font-weight: 500;
+}
+
+
+/* Charges */
+#charges {
+    margin: 0 5%;
+    padding: 0 1% 1% 1%;
+    border-bottom: 2px solid gray;
+}
+
+#charges th {
+    color: red;
+    font-size: 0.67em;
+    line-height: 1.2;
+}
+
+#charges td {
+    color: red;
+    font-size: 0.69em;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+
+/* Total Value */
+#total_payble_value {
+    margin: 0 5%;
+    padding: 0 1% 3% 1%;
+}
+
+#total_payble_value th {
+    color: #2a7189;
+    font-size: 0.8em;
+}
+
+#total_payble_value td {
+    color: #2a7189;
+    font-size: 0.8em;
+    font-weight: 600;
+}
+
+
+/* Bill Btns */
+#bill #btns {
+    display: flex;
+    justify-content: flex-end;
+    width: auto;
+    margin: 0 5%;
+    padding: 2% 1% 3% 1%;
+}
+
+#bill #btns a {
+    width: fit-content;
+    padding: 0.5% 5%;
+    font-size: 1.2vw;
+    color: white;
+    background-color: #3ca1c3;
+    text-decoration: none;
+    border-radius: 3px;
+}
+
+#bill #btns a:first-child {
+    margin-right: 3%;
+}
+
+#bill #btns a:hover {
+    background-color: #2a7189;
+}
+
+#bill #total_save {
+    display: block;
+    color: green;
+    font-size: 0.82em;
+    font-weight: 600;
+    text-align: center;
+}
+
+/* //! Empty Cart */
+#empty {
+    width: 50%;
+    padding: 5%;
+    margin: 2% auto;
+    background-color: white;
+    border-radius: 5px;
+}
+
+#empty h1 {
+    font-size: 1.2em;
+    text-align: center;
+}
+
+#empty a {
+    display: block;
+    width: fit-content;
+    margin: 10% auto 0 auto;
+    padding: 0.5% 2%;
+    font-size: 0.8em;
+    color: white;
+    background-color: #3ca1c3;
+    text-decoration: none;
+    border-radius: 3px;
+}

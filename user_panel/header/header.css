@@ -1,0 +1,311 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.header-hidden {
+    transform: translateY(-100%);
+    transition: transform 0.3s ease;
+}
+
+/* Visible state */
+.header-visible {
+    transform: translateY(0);
+    transition: transform 0.3s ease;
+}
+
+#main_nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    font-family: "Josefin Sans", sans-serif;
+    z-index: 5;
+    box-shadow: 0px 0px 5px 1.5px gray;
+}
+
+#fake_main_nav {
+    height: 100px;
+}
+
+#nav1 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px;
+    background-color: #30819c;
+    font-size: 30px;
+}
+
+
+#nav1 #logo {
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    margin-left: 2%;
+    text-shadow: 1.75px 1px 0px white;
+}
+#nav1 #logo span {
+    color: #0000b3 !important;
+}
+
+#nav1 #logo>img {
+    width: 4.2%;
+    height: 4.2%;
+    animation: rotate 5s linear infinite;
+    border-radius: 50%;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+#nav1 #logo span {
+    color: white
+}
+
+
+/* //! Login Btns */
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+#login_btns {
+    color: white;
+    width: 18%;
+}
+
+#login_btns i {
+    font-size: 0.7em;
+}
+
+#login_btns a {
+    color: white;
+    font-size: 0.8em;
+    font-family: "Rubik", sans-serif;
+    margin: 0 4%;
+    text-decoration: none;
+}
+
+#logout_btns {
+    color: white;
+    display: flex;
+    position: relative;
+    width: fit-content;
+    margin-right: 2%;
+}
+
+#logout_btns a {
+    display: none;
+    color: black;
+    position: absolute;
+    top: 100%;
+    left: -150%;
+    padding: 3% 50%;
+    z-index: 5;
+    font-size: 0.7em;
+    background-color: white;
+    text-decoration: none;
+    border-radius: 2.5px;
+}
+
+#logout_btns i {
+    margin: 0 2.5%;
+    font-size: 0.65em;
+}
+
+#logout_btns:hover>a {
+    display: block;
+}
+
+#logout_btns>a:hover {
+    background-color: #f2f2f2;
+}
+
+
+/* //!Nav - 2 */
+#nav2 {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 70px;
+    font-size: 25px;
+    background-color: white;
+    filter: brightness(99%);
+}
+
+
+/* Nav2 menu btn */
+#menu {
+    display: flex;
+    justify-content: flex-start;
+    width: 15%;
+    margin-left: 1%;
+}
+
+#menu i {
+    padding: 5%;
+    border-radius: 50%;
+}
+
+
+/* Nav2 btns */
+#nav2_btns {
+    display: flex;
+    justify-content: flex-end;
+    width: 45%;
+    margin-right: 3%;
+}
+
+.btn {
+    width: 100%;
+    position: relative !important;
+}
+
+.btn>a {
+    padding: 5% 0;
+    display: block;
+    color: #1e5162;
+    font-size: 2em;
+    font-weight: 500;
+    font-family: "Rubik", sans-serif;
+    text-decoration: none;
+}
+
+.btn>a:hover {
+    text-decoration: none;
+}
+
+/* Categories below menu-btns */
+.btn>a+div {
+    width: fit-content;
+    position: absolute;
+    display: none;
+    top: 90%;
+    left: 0;
+    z-index: 5;
+    text-align: left;
+}
+
+/* When hover on link, then display categories */
+.btn>a:hover+div {
+    display: block !important;
+}
+
+.btn>a+div:hover {
+    display: block;
+}
+
+#nav2_btns i {
+    font-size: 0.85em;
+}
+
+/* Nav2 search box */
+#search_box {
+    position: relative;
+    width: 35%;
+    margin-right: 3%;
+}
+
+#search_box input {
+    outline: none;
+    border: none;
+    border-bottom: 2.5px solid;
+    width: 100%;
+    padding: 0 2% 1.5% 0.5%;
+    font-size: 0.8em;
+    background-color: transparent;
+}
+
+#search_box button {
+    display: grid;
+    place-items: center;
+    width: 35px;
+    height: 35px;
+    position: absolute;
+    top: 50%;
+    right: -1%;
+    font-size: 0.75em;
+    transform: translate(0, -50%);
+    border-radius: 50%;
+    border: none;
+    background-color: transparent;
+}
+
+#search_box button:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Searched Items */
+#searched_items {
+    display: none;
+    position: absolute;
+    width: 100%;
+    max-height: 300px;
+    background-color: white;
+    border-radius: 7px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+#searched_items #new_items div {
+    width: 100%;
+    display: block;
+    padding: 0 3%;
+    line-height: 2;
+}
+
+#searched_items a {
+    display: block;
+    width: 100%;
+    color: gray;
+    font-size: 0.7em;
+    text-decoration: none;
+}
+
+#searched_items #new_items div:hover {
+    background-color: #f2f2f2;
+}
+
+
+/* //! Side nav */
+#side_nav {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 270px;
+    padding-bottom: 5%;
+    background-color: white;
+    font-size: 20px;
+    border-right: 3px solid #f2f2f2;
+    z-index: 4;
+}
+
+::-webkit-scrollbar {
+    width: 3.5px;
+    background-color: gray;
+}
+
+::-webkit-scrollbar-track {
+    background: #f2f2f2;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: gray;
+}
+
+#side_nav div:first-of-type {
+    width: 100%;
+    height: 30%;
+    background-color: #76bdd5;
+}
+
+#side_nav #menus {
+    height: 460px;
+    overflow-y: auto;
+}
