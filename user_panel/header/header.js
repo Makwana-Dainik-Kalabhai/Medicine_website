@@ -12,6 +12,7 @@ $(document).ready(() => {
             $("#main_nav").removeClass("header-visible");
             $("#side_nav").css({transform: "translateY(-15%)"});
             $("#side_nav #menus").css("height","100%");
+            $("#bill").css("top","80px");
         }
         // Scroll up 
         else {
@@ -19,6 +20,7 @@ $(document).ready(() => {
             $("#main_nav").removeClass("header-hidden");
             $("#side_nav").css({transform: "translateY(0)"});
             $("#side_nav #menus").css("height","460px");
+            $("#bill").css("top","150px");
         }
         
         prevScrollPos = currentScrollPos;
@@ -36,24 +38,20 @@ $(document).ready(() => {
         }
     });
 
-    $("#search_input").keydown(function (e) {
+    $("#search_input").keyup(function (e) {
         $("#searched_items #new_items").html("");
 
-        var firstName = $("#search_input").val();
+        var search_val = $("#search_input").val();
 
         $.ajax({
             type: "POST",
             url: "http://localhost/php/medicine_website/user_panel/header/search.php",
             data: {
-                key: e.key,
-                firstName: firstName
+                search_val:search_val
             },
             cache: false,
             success: function (data) {
                 $("#searched_items #new_items").append(data);
-            },
-            error: function (xhr, status, error) {
-                console.error(xhr);
             }
         });
     });

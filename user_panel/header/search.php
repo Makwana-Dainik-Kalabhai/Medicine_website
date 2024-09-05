@@ -2,15 +2,9 @@
 
 include("C:/xampp/htdocs/php/medicine_website/database.php");
 
-if ($_POST["firstName"] != null) {
+if ($_POST["search_val"] != null) {
 
-    if ($_POST["key"] == "Backspace") {
-        $data = $_POST["firstName"];
-    }
-    else {
-        $data = $_POST["firstName"] . $_POST["key"];
-    }
-    $select = $conn->prepare("SELECT * FROM `products` WHERE name LIKE '%$data%'");
+    $select = $conn->prepare("SELECT * FROM `products` WHERE name LIKE '%".$_POST["search_val"]."%'");
     $select->execute();
 
     $select = $select->fetchAll();

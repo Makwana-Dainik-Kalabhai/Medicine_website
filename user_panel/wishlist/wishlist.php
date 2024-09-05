@@ -10,7 +10,7 @@
 </head>
 
 <style>
-    <?php include("C:/xampp/htdocs/php/medicine_website/user_panel/wishlist/wishlist.css"); ?>
+    <?php include("wishlist.css"); ?>
 </style>
 
 <body>
@@ -53,9 +53,9 @@
                         <div id='wishlist_products'>
 
                             <div id='products'>
-                                <a href='http://localhost/php/medicine_website/user_panel/shop/products/product_details/product_details.php?item_code=<?php echo $row_item['item_code']; ?>' id='box'>
+                                <a href='http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php?item_code=<?php echo $row_item['item_code']; ?>' id='box'>
                                     <div id='product_img'>
-                                        <img src='http://localhost/php/medicine_website/user_panel/shop/products/product_imgs/<?php echo unserialize($row_item['item_img'])[0]; ?>' />
+                                        <img src='http://localhost/php/medicine_website/user_panel/shop/imgs/products/product_imgs/<?php echo unserialize($row_item['item_img'])[0]; ?>' />
                                     </div>
 
                                     <div id='product_details'>
@@ -88,7 +88,7 @@
 
             <div id='empty_wishlist'>
                 <h1>Your wishlist is empty, so add your favourites</h1>
-                <a href="http://localhost/php/medicine_website/user_panel/shop/products/pr_main_page.php">Add Now</a>
+                <a href="http://localhost/php/medicine_website/user_panel/shop/pr_main_page/pr_main_page.php">Add Now</a>
             </div>
         <?php } ?>
     </main>

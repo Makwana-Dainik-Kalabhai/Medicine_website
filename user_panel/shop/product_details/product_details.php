@@ -11,45 +11,24 @@ if (isset($_GET["item_code"])) {
 <?php include("C:/xampp/htdocs/php/medicine_website/user_panel/links.php"); ?>
 
 <style>
-    <?php include("C:/xampp/htdocs/php/medicine_website/user_panel/shop/products/product_details/product_details.css"); ?>
+    <?php include("product_details.css"); ?>
 </style>
 
 <script>
-    <?php include("C:/xampp/htdocs/php/medicine_website/user_panel/shop/products/product_details/product_details.js"); ?>
+    <?php include("product_details.js"); ?>
 </script>
 
 <body>
     <header>
         <?php include("C:/xampp/htdocs/php/medicine_website/user_panel/header/header.php"); ?>
     </header>
-
+    
     <main>
-        <?php if (isset($_SESSION["task_fail"])) { ?>
-            <div id="task" style="background-color: red;">
-                <?php echo $_SESSION["task_fail"];
-                unset($_SESSION["task_fail"]); ?>
-            </div>
-        <?php }
-        //
-        if (isset($_SESSION["task_success"])) { ?>
-            <div id="task" style="background-color: #00b300;">
-                <?php echo $_SESSION["task_success"];
-                unset($_SESSION["task_success"]); ?>
-                <script>
-                    setTimeout(() => {
-                        location.href = "http://localhost/php/medicine_website/user_panel/cart/products.php"
-                        return;
-
-                    }, 2000);
-                </script>
-            </div>
-        <?php } ?>
-
         <div id="product_container">
             <?php
             include("C:/xampp/htdocs/php/medicine_website/database.php");
 
-            $sel = $conn->prepare("SELECT * FROM `products` WHERE item_code='" . $_SESSION["item_code"] . "'");
+            $sel = $conn->prepare("SELECT * FROM `".$_SESSION["database"]."` WHERE item_code='" . $_SESSION["item_code"] . "'");
             $sel->execute();
             $sel = $sel->fetchAll();
 
@@ -64,7 +43,7 @@ if (isset($_GET["item_code"])) {
                             <figure class="fig">
                                 <?php foreach (unserialize($row["item_img"]) as $img) { ?>
                                     <div id="img">
-                                        <img src="http://localhost/php/medicine_website/user_panel/shop/products/product_imgs/<?php echo $img; ?>" />
+                                        <img src="<?php echo $_SESSION["img_path"].$img; ?>" />
                                     </div>
                                 <?php $count_img++;
                                 } ?>
@@ -96,11 +75,9 @@ if (isset($_GET["item_code"])) {
                     </script>
 
                     <div id="main_imgs">
-                        <div id="img">
                             <?php foreach (unserialize($row["item_img"]) as $img) { ?>
-                                <img id="full" src="http://localhost/php/medicine_website/user_panel/shop/products/product_imgs/<?php echo $img; ?>" />
+                                <img id="full" src="<?php echo $_SESSION["img_path"].$img; ?>" />
                             <?php } ?>
-                        </div>
 
                         <!-- //! Discount btn -->
                         <?php if ($row["discount"] != 0) { ?>
@@ -123,11 +100,11 @@ if (isset($_GET["item_code"])) {
                             }
 
                             if (isset($con_item)) { ?>
-                                <a href="http://localhost/php/medicine_website/user_panel/shop/products/product_details/verify_like.php?type=delete" id="like" style="color:red;"><i class="fa-solid fa-heart"></i></a>
+                                <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/verify_like.php?type=delete" id="like" style="color:red;"><i class="fa-solid fa-heart"></i></a>
                             <?php }
                             //
                             if (!isset($con_item)) { ?>
-                                <a href="http://localhost/php/medicine_website/user_panel/shop/products/product_details/verify_like.php?type=insert" id="like" style="color:gray;"><i class="fa-solid fa-heart"></i></a>
+                                <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/verify_like.php?type=insert" id="like" style="color:gray;"><i class="fa-solid fa-heart"></i></a>
                             <?php } ?>
                         <?php } ?>
                     </div>
@@ -156,7 +133,7 @@ if (isset($_GET["item_code"])) {
                             <a href="http://localhost/php/medicine_website/user_panel/form/login_form.php" id="buy_btn"><i class="fa-solid fa-shopping-bag"></i>&ensp;Buy Now</a>
                         <?php } ?>
                         <?php if (isset($_SESSION["email"])) { ?>
-                            <a href="http://localhost/php/medicine_website/user_panel/shop/products/product_details/verify_cart.php" id="buy_btn"><i class="fa-solid fa-shopping-bag"></i>&ensp;Buy Now</a>
+                            <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/verify_cart.php" id="buy_btn"><i class="fa-solid fa-shopping-bag"></i>&ensp;Buy Now</a>
                         <?php } ?>
 
                         <!-- //* Add to Cart button -->
@@ -164,7 +141,7 @@ if (isset($_GET["item_code"])) {
                             <a href="http://localhost/php/medicine_website/user_panel/form/login_form.php" id="add_cart"><i class="fa-solid fa-cart-plus"></i>&ensp;Add to Cart</a>
                         <?php } ?>
                         <?php if (isset($_SESSION["email"])) { ?>
-                            <a href="http://localhost/php/medicine_website/user_panel/shop/products/product_details/verify_cart.php" id="add_cart"><i class="fa-solid fa-cart-plus"></i>&ensp;Add to Cart</a>
+                            <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/verify_cart.php" id="add_cart"><i class="fa-solid fa-cart-plus"></i>&ensp;Add to Cart</a>
                         <?php } ?>
                     </div>
                 </div>
@@ -188,7 +165,7 @@ if (isset($_GET["item_code"])) {
 
                     <div id="description">
                         <?php foreach (unserialize($row["description"]) as $des) { ?>
-                            <li><?php echo $des; ?></li>
+                            <li><?php echo $des[0]; ?></li>
                         <?php }
 
                         if ($row["link"] != null) { ?>

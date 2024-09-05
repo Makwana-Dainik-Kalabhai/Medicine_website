@@ -19,7 +19,7 @@ $(document).ready(function () {
 
         $.ajax({
             type: "POST",
-            url: "http://localhost/php/medicine_website/user_panel/shop/products/sort_products.php",
+            url: "http://localhost/php/medicine_website/user_panel/shop/pr_main_page/sort_products.php",
             data: {
                 filter: filter,
                 price_range: price_range,
@@ -42,7 +42,7 @@ $(document).ready(function () {
 
         $.ajax({
             type: "POST",
-            url: "http://localhost/php/medicine_website/user_panel/shop/products/sort_products.php",
+            url: "http://localhost/php/medicine_website/user_panel/shop/pr_main_page/sort_products.php",
             data: {
                 category: category,
                 price_range: price_range,
@@ -60,7 +60,7 @@ $(document).ready(function () {
 
         $.ajax({
             type: "POST",
-            url: "http://localhost/php/medicine_website/user_panel/shop/products/sort_products.php",
+            url: "http://localhost/php/medicine_website/user_panel/shop/pr_main_page/sort_products.php",
             data: {
                 price_range: price_range,
                 discount_range: discount_range

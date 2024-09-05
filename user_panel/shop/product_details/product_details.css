@@ -14,16 +14,6 @@ main {
     padding: 5% 0;
 }
 
-#task {
-    width: 100%;
-    position: absolute;
-    font-size: 0.8em;
-    padding: 0.3% 0;
-    color: white;
-    text-align: center;
-    z-index: 2;
-}
-
 /* //! Product Details */
 /* Main Product container */
 #product_container {
@@ -99,21 +89,21 @@ main {
 /* Main Image of product */
 #main_imgs {
     position: relative;
-    width: 400px;
+    width: 80%;
     padding: 3%;
     margin: 0 2%;
     border: 1.5px solid gray;
     border-radius: 5px;
 }
 
-#main_imgs #img {
-    display: flex;
-    overflow: hidden;
-}
-
 #main_imgs img {
-    width: 97% !important;
-    margin: 3%;
+    display: none;
+    width: 94%;
+    height: 94%;
+    margin: 3% auto;
+}
+#main_imgs img:first-child {
+    display: block;
 }
 
 #main_imgs #discount {

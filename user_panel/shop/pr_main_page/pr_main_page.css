@@ -252,7 +252,6 @@ output {
     display: block;
     width: 100%;
     height: fit-content;
-    line-height: 2;
     color: black;
     text-decoration: none;
 }

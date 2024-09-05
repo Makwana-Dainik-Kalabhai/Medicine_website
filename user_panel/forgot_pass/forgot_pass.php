@@ -26,7 +26,7 @@
     <main>
         <div id="main_form">
             <div class="left_img">
-                <img src="http://localhost/php/medicine_website/user_panel/forgot_pass/forgot_pass.jpg" alt="">
+                <img src="forget_pass.jpg" alt="img not found">
             </div>
 
             <div id="forgot_pass_form">

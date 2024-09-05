@@ -17,8 +17,8 @@ if (isset($_SESSION["email"])) { ?>
     <a href="http://localhost/php/medicine_website/user_panel/profile/profile.php"><i class="fa-solid fa-user"></i>&ensp;Account</a>
 <?php }
 ?>
-<a href="http://localhost/php/medicine_website/user_panel/shop/medicines/medicines_cat.php"><i class="fa-solid fa-tablets"></i>&ensp;Medicines</a>
-<a href="http://localhost/php/medicine_website/user_panel/shop/products/pr_main_page.php"><i class="fa-solid fa-list"></i>&ensp;Medical Devices</a>
+<a href="http://localhost/php/medicine_website/user_panel/shop/pr_main_page/pr_main_page.php?database=medicines"><i class="fa-solid fa-tablets"></i>&ensp;Medicines</a>
+<a href="http://localhost/php/medicine_website/user_panel/shop/pr_main_page/pr_main_page.php?database=products"><i class="fa-solid fa-list"></i>&ensp;Medical Devices</a>
 <a href="http://localhost/php/medicine_website/user_panel/shop/cleaning/cleaning_cat.php"><i class="fa-solid fa-pump-medical"></i>&ensp;Cleaning Products</a>
 
 

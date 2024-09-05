@@ -1,7 +1,20 @@
 <?php
 session_start();
 if (isset($_GET["category"])) {
-    $_SESSION["category"] = $_GET["category"];
+    unset($_GET["category"]);
+}
+if (isset($_SESSION["category"])) {
+    unset($_SESSION["category"]);
+}
+if(isset($_GET["database"])) {
+    $_SESSION["database"] = $_GET["database"];
+
+    if($_GET["database"]=="medicines") {
+        $_SESSION["img_path"] = "http://localhost/php/medicine_website/user_panel/shop/imgs/medicines/medicine_imgs/";
+    }
+    else {
+        $_SESSION["img_path"] = "http://localhost/php/medicine_website/user_panel/shop/imgs/products/product_imgs/";
+    }
 }
 ?>
 
@@ -11,11 +24,11 @@ if (isset($_GET["category"])) {
 <?php include("C:/xampp/htdocs/php/medicine_website/user_panel/links.php"); ?>
 
 <style>
-    <?php include("C:/xampp/htdocs/php/medicine_website/user_panel/shop/products/pr_main_page.css"); ?>
+    <?php include("pr_main_page.css"); ?>
 </style>
 
 <script>
-    <?php include("C:/xampp/htdocs/php/medicine_website/user_panel/shop/products/pr_main_page.js"); ?>
+    <?php include("pr_main_page.js"); ?>
 </script>
 
 
@@ -97,7 +110,7 @@ if (isset($_GET["category"])) {
                         <?php
                         include("C:/xampp/htdocs/php/medicine_website/database.php");
 
-                        $sel_cat = $conn->prepare("SELECT * FROM `products` GROUP BY `category`");
+                        $sel_cat = $conn->prepare("SELECT * FROM `".$_SESSION["database"]."` GROUP BY `category`");
                         $sel_cat->execute();
                         $sel_cat = $sel_cat->fetchAll(); ?>
 
@@ -118,12 +131,14 @@ if (isset($_GET["category"])) {
 
                         <?php
                         $max_price = 0;
+                        $min_price = 0;
                         $max_discount = 0;
+                        $min_discount = 0;
 
-                        if (isset($_SESSION["category"])) {
-                            $sel_cat = $conn->prepare("SELECT * FROM `products` WHERE `category` = '" . $_SESSION["category"] . "'");
+                        if (isset($_GET["category"])) {
+                            $sel_cat = $conn->prepare("SELECT * FROM `".$_SESSION["database"]."` WHERE `category` = '" . $_GET["category"] . "'");
                         } else {
-                            $sel_cat = $conn->prepare("SELECT * FROM `products`");
+                            $sel_cat = $conn->prepare("SELECT * FROM `".$_SESSION["database"]."`");
                         }
                         $sel_cat->execute();
                         $sel_cat = $sel_cat->fetchAll();
@@ -133,22 +148,30 @@ if (isset($_GET["category"])) {
                             if ($row_cat["discount"] > $max_discount) {
                                 $max_discount = $row_cat["discount"];
                             }
-                            // ! Get Max Expensive product
+                            // ! Get Min Discount
+                            if ($row_cat["discount"] <= $min_discount) {
+                                $min_discount = $row_cat["discount"];
+                            }
+                            // ! Get Max product
                             if ($row_cat["offer_price"] > $max_price) {
                                 $max_price = $row_cat["offer_price"];
+                            }
+                            // ! Get Min product
+                            if ($row_cat["offer_price"] <= $min_price) {
+                                $min_price = $row_cat["offer_price"];
                             }
                         } ?>
 
                         <div id="price_range">
                             <span>Price range</span>
-                            <input type="range" name="" min="5000" value="<?php echo $max_price; ?>" max="<?php echo $max_price; ?>" oninput="document.getElementById('max_price').value = '&#8377;'+this.value">
-                            <output id="min_price">&#8377;5000</output>
+                            <input type="range" name="" min="<?php echo $min_price; ?>" value="<?php echo $max_price; ?>" max="<?php echo $max_price; ?>" oninput="document.getElementById('max_price').value = '&#8377;'+this.value">
+                            <output id="min_price">&#8377;<?php echo $min_price; ?></output>
                             <output id="max_price"></output>
                         </div>
                         <div id="discount_range">
                             <span>Discount</span>
-                            <input type="range" name="" value="<?php echo $max_discount; ?>" min="0" max="<?php echo $max_discount; ?>" oninput="document.getElementById('max_discount').value = this.value+'%'">
-                            <output id="min_discount">0</output>
+                            <input type="range" name="" min="<?php echo $min_discount; ?>" value="<?php echo $max_discount; ?>" max="<?php echo $max_discount; ?>" oninput="document.getElementById('max_discount').value = this.value+'%'">
+                            <output id="min_discount"><?php echo $min_discount; ?></output>
                             <output id="max_discount"></output>
                         </div>
                     </div>
@@ -156,15 +179,10 @@ if (isset($_GET["category"])) {
                 <div id="products">
                     <?php
 
-                    $sel = $conn->prepare("SELECT * FROM `products`");
                     if (isset($_GET["category"])) {
-                        $sel = $conn->prepare("SELECT * FROM `products` WHERE `category`='" . $_GET["category"] . "'");
-                    }
-                    if (isset($_SESSION["price_range"]) && isset($_SESSION["discount_range"])) {
-                        $sel = $conn->prepare("SELECT * FROM `products` WHERE `offer_price`<=" . $_SESSION["price_range"] . " AND `discount`<=" . $_SESSION["discount_range"] . "");
-                    }
-                    if (isset($_GET["category"]) && isset($_SESSION["price_range"]) && isset($_SESSION["discount_range"])) {
-                        $sel = $conn->prepare("SELECT * FROM `products` WHERE `offer_price`<=" . $_SESSION["price_range"] . " AND `discount`<=" . $_SESSION["discount_range"] . " AND `category`='" . $_GET["category"] . "'");
+                        $sel = $conn->prepare("SELECT * FROM `".$_SESSION["database"]."` WHERE `category`='" . $_GET["category"] . "'");
+                    } else {
+                        $sel = $conn->prepare("SELECT * FROM `".$_SESSION["database"]."`");
                     }
                     $sel->execute();
                     $sel = $sel->fetchAll();
@@ -172,13 +190,13 @@ if (isset($_GET["category"])) {
                     foreach ($sel as $row) { ?>
 
                         <div id="box">
-                            <a href="http://localhost/php/medicine_website/user_panel/shop/products/product_details/product_details.php?item_code=<?php echo $row["item_code"]; ?>">
+                            <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php?item_code=<?php echo $row["item_code"]; ?>">
                                 <div id="product_img">
                                     <?php
                                     if ($row["discount"] != 0) { ?>
                                         <span>&ensp;-<?php echo $row["discount"]; ?>%</span>
                                     <?php } ?>
-                                    <img src="http://localhost/php/medicine_website/user_panel/shop/products/product_imgs/<?php echo unserialize($row["item_img"])[0]; ?>" alt="" />
+                                    <img src="<?php echo $_SESSION["img_path"].unserialize($row["item_img"])[0]; ?>" alt="" />
                                 </div>
                                 <div id="product_details">
                                     <span id="name"><?php echo $row["name"]; ?></span>
@@ -197,7 +215,7 @@ if (isset($_GET["category"])) {
                                 <a href="http://localhost/php/medicine_website/user_panel/form/login_form.php" id="add_cart"><i class="fa-solid fa-cart-plus"></i>&ensp;Add to Cart</a>
                             <?php } ?>
                             <?php if (isset($_SESSION["email"])) { ?>
-                                <a href="http://localhost/php/medicine_website/user_panel/shop/products/product_details/verify_cart.php" id="add_cart"><i class="fa-solid fa-cart-plus"></i>&ensp;Add to Cart</a>
+                                <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/verify_cart.php" id="add_cart"><i class="fa-solid fa-cart-plus"></i>&ensp;Add to Cart</a>
                             <?php } ?>
                         </div>
                     <?php }

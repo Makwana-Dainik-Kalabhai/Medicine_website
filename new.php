@@ -177,67 +177,90 @@ if (isset($_POST["sub"])) {
 <?php
 $conn = new PDO("mysql:host=localhost;dbname=medicine_website", "root", "");
 
+
 $cat = "ayurvedic";
 $item_img = [
-    "Truuth Ashwagandha 500mg Capsule 60s(1).jpg",
-    "Truuth Ashwagandha 500mg Capsule 60s(2).jpg",
-    "Truuth Ashwagandha 500mg Capsule 60s(3).jpg",
-    "Truuth Ashwagandha 500mg Capsule 60s(4).jpg",
-    "Truuth Ashwagandha 500mg Capsule 60s(5).jpg"
+    "Krishna's Herbal & Ayurveda Diabic Care Juice 1000 ml(1).jpg",
+    "Krishna's Herbal & Ayurveda Diabic Care Juice 1000 ml(2).jpg",
+    "Krishna's Herbal & Ayurveda Diabic Care Juice 1000 ml(3).jpg",
+    "Krishna's Herbal & Ayurveda Diabic Care Juice 1000 ml(4).jpg",
+    "Krishna's Herbal & Ayurveda Diabic Care Juice 1000 ml(5).jpg",
+    "Krishna's Herbal & Ayurveda Diabic Care Juice 1000 ml(6).jpg",
+    "Krishna's Herbal & Ayurveda Diabic Care Juice 1000 ml(7).jpg",
+    "Krishna's Herbal & Ayurveda Diabic Care Juice 1000 ml(8).jpg",
+    "Krishna's Herbal & Ayurveda Diabic Care Juice 1000 ml(9).jpg"
 ];
-$name = "Truuth Ashwagandha 500mg Capsule 60's";
-$def = [];
-$off_price = 239.60;
-$price = 599;
-$dis = 60;
+$name = "Krishna's Herbal & Ayurveda Diabic Care Juice 1000 ml";
+$def = [
+    "Blend of 11 herbs Methi, Amla, Karela, Jamun, Kutki, Guduchi & 5 other herbs to manage sugar level"
+];
+$off_price = 490;
+$price = 490;
+$dis = 0;
 $weight = [
-    "150gm"
+    "1000ml"
 ];
 $quantity = 10;
 $expiry = "Jul 2025";
 
+$des_img = [
+    "Krishna's Herbal & Ayurveda Diabic Care Juice 1000 ml.webp"
+];
+
 $des = [
-    ["Truuth Ashwagandha Capsules, available in a pack of 60, introduce you to the age-old wisdom of Ayurveda in a modern and convenient form."],
-    ["Each capsule encapsulates 500mg of pure Ashwagandha extract, delivering a potent and standardized dose of this revered herb."],
-    ["Ashwagandha, known for its adaptogenic properties, is a versatile herb that has been traditionally used to support the body in managing stress, enhancing vitality, and promoting an overall sense of well-being."],
-    ["Crafted with precision and care, Truuth Ashwagandha Capsules provide you with a natural way to elevate your health."],
-    ["The 60-capsule pack ensures a sustained supply, allowing you to effortlessly incorporate this Ayurvedic gem into your daily routine."],
-    ["Whether you are navigating the challenges of a hectic lifestyle or seeking a holistic approach to your well-being journey, Truuth Ashwagandha Capsules stand as your reliable companion, offering the goodness of nature in every dose."]
+    ["The raw and pure herbs used in Krishna's Herbal & Ayurveda Diabic Care Juice are collected from reputable farms all across the country. These effective herbs assist in maintaining health sugar levels. We have multiple ayurvedic products to improve the quality of life."]
 ];
 $benefit = [
-    "With 500mg of pure Ashwagandha extract per capsule, this supplement ensures a concentrated and effective dose.",
-    "The 60-capsule pack facilitates a seamless integration of Ashwagandha into your daily health routine, supporting a holistic approach to well-being.",
-    "Ashwagandha is renowned for its adaptogenic qualities, assisting the body in adapting to stressors and promoting balance."
+    ["Blood sugar regulation : Diabic Care Juice is formulated to regulate blood sugar levels. With its unique blend of ingredients, this juice helps maintain proper glucose levels, providing potential benefits for individuals with diabetes."],
+    ["Antioxidant support : This powerful antioxidant supplement provides support for your body's natural defense against free radicals. With a proprietary blend of ingredients, it helps protect against oxidative stress and manage overall wellness."],
+    ["Heart health : Diabic care juices, may help support heart health by manage cholesterol levels, improving blood circulation, and reducing inflammation in the arteries."],
+    ["Digestive health : This Juice is a powerful solution for manage digestive health. With its unique formulation, this juice offers a natural and effective way to support the digestive system, leading to improved overall wellbeing."],
+    ["Weight management : This Ayurvedic  formulated juice that helps with weight management. With its unique blend of ingredients, this juice manage healthy weight loss and management."],
+    ["Hydration : Diabic Care Juice provides optimal hydration to keep you healthy and energized. Its unique formula nourishes your body and provides essential electrolytes for improved overall wellness."],
+    ["Boost Metabolism : This juice can help improve your body's metabolic rate, allowing you to feel energized and refreshed."]
 ];
 $how_use = [
-    ["ncorporate the capsule into your daily routine consistently."],
-    ["Ensure proper hydration by drinking enough water when taking the capsule."],
-    ["If you have underlying health conditions or are on medication, consult with a healthcare professional before use."]
+    "Shake well before use",
+    "Mix 30ml of juice with 30ml of warm water",
+    "Take an empty stomach in the morning and 30 mins post-dinner",
+    "Keep in a cold & dry place",
+    "Close the bottle tightly",
+    "Consume within 1 month after opening"
 ];
-$safety = [
-    "Truuth Ashwagandha 500mg Capsules are generally safe for consumption when used as directed.",
-    "However, individuals with specific medical conditions, pregnant or lactating women, and those under other medications should consult with a healthcare professional before incorporating this supplement into their routine.",
-    "While Ashwagandha is well-tolerated by many, potential interactions with certain medications may exist.",
-    "It is advisable to start with the recommended dosage and monitor individual responses.",
-    "In case of any adverse reactions or allergies, discontinue use and seek professional advice."
+$safety = [];
+$other_info = [
+    ["Jamun", "Regulates Blood sugar levels"],
+    ["GILOY", "Balances the Tridoshas Vata - Pitta - Kapha"],
+    ["BEL PATRA", "Strengthens Urinary system"],
+    ["VIJAYSAR", "Strengthens pancreas and insulin secretion"],
+    ["AMLA", "Enriched with Vitamin C"],
+    ["TULSI", "Supports respiratory system"],
+    ["METHI", "Strengthens nervous system"],
+    ["GUDMAAR", "Liver Stimulant"],
+    ["KARELA", "Enhances Insulin Secretion"],
+    ["NEEM", "Natural finest detoxifier"],
+    ["KUTKI", "Keeps a check on sugar levels"]
 ];
-$other_info = [[
-    "Store in a cool, dry place, away from direct sunlight, and keep it out of reach of children."
-]];
 
 $faqs = [
-    ["Are there any known side effects of Ashwagandha capsules?","Ashwagandha is generally well-tolerated, but individuals with specific medical conditions should consult with a healthcare professional before use."],
-    ["How long does it take to experience the benefits of Ashwagandha?","Individual responses may vary, but consistent use over a few weeks is typically recommended for noticeable effects."],
-    ["Is Truuth Ashwagandha safe for daily use?","Yes, Truuth Ashwagandha Capsules are formulated for daily use; however, individuals with specific health concerns should consult a healthcare professional."]
+    ["How to use?", "Take 30 ml of juice with 30 ml warm water, twice a day. Empty stomach in Morning & 30 minutes post-dinner at night. Shake well before use."],
+    ["How much time it will take to control diabetes?", "You will be able to see noticeable results in 60-90 days. For best results it is advised to continue drinking this juice daily"],
+    ["Can I use allopathic medicine while using diabic care juice?", "Yes, Diabic care juice is safe to be taken along with Allopathic medication. But please take 10-15 minutes gap between juice and allopathic medicine for better results."],
+    ["Can use it during pregnancy ?", "Consult with your doctor before taking this in case of pregnancy. You can also connect us for free expert doctor consultation by Krishna Ayurveda."],
+    ["Can a breastfeeding mom take it?", "Consult with your doctor before taking this in case of pregnancy. You can also connect us for free expert doctor consultation by Krishna Ayurveda."],
+    ["What are the precautions?", "Avoid sweets, sugary foods, junk food, non-veg, rice and potatoes.Fruits which have high sugar content must be avoided (Apple and papaya can be taken). Daily 15 min exercise or walk will be very beneficial."],
+    ["Whats the age criteria?", "Kids aged 10 years+ can take this juice – 15 ml twice a day. Adults can take 30ml twice a day ."],
+    ["Arethere any side-effects?", "Krishna’s Diabic care Juice is an ayurvedic product, the ingredients used in this juice have shown to have no side effects. However, please read the ingredients list for any known allergies."],
+    ["How many days will Diabic care juice 1000ml last?", "One bottle Diabic care juice 1000ml will last for 15 days. Please order your next bottle in advance to make sure that you need not discontinue it."]
 ];
-$item_code = "m1002";
+$item_code = "1003";
 
-$query = "INSERT INTO `medicines` VALUES ('',NOW(),'$cat','','','" . serialize($def) . "','$off_price','$price','$dis','" . serialize($weight) . "','$quantity','$expiry','','" . serialize($benefit) . "','" . serialize($how_use) . "','" . serialize($safety) . "','" . serialize($other_info) . "','".serialize($faqs)."','$item_code')";
+$query = "INSERT INTO `medicines` VALUES ('',NOW(),'$cat',`".serialize($item_img)."`,'$name','" . serialize($def) . "','$off_price','$price','$dis','" . serialize($weight) . "','$quantity','$expiry','".serialize($des_img)."','".serialize($des)."','" . serialize($benefit) . "','" . serialize($how_use) . "','" . serialize($safety) . "','" . serialize($other_info) . "','" . serialize($faqs) . "','$item_code')";
 $insert = $conn->prepare($query);
-// $insert->execute();
+$insert->execute();
 
 
-$up = $conn->prepare("UPDATE `medicines` SET `description`='".serialize($des)."' WHERE `item_code`='m1002'");
+$up = $conn->prepare("UPDATE `medicines` SET `description`='" . serialize($des) . "' WHERE `item_code`='m1002'");
 // $up->execute();
 
 // $sel = $conn->prepare("SELECT SUBSTRING(`item_code`,2,length(item_code)) FROM `products`");
