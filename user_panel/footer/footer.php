@@ -31,7 +31,7 @@
             <div>
                 <span>Our Policies</span>
                 <a href="">Terms & Conditions</a>
-                <a href="">Return & Refund Policy</a>
+                <a href="http://localhost/php/medicine_website/user_panel/return_policy/return_policy.php">Return & Refund Policy</a>
                 <a href="">Payments Policy</a>
                 <a href="">Shipping & Delivery Policy</a>
             </div>

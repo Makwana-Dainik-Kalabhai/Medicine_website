@@ -1,0 +1,54 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    width: 75%;
+    padding: 5% 0;
+    padding-top: 7%;
+    margin: 0 auto;
+    font-size: 30px;
+}
+
+main>div {
+    display: flex;
+    justify-content: space-between;
+}
+table {
+    width: 80%;
+}
+
+#welcome_intro {
+    font-size: 0.55em;
+    width: 70%;
+    padding: 2.5%;
+    padding-top: 6%;
+    border-right: 1px solid black;
+}
+
+#policy {
+    font-size: 0.58em;
+    padding: 2.5%;
+    padding-top: 0;
+}
+
+#policy #heading {
+    color: red;
+    font-size: 1.3em;
+    margin-bottom: 3%;
+}
+
+ol li {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #2a7189;
+}
+ul li {
+    color: black;
+    font-size: 1em;
+    font-weight: 400;
+}
+.mt-5 {
+    margin-top: 5%;
+}

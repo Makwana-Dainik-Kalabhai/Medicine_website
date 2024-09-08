@@ -92,6 +92,15 @@
 <button id="add_d">Add Description</button>
 
 <?php
+// try {
+//     $conn->beginTransaction();
+//     //INSERT
+//     //UPDATE
+//     $conn->commit();
+// }
+// catch(Exception) {
+//     $conn->rollBack();
+// }
 if (isset($_POST["sub"])) {
 
     // $cat = [$_POST["cat1"], $_POST["cat2"]];
@@ -179,18 +188,18 @@ $conn = new PDO("mysql:host=localhost;dbname=medicine_website", "root", "");
 
 
 $cat = "ayurvedic";
-$item_img = [
-    "Krishna's Herbal & Ayurveda Diabic Care Juice 1000 ml(1).jpg",
-    "Krishna's Herbal & Ayurveda Diabic Care Juice 1000 ml(2).jpg",
-    "Krishna's Herbal & Ayurveda Diabic Care Juice 1000 ml(3).jpg",
-    "Krishna's Herbal & Ayurveda Diabic Care Juice 1000 ml(4).jpg",
-    "Krishna's Herbal & Ayurveda Diabic Care Juice 1000 ml(5).jpg",
-    "Krishna's Herbal & Ayurveda Diabic Care Juice 1000 ml(6).jpg",
-    "Krishna's Herbal & Ayurveda Diabic Care Juice 1000 ml(7).jpg",
-    "Krishna's Herbal & Ayurveda Diabic Care Juice 1000 ml(8).jpg",
-    "Krishna's Herbal & Ayurveda Diabic Care Juice 1000 ml(9).jpg"
-];
-$name = "Krishna's Herbal & Ayurveda Diabic Care Juice 1000 ml";
+$item_img = array(
+    "Krishna\'s Herbal & Ayurveda Diabic Care Juice 1000 ml(1).jpg",
+    "Krishna\'s Herbal & Ayurveda Diabic Care Juice 1000 ml(2).jpg",
+    "Krishna\'s Herbal & Ayurveda Diabic Care Juice 1000 ml(3).jpg",
+    "Krishna\'s Herbal & Ayurveda Diabic Care Juice 1000 ml(4).jpg",
+    "Krishna\'s Herbal & Ayurveda Diabic Care Juice 1000 ml(5).jpg",
+    "Krishna\'s Herbal & Ayurveda Diabic Care Juice 1000 ml(6).jpg",
+    "Krishna\'s Herbal & Ayurveda Diabic Care Juice 1000 ml(7).jpg",
+    "Krishna\'s Herbal & Ayurveda Diabic Care Juice 1000 ml(8).jpg",
+    "Krishna\'s Herbal & Ayurveda Diabic Care Juice 1000 ml(9).jpg"
+);
+$name = "Krishnas Herbal & Ayurveda Diabic Care Juice 1000 ml";
 $def = [
     "Blend of 11 herbs Methi, Amla, Karela, Jamun, Kutki, Guduchi & 5 other herbs to manage sugar level"
 ];
@@ -203,21 +212,19 @@ $weight = [
 $quantity = 10;
 $expiry = "Jul 2025";
 
-$des_img = [
-    "Krishna's Herbal & Ayurveda Diabic Care Juice 1000 ml.webp"
-];
+$des_img = ["Krishnas Herbal & Ayurveda Diabic Care Juice 1000 ml.webp"];
 
 $des = [
-    ["The raw and pure herbs used in Krishna's Herbal & Ayurveda Diabic Care Juice are collected from reputable farms all across the country. These effective herbs assist in maintaining health sugar levels. We have multiple ayurvedic products to improve the quality of life."]
+    ["The raw and pure herbs used in Krishnas Herbal & Ayurveda Diabic Care Juice are collected from reputable farms all across the country. These effective herbs assist in maintaining health sugar levels. We have multiple ayurvedic products to improve the quality of life."]
 ];
 $benefit = [
     ["Blood sugar regulation : Diabic Care Juice is formulated to regulate blood sugar levels. With its unique blend of ingredients, this juice helps maintain proper glucose levels, providing potential benefits for individuals with diabetes."],
-    ["Antioxidant support : This powerful antioxidant supplement provides support for your body's natural defense against free radicals. With a proprietary blend of ingredients, it helps protect against oxidative stress and manage overall wellness."],
+    ["Antioxidant support : This powerful antioxidant supplement provides support for your bodys natural defense against free radicals. With a proprietary blend of ingredients, it helps protect against oxidative stress and manage overall wellness."],
     ["Heart health : Diabic care juices, may help support heart health by manage cholesterol levels, improving blood circulation, and reducing inflammation in the arteries."],
     ["Digestive health : This Juice is a powerful solution for manage digestive health. With its unique formulation, this juice offers a natural and effective way to support the digestive system, leading to improved overall wellbeing."],
     ["Weight management : This Ayurvedic  formulated juice that helps with weight management. With its unique blend of ingredients, this juice manage healthy weight loss and management."],
     ["Hydration : Diabic Care Juice provides optimal hydration to keep you healthy and energized. Its unique formula nourishes your body and provides essential electrolytes for improved overall wellness."],
-    ["Boost Metabolism : This juice can help improve your body's metabolic rate, allowing you to feel energized and refreshed."]
+    ["Boost Metabolism : This juice can help improve your bodys metabolic rate, allowing you to feel energized and refreshed."]
 ];
 $how_use = [
     "Shake well before use",
@@ -250,30 +257,65 @@ $faqs = [
     ["Can a breastfeeding mom take it?", "Consult with your doctor before taking this in case of pregnancy. You can also connect us for free expert doctor consultation by Krishna Ayurveda."],
     ["What are the precautions?", "Avoid sweets, sugary foods, junk food, non-veg, rice and potatoes.Fruits which have high sugar content must be avoided (Apple and papaya can be taken). Daily 15 min exercise or walk will be very beneficial."],
     ["Whats the age criteria?", "Kids aged 10 years+ can take this juice – 15 ml twice a day. Adults can take 30ml twice a day ."],
-    ["Arethere any side-effects?", "Krishna’s Diabic care Juice is an ayurvedic product, the ingredients used in this juice have shown to have no side effects. However, please read the ingredients list for any known allergies."],
+    ["Arethere any side-effects?", "Krishnas Diabic care Juice is an ayurvedic product, the ingredients used in this juice have shown to have no side effects. However, please read the ingredients list for any known allergies."],
     ["How many days will Diabic care juice 1000ml last?", "One bottle Diabic care juice 1000ml will last for 15 days. Please order your next bottle in advance to make sure that you need not discontinue it."]
 ];
 $item_code = "1003";
 
-$query = "INSERT INTO `medicines` VALUES ('',NOW(),'$cat',`".serialize($item_img)."`,'$name','" . serialize($def) . "','$off_price','$price','$dis','" . serialize($weight) . "','$quantity','$expiry','".serialize($des_img)."','".serialize($des)."','" . serialize($benefit) . "','" . serialize($how_use) . "','" . serialize($safety) . "','" . serialize($other_info) . "','" . serialize($faqs) . "','$item_code')";
+// $query = "INSERT INTO `medicines` VALUES ('',NOW(),'$cat','','','" . serialize($def) . "','$off_price','$price','$dis','" . serialize($weight) . "','$quantity','$expiry','','','','" . serialize($how_use) . "','" . serialize($safety) . "','" . serialize($other_info) . "','','$item_code')";
+$query = "INSERT INTO `medicines` VALUES ('',NOW(),'$cat','" . serialize($item_img) . "','$name','" . serialize($def) . "','$off_price','$price','$dis','" . serialize($weight) . "','$quantity','$expiry','" . serialize($des_img) . "','" . serialize($des) . "','" . serialize($benefit) . "','" . serialize($how_use) . "','" . serialize($safety) . "','" . serialize($other_info) . "','" . serialize($faqs) . "','$item_code')";
 $insert = $conn->prepare($query);
-$insert->execute();
+// $insert->execute();
+
+$sel = $conn->prepare("SELECT * FROM `medicines`");
+$sel->execute();
+$sel = $sel->fetchAll();
+
+foreach ($sel as $row) {
+    if ($row["item_code"] == $item_code) {
+        echo "<h1>Item Image</h1>";
+        echo $row["item_img"]."<br/><br/>";
+        echo "<br/><br/><br/>" . unserialize($row["item_img"])[0];
+
+        echo "<h1>Definition</h1>";
+        echo "<br/><br/><br/>" . unserialize($row["definition"])[0];
+
+        echo "<h1>Description Image</h1>";
+        echo "UPDATE `medicines` SET `desc_img`='" . $row["desc_img"] . "' WHERE `item_code`='$item_code'<br/><br/>";
+        echo "<br/><br/><br/>" . unserialize($row["desc_img"])[0];
+
+        echo "<h1>Description</h1>";
+        echo "UPDATE `medicines` SET `description`='" . $row["description"] . "' WHERE `item_code`='$item_code'<br/><br/>";
+        echo "<br/><br/><br/>";
+        foreach(unserialize($row["description"]) as $d)
+        echo "<br/>" . $d;
+
+        echo "<h1>Benefits</h1>";
+        echo "UPDATE `medicines` SET `benefits`='" . $row["benefits"] . "' WHERE `item_code`='$item_code'<br/><br/>"; 
+        echo "<br/><br/><br/>";
+        foreach(unserialize($row["benefits"]) as $b)
+        echo "<br/>" . $b;
+
+        echo "<br/><br/><br/>";
+        foreach (unserialize($row["benefits"]) as $be) {
+            echo $be[0].": ".$be[1];
+        }
+
+        echo "<h1>How to Use</h1>";
+        echo "<br/><br/><br/>" . $row["how_use"];
+
+        echo "<h1>Other Information</h1>";
+        echo "<br/><br/><br/>" . $row["other_info"];
+    }
+}
 
 
-$up = $conn->prepare("UPDATE `medicines` SET `description`='" . serialize($des) . "' WHERE `item_code`='m1002'");
+$up = $conn->prepare("UPDATE `medicines` SET `item_img`='" . serialize($item_img) . "' WHERE item_code='$item_code'");
 // $up->execute();
 
-// $sel = $conn->prepare("SELECT SUBSTRING(`item_code`,2,length(item_code)) FROM `products`");
-// $sel->execute();
-// $sel = $sel->fetchAll();
-
-// print_r($sel);
-// foreach($sel as $row) {
-//     echo $row["item_code"]."<br/>";
-// }
-echo "<script>
-        alert('Inserted successfully');
-        </script>";
+// echo "<script>
+//        alert('Inserted successfully');
+//        </script>";
 
 // $img =[
 //     "Invacare Platinum 9 LPM(1).jpg",

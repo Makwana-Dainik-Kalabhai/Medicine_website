@@ -131,9 +131,9 @@ if(isset($_GET["database"])) {
 
                         <?php
                         $max_price = 0;
-                        $min_price = 0;
+                        $min_price = 5000;
                         $max_discount = 0;
-                        $min_discount = 0;
+                        $min_discount = 50;
 
                         if (isset($_GET["category"])) {
                             $sel_cat = $conn->prepare("SELECT * FROM `".$_SESSION["database"]."` WHERE `category` = '" . $_GET["category"] . "'");

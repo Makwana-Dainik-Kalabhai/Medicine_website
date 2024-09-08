@@ -22,12 +22,10 @@
             $sel->execute();
             $sel = $sel->fetchAll();
 
-            $category = array();
-
             foreach ($sel as $row) { ?>
                 <div class="box">
-                    <a href="http://localhost/php/medicine_website/user_panel/shop/products/pr_main_page.php?category=<?php echo $row["category"]; ?>">
-                        <img src="http://localhost/php/medicine_website/user_panel/shop/products/product_imgs/<?php echo unserialize($row["item_img"])[0]; ?>" />
+                    <a href="http://localhost/php/medicine_website/user_panel/shop/pr_main_page/pr_main_page.php?category=<?php echo $row["category"]; ?>&database=products">
+                        <img src="http://localhost/php/medicine_website/user_panel/shop/imgs/products/product_imgs/<?php echo unserialize($row["item_img"])[0]; ?>" />
                         <span class="category"><?php echo $row["category"]; ?></span>
                     </a>
                 </div>
@@ -47,12 +45,12 @@
             <?php
             $sel = $conn->prepare("SELECT * FROM `products`");
             $sel->execute();
-            $sel = $sel->fetchAll(); ?>
-
-            <?php foreach ($sel as $row) { ?>
+            $sel = $sel->fetchAll();
+            
+            foreach ($sel as $row) { ?>
                 <div class="box">
-                    <a href="http://localhost/php/medicine_website/user_panel/shop/products/product_details/product_details.php?item_code=<?php echo $row["item_code"]; ?>">
-                        <img src="http://localhost/php/medicine_website/user_panel/shop/products/product_imgs/<?php echo unserialize($row["item_img"])[0]; ?>" />
+                    <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php?item_code=<?php echo $row["item_code"]; ?>">
+                        <img src="http://localhost/php/medicine_website/user_panel/shop/imgs/products/product_imgs/<?php echo unserialize($row["item_img"])[0]; ?>" />
                         <span id="name"><?php echo $row["name"]; ?></span>
                         <div>
                             <?php if ($row["discount"] != 0) { ?>
@@ -61,7 +59,13 @@
                             <span id="off_price">&#8377;<?php echo $row["offer_price"]; ?></span>
                         </div>
                     </a>
-                    <a href="http://localhost/php/medicine_website/user_panel/home_page_items/products/verify_cart.php?item_code=<?php echo $row["item_code"]; ?>"><i class="fa-solid fa-cart-plus"></i> Add to Cart</a>
+                    <!-- //! Add to Cart button -->
+                    <?php if (!isset($_SESSION["email"])) { ?>
+                        <a href="http://localhost/php/medicine_website/user_panel/form/login_form.php" id="add_cart"><i class="fa-solid fa-cart-plus"></i>&ensp;Add to Cart</a>
+                    <?php } ?>
+                    <?php if (isset($_SESSION["email"])) { ?>
+                        <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/verify_cart.php" id="add_cart"><i class="fa-solid fa-cart-plus"></i>&ensp;Add to Cart</a>
+                    <?php } ?>
                 </div>
             <?php } ?>
         </div>

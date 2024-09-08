@@ -99,9 +99,9 @@
             <div id="products">
                 <?php foreach ($sel_rel as $row_rel) { ?>
                     <div id="box">
-                        <a href="http://localhost/php/medicine_website/user_panel/shop/products/product_details/product_details.php?item_code=<?php echo $row_rel["item_code"]; ?>">
+                        <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php?item_code=<?php echo $row_rel["item_code"]; ?>">
                             <div id="product_img">
-                                <img src="http://localhost/php/medicine_website/user_panel/shop/products/product_imgs/<?php echo unserialize($row_rel["item_img"])[0]; ?>" />
+                                <img src="http://localhost/php/medicine_website/user_panel/shop/imgs/products/product_imgs/<?php echo unserialize($row_rel["item_img"])[0]; ?>" />
                             </div>
                             <div id="details">
                                 <span id="name"><?php echo $row_rel["name"]; ?></span>
