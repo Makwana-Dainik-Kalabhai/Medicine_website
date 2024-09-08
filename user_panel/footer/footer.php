@@ -30,10 +30,10 @@
             </div>
             <div>
                 <span>Our Policies</span>
-                <a href="">Terms & Conditions</a>
-                <a href="http://localhost/php/medicine_website/user_panel/return_policy/return_policy.php">Return & Refund Policy</a>
-                <a href="">Payments Policy</a>
-                <a href="">Shipping & Delivery Policy</a>
+                <a href="http://localhost/php/medicine_website/user_panel/policies/terms_conditions.php">Terms & Conditions</a>
+                <a href="http://localhost/php/medicine_website/user_panel/policies/return.php">Return & Refund Policy</a>
+                <a href="http://localhost/php/medicine_website/user_panel/policies/payment.php">Payments Policy</a>
+                <a href="http://localhost/php/medicine_website/user_panel/policies/shipping_delivery.php">Shipping & Delivery Policy</a>
             </div>
             <div>
                 <span>Order Now</span>
