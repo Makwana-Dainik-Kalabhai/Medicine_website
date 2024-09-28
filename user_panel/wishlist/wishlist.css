@@ -148,18 +148,12 @@ main {
     border-radius: 10px;
 }
 
-#empty_wishlist h1 {
-    font-size: 1em;
-    font-weight: 600;
-    margin-bottom: 10%;
-}
-
 #empty_wishlist a {
     color: white;
     border: none;
     font-size: 0.8em;
     font-weight: 600;
-    padding: 0.3% 2.5%;
+    padding: 0.3% 3%;
     background-color: #30819c;
     text-decoration: none;
     border-radius: 3px;

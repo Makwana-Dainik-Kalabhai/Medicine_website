@@ -86,15 +86,6 @@ if($_SESSION["time"]<=time()) {
                     </form>
                 </div>
             <?php } ?>
-
-            <?php if (isset($_SESSION["admin_user"])) { ?>
-                <div id="admin_user">
-                    <span>Your Email ID is exist in Admin Data & User Data</span>
-                    <span>So that, Go To: </span>
-                    <a href="verify.php?admin=true">Admin Panel</a>
-                    <a href="verify.php?user=true">User Panel</a>
-                </div>
-            <?php } ?>
         </div>
     </main>
 </body>

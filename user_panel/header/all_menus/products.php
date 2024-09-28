@@ -20,13 +20,13 @@
 
     <div class="category">
         <?php foreach ($sel as $row) { ?>
-            <a href="http://localhost/php/medicine_website/user_panel/shop/pr_main_page/pr_main_page.php?category=<?php echo $row["category"]; ?>"><?php echo $row["category"]; ?> <i class="fa-solid fa-chevron-right"></i></a>
+            <a href="http://localhost/php/medicine_website/user_panel/shop/pr_main_page/pr_main_page.php?category=<?php echo $row["category"]; ?>&database=products"><?php echo $row["category"]; ?> <i class="fa-solid fa-chevron-right"></i></a>
         <?php
         } ?>
     </div>
 
     <a href="">Mobile X-Ray Machine</a>
-    <a href="" style="color: #0000b3;">Explore More%</a>
+    <a href="http://localhost/php/medicine_website/user_panel/shop/pr_main_page/pr_main_page.php?database=products" style="color: #0000b3;">Explore More%</a>
 </div>
 
 </html>

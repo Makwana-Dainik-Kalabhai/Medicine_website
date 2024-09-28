@@ -91,8 +91,12 @@
 
 #footer2 #all_links a {
     font-size: 0.58em;
-    font-weight: 100;
+    font-weight: 400;
     line-height: 1.5;
+}
+
+#footer2 #all_links a:hover {
+    color: #0000b3;
 }
 
 #footer2 #all_links a:first-of-type {

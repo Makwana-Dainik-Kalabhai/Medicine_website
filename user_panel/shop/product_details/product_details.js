@@ -9,9 +9,8 @@ $(document).ready(() => {
         $("#full").attr("src", $(this).children().attr("src"));
     });
 
+    $("#details").children("div").hide();
     $("#description").show();
-    $("#features").hide();
-    $("#specification").hide();
 
     $("#advance_details button").click(function() {
         var data = $(this).val();

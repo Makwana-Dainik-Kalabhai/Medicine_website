@@ -63,16 +63,18 @@ $(document).ready(() => {
         $("#searched_items").show();
     });
 
-    // $("#search_box #search_input").blur(() => {
-    // });
-    // $("#searched_items").focus(() => {
-    //     $("#searched_items").show();
-    // });
-
     $("main, footer").click(() => {
         $("#side_nav").css("left", "-100%");
         dis_menu = false;
         $(".regi_form").css({ margin: "0 auto" });
         $("#searched_items").hide();
+    });
+
+    $("#ok_btn").click(() => {
+        $("#pr_not_found").hide();
+    });
+    $(document).keypress(function(e) {
+        if(e.keyCode==13)
+        $("#pr_not_found").hide();
     });
 });

@@ -31,7 +31,7 @@
 
             foreach ($sel as $row) { ?>
                 <div id="box">
-                    <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php?item_code=<?php echo $row["item_code"]; ?>">
+                    <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php?database=medicines&item_code=<?php echo $row["item_code"]; ?>">
                         <div id="product_img">
                             <img src="http://localhost/php/medicine_website/user_panel/shop/imgs/medicines/medicine_imgs/<?php echo unserialize($row["item_img"])[0]; ?>" />
 

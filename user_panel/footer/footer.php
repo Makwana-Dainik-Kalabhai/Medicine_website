@@ -25,8 +25,8 @@
         <div id="all_links">
             <div>
                 <span>Know us Better</span>
-                <a href="">About US</a>
-                <a href="">Contact US</a>
+                <a href="http://localhost/php/medicine_website/user_panel/about_us/about_us.php">About US</a>
+                <a href="http://localhost/php/medicine_website/user_panel/contact_us/contact_us.php">Contact US</a>
             </div>
             <div>
                 <span>Our Policies</span>

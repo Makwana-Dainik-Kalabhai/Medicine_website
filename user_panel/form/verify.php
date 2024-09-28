@@ -93,49 +93,45 @@ if (isset($_POST["login_submit"])) {
 
     $login_email = $_POST["login_email"];
     $login_pass = $_POST["login_pass"];
-
-    if($_SESSION["max_try"] >= 3) {
-        $_SESSION["form_error"] = "You can try after 1 hour";
-        header("Refresh:0; url=http://localhost/php/medicine_website/user_panel/form/login_form.php");
-        return;
-    }
     
-    
-    $sel_admin = $conn->prepare("SELECT * FROM `admin_login_data`");
-    $sel_admin->execute();
-    $sel_admin = $sel_admin->fetchAll();
-
-    foreach ($sel_admin as $row_admin) {
-        if ($login_email == $row_admin["email"] && $login_pass == $row_admin["pass"]) {
-            $contain_admin = true;
-            $_SESSION["admin_email"] = $row_admin["email"];
-        }
-    }
-    
+    //! Select user
     $sel_user = $conn->prepare("SELECT * FROM `user_login_data`");
     $sel_user->execute();
     $sel_user = $sel_user->fetchAll();
     
     foreach ($sel_user as $row_user) {
         if ($login_email == $row_user["email"] && $login_pass == $row_user["pass"]) {
-            $contain_user = true;
-            $_SESSION["email"] = $row_admin["email"];
+            
+            $_SESSION["email"] = $row_user["email"];
+            $_SESSION["form_succ"] = "Login Successfully";
+            
+            header("Refresh:0; url=http://localhost/php/medicine_website/user_panel/form/login_form.php");
+            return;
+        }
+        //
+        if ($login_email == $row_user["email"] && $login_pass != $row_user["pass"]) {
+            $_SESSION["form_error"] = "Invalid Password";
+
+            header("Refresh:0; url=http://localhost/php/medicine_website/user_panel/form/login_form.php");
+        }
+        //
+        else {
+            $_SESSION["form_error"] = "Invalid Email ID";
+            
+            header("Refresh:0; url=http://localhost/php/medicine_website/user_panel/form/login_form.php");
         }
     }
-    
-    // ! if Email id exist in admin_login_data & user_login_data
-    if (isset($contain_admin) && isset($contain_user)) {
-        
-        $_SESSION["admin_user"] = true;
-        header("Refresh:0; url=http://localhost/php/medicine_website/user_panel/form/login_form.php");
-        return;
-    }
+
+    //! Select Admin
+    $sel_admin = $conn->prepare("SELECT * FROM `admin_login_data`");
+    $sel_admin->execute();
+    $sel_admin = $sel_admin->fetchAll();
     
     foreach ($sel_admin as $row_admin) {
 
         if ($login_email == $row_admin["email"] && $login_pass == $row_admin["pass"]) {
 
-            $_SESSION["admin_email"] = $row_admin["email"];
+            $_SESSION["email"] = $row_admin["email"];
             
             header("Refresh:0; url='http://localhost/php/medicine_website/admin_panel/index.php'");
             return;
@@ -143,63 +139,14 @@ if (isset($_POST["login_submit"])) {
         //
         if ($login_email == $row_admin["email"] && $login_pass != $row_admin["pass"]) {
             $_SESSION["form_error"] = "Invalid Password";
-            $max_try = true;
             
             header("Refresh:0; url=http://localhost/php/medicine_website/user_panel/form/login_form.php");
         }
         //
         else {
             $_SESSION["form_error"] = "Invalid Email ID";
-            $max_try = true;
             
             header("Refresh:0; url=http://localhost/php/medicine_website/user_panel/form/login_form.php");
         }
     }
-    
-    foreach ($sel_user as $row_user) {
-        if ($login_email == $row_user["email"] && $login_pass == $row_user["pass"]) {
-            
-            $contain_user = true;
-            $_SESSION["email"] = $row_user["email"];
-            $_SESSION["form_succ"] = "Login Successfully";
-
-            header("Refresh:0; url=http://localhost/php/medicine_website/user_panel/form/login_form.php");
-            return;
-        }
-        //
-        if ($login_email == $row_user["email"] && $login_pass != $row_user["pass"]) {
-            $_SESSION["form_error"] = "Invalid Password";
-            $max_try = true;
-
-            header("Refresh:0; url=http://localhost/php/medicine_website/user_panel/form/login_form.php");
-        }
-        //
-        else {
-            $_SESSION["form_error"] = "Invalid Email ID";
-            $max_try = true;
-            
-            header("Refresh:0; url=http://localhost/php/medicine_website/user_panel/form/login_form.php");
-        }
-    }
-    
-    if (isset($max_try) && $_SESSION["max_try"]<=3) {
-        $_SESSION["time"] = time()+3600;
-        $_SESSION["max_try"]++;
-    }
-}
-
-
-//! If email is exist in admin & user
-if (isset($_GET["admin"])) {
-    unset($_SESSION["admin_user"]);
-    
-    header("Refresh:0; url='http://localhost/php/medicine_website/admin_panel/index.php'");
-    return;
-}
-//
-if (isset($_GET["user"])) {
-    unset($_SESSION["admin_user"]);
-
-    header("Refresh:0; url='http://localhost/php/medicine_website/index.php'");
-    return;
 }

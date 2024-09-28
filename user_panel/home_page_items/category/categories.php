@@ -65,16 +65,16 @@ foreach($sel as $row) {
     }
 }
 
-// $sel = $conn->prepare("SELECT * FROM `medicines`");
-// $sel->execute();
-// $sel = $sel->fetchAll();
+$sel = $conn->prepare("SELECT * FROM `medicines`");
+$sel->execute();
+$sel = $sel->fetchAll();
 $max_me_dis = 0;
 
-// foreach($sel as $row) {
-//     if($row["discount"] > $max_me_price) {
-//         $max_me_dis = $row["discount"];
-//     }
-// }
+foreach($sel as $row) {
+    if($row["discount"] > $max_me_dis) {
+        $max_me_dis = $row["discount"];
+    }
+}
 
 // $sel = $conn->prepare("SELECT * FROM `products`");
 // $sel->execute();
@@ -90,7 +90,7 @@ $max_cl_dis = 0;
 
 <!-- //! This category file is used only for index.php -->
 
-<a href="http://localhost/php/medicine_website/user_panel/shop/medicines/medicines.php" id="medicines">
+<a href="http://localhost/php/medicine_website/user_panel/shop/pr_main_page/pr_main_page.php?database=medicines" id="medicines">
     <img src="http://localhost/php/medicine_website/user_panel/home_page_items/category/medicines.jpg" alt="">
     <div class="details">
         <span>Order Medicines</span>
@@ -98,7 +98,7 @@ $max_cl_dis = 0;
     </div>
     <i class="fa-solid fa-chevron-right"></i>
 </a>
-<a href="http://localhost/php/medicine_website/user_panel/shop/products/pr_main_page.php" id="products">
+<a href="http://localhost/php/medicine_website/user_panel/shop/pr_main_page/pr_main_page.php?database=products" id="products">
     <img src="http://localhost/php/medicine_website/user_panel/home_page_items/category/products.png" alt="">
     <div class="details">
         <span>Medical Devices</span>

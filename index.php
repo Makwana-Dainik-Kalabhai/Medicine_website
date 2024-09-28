@@ -72,4 +72,7 @@ if(isset($_SESSION["price_range"])) {
 if(isset($_SESSION["discount_range"])) {
     unset($_SESSION["discount_range"]);
 }
+if (isset($_SESSION["search_input"])) {
+    unset($_SESSION["search_input"]);
+}
 ?>

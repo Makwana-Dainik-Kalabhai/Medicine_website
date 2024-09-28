@@ -239,26 +239,26 @@ main {
     padding: 2% 1%;
 }
 
-#advance_details #details li {
+#details li {
+    font-size: 0.6em;
+    margin: 1% 0;
+}
+#details span {
     font-size: 0.6em;
     font-weight: 400;
     margin: 1% 0;
 }
-
-#advance_details iframe {
+#details iframe {
     margin-top: 3.5%;
     border-radius: 10px;
 }
-
-#advance_details #specification table {
+#specification table {
     font-size: 0.65em;
     width: 100%;
 }
-
 #specification th {
     font-weight: 600;
 }
-
 #specification th,
 #specification td {
     width: 50%;

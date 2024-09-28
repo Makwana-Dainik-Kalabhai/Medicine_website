@@ -3,6 +3,16 @@
 if (isset($_GET["item_code"])) {
     $_SESSION["item_code"] = $_GET["item_code"];
 }
+
+if (isset($_GET["database"])) {
+    $_SESSION["database"] = $_GET["database"];
+
+    if ($_SESSION["database"] == "medicines") {
+        $_SESSION["img_path"] = "http://localhost/php/medicine_website/user_panel/shop/imgs/medicines/medicine_imgs/";
+    } else {
+        $_SESSION["img_path"] = "http://localhost/php/medicine_website/user_panel/shop/imgs/products/product_imgs/";
+    }
+}
 ?>
 
 <meta charset="UTF-8">
@@ -22,13 +32,13 @@ if (isset($_GET["item_code"])) {
     <header>
         <?php include("C:/xampp/htdocs/php/medicine_website/user_panel/header/header.php"); ?>
     </header>
-    
+
     <main>
         <div id="product_container">
             <?php
             include("C:/xampp/htdocs/php/medicine_website/database.php");
 
-            $sel = $conn->prepare("SELECT * FROM `".$_SESSION["database"]."` WHERE item_code='" . $_SESSION["item_code"] . "'");
+            $sel = $conn->prepare("SELECT * FROM `" . $_SESSION["database"] . "` WHERE item_code='" . $_SESSION["item_code"] . "'");
             $sel->execute();
             $sel = $sel->fetchAll();
 
@@ -43,7 +53,7 @@ if (isset($_GET["item_code"])) {
                             <figure class="fig">
                                 <?php foreach (unserialize($row["item_img"]) as $img) { ?>
                                     <div id="img">
-                                        <img src="<?php echo $_SESSION["img_path"].$img; ?>" />
+                                        <img src="<?php echo $_SESSION["img_path"] . $img; ?>" />
                                     </div>
                                 <?php $count_img++;
                                 } ?>
@@ -75,9 +85,9 @@ if (isset($_GET["item_code"])) {
                     </script>
 
                     <div id="main_imgs">
-                            <?php foreach (unserialize($row["item_img"]) as $img) { ?>
-                                <img id="full" src="<?php echo $_SESSION["img_path"].$img; ?>" />
-                            <?php } ?>
+                        <?php foreach (unserialize($row["item_img"]) as $img) { ?>
+                            <img id="full" src="<?php echo $_SESSION["img_path"] . $img; ?>" />
+                        <?php } ?>
 
                         <!-- //! Discount btn -->
                         <?php if ($row["discount"] != 0) { ?>
@@ -152,53 +162,27 @@ if (isset($_GET["item_code"])) {
     <div id="advance_details">
         <div>
             <div id="btns">
-                <button value="description" class="clicked_btn">Description</button>
-                <button value="features">Features</button>
-                <button value="specification">Specification</button>
+                <?php if ($_SESSION["database"] == "products") { ?>
+                    <button value="description" class="clicked_btn">Description</button>
+                    <button value="features">Features</button>
+                    <button value="specification">Specification</button>
+                <?php } else { ?>
+                    <button value="description" class="clicked_btn">Description</button>
+                    <button value="benefits">Benefits</button>
+                    <button value="how_use">How to Use</button>
+                    <button value="safety">Safety</button>
+                    <button value="other_info">Other Info.</button>
+                    <button value="faqs">FAQs</button>
+                <?php } ?>
             </div>
 
 
             <?php
-            foreach ($sel as $row) {
-                $_GET["des"] = true; ?>
-                <div id="details">
-
-                    <div id="description">
-                        <?php foreach (unserialize($row["description"]) as $des) { ?>
-                            <li><?php echo $des[0]; ?></li>
-                        <?php }
-
-                        if ($row["link"] != null) { ?>
-                            <iframe width="560" height="315" src="<?php echo $row["link"]; ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                        <?php } ?>
-                    </div>
-
-                    <div id="features">
-                        <ol>
-                            <?php foreach (unserialize($row["features"]) as $fea) { ?>
-                                <li><?php echo $fea; ?></li>
-                            <?php } ?>
-                        </ol>
-                    </div>
-
-                    <div id="specification">
-                        <table>
-                            <tr>
-                                <th>Weight</th>
-                                <td><?php echo $row["weight"]; ?></td>
-                            </tr>
-                            <?php
-                            for ($i = 0; $i < sizeof(unserialize($row["specification"])); $i++) { ?>
-                                <tr>
-                                    <th><?php echo unserialize($row["specification"])[$i][0]; ?></th>
-                                    <td><?php echo unserialize($row["specification"])[$i][1]; ?></td>
-                                </tr>
-                            <?php }
-                            ?>
-                        </table>
-                    </div>
-                </div>
-            <?php } ?>
+            if ($_SESSION["database"] == "products")
+                disProductDetalis();
+            else
+                disMedicineDetalis();
+            ?>
         </div>
     </div>
     <?php include("./related_product/related_product.php"); ?>
@@ -210,3 +194,103 @@ if (isset($_GET["item_code"])) {
 </body>
 
 </html>
+
+<?php
+//* Display Product Details
+function disProductDetalis()
+{
+    global $sel;
+
+    foreach ($sel as $row) {
+        $_GET["des"] = true; ?>
+        <div id="details">
+            <div id="description">
+                <?php foreach (unserialize($row["description"]) as $des) { ?>
+                    <li><?php echo $des; ?></li>
+                <?php
+                }
+
+                if (isset($row["link"])) { ?>
+                    <iframe width="560" height="315" src="<?php echo $row["link"]; ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <?php } ?>
+            </div>
+
+            <div id="features">
+                <ol>
+                    <?php foreach (unserialize($row["features"]) as $fea) { ?>
+                        <li><?php echo $fea; ?></li>
+                    <?php } ?>
+                </ol>
+            </div>
+
+            <div id="specification">
+                <table>
+                    <tr>
+                        <th>Weight</th>
+                        <td><?php echo $row["weight"]; ?></td>
+                    </tr>
+                    <?php
+                    for ($i = 0; $i < sizeof(unserialize($row["specification"])); $i++) { ?>
+                        <tr>
+                            <th><?php echo unserialize($row["specification"])[$i][0]; ?></th>
+                            <td><?php echo unserialize($row["specification"])[$i][1]; ?></td>
+                        </tr>
+                    <?php }
+                    ?>
+                </table>
+            </div>
+        <?php }
+}
+//
+//* Display Medicine Details
+function disMedicineDetalis()
+{
+    global $sel;
+
+    foreach ($sel as $row) {
+        $_GET["des"] = true; ?>
+            <div id="details">
+                <div id="description">
+                    <?php foreach (unserialize($row["description"]) as $des) {
+                        foreach ($des as $d) { ?>
+                            <li><?php echo $d; ?></li>
+                    <?php }
+                    } ?>
+                </div>
+                <div id="benefits">
+                    <?php foreach (unserialize($row["benefits"]) as $ben) { ?>
+                        <?php if (!isset($ben[1])) { ?>
+                            <li><?php echo $ben[0]; ?></li>
+                        <?php }
+                        //
+                        else { ?>
+                            <p>
+                                <li style="display: inline;font-weight: 700;"><?php echo $ben[0]; ?></li>
+                                <span>: -&ensp;<?php echo $ben[1]; ?></span>
+                            </p>
+                        <?php } ?>
+                    <?php } ?>
+                </div>
+                <div id="how_use">
+                    <?php foreach (unserialize($row["how_use"]) as $how) { ?>
+                        <?php if (!isset($how[1])) { ?>
+                            <li><?php echo $how[0]; ?></li>
+                        <?php }
+                        //
+                        else { ?>
+                            <p>
+                                <li style="display: inline;font-weight: 700;"><?php echo $how[0]; ?></li>
+                                <span>: -&ensp;<?php echo $how[1]; ?></span>
+                            </p>
+                        <?php } ?>
+                    <?php } ?>
+                </div>
+                <div id="safety">
+                    <?php foreach (unserialize($row["safety"]) as $saf) { ?>
+                        <li><?php echo $saf; ?></li>
+                    <?php
+                    } ?>
+                </div>
+            </div>
+    <?php }
+} ?>

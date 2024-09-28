@@ -189,20 +189,18 @@ $conn = new PDO("mysql:host=localhost;dbname=medicine_website", "root", "");
 
 $cat = "ayurvedic";
 $item_img = array(
-    "Krishna\'s Herbal & Ayurveda Diabic Care Juice 1000 ml(1).jpg",
-    "Krishna\'s Herbal & Ayurveda Diabic Care Juice 1000 ml(2).jpg",
-    "Krishna\'s Herbal & Ayurveda Diabic Care Juice 1000 ml(3).jpg",
-    "Krishna\'s Herbal & Ayurveda Diabic Care Juice 1000 ml(4).jpg",
-    "Krishna\'s Herbal & Ayurveda Diabic Care Juice 1000 ml(5).jpg",
-    "Krishna\'s Herbal & Ayurveda Diabic Care Juice 1000 ml(6).jpg",
-    "Krishna\'s Herbal & Ayurveda Diabic Care Juice 1000 ml(7).jpg",
-    "Krishna\'s Herbal & Ayurveda Diabic Care Juice 1000 ml(8).jpg",
-    "Krishna\'s Herbal & Ayurveda Diabic Care Juice 1000 ml(9).jpg"
+    "Krishnas Herbal & Ayurveda Diabic Care Juice 1000 ml(1).jpg",
+    "Krishnas Herbal & Ayurveda Diabic Care Juice 1000 ml(2).jpg",
+    "Krishnas Herbal & Ayurveda Diabic Care Juice 1000 ml(3).jpg",
+    "Krishnas Herbal & Ayurveda Diabic Care Juice 1000 ml(4).jpg",
+    "Krishnas Herbal & Ayurveda Diabic Care Juice 1000 ml(5).jpg",
+    "Krishnas Herbal & Ayurveda Diabic Care Juice 1000 ml(6).jpg",
+    "Krishnas Herbal & Ayurveda Diabic Care Juice 1000 ml(7).jpg",
+    "Krishnas Herbal & Ayurveda Diabic Care Juice 1000 ml(8).jpg",
+    "Krishnas Herbal & Ayurveda Diabic Care Juice 1000 ml(9).jpg"
 );
 $name = "Krishnas Herbal & Ayurveda Diabic Care Juice 1000 ml";
-$def = [
-    "Blend of 11 herbs Methi, Amla, Karela, Jamun, Kutki, Guduchi & 5 other herbs to manage sugar level"
-];
+$def = "The raw and pure herbs used in Krishnas Herbal & Ayurveda Diabic Care Juice are collected from reputable farms all across the country. These effective herbs assist in maintaining health sugar levels. We have multiple ayurvedic products to improve the quality of life.Blend of 11 herbs Methi, Amla, Karela, Jamun, Kutki, Guduchi & 5 other herbs to manage sugar level";
 $off_price = 490;
 $price = 490;
 $dis = 0;
@@ -218,21 +216,21 @@ $des = [
     ["The raw and pure herbs used in Krishnas Herbal & Ayurveda Diabic Care Juice are collected from reputable farms all across the country. These effective herbs assist in maintaining health sugar levels. We have multiple ayurvedic products to improve the quality of life."]
 ];
 $benefit = [
-    ["Blood sugar regulation : Diabic Care Juice is formulated to regulate blood sugar levels. With its unique blend of ingredients, this juice helps maintain proper glucose levels, providing potential benefits for individuals with diabetes."],
-    ["Antioxidant support : This powerful antioxidant supplement provides support for your bodys natural defense against free radicals. With a proprietary blend of ingredients, it helps protect against oxidative stress and manage overall wellness."],
-    ["Heart health : Diabic care juices, may help support heart health by manage cholesterol levels, improving blood circulation, and reducing inflammation in the arteries."],
-    ["Digestive health : This Juice is a powerful solution for manage digestive health. With its unique formulation, this juice offers a natural and effective way to support the digestive system, leading to improved overall wellbeing."],
-    ["Weight management : This Ayurvedic  formulated juice that helps with weight management. With its unique blend of ingredients, this juice manage healthy weight loss and management."],
-    ["Hydration : Diabic Care Juice provides optimal hydration to keep you healthy and energized. Its unique formula nourishes your body and provides essential electrolytes for improved overall wellness."],
-    ["Boost Metabolism : This juice can help improve your bodys metabolic rate, allowing you to feel energized and refreshed."]
+    ["Blood sugar regulation","Diabic Care Juice is formulated to regulate blood sugar levels. With its unique blend of ingredients, this juice helps maintain proper glucose levels, providing potential benefits for individuals with diabetes."],
+    ["Antioxidant support","This powerful antioxidant supplement provides support for your bodys natural defense against free radicals. With a proprietary blend of ingredients, it helps protect against oxidative stress and manage overall wellness."],
+    ["Heart health","Diabic care juices, may help support heart health by manage cholesterol levels, improving blood circulation, and reducing inflammation in the arteries."],
+    ["Digestive health","This Juice is a powerful solution for manage digestive health. With its unique formulation, this juice offers a natural and effective way to support the digestive system, leading to improved overall wellbeing."],
+    ["Weight management","This Ayurvedic  formulated juice that helps with weight management. With its unique blend of ingredients, this juice manage healthy weight loss and management."],
+    ["Hydration","Diabic Care Juice provides optimal hydration to keep you healthy and energized. Its unique formula nourishes your body and provides essential electrolytes for improved overall wellness."],
+    ["Boost Metabolism","This juice can help improve your bodys metabolic rate, allowing you to feel energized and refreshed."]
 ];
 $how_use = [
-    "Shake well before use",
-    "Mix 30ml of juice with 30ml of warm water",
-    "Take an empty stomach in the morning and 30 mins post-dinner",
-    "Keep in a cold & dry place",
-    "Close the bottle tightly",
-    "Consume within 1 month after opening"
+    ["Shake well before use",],
+    ["Mix 30ml of juice with 30ml of warm water",],
+    ["Take an empty stomach in the morning and 30 mins post-dinner",],
+    ["Keep in a cold & dry place",],
+    ["Close the bottle tightly",],
+    ["Consume within 1 month after opening"]
 ];
 $safety = [];
 $other_info = [
@@ -267,50 +265,7 @@ $query = "INSERT INTO `medicines` VALUES ('',NOW(),'$cat','" . serialize($item_i
 $insert = $conn->prepare($query);
 // $insert->execute();
 
-$sel = $conn->prepare("SELECT * FROM `medicines`");
-$sel->execute();
-$sel = $sel->fetchAll();
-
-foreach ($sel as $row) {
-    if ($row["item_code"] == $item_code) {
-        echo "<h1>Item Image</h1>";
-        echo $row["item_img"]."<br/><br/>";
-        echo "<br/><br/><br/>" . unserialize($row["item_img"])[0];
-
-        echo "<h1>Definition</h1>";
-        echo "<br/><br/><br/>" . unserialize($row["definition"])[0];
-
-        echo "<h1>Description Image</h1>";
-        echo "UPDATE `medicines` SET `desc_img`='" . $row["desc_img"] . "' WHERE `item_code`='$item_code'<br/><br/>";
-        echo "<br/><br/><br/>" . unserialize($row["desc_img"])[0];
-
-        echo "<h1>Description</h1>";
-        echo "UPDATE `medicines` SET `description`='" . $row["description"] . "' WHERE `item_code`='$item_code'<br/><br/>";
-        echo "<br/><br/><br/>";
-        foreach(unserialize($row["description"]) as $d)
-        echo "<br/>" . $d;
-
-        echo "<h1>Benefits</h1>";
-        echo "UPDATE `medicines` SET `benefits`='" . $row["benefits"] . "' WHERE `item_code`='$item_code'<br/><br/>"; 
-        echo "<br/><br/><br/>";
-        foreach(unserialize($row["benefits"]) as $b)
-        echo "<br/>" . $b;
-
-        echo "<br/><br/><br/>";
-        foreach (unserialize($row["benefits"]) as $be) {
-            echo $be[0].": ".$be[1];
-        }
-
-        echo "<h1>How to Use</h1>";
-        echo "<br/><br/><br/>" . $row["how_use"];
-
-        echo "<h1>Other Information</h1>";
-        echo "<br/><br/><br/>" . $row["other_info"];
-    }
-}
-
-
-$up = $conn->prepare("UPDATE `medicines` SET `item_img`='" . serialize($item_img) . "' WHERE item_code='$item_code'");
+$up = $conn->prepare("UPDATE `medicines` SET `definition`='$def' WHERE item_code='1003'");
 // $up->execute();
 
 // echo "<script>

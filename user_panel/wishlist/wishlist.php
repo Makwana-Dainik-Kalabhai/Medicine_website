@@ -87,8 +87,8 @@
         if ($like_count == 0) { ?>
 
             <div id='empty_wishlist'>
-                <h1>Your wishlist is empty, so add your favourites</h1>
-                <a href="http://localhost/php/medicine_website/user_panel/shop/pr_main_page/pr_main_page.php">Add Now</a>
+                <img src="empty.png" alt="">
+                <a href="http://localhost/php/medicine_website/user_panel/shop/pr_main_page/pr_main_page.php?database=products">Add Now</a>
             </div>
         <?php } ?>
     </main>

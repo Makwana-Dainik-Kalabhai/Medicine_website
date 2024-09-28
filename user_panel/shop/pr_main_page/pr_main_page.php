@@ -1,18 +1,20 @@
 <?php
 session_start();
-if (isset($_GET["category"])) {
-    unset($_GET["category"]);
-}
+
+// ! Unset searched_data & category
 if (isset($_SESSION["category"])) {
     unset($_SESSION["category"]);
 }
-if(isset($_GET["database"])) {
+
+if (isset($_GET["category"])) {
+    $_SESSION["category"] = $_GET["category"];
+}
+if (isset($_GET["database"])) {
     $_SESSION["database"] = $_GET["database"];
 
-    if($_GET["database"]=="medicines") {
+    if ($_SESSION["database"] == "medicines") {
         $_SESSION["img_path"] = "http://localhost/php/medicine_website/user_panel/shop/imgs/medicines/medicine_imgs/";
-    }
-    else {
+    } else {
         $_SESSION["img_path"] = "http://localhost/php/medicine_website/user_panel/shop/imgs/products/product_imgs/";
     }
 }
@@ -110,7 +112,7 @@ if(isset($_GET["database"])) {
                         <?php
                         include("C:/xampp/htdocs/php/medicine_website/database.php");
 
-                        $sel_cat = $conn->prepare("SELECT * FROM `".$_SESSION["database"]."` GROUP BY `category`");
+                        $sel_cat = $conn->prepare("SELECT * FROM `" . $_SESSION["database"] . "` GROUP BY `category`");
                         $sel_cat->execute();
                         $sel_cat = $sel_cat->fetchAll(); ?>
 
@@ -135,15 +137,11 @@ if(isset($_GET["database"])) {
                         $max_discount = 0;
                         $min_discount = 50;
 
-                        if (isset($_GET["category"])) {
-                            $sel_cat = $conn->prepare("SELECT * FROM `".$_SESSION["database"]."` WHERE `category` = '" . $_GET["category"] . "'");
-                        } else {
-                            $sel_cat = $conn->prepare("SELECT * FROM `".$_SESSION["database"]."`");
-                        }
-                        $sel_cat->execute();
-                        $sel_cat = $sel_cat->fetchAll();
+                        $sel = $conn->prepare("SELECT * FROM `" . $_SESSION["database"] . "`");
+                        $sel->execute();
+                        $sel = $sel->fetchAll();
 
-                        foreach ($sel_cat as $row_cat) {
+                        foreach ($sel as $row_cat) {
                             // ! Get Max Discount
                             if ($row_cat["discount"] > $max_discount) {
                                 $max_discount = $row_cat["discount"];
@@ -178,25 +176,26 @@ if(isset($_GET["database"])) {
                 </div>
                 <div id="products">
                     <?php
-
+                    $query = "SELECT * FROM `" . $_SESSION["database"] . "`";
                     if (isset($_GET["category"])) {
-                        $sel = $conn->prepare("SELECT * FROM `".$_SESSION["database"]."` WHERE `category`='" . $_GET["category"] . "'");
-                    } else {
-                        $sel = $conn->prepare("SELECT * FROM `".$_SESSION["database"]."`");
+                        $query = "SELECT * FROM `" . $_SESSION["database"] . "` WHERE `category` = '" . $_GET["category"] . "'";
                     }
+
+                    $sel = $conn->prepare($query);
                     $sel->execute();
                     $sel = $sel->fetchAll();
 
-                    foreach ($sel as $row) { ?>
+                    foreach ($sel as $row) {
+                        $contain_data = true; ?>
 
                         <div id="box">
-                            <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php?item_code=<?php echo $row["item_code"]; ?>">
+                            <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php?database=<?php echo $_SESSION["database"]; ?>&item_code=<?php echo $row["item_code"]; ?>">
                                 <div id="product_img">
                                     <?php
                                     if ($row["discount"] != 0) { ?>
                                         <span>&ensp;-<?php echo $row["discount"]; ?>%</span>
                                     <?php } ?>
-                                    <img src="<?php echo $_SESSION["img_path"].unserialize($row["item_img"])[0]; ?>" alt="" />
+                                    <img src="<?php echo $_SESSION["img_path"] . unserialize($row["item_img"])[0]; ?>" alt="" />
                                 </div>
                                 <div id="product_details">
                                     <span id="name"><?php echo $row["name"]; ?></span>
