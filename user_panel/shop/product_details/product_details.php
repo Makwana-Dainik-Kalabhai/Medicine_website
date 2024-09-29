@@ -205,21 +205,24 @@ function disProductDetalis()
         $_GET["des"] = true; ?>
         <div id="details">
             <div id="description">
-                <?php foreach (unserialize($row["description"]) as $des) { ?>
-                    <li><?php echo $des; ?></li>
-                <?php
+                <?php if ($row["description"] != null) {
+                    foreach (unserialize($row["description"]) as $des) { ?>
+                        <li><?php echo $des; ?></li>
+                    <?php
+                    }
                 }
-
-                if (isset($row["link"])) { ?>
+                if ($row["link"]!=null) { ?>
                     <iframe width="560" height="315" src="<?php echo $row["link"]; ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                 <?php } ?>
             </div>
 
             <div id="features">
                 <ol>
-                    <?php foreach (unserialize($row["features"]) as $fea) { ?>
-                        <li><?php echo $fea; ?></li>
-                    <?php } ?>
+                    <?php if ($row["features"] != null) {
+                        foreach (unserialize($row["features"]) as $fea) { ?>
+                            <li><?php echo $fea; ?></li>
+                    <?php }
+                    } ?>
                 </ol>
             </div>
 
@@ -229,17 +232,19 @@ function disProductDetalis()
                         <th>Weight</th>
                         <td><?php echo $row["weight"]; ?></td>
                     </tr>
-                    <?php
-                    for ($i = 0; $i < sizeof(unserialize($row["specification"])); $i++) { ?>
-                        <tr>
-                            <th><?php echo unserialize($row["specification"])[$i][0]; ?></th>
-                            <td><?php echo unserialize($row["specification"])[$i][1]; ?></td>
-                        </tr>
+                    <?php if ($row["specification"] != null) {
+                        foreach (unserialize($row["specification"]) as $spe) { ?>
+                            <tr>
+                                <th><?php echo $spe[0]; ?></th>
+                                <td><?php echo $spe[1]; ?></td>
+                            </tr>
                     <?php }
+                    }
                     ?>
                 </table>
             </div>
-        <?php }
+        </div>
+    <?php }
 }
 //
 //* Display Medicine Details
@@ -249,16 +254,19 @@ function disMedicineDetalis()
 
     foreach ($sel as $row) {
         $_GET["des"] = true; ?>
-            <div id="details">
-                <div id="description">
-                    <?php foreach (unserialize($row["description"]) as $des) {
+        <div id="details">
+            <div id="description">
+                <?php if ($row["description"] != null) {
+                    foreach (unserialize($row["description"]) as $des) {
                         foreach ($des as $d) { ?>
                             <li><?php echo $d; ?></li>
-                    <?php }
-                    } ?>
-                </div>
-                <div id="benefits">
-                    <?php foreach (unserialize($row["benefits"]) as $ben) { ?>
+                <?php }
+                    }
+                } ?>
+            </div>
+            <div id="benefits">
+                <?php if ($row["benefits"] != null) {
+                    foreach (unserialize($row["benefits"]) as $ben) { ?>
                         <?php if (!isset($ben[1])) { ?>
                             <li><?php echo $ben[0]; ?></li>
                         <?php }
@@ -269,10 +277,12 @@ function disMedicineDetalis()
                                 <span>: -&ensp;<?php echo $ben[1]; ?></span>
                             </p>
                         <?php } ?>
-                    <?php } ?>
-                </div>
-                <div id="how_use">
-                    <?php foreach (unserialize($row["how_use"]) as $how) { ?>
+                <?php }
+                } ?>
+            </div>
+            <div id="how_use">
+                <?php if ($row["how_use"] != null) {
+                    foreach (unserialize($row["how_use"]) as $how) { ?>
                         <?php if (!isset($how[1])) { ?>
                             <li><?php echo $how[0]; ?></li>
                         <?php }
@@ -283,14 +293,44 @@ function disMedicineDetalis()
                                 <span>: -&ensp;<?php echo $how[1]; ?></span>
                             </p>
                         <?php } ?>
-                    <?php } ?>
-                </div>
-                <div id="safety">
-                    <?php foreach (unserialize($row["safety"]) as $saf) { ?>
-                        <li><?php echo $saf; ?></li>
-                    <?php
-                    } ?>
-                </div>
+                <?php }
+                } ?>
             </div>
-    <?php }
+            <div id="safety">
+                <?php if ($row["safety"] != null) {
+                    foreach (unserialize($row["safety"]) as $saf) { ?>
+                        <li><?php echo $saf; ?></li>
+                <?php
+                    }
+                } ?>
+            </div>
+            <div id="other_info">
+                <?php if ($row["other_info"] != null) {
+                    foreach (unserialize($row["other_info"]) as $inf) { ?>
+                        <?php if (!isset($inf[1])) { ?>
+                            <li><?php echo $inf[0]; ?></li>
+                        <?php }
+                        //
+                        else { ?>
+                            <p>
+                                <li style="display: inline;font-weight: 700;"><?php echo $inf[0]; ?></li>
+                                <span>: -&ensp;<?php echo $inf[1]; ?></span>
+                            </p>
+                        <?php } ?>
+                <?php }
+                } ?>
+            </div>
+            <div id="faqs">
+                <?php if ($row["faqs"] != null) {
+                    foreach (unserialize($row["faqs"]) as $faqs) { ?>
+                        <p style="margin-bottom:3%;">
+                            <li style="display:inline;font-weight: 700;">Q.&ensp;<?php echo $faqs[0]; ?></li>
+                            <hr />
+                            <span>Ans.&ensp;<?php echo $faqs[1]; ?></span>
+                        </p>
+                <?php }
+                } ?>
+            </div>
+        </div>
+<?php }
 } ?>

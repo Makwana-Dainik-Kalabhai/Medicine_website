@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Return Policy</title>
+    <link rel="shortcut icon" href="http://localhost/php/medicine_website/logo.ico" type="image/x-icon" />
 </head>
 <style>
     <?php include("policies.css"); ?>

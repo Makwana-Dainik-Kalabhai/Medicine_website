@@ -163,7 +163,7 @@ main {
     height: 100%;
     border-radius: 5px;
     border: 1px solid black;
-    /* overflow: hidden; */
+    overflow: hidden;
 }
 #category_main #cat_head {
     padding: 15% 3% 3% 3%;

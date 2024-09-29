@@ -186,79 +186,50 @@ if (isset($_POST["sub"])) {
 <?php
 $conn = new PDO("mysql:host=localhost;dbname=medicine_website", "root", "");
 
-
 $cat = "ayurvedic";
-$item_img = array(
-    "Krishnas Herbal & Ayurveda Diabic Care Juice 1000 ml(1).jpg",
-    "Krishnas Herbal & Ayurveda Diabic Care Juice 1000 ml(2).jpg",
-    "Krishnas Herbal & Ayurveda Diabic Care Juice 1000 ml(3).jpg",
-    "Krishnas Herbal & Ayurveda Diabic Care Juice 1000 ml(4).jpg",
-    "Krishnas Herbal & Ayurveda Diabic Care Juice 1000 ml(5).jpg",
-    "Krishnas Herbal & Ayurveda Diabic Care Juice 1000 ml(6).jpg",
-    "Krishnas Herbal & Ayurveda Diabic Care Juice 1000 ml(7).jpg",
-    "Krishnas Herbal & Ayurveda Diabic Care Juice 1000 ml(8).jpg",
-    "Krishnas Herbal & Ayurveda Diabic Care Juice 1000 ml(9).jpg"
-);
-$name = "Krishnas Herbal & Ayurveda Diabic Care Juice 1000 ml";
-$def = "The raw and pure herbs used in Krishnas Herbal & Ayurveda Diabic Care Juice are collected from reputable farms all across the country. These effective herbs assist in maintaining health sugar levels. We have multiple ayurvedic products to improve the quality of life.Blend of 11 herbs Methi, Amla, Karela, Jamun, Kutki, Guduchi & 5 other herbs to manage sugar level";
-$off_price = 490;
-$price = 490;
-$dis = 0;
-$weight = [
-    "1000ml"
+$item_img = [
+    "Chyawanprash Preservative Free(1).webp",
+    "Chyawanprash Preservative Free(2).webp",
+    "Chyawanprash Preservative Free(3).webp",
+    "Chyawanprash Preservative Free(4).webp",
+    "Chyawanprash Preservative Free(5).webp"
 ];
+$name = "Chyawanprash Preservative Free";
+$def = "Made using only fresh amla, A2 Ghee & cold pressed sesame oil in Glass Bottle | Ayurvedic Immunity Booster | Support For All Age Groups | All Season";
+$off_price = 428;
+$price = 490;
+$dis = 14;
+$weight = "500g";
 $quantity = 10;
-$expiry = "Jul 2025";
+$expiry = "";
 
-$des_img = ["Krishnas Herbal & Ayurveda Diabic Care Juice 1000 ml.webp"];
+$des_img = ["Chyawanprash Preservative Free.webp"];
 
 $des = [
-    ["The raw and pure herbs used in Krishnas Herbal & Ayurveda Diabic Care Juice are collected from reputable farms all across the country. These effective herbs assist in maintaining health sugar levels. We have multiple ayurvedic products to improve the quality of life."]
+    ["Krishnas Chyawanprash Preservative Free is power-packed with fresh Amla, rich in Vitamin C and more than 45 essential herbs and minerals. It is made with A2 desi cow ghee in an iron pan in small batches using original Vanshlochan & All Herbs. This Chywawanprash benefits all age groups and follows the formula in ancient scriptures."],
+    ["Krishnas Chyawanprash uses fresh Amla fruits (cold-pressed) to unlock the high antioxidant value and get the true benefit of Vitamin C. Chyawanprash ingredients are Vanshlochan, Till Oil, and more than 45 raw herbs. This Chywanprash uses the classical Ayurvedic process known as the Shasktot Process. Experience the benefits of the traditional herbal supplement for generations."]
 ];
 $benefit = [
-    ["Blood sugar regulation","Diabic Care Juice is formulated to regulate blood sugar levels. With its unique blend of ingredients, this juice helps maintain proper glucose levels, providing potential benefits for individuals with diabetes."],
-    ["Antioxidant support","This powerful antioxidant supplement provides support for your bodys natural defense against free radicals. With a proprietary blend of ingredients, it helps protect against oxidative stress and manage overall wellness."],
-    ["Heart health","Diabic care juices, may help support heart health by manage cholesterol levels, improving blood circulation, and reducing inflammation in the arteries."],
-    ["Digestive health","This Juice is a powerful solution for manage digestive health. With its unique formulation, this juice offers a natural and effective way to support the digestive system, leading to improved overall wellbeing."],
-    ["Weight management","This Ayurvedic  formulated juice that helps with weight management. With its unique blend of ingredients, this juice manage healthy weight loss and management."],
-    ["Hydration","Diabic Care Juice provides optimal hydration to keep you healthy and energized. Its unique formula nourishes your body and provides essential electrolytes for improved overall wellness."],
-    ["Boost Metabolism","This juice can help improve your bodys metabolic rate, allowing you to feel energized and refreshed."]
+    ["Natural Protection", "Builds Healthy living against common allergies and health probs and is suitable for all age groups. "],
+    ["Improves Memory", "Possesses properties to improve memory function."],
+    ["Enriched with Vitamin C", "Amla is rich in antioxidants and has abundant Vitamin C."],
+    ["Packaging and Safety", "Krishnas Chyawanprash does not use harmful metals which can cause toxicity and has no artificial flavors or colors. The packaging consists of glass bottles to avoid the leaching of harmful chemicals in the product for enhanced safety."]
 ];
 $how_use = [
-    ["Shake well before use",],
-    ["Mix 30ml of juice with 30ml of warm water",],
-    ["Take an empty stomach in the morning and 30 mins post-dinner",],
-    ["Keep in a cold & dry place",],
-    ["Close the bottle tightly",],
-    ["Consume within 1 month after opening"]
+    ["For Adults", "1 teaspoon twice daily"],
+    ["For children above two years", "1/2 teaspoon twice daily. Follow with warm milk for best results, but can be consumed directly."],
+    ["This product is natural; therefore, the color & taste may change slightly from batch to batch due to seasonal variations without affecting purity, efficiency & quality as all ingredients are natural."]
 ];
-$safety = [];
+$safety = [
+];
 $other_info = [
-    ["Jamun", "Regulates Blood sugar levels"],
-    ["GILOY", "Balances the Tridoshas Vata - Pitta - Kapha"],
-    ["BEL PATRA", "Strengthens Urinary system"],
-    ["VIJAYSAR", "Strengthens pancreas and insulin secretion"],
-    ["AMLA", "Enriched with Vitamin C"],
-    ["TULSI", "Supports respiratory system"],
-    ["METHI", "Strengthens nervous system"],
-    ["GUDMAAR", "Liver Stimulant"],
-    ["KARELA", "Enhances Insulin Secretion"],
-    ["NEEM", "Natural finest detoxifier"],
-    ["KUTKI", "Keeps a check on sugar levels"]
+    []
 ];
 
 $faqs = [
-    ["How to use?", "Take 30 ml of juice with 30 ml warm water, twice a day. Empty stomach in Morning & 30 minutes post-dinner at night. Shake well before use."],
-    ["How much time it will take to control diabetes?", "You will be able to see noticeable results in 60-90 days. For best results it is advised to continue drinking this juice daily"],
-    ["Can I use allopathic medicine while using diabic care juice?", "Yes, Diabic care juice is safe to be taken along with Allopathic medication. But please take 10-15 minutes gap between juice and allopathic medicine for better results."],
-    ["Can use it during pregnancy ?", "Consult with your doctor before taking this in case of pregnancy. You can also connect us for free expert doctor consultation by Krishna Ayurveda."],
-    ["Can a breastfeeding mom take it?", "Consult with your doctor before taking this in case of pregnancy. You can also connect us for free expert doctor consultation by Krishna Ayurveda."],
-    ["What are the precautions?", "Avoid sweets, sugary foods, junk food, non-veg, rice and potatoes.Fruits which have high sugar content must be avoided (Apple and papaya can be taken). Daily 15 min exercise or walk will be very beneficial."],
-    ["Whats the age criteria?", "Kids aged 10 years+ can take this juice – 15 ml twice a day. Adults can take 30ml twice a day ."],
-    ["Arethere any side-effects?", "Krishnas Diabic care Juice is an ayurvedic product, the ingredients used in this juice have shown to have no side effects. However, please read the ingredients list for any known allergies."],
-    ["How many days will Diabic care juice 1000ml last?", "One bottle Diabic care juice 1000ml will last for 15 days. Please order your next bottle in advance to make sure that you need not discontinue it."]
+    []
 ];
-$item_code = "1003";
+$item_code = "1005";
 
 // $query = "INSERT INTO `medicines` VALUES ('',NOW(),'$cat','','','" . serialize($def) . "','$off_price','$price','$dis','" . serialize($weight) . "','$quantity','$expiry','','','','" . serialize($how_use) . "','" . serialize($safety) . "','" . serialize($other_info) . "','','$item_code')";
 $query = "INSERT INTO `medicines` VALUES ('',NOW(),'$cat','" . serialize($item_img) . "','$name','" . serialize($def) . "','$off_price','$price','$dis','" . serialize($weight) . "','$quantity','$expiry','" . serialize($des_img) . "','" . serialize($des) . "','" . serialize($benefit) . "','" . serialize($how_use) . "','" . serialize($safety) . "','" . serialize($other_info) . "','" . serialize($faqs) . "','$item_code')";
@@ -268,9 +239,9 @@ $insert = $conn->prepare($query);
 $up = $conn->prepare("UPDATE `medicines` SET `definition`='$def' WHERE item_code='1003'");
 // $up->execute();
 
-// echo "<script>
-//        alert('Inserted successfully');
-//        </script>";
+echo "<script>
+       alert('Inserted successfully');
+       </script>";
 
 // $img =[
 //     "Invacare Platinum 9 LPM(1).jpg",
