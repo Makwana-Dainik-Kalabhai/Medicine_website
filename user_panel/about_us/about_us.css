@@ -15,20 +15,23 @@ main img {
 
 /* //! First Introduction Page */
 #intro {
+    padding: 0 !important;
     width: 100%;
 }
 
 /* //! Policies */
-#policies {
+main>div {
     width: 90%;
     padding: 3% 0;
     margin: 0 auto;
 }
 
-#policies>div {
+main>div>div {
     width: 95%;
     margin: 0 auto;
     padding-top: 2%;
+}
+#policies div {
     display: flex;
 }
 #policies a {
@@ -39,14 +42,42 @@ main img {
     font-weight: 500;
     text-decoration: none;
 }
-#policies a div {
-    width: 150px;
-    height: 180px;
-    box-shadow: 0px 0px 10px 1px gray;
-}
 #policies img {
     display: block;
-    width: 80%;
+    width: 70%;
     padding: 3%;
     margin: 0 auto;
+}
+
+/* //! About US */
+#about_us div {
+    width: 90%;
+    margin: 0 auto;
+}
+#about_us #company {
+    width: 90%;
+    margin: 0 auto;
+    color: #2a7189;
+    font-size: 0.7em;
+    font-weight: 500;
+    margin-bottom: -3.5%;
+}
+#about_us div p {
+    font-size: 0.65em;
+    text-align: justify;
+    margin-bottom: 1%;
+}
+#about_us div span {
+    font-size: 1.1em;
+    font-weight: 600;
+}
+#about_us div li {
+    font-size: 0.65em;
+    text-align: justify;
+}
+#about_us div h3 {
+    display: inline;
+}
+#thank {
+    color: #04aa6d;
 }
