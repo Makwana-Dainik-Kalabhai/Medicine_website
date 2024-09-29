@@ -15,7 +15,7 @@
                 <img src="http://localhost/php/medicine_website/user_panel/footer/logo.png" alt="">&nbsp;health<span>Group</span>
             </div>
             <div id="description">
-                <span>healthGroup.com is one of the best company that provides best services. We provide best medicines, medical products and best health tips.</span>
+                <span>healthGroup.com is one of the best company that provides best services. We provide best medicines, medical products and healthy life.</span>
             </div>
         </div>
         <hr>

@@ -64,8 +64,8 @@ if (isset($_GET["database"])) {
             <div id="return">
                 <i class="fa-solid fa-truck-fast"></i>
                 <div>
-                    <span>15 days Returns</span>
-                    <span>Return within 15 days</span>
+                    <span>30/14 days Returns</span>
+                    <span>Return within 30/14 days</span>
                 </div>
             </div>
 

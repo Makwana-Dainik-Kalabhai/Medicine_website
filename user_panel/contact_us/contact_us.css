@@ -1,0 +1,107 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    width: 100%;
+    font-size: 30px;
+}
+
+main img {
+    width: 100%;
+}
+
+#intro {
+    padding: 2% 5%;
+    padding-top: 5%;
+    background-color: rgba(242, 242, 242, 0.9);
+}
+#intro img {
+    border-radius: 10px;
+}
+
+/* //!Contact Form */
+#contact_form {
+    width: 90%;
+    margin: 0 auto;
+}
+#contact_form>div {
+    display: flex;
+    justify-content: space-evenly;
+}
+#contact_form>div>div {
+    width: 45%;
+    padding: 2% 4%;
+    margin: 3% 0;
+    border-radius: 7px;
+}
+#contact_form p {
+    font-size: 0.6em;
+    margin-bottom: 3%;
+}
+
+/* //*Company Details */
+#company_details {
+    background-color: rgba(242, 242, 242, 0.9);
+}
+#company_details img {
+    margin-bottom: 5%;
+    border-radius: 5px;
+}
+
+/* //*Form */
+/* Form Error */
+#contact_form #form {
+    position: relative;
+    background-color: #b1dae7;
+    overflow: hidden;
+}
+#form_error,
+#form_succ {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 100%;
+    color: white;
+    padding: 1.5% 2.5%;
+    margin-bottom: 2%;
+    font-size: 0.6em;
+    animation: slide 0.3s linear;
+}
+
+@keyframes slide {
+    from {
+        top: -8%;
+    }
+
+    to {
+        top: 0;
+    }
+}
+#form_error {
+    background-color: #ef000f;
+}
+#form_succ {
+    background-color: #04aa6d;
+}
+
+#contact_form #form h1 {
+    color: #2a7189;
+}
+#contact_form form label {
+    font-size: 0.55em;
+}
+#contact_form form input, #contact_form form textarea {
+    font-size: 0.5em;
+}
+#contact_form form input[type="submit"] {
+    font-size: 0.6em;
+    font-weight: 700;
+    color: white;
+    padding: 0.6% 5%;
+    background-color: #30819c;
+    border: none;
+    border-radius: 3px;
+}

@@ -20,10 +20,6 @@
 <?php include("C:/xampp/htdocs/php/medicine_website/database.php"); ?>
 
 <body>
-    <!-- <header>
-        <?php //include("C:/xampp/htdocs/php/medicine_website/user_panel/header/header.php"); 
-        ?>
-    </header> -->
 
     <main>
         <?php
@@ -115,11 +111,11 @@
                                 <div class="row mb-4">
                                     <div class="col-md-8">
                                         <label>Street:</label>
-                                        <p><?php echo unserialize($row["address"])["house_no"]; ?></p>
+                                        <p><?php echo unserialize($row["address"])["street"]; ?></p>
                                     </div>
                                     <div class="col-md-4">
                                         <label>House no.:</label>
-                                        <p><?php echo unserialize($row["address"])["street"]; ?></p>
+                                        <p><?php echo unserialize($row["address"])["house_no"]; ?></p>
                                     </div>
                                 </div>
                                 <div class="row mb-4">
@@ -169,8 +165,8 @@
                                         <div class="col-md-6">
                                             <label class="form-label">Phone:</label>
                                             <input type="text" name="phone" value="<?php if ($row["phone"] != 0) {
-                                                                            echo $row["phone"];
-                                                                        } ?>" class="form-control" maxlength="14" placeholder="0123456789" />
+                                                                                        echo $row["phone"];
+                                                                                    } ?>" class="form-control" maxlength="14" placeholder="0123456789" />
                                         </div>
                                     </div>
                                     <div class="row mb-4">
@@ -181,8 +177,8 @@
                                         <div class="col-md-6">
                                             <label class="form-label">Age:</label>
                                             <input type="number" name="age" value="<?php if ($row["age"] != 0) {
-                                                                            echo $row["age"];
-                                                                        } ?>" class="form-control" placeholder="Age" />
+                                                                                        echo $row["age"];
+                                                                                    } ?>" class="form-control" placeholder="Age" />
                                         </div>
                                     </div>
                                     <div class="row mb-4">
@@ -192,7 +188,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <label class="form-label">Password:</label>
-                                            <input type="password" value="<?php echo $row["pass"]; ?>" class="form-control" placeholder="Password" readonly/>
+                                            <input type="password" value="<?php echo $row["pass"]; ?>" class="form-control" placeholder="Password" readonly />
                                             <a href="http://localhost/php/medicine_website/user_panel/forgot_pass/forgot_pass.php">Forget Password?</a>
                                         </div>
                                     </div>
@@ -242,19 +238,19 @@
 
 </html>
 <?php
-if(isset($_SESSION["set_pass"])) {
+if (isset($_SESSION["set_pass"])) {
     unset($_SESSION["set_pass"]);
 }
-if(isset($_SESSION["pass_changed"])) {
+if (isset($_SESSION["pass_changed"])) {
     unset($_SESSION["pass_changed"]);
 }
-if(isset($_SESSION["otp"])) {
+if (isset($_SESSION["otp"])) {
     unset($_SESSION["otp"]);
 }
-if(isset($_SESSION["form_error"])) {
+if (isset($_SESSION["form_error"])) {
     unset($_SESSION["form_error"]);
 }
-if(isset($_SESSION["form_succ"])) {
+if (isset($_SESSION["form_succ"])) {
     unset($_SESSION["form_succ"]);
 }
 ?>
