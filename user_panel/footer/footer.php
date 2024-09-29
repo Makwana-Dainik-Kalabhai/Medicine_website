@@ -37,8 +37,8 @@
             </div>
             <div>
                 <span>Order Now</span>
-                <a href="">All Medicines</a>
-                <a href="">Medical Products</a>
+                <a href="http://localhost/php/medicine_website/user_panel/shop/pr_main_page/pr_main_page.php?database=medicines">All Medicines</a>
+                <a href="http://localhost/php/medicine_website/user_panel/shop/pr_main_page/pr_main_page.php?database=products">Medical Devices</a>
                 <a href="">Cleaning Products</a>
                 <a href="">FAQs</a>
             </div>

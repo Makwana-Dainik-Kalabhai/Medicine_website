@@ -52,3 +52,10 @@ ul li {
 .mt-5 {
     margin-top: 5%;
 }
+.note {
+    color: red;
+    font-size: 0.9em;
+    font-weight: 500;
+    line-height: 1.2;
+    margin: 0;
+}

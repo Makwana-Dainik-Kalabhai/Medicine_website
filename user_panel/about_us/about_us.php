@@ -17,28 +17,15 @@
 
     <main>
         <div id="intro">
-            <div>
-                <span>Welcome to healthGroup.com</span>
-
-                <span>We're dedicated to providing you with the highest quality healthcare in a compassionate and patient-centered environment. Our team of experienced medical professionals is here to support you through every stage of your health journey, offering personalized care and cutting-edge treatments.</span>
-                <a href="">Try Now</a>
-            </div>
-            <img src="img.jpg" alt="">
+            <img src="about_us.png" alt="">
         </div>
 
         <div id="policies">
             <h1>Our Policies...</h1><hr>
-            <div>
-                <a href="">
-                    <div><img src="return.png" alt="">
-                        <span>Return Policy</span>
-                    </div>
-                </a>
-                <a href="">
-                    <div><img src="payment.png" alt="">
-                        <span>Payment Policy</span>
-                    </div>
-                </a>
+            <div><img src="http://localhost/php/medicine_website/user_panel/about_us/return.png" alt="">
+                <a href=""><img src="payment.png" alt=""></a>
+                <a href=""><img src="shipping.png" alt=""></a>
+                <a href=""><img src="tc.png" alt=""></a>
             </div>
         </div>
     </main>

@@ -53,6 +53,7 @@
                         Unopened personal care products can be returned within 14 days of receipt. Opened items are non-returnable.
                     </p>
                     </p>
+                    
                     <p class="mt-5">
                         <li>How to Initiate a Return: -</li>
                     <p>
@@ -68,6 +69,7 @@
                         Securely pack the items in the original packaging, including all accessories, manuals, and documentation. Clearly write the Return Authorization Number on the outside of the package.
                     </p>
                     </p>
+
                     <p class="mt-5">
                         <li>Return Shipping: -</li>
                     <p>
@@ -79,6 +81,7 @@
                         We recommend using a trackable shipping service or purchasing shipping insurance for returns, as we cannot guarantee that we will receive your returned item.
                     </p>
                     </p>
+
                     <p class="mt-5">
                         <li>Refunds and Exchanges: -</li>
                     <p>
@@ -90,6 +93,7 @@
                         We do not offer direct exchanges. If you wish to exchange an item, please return the original item and place a new order for the desired product.
                     </p>
                     </p>
+
                     <p class="mt-5">
                         <li>Non-Returnable Items: -</li>
                     <p>The following items are non-returnable: -</p>
@@ -99,6 +103,7 @@
                         <li>Custom-made or personalized items</li>
                     </ul>
                     </p>
+
                     <p class="mt-5">
                         <li>Contact Us: -</li>
                         <p>For any questions or concerns about our return policy, please contact our customer service team: -</p>

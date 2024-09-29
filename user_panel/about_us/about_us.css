@@ -9,42 +9,13 @@ main {
     font-size: 30px;
 }
 
-/* //! First Introduction Page */
-#intro {
-    padding: 5%;
-    padding-bottom: 3%;
-    display: flex;
-    justify-content: space-between;
-    background-color: rgba(242, 242, 242, 0.2);
-}
-#intro div {
-    width: 40%;
-}
-#intro img {
-    width: 50%;
-    border-radius: 10px;
+main img {
+    width: 100%;
 }
 
-#intro span {
-    display: block;
-}
-#intro span:first-child {
-    font-weight: 500;
-}
-#intro span:nth-child(2) {
-    font-size: 0.65em;
-    font-weight: 400;
-}
-#intro a {
-    display: block;
-    width: fit-content;
-    font-size: 0.75em;
-    padding: 0 3%;
-    margin-top: 5%;
-    color: white;
-    background-color: #30819c;
-    text-decoration: none;
-    border-radius: 3px;
+/* //! First Introduction Page */
+#intro {
+    width: 100%;
 }
 
 /* //! Policies */
