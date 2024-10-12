@@ -115,7 +115,7 @@ if (isset($_SESSION["email"])) {
 </div>
 
 <!-- //! Review the product -->
-<div id="review">
+<div id="review_form">
     <form action="http://localhost/php/medicine_website/user_panel/shop/product_details/ratings/rate.php" method="post" enctype="multipart/form-data">
         <div class="row mb-5">
             <div class="col-md-12">
@@ -135,7 +135,65 @@ if (isset($_SESSION["email"])) {
     </form>
 </div>
 
+
 <?php
+$sel = $conn->prepare("SELECT * FROM `ratings` INNER JOIN `user_login_data` ON ratings.email=user_login_data.email  WHERE `item_code`='" . $_SESSION["item_code"] . "'");
+$sel->execute();
+$sel = $sel->fetchAll();
+?>
+<!-- //! Show Reviews -->
+<div id="show_review">
+    <h1>Reviews</h1>
+    <hr />
+    <?php
+    foreach ($sel as $row) {
+        if (isset($_SESSION["email"]) && $row["email"] == $_SESSION["email"]) {
+            disRev($row);
+            $email = $row["email"];
+        }
+    }
+    foreach ($sel as $row) {
+        if ($row["email"] != $email)
+            disRev($row);
+    }
+    ?>
+</div>
+
+
+<?php
+
+function disRev($row)
+{ ?>
+    <div id="review">
+        <div id="user">
+            <?php if ($row["profile_img"] != null) { ?>
+                <img src="http://localhost/php/medicine_website/user_panel/profile/profile_imgs/<?php echo $row["profile_img"]; ?>" alt="">
+            <?php } else { ?>
+                <img src="http://localhost/php/medicine_website/user_panel/profile/user.png" alt="">
+            <?php } ?>
+            <span><?php echo $row["name"]; ?></span>
+        </div>
+        <h2><?php if (isset(unserialize($row["review"])[0])) echo unserialize($row["review"])[0]; ?></h2>
+        <?php $i = 0;
+        while ($i < 5) {
+            if ($i < $row["rate"]) { ?>
+                <i class="fa-solid fa-star" style="color:#ffaf1a;"></i>
+            <?php }
+            //
+            else { ?>
+                <i class="fa-solid fa-star"></i>
+        <?php }
+            $i++;
+        } ?>
+        <p><?php if (isset(unserialize($row["review"])[1])) echo unserialize($row["review"])[1]; ?></p>
+
+        <?php // $del = $conn->prepare("DELETE * FROM `ratings` WHERE `email`='".$_SESSION["email"]."' AND `item_code`='".$_SESSION["item_code"]."'");
+        if (isset($_SESSION["email"]) && $row["email"] == $_SESSION["email"]) { ?>
+            <a href=""><i class="fa-solid fa-trash"></i></a>
+        <?php } ?>
+    </div>
+<?php }
+
 if (isset($_SESSION["success"])) {
     unset($_SESSION["success"]);
 }

@@ -5,10 +5,11 @@
 #ratings {
     font-size: 30px;
     width: 60%;
-    padding: 1% 2%;
+    padding: 2%;
     margin-left: 3%;
     background-color: white;
     box-shadow: 0px 0px 3px 1px #f2f2f2;
+    border-radius: 3px;
 }
 #ratings>h1 {
     color: gray;
@@ -144,8 +145,9 @@ progress::before {
     color: #ffaf1a;
 }
 
+
 /* //! Write Review form */
-#review {
+#review_form {
     display: none;
     width: 60%;
     padding: 1% 2%;
@@ -153,13 +155,72 @@ progress::before {
     background-color: white;
     box-shadow: 0px 0px 3px 1px #f2f2f2;
 }
-#review label, #review input, #review textarea{
+#review_form label, #review_form input, #review_form textarea{
     font-size: 0.6em;
 }
-#review input[type="submit"] {
+#review_form input[type="submit"] {
     color: white;
     padding: 0.5% 3%;
     border: none;
     background-color: green;
     border-radius: 3px;
+}
+
+
+/* //! Show Reviews */
+#show_review {
+    width: 60%;
+    padding: 2%;
+    margin: 2% 0 0 3%;
+    background-color: white;
+    box-shadow: 0px 0px 3px 1px #f2f2f2;
+    border-radius: 3px;
+}
+#show_review>h1 {
+    font-size: 0.7em;
+}
+#review {
+    position: relative;
+    width: 100%;
+    padding: 2% 3%;
+    margin: 2% auto;
+    border: 1px solid gray;
+    border-radius: 3px;
+}
+#review #user {
+    width: 100%;
+}
+#review #user img {
+    width: 40px;
+    height: 40px;
+    outline: 1px solid black;
+    outline-offset: 3px;
+    border-radius: 50%;
+}
+#review #user span {
+    font-size: 0.5em;
+    font-weight: 600;
+    margin-left: 1%;
+}
+#review i {
+    color: gray;
+    font-size: 0.65em;
+}
+#review h2 {
+    display: inline;
+    margin-top: 1%;
+    margin-right: 1%;
+    font-size: 0.6em;
+    font-weight: 700;
+}
+#review p {
+    font-size: 0.55em;
+}
+#review .fa-trash {
+    position: absolute;
+    top: 8%;
+    right: 2%;
+}
+#review .fa-trash:hover {
+    color: black;
 }

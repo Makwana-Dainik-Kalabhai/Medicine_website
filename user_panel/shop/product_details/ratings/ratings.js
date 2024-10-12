@@ -1,6 +1,6 @@
 $(document).ready(function() {
     $("#write_review").click(function() {
-        $("#review").show();
+        $("#review_form").show();
     });
     
     $(".already").click(function() {
