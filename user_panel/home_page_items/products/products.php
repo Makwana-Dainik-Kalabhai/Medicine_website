@@ -41,7 +41,7 @@
     <div>
         <div id="products">
             <?php
-            $sel = $conn->prepare("SELECT * FROM `products`");
+            $sel = $conn->prepare("SELECT * FROM `products` ORDER BY `time` DESC LIMIT 10");
             $sel->execute();
             $sel = $sel->fetchAll();
             

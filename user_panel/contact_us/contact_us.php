@@ -96,6 +96,7 @@
                 </div>
             </div>
         </div>
+        <img src="contact_us2.png" alt="">
     </main>
     <footer>
         <?php include("C:/xampp/htdocs/php/medicine_website/user_panel/footer/footer.php"); ?>

@@ -51,11 +51,16 @@ main {
     font-weight: 400;
 }
 
-#top_img #right_text button {
+#top_img #right_text a {
+    display: block;
+    width: fit-content;
+    color: black;
     font-size: 0.9em;
     padding: 0 3%;
     margin-top: 5%;
+    border: 2px solid black;
     border-radius: 3px;
+    text-decoration: none;
 }
 
 

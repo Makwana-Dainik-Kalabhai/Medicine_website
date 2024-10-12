@@ -48,7 +48,7 @@ if (isset($_GET["database"])) {
                 <p>GET maximum Discounts</p>
                 <p>Try Our Best</p>
                 <p>Join with healthGroup pvt. ltd. to get best deals. health.Group pvt. ltd. provides best products. </p>
-                <button>Shop Now</button>
+                <a href="#main_products">Shop Now</a>
             </div>
         </div>
 

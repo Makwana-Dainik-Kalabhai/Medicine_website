@@ -48,38 +48,17 @@
                     $sel_item->execute();
                     $sel_item = $sel_item->fetchAll();
 
-                    foreach ($sel_item as $row_item) { ?>
-
-                        <div id='wishlist_products'>
-
-                            <div id='products'>
-                                <a href='http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php?item_code=<?php echo $row_item['item_code']; ?>' id='box'>
-                                    <div id='product_img'>
-                                        <img src='http://localhost/php/medicine_website/user_panel/shop/imgs/products/product_imgs/<?php echo unserialize($row_item['item_img'])[0]; ?>' />
-                                    </div>
-
-                                    <div id='product_details'>
-                                        <span id="name"><?php echo $row_item["name"]; ?> (<?php echo $row_item["weight"]; ?>)</span>
-
-                                        <!-- Price -->
-                                        <?php if ($row_item["discount"] != 0) { ?>
-                                            <span id="price">&#8377;<?php echo $row_item["price"]; ?></span>
-                                        <?php } ?>
-                                        <span id="off_price">&#8377;<?php echo $row_item["offer_price"]; ?></span>
-
-                                        <!-- Discount -->
-                                        <?php if ($row_item["discount"] != 0) { ?>
-                                            <span id="dis">GET <?php echo $row_item["discount"]; ?>% off</span>
-                                        <?php } ?>
-                                        <span id="def"><?php echo $row_item["definition"]; ?></span>
-                                    </div>
-                                </a>
-                                <a href='remove.php?remove_item=<?php echo $row_item['item_code']; ?>' id='remove_btn'><i class='fa-solid fa-trash'></i></a>
-                            </div>
-
-                    <?php }
+                    $imgPath = "http://localhost/php/medicine_website/user_panel/shop/imgs/products/product_imgs/";
+                    displayItems($sel_item, $imgPath);
+                    
+                    $sel_item = $conn->prepare("SELECT * FROM `medicines` WHERE `item_code`='" . $row_wish["item_code"] . "'");
+                    $sel_item->execute();
+                    $sel_item = $sel_item->fetchAll();  
+                    
+                    $imgPath = "http://localhost/php/medicine_website/user_panel/shop/imgs/medicines/medicine_imgs/";
+                    displayItems($sel_item, $imgPath);
                 } ?>
-                        </div>
+            </div>
             </div>
         <?php }
 
@@ -99,3 +78,38 @@
 </body>
 
 </html>
+
+<?php
+function displayItems($sel_item, $imgPath)
+{
+    foreach ($sel_item as $row_item) { ?>
+
+        <div id='wishlist_products'>
+
+            <div id='products'>
+                <a href='http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php?item_code=<?php echo $row_item['item_code']; ?>' id='box'>
+                    <div id='product_img'>
+                        <img src='<?php echo $imgPath.unserialize($row_item['item_img'])[0]; ?>' />
+                    </div>
+
+                    <div id='product_details'>
+                        <span id="name"><?php echo $row_item["name"]; ?> (<?php echo $row_item["weight"]; ?>)</span>
+
+                        <!-- Price -->
+                        <?php if ($row_item["discount"] != 0) { ?>
+                            <span id="price">&#8377;<?php echo $row_item["price"]; ?></span>
+                        <?php } ?>
+                        <span id="off_price">&#8377;<?php echo $row_item["offer_price"]; ?></span>
+
+                        <!-- Discount -->
+                        <?php if ($row_item["discount"] != 0) { ?>
+                            <span id="dis">GET <?php echo $row_item["discount"]; ?>% off</span>
+                        <?php } ?>
+                        <span id="def"><?php echo $row_item["definition"]; ?></span>
+                    </div>
+                </a>
+                <a href='remove.php?remove_item=<?php echo $row_item['item_code']; ?>' id='remove_btn'><i class='fa-solid fa-trash'></i></a>
+            </div>
+    <?php }
+}
+    ?>

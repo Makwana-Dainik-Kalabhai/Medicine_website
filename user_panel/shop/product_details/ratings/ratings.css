@@ -1,0 +1,141 @@
+#ratings_div {
+    padding: 3% 0;
+    background-color: rgba(242, 242, 242, 0.5);
+}
+#ratings {
+    font-size: 30px;
+    width: 60%;
+    padding: 1% 2%;
+    margin-left: 3%;
+    background-color: white;
+    box-shadow: 0px 0px 3px 1px #f2f2f2;
+}
+
+#ratings>h1 {
+    color: gray;
+    font-size: 0.65em;
+}
+
+.d-flex>div {
+    width: 100%;
+}
+
+/* //! Show Ratings */
+#show_ratings h1 {
+    font-size: 1.25em;
+}
+
+#show_ratings h1 i {
+    color: #ffaf1a;
+    font-size: 0.85em;
+    margin-left: 1%;
+}
+
+.progress_bar>div {
+    display: inline-block;
+    width: 200px;
+    height: 10px;
+    border-radius: 10px;
+    background-color: #e9ecef;
+    overflow: hidden;
+}
+
+.progress_bar span {
+    font-size: 0.7em;
+}
+
+.progress_bar span i {
+    color: #ffaf1a;
+}
+
+.progress_bar span:last-child {
+    font-size: 0.65em;
+    font-weight: 500;
+}
+
+.progress_bar>div>div {
+    width: 100px;
+    height: 100%;
+}
+
+#progress_bar5 div {
+    background-color: green;
+}
+
+#progress_bar4 div {
+    background-color: rgba(0, 128, 0, 0.8);
+}
+
+#progress_bar3 div {
+    background-color: rgba(0, 128, 0, 0.7);
+}
+
+#progress_bar2 div {
+    background-color: #ffaf1a;
+}
+
+#progress_bar1 div {
+    background-color: red;
+}
+
+/* //! Give ratings */
+#give_ratings {
+    padding: 6% 2% 0 2%;
+    height: fit-content;
+    margin: auto 0;
+}
+
+#give_ratings span {
+    display: block;
+    width: fit-content;
+    margin: 0 auto;
+}
+
+#give_ratings a i {
+    color: gray;
+}
+
+#give_ratings>a, #give_ratings>button {
+    color: gray;
+    display: block;
+    font-size: 0.75em;
+    font-weight: 500;
+    width: 90%;
+    padding: 0.5% 0;
+    margin: 10% auto 0 auto;
+    border: 1px solid gray;
+    border-radius: 4px;
+    text-align: center;
+    text-decoration: none;
+    background-color: #f2f2f2;
+}
+
+#stars {
+    unicode-bidi: bidi-override;
+    direction: rtl;
+}
+
+#stars>a i:hover:before,
+#stars a:hover~a i:before {
+    color: #ffaf1a;
+}
+
+/* //! Write Review form */
+#review {
+    display: none;
+    width: 60%;
+    padding: 1% 2%;
+    margin: 3% 0 0 3%;
+    background-color: white;
+    box-shadow: 0px 0px 3px 1px #f2f2f2;
+}
+#review label, #review input, #review textarea{
+    font-size: 0.6em;
+}
+#review input[type="submit"] {
+    color: white;
+    padding: 0.5% 3%;
+    border: none;
+    background-color: green;
+    border-radius: 3px;
+}

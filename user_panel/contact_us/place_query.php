@@ -52,10 +52,10 @@ if (isset($_POST["send"])) {
     foreach ($sel as $row) {
         if ($email == $row["email"]) {
             $html = "<h1>Cutomer Place a Query</h1>
-<p><b>Name: </b>" . $_POST["name"] . "</p>
-<p><b>Email: </b>" . $_POST["email"] . "</p>
-<p><b>Phone no.: </b>" . $_POST["phone"] . "</p>
-<p><b>Query/Question: </b>&ensp;" . $_POST["query"] . "</p>";
+                    <p><b>Name: </b>" . $_POST["name"] . "</p>
+                    <p><b>Email: </b>" . $_POST["email"] . "</p>
+                    <p><b>Phone no.: </b>" . $_POST["phone"] . "</p>
+                    <p><b>Query/Question: </b>&ensp;" . $_POST["query"] . "</p>";
 
             send_email($_POST["name"], $email, $html);            
 

@@ -32,7 +32,6 @@
     width: 100%;
     height: 500px;
     margin-bottom: 2.5%;
-    /* background-color: rgba(242, 242, 242, 0.4); */
     background-color: #f2f2f2;
 }
 
@@ -48,6 +47,7 @@
 }
 
 #popular_picks #picks {
+    width: 100%;
     display: flex;
     position: absolute;
     top: 18%;
@@ -59,6 +59,7 @@
 
 /* Product Box */
 #picks #box {
+    position: relative;
     width: 300px;
     text-align: center;
     padding: 1%;
@@ -84,8 +85,9 @@
     color: gray;
     position: absolute;
     right: 3%;
-    bottom: 0;
+    bottom: 1%;
     font-size: 0.8em;
+    z-index: 6;
 }
 
 #product_img .fa-heart:hover {
@@ -96,6 +98,7 @@
 #details {
     color: black;
     width: 92%;
+    height: 120px;
     margin: 0 auto;
     margin-bottom: 7%;
     text-align: left;

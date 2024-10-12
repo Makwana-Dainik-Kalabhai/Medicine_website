@@ -186,57 +186,51 @@ if (isset($_POST["sub"])) {
 <?php
 $conn = new PDO("mysql:host=localhost;dbname=medicine_website", "root", "");
 
-$cat = "ayurvedic";
+$cat = "cold and fever";
 $item_img = [
-    "Chyawanprash Preservative Free(1).webp",
-    "Chyawanprash Preservative Free(2).webp",
-    "Chyawanprash Preservative Free(3).webp",
-    "Chyawanprash Preservative Free(4).webp",
-    "Chyawanprash Preservative Free(5).webp"
+    "Lama Cough Syrup 100 ml.jpg"
 ];
-$name = "Chyawanprash Preservative Free";
-$def = "Made using only fresh amla, A2 Ghee & cold pressed sesame oil in Glass Bottle | Ayurvedic Immunity Booster | Support For All Age Groups | All Season";
-$off_price = 428;
-$price = 490;
-$dis = 14;
-$weight = "500g";
+$name = "Lama Cough Syrup 100 ml";
+$def = "";
+$off_price = 73.95;
+$price = 85;
+$dis = 13;
+$weight = "100ml";
 $quantity = 10;
-$expiry = "";
+$expiry = "Nov 2026";
 
-$des_img = ["Chyawanprash Preservative Free.webp"];
+$des_img = [];
 
 $des = [
-    ["Krishnas Chyawanprash Preservative Free is power-packed with fresh Amla, rich in Vitamin C and more than 45 essential herbs and minerals. It is made with A2 desi cow ghee in an iron pan in small batches using original Vanshlochan & All Herbs. This Chywawanprash benefits all age groups and follows the formula in ancient scriptures."],
-    ["Krishnas Chyawanprash uses fresh Amla fruits (cold-pressed) to unlock the high antioxidant value and get the true benefit of Vitamin C. Chyawanprash ingredients are Vanshlochan, Till Oil, and more than 45 raw herbs. This Chywanprash uses the classical Ayurvedic process known as the Shasktot Process. Experience the benefits of the traditional herbal supplement for generations."]
+    ["Effective medicine for Cough, Cold, Bronchitis, Whooping Cough, Asthmatic Cough."]
 ];
 $benefit = [
-    ["Natural Protection", "Builds Healthy living against common allergies and health probs and is suitable for all age groups. "],
-    ["Improves Memory", "Possesses properties to improve memory function."],
-    ["Enriched with Vitamin C", "Amla is rich in antioxidants and has abundant Vitamin C."],
-    ["Packaging and Safety", "Krishnas Chyawanprash does not use harmful metals which can cause toxicity and has no artificial flavors or colors. The packaging consists of glass bottles to avoid the leaching of harmful chemicals in the product for enhanced safety."]
+    ["It may help by thinning and loosening mucus in the airways, clearing congestion and making breathing easier."],
+    ["It may help relieve of cough, sneezing or runny nose due to the common cold."]
 ];
 $how_use = [
-    ["For Adults", "1 teaspoon twice daily"],
-    ["For children above two years", "1/2 teaspoon twice daily. Follow with warm milk for best results, but can be consumed directly."],
-    ["This product is natural; therefore, the color & taste may change slightly from batch to batch due to seasonal variations without affecting purity, efficiency & quality as all ingredients are natural."]
+    ["1-2 teaspoon thrice daily or as directed by the physician."]
 ];
 $safety = [
+    "The product information contained herein is for informational purposes only and is not intended to diagnose, treat, or prevent.",
+    "Read the label carefully before use. Do not exceed the recommended dose.",
+    "Keep out of the reach and sight of children."
 ];
 $other_info = [
-    []
+    ["Ingredients","Pipal (Piper longum) Tagar (Valeriana wallichi) Sonth (Zingiber officinale) Nagarmotha (Cyperus rotundus) Kantikari (Solanum Surattense) Tulsi (Ocimum sanctrum) Talispatra (Abies webbiana) Kalimarich (Piper nigrum) Dalchini (Cinnamomum zeylanicum) Apamarg (Achyaranthes aspera) Ganiyari (Clerodendrum plomidis) Somlata (Sarcostemma acidum) Basak (Adhatoda vasica) Pudina (Mentha sylvestris)"]
 ];
 
 $faqs = [
     []
 ];
-$item_code = "1005";
+$item_code = "1010";
 
 // $query = "INSERT INTO `medicines` VALUES ('',NOW(),'$cat','','','" . serialize($def) . "','$off_price','$price','$dis','" . serialize($weight) . "','$quantity','$expiry','','','','" . serialize($how_use) . "','" . serialize($safety) . "','" . serialize($other_info) . "','','$item_code')";
-$query = "INSERT INTO `medicines` VALUES ('',NOW(),'$cat','" . serialize($item_img) . "','$name','" . serialize($def) . "','$off_price','$price','$dis','" . serialize($weight) . "','$quantity','$expiry','" . serialize($des_img) . "','" . serialize($des) . "','" . serialize($benefit) . "','" . serialize($how_use) . "','" . serialize($safety) . "','" . serialize($other_info) . "','" . serialize($faqs) . "','$item_code')";
+$query = "INSERT INTO `medicines` VALUES ('',NOW(),'$cat','" . serialize($item_img) . "','$name','$def','$off_price','$price','$dis','$weight','$quantity','$expiry','" . serialize($des_img) . "','" . serialize($des) . "','" . serialize($benefit) . "','" . serialize($how_use) . "','" . serialize($safety) . "','" . serialize($other_info) . "','" . serialize($faqs) . "','$item_code')";
 $insert = $conn->prepare($query);
 // $insert->execute();
 
-$up = $conn->prepare("UPDATE `medicines` SET `definition`='$def' WHERE item_code='1003'");
+$up = $conn->prepare("UPDATE `medicines` SET `item_code`='m1010' WHERE item_code='1010'");
 // $up->execute();
 
 echo "<script>
