@@ -6,7 +6,7 @@
 }
 
 .header-hidden {
-    transform: translateY(-100%);
+    transform: translateY(-53%);
     transition: transform 0.3s ease;
 }
 
