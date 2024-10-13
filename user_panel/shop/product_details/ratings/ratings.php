@@ -146,6 +146,7 @@ $sel = $sel->fetchAll();
     <h1>Reviews</h1>
     <hr />
     <?php
+    $email = "";
     foreach ($sel as $row) {
         if (isset($_SESSION["email"]) && $row["email"] == $_SESSION["email"]) {
             disRev($row);

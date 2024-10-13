@@ -111,31 +111,31 @@
                                 <div class="row mb-4">
                                     <div class="col-md-8">
                                         <label>Street:</label>
-                                        <p><?php echo unserialize($row["address"])["street"]; ?></p>
+                                        <p><?php if(isset(unserialize($row["address"])["street"])) echo unserialize($row["address"])["street"]; ?></p>
                                     </div>
                                     <div class="col-md-4">
                                         <label>House no.:</label>
-                                        <p><?php echo unserialize($row["address"])["house_no"]; ?></p>
+                                        <p><?php if(isset(unserialize($row["address"])["house_no"])) echo unserialize($row["address"])["house_no"]; ?></p>
                                     </div>
                                 </div>
                                 <div class="row mb-4">
                                     <div class="col-md-8">
                                         <label>Apartment suite(optional):</label>
-                                        <p><?php echo unserialize($row["address"])["suite"]; ?></p>
+                                        <p><?php if(isset(unserialize($row["address"])["suite"])) echo unserialize($row["address"])["suite"]; ?></p>
                                     </div>
                                     <div class="col-md-4">
                                         <label>Pincode:</label>
-                                        <p><?php echo unserialize($row["address"])["pincode"]; ?></p>
+                                        <p><?php if(isset(unserialize($row["address"])["pincode"])) echo unserialize($row["address"])["pincode"]; ?></p>
                                     </div>
                                 </div>
                                 <div class="row mb-4">
                                     <div class="col-md-8">
                                         <label>City:</label>
-                                        <p><?php echo unserialize($row["address"])["city"]; ?></p>
+                                        <p><?php if(isset(unserialize($row["address"])["city"])) echo unserialize($row["address"])["city"]; ?></p>
                                     </div>
                                     <div class="col-md-4">
                                         <label>State:</label>
-                                        <p><?php echo unserialize($row["address"])["state"]; ?></p>
+                                        <p><?php if(isset(unserialize($row["address"])["state"])) echo unserialize($row["address"])["state"]; ?></p>
                                     </div>
                                 </div>
                             </div>
