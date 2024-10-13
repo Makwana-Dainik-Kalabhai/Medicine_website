@@ -53,25 +53,60 @@
         <?php include("C:/xampp/htdocs/php/medicine_website/user_panel/footer/footer.php"); ?>
     </footer>
 </body>
+
 </html>
 
 <?php
-if(isset($_SESSION["filter"])) {
+if (isset($_SESSION["filter"])) {
     unset($_SESSION["filter"]);
 }
-if(isset($_SESSION["category"])) {
+if (isset($_SESSION["category"])) {
     unset($_SESSION["category"]);
 }
-if(isset($_SESSION["condition"])) {
+if (isset($_SESSION["condition"])) {
     unset($_SESSION["condition"]);
 }
-if(isset($_SESSION["price_range"])) {
+if (isset($_SESSION["price_range"])) {
     unset($_SESSION["price_range"]);
 }
-if(isset($_SESSION["discount_range"])) {
+if (isset($_SESSION["discount_range"])) {
     unset($_SESSION["discount_range"]);
 }
 if (isset($_SESSION["search_input"])) {
     unset($_SESSION["search_input"]);
+}
+?>
+
+<?php
+
+deliveryDate("medicines");
+deliveryDate("products");
+
+function deliveryDate($table)
+{
+    date_default_timezone_set('Asia/Calcutta');
+    $today = strtotime("today");
+
+    if($table == "medicines")
+    {
+        date_default_timezone_set('Asia/Calcutta');
+        $date = strtotime("+1 days");
+    }
+    else {
+        date_default_timezone_set('Asia/Calcutta');
+        $date = strtotime("+4 days");
+    }
+
+    global $conn, $today;
+    $sel = $conn->prepare("SELECT * FROM `$table`");
+    $sel->execute();
+    $sel = $sel->fetchAll();
+
+    foreach ($sel as $row) {
+        if ($row["delivery_date"] == $today) {
+            $up = $conn->prepare("UPDATE `$table` SET `delivery_date`='$date'");
+            $up->execute();
+        }
+    }
 }
 ?>
