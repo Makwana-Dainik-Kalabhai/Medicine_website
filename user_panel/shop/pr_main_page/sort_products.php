@@ -28,7 +28,7 @@ $query = "";
 
 if (isset($_POST["filter"])) {
     if ($_POST["filter"] == "latest") {
-        $_SESSION["condition"] = "sr_no DESC";
+        $_SESSION["condition"] = "time DESC";
     }
     if ($_POST["filter"] == "high to low") {
         $_SESSION["condition"] = "offer_price DESC";

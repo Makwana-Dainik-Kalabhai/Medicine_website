@@ -188,7 +188,8 @@ $conn = new PDO("mysql:host=localhost;dbname=medicine_website", "root", "");
 
 $cat = "cold and fever";
 $item_img = [
-    "Lama Cough Syrup 100 ml.jpg"
+    "Superior Wheelchair 24-inch Rear Mag Wheel(1).jpg",
+    "Superior Wheelchair 24-inch Rear Mag Wheel(2).jpg"
 ];
 $name = "Lama Cough Syrup 100 ml";
 $def = "";
@@ -217,7 +218,7 @@ $safety = [
     "Keep out of the reach and sight of children."
 ];
 $other_info = [
-    ["Ingredients","Pipal (Piper longum) Tagar (Valeriana wallichi) Sonth (Zingiber officinale) Nagarmotha (Cyperus rotundus) Kantikari (Solanum Surattense) Tulsi (Ocimum sanctrum) Talispatra (Abies webbiana) Kalimarich (Piper nigrum) Dalchini (Cinnamomum zeylanicum) Apamarg (Achyaranthes aspera) Ganiyari (Clerodendrum plomidis) Somlata (Sarcostemma acidum) Basak (Adhatoda vasica) Pudina (Mentha sylvestris)"]
+    ["Ingredients", "Pipal (Piper longum) Tagar (Valeriana wallichi) Sonth (Zingiber officinale) Nagarmotha (Cyperus rotundus) Kantikari (Solanum Surattense) Tulsi (Ocimum sanctrum) Talispatra (Abies webbiana) Kalimarich (Piper nigrum) Dalchini (Cinnamomum zeylanicum) Apamarg (Achyaranthes aspera) Ganiyari (Clerodendrum plomidis) Somlata (Sarcostemma acidum) Basak (Adhatoda vasica) Pudina (Mentha sylvestris)"]
 ];
 
 $faqs = [
@@ -230,57 +231,20 @@ $query = "INSERT INTO `medicines` VALUES ('',NOW(),'$cat','" . serialize($item_i
 $insert = $conn->prepare($query);
 // $insert->execute();
 
-$up = $conn->prepare("UPDATE `medicines` SET `item_code`='m1010' WHERE item_code='1010'");
+$up = $conn->prepare("UPDATE `products` SET `time`=NOW() WHERE item_code='p1023'");
 // $up->execute();
 
 echo "<script>
        alert('Inserted successfully');
        </script>";
 
-// $img =[
-//     "Invacare Platinum 9 LPM(1).jpg",
-//     "Invacare Platinum 9 LPM(2).jpg",
-//     "Invacare Platinum 9 LPM(3).jpg"
-// ];
-
-
-// $sel = $conn->prepare("SELECT `name` FROM `products` WHERE `name` LIKE '%5L%'");
-// $sel = $conn->prepare("SELECT * FROM `products`");
+//! Date & Time
+// $sel = $conn->prepare("SELECT * FROM `orders`");
 // $sel->execute();
 // $sel = $sel->fetchAll();
-
-// foreach($sel as $row) {
-//     echo "<h1>".$row["name"]."</h1>";
+// foreach ($sel as $r) {
+//     date_default_timezone_set('Asia/Calcutta');
+//     $t = strtotime($r["time"]);
+//     echo "<h1>" . date("D M, Y h:i:s", $t) . "</h1>";
 // }
-// foreach($sel as $row) {
-//     echo "<h1>Description:- </h1>";
-//     $desc = unserialize($row["description"]);
-//     foreach ($desc as $des) {
-//         echo "<p>$des</p>";
-//     }
-//     echo "<hr>";
-//     echo "<h1>Features:- </h1>";
-//     $features = unserialize($row["feature1"]);
-//     foreach ($features as $fea) {
-//         echo "<li>$fea</li>";
-//     }
-
-//     echo "<hr>";
-//     echo "<h1>Specification:- </h1>";
-//     $spes = unserialize($row["specification1"]);
 ?>
-
-<!-- <table>
-    <?php foreach ($spes as $spe) { ?>
-        <tr>
-        <?php //foreach($spe as $sp) { 
-        ?>
-        <th><?php echo $spe[0]; ?></th>
-        <td><?php echo $spe[1]; ?></td>
-        <?php } ?>
-        </tr>
-    <?php //} 
-    ?>
-    </table>
-<?php //} 
-?> -->
