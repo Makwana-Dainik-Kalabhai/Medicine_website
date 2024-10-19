@@ -48,7 +48,7 @@
             <div>
                 <div id="office_address">
                     <span>Office Address</span>
-                    <p>IOC road Chandkheda, Ahmedabad, Gujarat India-382424</p>
+                    <p>34, Kameshwar park, opp. Swaminarayan Mandir, Hirawadi road, Saidpur bogha, Ahmedabad, Gujarat India-382 345</p>
                 </div>
                 <div id="cus_care">
                     <span>Customer Care</span>
