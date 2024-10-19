@@ -2,6 +2,7 @@
     padding: 3% 0;
     background-color: rgba(242, 242, 242, 0.5);
 }
+
 #ratings {
     font-size: 30px;
     width: 60%;
@@ -11,6 +12,7 @@
     box-shadow: 0px 0px 3px 1px #f2f2f2;
     border-radius: 3px;
 }
+
 #ratings>h1 {
     color: gray;
     font-size: 0.65em;
@@ -30,12 +32,14 @@
     font-size: 0.85em;
     margin-left: 1%;
 }
+
 .progress_bar {
     width: 90%;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
 }
+
 .progress_bar span {
     font-size: 0.7em;
 }
@@ -46,17 +50,19 @@
 
 progress {
     position: relative;
-    width: 80%;
+    width: 85%;
     height: 14px;
     background-color: transparent;
 }
+
 progress::-webkit-progress-bar {
-    width: 82%;
+    width: 80%;
     background-color: #f2f2f2;
-    border: 1px solid rgba(128, 128, 128, 0.4 );
+    border: 1px solid rgba(128, 128, 128, 0.4);
     border-radius: 25px;
     overflow: hidden;
 }
+
 progress::before {
     content: attr(value)"%";
     font-size: 0.65em;
@@ -66,6 +72,7 @@ progress::before {
     right: 0;
     transform: translate(0, -50%);
 }
+
 .progress_bar5 progress::-webkit-progress-value {
     background-color: green;
 }
@@ -93,25 +100,31 @@ progress::before {
     height: fit-content;
     margin: auto 0;
 }
+
 #give_ratings h2 {
     white-space: nowrap;
     position: absolute;
     top: 2%;
     left: 50%;
-    transform: translate(-50%,0);
+    transform: translate(-50%, 0);
 }
+
 #give_ratings #error {
     display: none;
     color: red;
 }
+
 #give_ratings #success {
     color: green;
 }
-#give_ratings span, #give_ratings div {
+
+#give_ratings span,
+#give_ratings div {
     display: block;
     width: fit-content;
     margin: 0 auto;
 }
+
 #give_ratings span {
     font-size: 0.95em;
     font-weight: 500;
@@ -121,7 +134,8 @@ progress::before {
     color: gray;
 }
 
-#give_ratings>a, #give_ratings>button {
+#give_ratings>a,
+#give_ratings>button {
     color: gray;
     display: block;
     font-size: 0.75em;
@@ -135,13 +149,14 @@ progress::before {
     text-decoration: none;
     background-color: #f2f2f2;
 }
-#stars {
+
+.stars {
     unicode-bidi: bidi-override;
     direction: rtl;
 }
 
-#stars>a i:hover:before,
-#stars a:hover~a i:before {
+.stars>a i:hover:before,
+.stars a:hover~a i:before {
     color: #ffaf1a;
 }
 
@@ -155,9 +170,13 @@ progress::before {
     background-color: white;
     box-shadow: 0px 0px 3px 1px #f2f2f2;
 }
-#review_form label, #review_form input, #review_form textarea{
+
+#review_form label,
+#review_form input,
+#review_form textarea {
     font-size: 0.6em;
 }
+
 #review_form input[type="submit"] {
     color: white;
     padding: 0.5% 3%;
@@ -176,20 +195,24 @@ progress::before {
     box-shadow: 0px 0px 3px 1px #f2f2f2;
     border-radius: 3px;
 }
+
 #show_review>h1 {
     font-size: 0.7em;
 }
+
 #review {
     position: relative;
     width: 100%;
-    padding: 2% 3%;
+    padding: 1.5% 3%;
     margin: 2% auto;
     border: 1px solid gray;
     border-radius: 3px;
 }
+
 #review #user {
     width: 100%;
 }
+
 #review #user img {
     width: 40px;
     height: 40px;
@@ -197,30 +220,55 @@ progress::before {
     outline-offset: 3px;
     border-radius: 50%;
 }
+
 #review #user span {
     font-size: 0.5em;
     font-weight: 600;
     margin-left: 1%;
 }
+
 #review i {
     color: gray;
     font-size: 0.65em;
 }
+
 #review h2 {
-    display: inline;
+    display: inline-block;
     margin-top: 1%;
     margin-right: 1%;
     font-size: 0.6em;
     font-weight: 700;
 }
+
 #review p {
+    width: 100%;
+    display: block;
+    white-space: nowrap;
     font-size: 0.55em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    /* white-space: pre-wrap; */
 }
+
 #review .fa-trash {
     position: absolute;
     top: 8%;
     right: 2%;
 }
+
 #review .fa-trash:hover {
     color: black;
+}
+
+#review #time {
+    position: absolute;
+    right: 1.5%;
+    bottom: 3%;
+    color: gray;
+    font-size: 0.5em;
+    font-weight: 600;
+    margin: 0 !important;
 }

@@ -8,7 +8,9 @@ if (isset($_SESSION["email"])) {
     $sel = $sel->fetchAll();
 
     foreach ($sel as $row) {
-        $contain_rating = $row["rate"];
+        if ($row["status"] == "rate" || $row["status"]=="both") {
+            $contain_rating = $row["rate"];
+        }
     }
 }
 ?>
@@ -67,7 +69,7 @@ if (isset($_SESSION["email"])) {
 
                     if (isset($contain_rating)) { ?>
                         <!-- //! Already Rate -->
-                        <div class="already">
+                        <div class="stars already">
                             <?php $i = 0;
                             while ($i < 5) {
                                 if ($i < $contain_rating) { ?>
@@ -83,7 +85,7 @@ if (isset($_SESSION["email"])) {
                     <?php }
                     //
                     else { ?>
-                        <div id="stars">
+                        <div class="stars">
                             <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/ratings/rate.php?star=5"><i class="fa-solid fa-star"></i></a>
                             <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/ratings/rate.php?star=4"><i class="fa-solid fa-star"></i></a>
                             <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/ratings/rate.php?star=3"><i class="fa-solid fa-star"></i></a>
@@ -94,7 +96,7 @@ if (isset($_SESSION["email"])) {
                 }
                 //
                 else { ?>
-                    <div id="stars">
+                    <div class="stars">
                         <a href="http://localhost/php/medicine_website/user_panel/form/login_form.php"><i class="fa-solid fa-star"></i></a>
                         <a href="http://localhost/php/medicine_website/user_panel/form/login_form.php"><i class="fa-solid fa-star"></i></a>
                         <a href="http://localhost/php/medicine_website/user_panel/form/login_form.php"><i class="fa-solid fa-star"></i></a>
@@ -137,7 +139,7 @@ if (isset($_SESSION["email"])) {
 
 
 <?php
-$sel = $conn->prepare("SELECT * FROM `ratings` INNER JOIN `user_login_data` ON ratings.email=user_login_data.email  WHERE `item_code`='" . $_SESSION["item_code"] . "'");
+$sel = $conn->prepare("SELECT * FROM `ratings` INNER JOIN `user_login_data` ON ratings.email=user_login_data.email  WHERE `item_code`='" . $_SESSION["item_code"] . "' ORDER BY `time`");
 $sel->execute();
 $sel = $sel->fetchAll();
 ?>
@@ -175,23 +177,28 @@ function disRev($row)
             <span><?php echo $row["name"]; ?></span>
         </div>
         <h2><?php if (isset(unserialize($row["review"])[0])) echo unserialize($row["review"])[0]; ?></h2>
-        <?php $i = 0;
-        while ($i < 5) {
-            if ($i < $row["rate"]) { ?>
-                <i class="fa-solid fa-star" style="color:#ffaf1a;"></i>
-            <?php }
-            //
-            else { ?>
-                <i class="fa-solid fa-star"></i>
+        <?php
+        if ($row["rate"] != 0) {
+            $i = 0;
+            while ($i < 5) {
+                if ($i < $row["rate"]) { ?>
+                    <i class="fa-solid fa-star" style="color:#ffaf1a;"></i>
+                <?php }
+                //
+                else { ?>
+                    <i class="fa-solid fa-star"></i>
         <?php }
-            $i++;
+                $i++;
+            }
         } ?>
         <p><?php if (isset(unserialize($row["review"])[1])) echo unserialize($row["review"])[1]; ?></p>
 
-        <?php // $del = $conn->prepare("DELETE * FROM `ratings` WHERE `email`='".$_SESSION["email"]."' AND `item_code`='".$_SESSION["item_code"]."'");
+        <?php
         if (isset($_SESSION["email"]) && $row["email"] == $_SESSION["email"]) { ?>
-            <a href=""><i class="fa-solid fa-trash"></i></a>
+            <a href="./ratings/del_review.php"><i class="fa-solid fa-trash"></i></a>
         <?php } ?>
+        <span id="time"><?php $time = strtotime($row["time"]);
+                        echo date("d M, Y", $time); ?></span>
     </div>
 <?php }
 

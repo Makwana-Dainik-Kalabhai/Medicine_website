@@ -9,7 +9,7 @@ if (isset($_GET["star"])) {
     $sel = $sel->fetchAll();
 
     foreach ($sel as $row) {
-        if ($row["status"] == "rate" || $row["status"] == "both") {
+        if ($row["status"] == "review" || $row["status"] == "both") {
             $contain = true;
         }
     }
@@ -21,7 +21,7 @@ if (isset($_GET["star"])) {
     //
     else {
         $_SESSION["success"] = "Your rating has been submitted successfully";
-        $insert = $conn->prepare("INSERT INTO `ratings` VALUES('" . $_SESSION["email"] . "','" . $_SESSION["item_code"] . "','" . $_GET["star"] . "','','rate')");
+        $insert = $conn->prepare("INSERT INTO `ratings` VALUES('" . $_SESSION["email"] . "','" . $_SESSION["item_code"] . "','" . $_GET["star"] . "','',NOW(),'rate')");
         $insert->execute();
     }
     
@@ -53,6 +53,9 @@ if (isset($_POST["submit"])) {
         if ($row["status"] == "rate") {
             $contain = true;
         }
+        if ($row["status"] == "both") {
+            $contain = true;
+        }
     }
     
     if (isset($contain)) {
@@ -63,9 +66,10 @@ if (isset($_POST["submit"])) {
     //
     else {
         $_SESSION["success"] = "Your review has been submitted successfully";
-        $insert = $conn->prepare("INSERT INTO `ratings` VALUES('" . $_SESSION["email"] . "','" . $_SESSION["item_code"] . "','','".$_POST["review"]."','review')");
+        $insert = $conn->prepare("INSERT INTO `ratings` VALUES('" . $_SESSION["email"] . "','" . $_SESSION["item_code"] . "','','" . serialize($review) . "',NOW(),'review')");
         $insert->execute();
     }
     header("Refresh:0; url=http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php");
     return;
 }
+?>

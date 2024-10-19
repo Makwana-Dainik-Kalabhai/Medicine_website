@@ -85,3 +85,12 @@
     </footer>
 </body>
 </html>
+
+<?php
+if (isset($_SESSION["form_error"])) {
+    unset($_SESSION["form_error"]);
+}
+if (isset($_SESSION["form_succ"])) {
+    unset($_SESSION["form_succ"]);
+}
+?>

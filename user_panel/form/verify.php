@@ -9,7 +9,6 @@ if (isset($_POST["sign_submit"])) {
 
     class User
     {
-        public $user = array();
         public string $profile_img;
         public string $name;
         public $gender;
@@ -36,7 +35,7 @@ if (isset($_POST["sign_submit"])) {
         function insertValue()
         {
             global $conn;
-            $insert = $conn->prepare("INSERT INTO `user_login_data` VALUES ('" . $this->profile_img . "','" . $this->name . "','" . $this->gender . "','" . $this->age . "','" . $this->email . "','" . $this->pass . "','" . $this->phone . "','" . $this->address . "','" . $this->status . "')");
+            $insert = $conn->prepare("INSERT INTO `user_login_data` VALUES ('" . $this->profile_img . "','" . $this->name . "','" . $this->gender . "','" . $this->age . "','" . $this->email . "','" . $this->pass . "','" . $this->phone . "','" . $this->address . "','" . $this->status . "','')");
             $insert->execute();
         }
     }
@@ -59,14 +58,6 @@ if (isset($_POST["sign_submit"])) {
 
         //! Insert it into database.
         $U->insertValue();
-
-        $select = $conn->prepare("SELECT * FROM `user_login_data` WHERE email='" . $_POST["sign_email"] . "'");
-        $select->execute();
-        $select = $select->fetchAll();
-
-        foreach ($select as $row) {
-            $_SESSION["email"] = $row["email"];
-        }
 
         $_SESSION["form_succ"] = "signUp Successfully";
         header("Refresh:0; url=http://localhost/php/medicine_website/user_panel/form/sign_form.php");
@@ -115,7 +106,7 @@ if (isset($_POST["login_submit"])) {
             header("Refresh:0; url=http://localhost/php/medicine_website/user_panel/form/login_form.php");
         }
         //
-        else {
+        else if ($login_email != $row_user["email"] && $login_pass == $row_user["pass"]) {
             $_SESSION["form_error"] = "Invalid Email ID";
             
             header("Refresh:0; url=http://localhost/php/medicine_website/user_panel/form/login_form.php");

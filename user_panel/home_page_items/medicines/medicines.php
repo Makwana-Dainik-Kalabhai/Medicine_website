@@ -42,7 +42,7 @@
                                 $sel_item = $sel_item->fetchAll();
 
                                 foreach ($sel_item as $row_item) {
-                                    if ($row["item_code"] == $row_item["item_code"]) {
+                                    if ($row["item_code"] == $row_item["item_code"] && $_SESSION["email"]==$row_item["email"]) {
                                         $con_item = $row_item["item_code"];
                                     }
                                 }
