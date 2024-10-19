@@ -1,12 +1,4 @@
-<?php
-session_start();
-if (!isset($_SESSION["max_try"])) {
-    $_SESSION["max_try"] = 0;
-}
-if($_SESSION["time"]<=time()) {
-    unset($_SESSION["time"]);
-}
-?>
+<?php session_start(); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -26,6 +18,12 @@ if($_SESSION["time"]<=time()) {
     <?php include("C:/xampp/htdocs/php/medicine_website/user_panel/form/form.js"); ?>
 </script>
 
+<?php if (!isset($_SESSION["max_try"])) {
+    $_SESSION["max_try"] = 0;
+}
+if ($_SESSION["time"] <= time()) {
+    unset($_SESSION["time"]);
+} ?>
 
 <body>
     <header>
@@ -57,13 +55,13 @@ if($_SESSION["time"]<=time()) {
                                 setTimeout(() => {
                                     location.href = "http://localhost/php/medicine_website/index.php"
                                     return;
-                                    
+
                                 }, 2000);
-                                </script>
+                            </script>
                         </div>
-                        <?php }
+                    <?php }
                     ?>
-                    
+
                     <span class="heading">Login Now</span>
                     <span class="description">Login now to access your orders, book appoitment, get heath tips and for many more</span>
 
