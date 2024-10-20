@@ -44,25 +44,26 @@ if (isset($_POST["category"])) {
     $_SESSION["category"] = $_POST["category"];
 }
 
-if(isset($_POST["price_range"]) && isset($_POST["discount_range"]))
-{
+if (isset($_POST["price_range"]) && isset($_POST["discount_range"])) {
     $_SESSION["price_range"] = $_POST["price_range"];
     $_SESSION["discount_range"] = $_POST["discount_range"];
 }
 
-$query = "SELECT * FROM `".$_SESSION["database"]."` WHERE `offer_price`<=" . $_SESSION["price_range"] . " AND `discount`<=" . $_POST["discount_range"] . "";
-
-if (isset($_SESSION["category"])) {
-    $query = "SELECT * FROM `".$_SESSION["database"]."` WHERE `offer_price`<=" . $_SESSION["price_range"] . " AND `discount`<=" . $_POST["discount_range"] . " AND `category`='" . $_SESSION["category"] . "'";
+$query = "SELECT * FROM `products` WHERE `offer_price`<=" . $_SESSION["price_range"] . " AND `discount`<=" . $_POST["discount_range"] . "";
+if (isset($_SESSION["status"])) {
+    $query = "SELECT * FROM `products` WHERE `offer_price`<=" . $_SESSION["price_range"] . " AND `discount`<=" . $_POST["discount_range"] . " AND `status`='" . $_SESSION["status"] . "'";
 }
-if (isset($_SESSION["condition"])) {
-    $query = "SELECT * FROM `".$_SESSION["database"]."` WHERE `offer_price`<=" . $_SESSION["price_range"] . " AND `discount`<=" . $_POST["discount_range"] . " ORDER BY ".$_SESSION["condition"]."";
+if (isset($_SESSION["category"]) && isset($_SESSION["status"])) {
+    $query = "SELECT * FROM `products` WHERE `offer_price`<=" . $_SESSION["price_range"] . " AND `discount`<=" . $_POST["discount_range"] . " AND `category`='" . $_SESSION["category"] . "' AND `status`='" . $_SESSION["status"] . "'";
 }
-if (isset($_SESSION["condition"]) && isset($_SESSION["search_input"])) {
-    $query = "SELECT * FROM `".$_SESSION["database"]."` WHERE `offer_price`<=" . $_SESSION["price_range"] . " AND `discount`<=" . $_POST["discount_range"] . " AND `name` LIKE '%".$_SESSION["search_input"]."%' ORDER BY ".$_SESSION["condition"]."";
+if (isset($_SESSION["condition"]) && isset($_SESSION["status"])) {
+    $query = "SELECT * FROM `products` WHERE `offer_price`<=" . $_SESSION["price_range"] . " AND `discount`<=" . $_POST["discount_range"] . " AND `status`='" . $_SESSION["status"] . "' ORDER BY " . $_SESSION["condition"] . "";
 }
 if (isset($_SESSION["condition"]) && isset($_SESSION["category"])) {
-    $query = "SELECT * FROM `".$_SESSION["database"]."` WHERE `offer_price`<=" . $_SESSION["price_range"] . " AND `discount`<=" . $_POST["discount_range"] . " AND `category`='" . $_SESSION["category"] . "' ORDER BY ".$_SESSION["condition"]."";
+    $query = "SELECT * FROM `products` WHERE `offer_price`<=" . $_SESSION["price_range"] . " AND `discount`<=" . $_POST["discount_range"] . " AND `category`='" . $_SESSION["category"] . "' AND `status`='" . $_SESSION["status"] . "' ORDER BY " . $_SESSION["condition"] . "";
+}
+if (isset($_SESSION["search_input"]) && isset($_SESSION["condition"])) {
+    $query = "SELECT * FROM `products` WHERE `name` LIKE '%" . $_SESSION["search_input"] . "%' AND `offer_price`<=" . $_SESSION["price_range"] . " AND `discount`<=" . $_POST["discount_range"] . "  ORDER BY " . $_SESSION["condition"] . "";
 }
 
 
@@ -82,7 +83,7 @@ foreach ($sel as $row) {
                 if ($row["discount"] != 0) { ?>
                     <span>&ensp;-<?php echo $row["discount"]; ?>%</span>
                 <?php } ?>
-                <img src="<?php echo $_SESSION["img_path"].unserialize($row["item_img"])[0]; ?>" alt="" />
+                <img src="http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo unserialize($row["item_img"])[0]; ?>" alt="" />
             </div>
             <div id="product_details">
                 <span id="name"><?php echo $row["name"]; ?></span>
@@ -106,7 +107,7 @@ foreach ($sel as $row) {
 
 if (isset($product_count) && $product_count == 0) { ?>
     <div id="pr_not_available">
-        <p>Products are not available <?php if(isset($_SESSION["category"])) { ?>in the category of <span><?php echo $_SESSION["category"]; ?></span><?php } ?></p>
+        <p>Products are not available <?php if (isset($_SESSION["category"])) { ?>in the category of <span><?php echo $_SESSION["category"]; ?></span><?php } ?></p>
         <p> with &#8377;<span><?php echo $_POST["price_range"]; ?></span> price and <span><?php echo $_POST["discount_range"]; ?></span>% discount.</p>
     </div>
 <?php }

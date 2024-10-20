@@ -258,6 +258,7 @@
     display: block;
     padding: 0 3%;
     line-height: 2;
+    text-transform: capitalize;
 }
 
 #searched_items a {
@@ -308,35 +309,4 @@
 #side_nav #menus {
     height: 460px;
     overflow-y: auto;
-}
-
-/* //!person search pr & if pr not found*/
-#pr_not_found {
-    width: 400px;
-    height: 300px;
-    position: fixed;
-    top: 20%;
-    left: 50%;
-    transform: translate(-50%, 0);
-    background-color: white;
-    border-radius: 7px;
-    box-shadow: 0px 0px 5px 3px gray;
-    filter: contrast(130%);
-    z-index: 6;
-    overflow: hidden;
-}
-#pr_not_found img {
-    display: block;
-    width: 70%;
-    margin: 0 auto;
-}
-#pr_not_found button {
-    display: block;
-    font-size: 2em;
-    padding: 0.1% 7%;
-    color: white;
-    background-color: red;
-    border: none;
-    border-radius: 5px;
-    margin: 3% auto;
 }

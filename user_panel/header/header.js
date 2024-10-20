@@ -69,12 +69,4 @@ $(document).ready(() => {
         $(".regi_form").css({ margin: "0 auto" });
         $("#searched_items").hide();
     });
-
-    $("#ok_btn").click(() => {
-        $("#pr_not_found").hide();
-    });
-    $(document).keypress(function(e) {
-        if(e.keyCode==13)
-        $("#pr_not_found").hide();
-    });
 });

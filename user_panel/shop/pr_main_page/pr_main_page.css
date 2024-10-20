@@ -323,3 +323,11 @@ output {
     text-align: center;
     border-radius: 3px;
 }
+
+/* //!person search pr & if pr not found*/
+#pr_not_found {
+    display: block;
+    width: 60%;
+    height: 70%;
+    margin: auto;
+}

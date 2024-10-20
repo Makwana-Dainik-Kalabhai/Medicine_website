@@ -42,6 +42,7 @@ main {
 
 /* //! All Products */
 #products {
+    padding: 2% 0;
     width: 100%;
     display: flex;
     background-color: white;
@@ -143,13 +144,13 @@ main {
     color: green;
     position: absolute;
     right: 3%;
-    bottom: 5%;
+    bottom: -3%;
     font-size: 0.65em;
 }
 
 #product_details #remove_btn {
     position: absolute;
-    bottom: 5%;
+    bottom: -3%;
     font-size: 0.78em;
     padding: 0.2% 3%;
     color: white;

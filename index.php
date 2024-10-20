@@ -17,12 +17,7 @@
     <header>
         <?php include("C:/xampp/htdocs/php/medicine_website/user_panel/header/header.php"); ?>
     </header>
-
-    <?php if (isset($_GET["all_medicines"])) {
-        include("C:/xampp/htdocs/php/medicine_website/user_panel/header/medicines/all_medicines.php");
-    } ?>
-
-
+    
     <main>
         <div id="img_slider">
             <?php include("C:/xampp/htdocs/php/medicine_website/user_panel/home_page_items/img_slider/img_slider.php"); ?>

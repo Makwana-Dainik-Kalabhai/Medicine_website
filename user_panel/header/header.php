@@ -46,7 +46,7 @@
 
             <div class="btn">
                 <a href="">Medicines <i class="fa-solid fa-caret-down"></i></a>
-                <div><?php include("C:/xampp/htdocs/php/medicine_website/user_panel/header/all_menus/medicines/medicines.php"); ?></div>
+                <div><?php include("C:/xampp/htdocs/php/medicine_website/user_panel/header/all_menus/medicines.php"); ?></div>
             </div>
 
             <div class="btn">
@@ -63,7 +63,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
         <div id="search_box">
-            <form action="" method="post">
+            <form action="http://localhost/php/medicine_website/user_panel/shop/pr_main_page/pr_main_page.php" method="post">
                 <input type="text" id="search_input" name="search_input" placeholder="Search Here..." />
                 <button><i class="fa-solid fa-magnifying-glass"></i></button>
             </form>
@@ -87,42 +87,3 @@
         <?php include("C:/xampp/htdocs/php/medicine_website/user_panel/sidenav/sidenav.php"); ?>
     </div>
 </nav>
-
-<?php
-//! Searched product
-if (isset($_POST["search_input"])) {
-    $sel = $conn->prepare("SELECT * FROM `products` WHERE name='" . $_POST["search_input"] . "'");
-    $sel->execute();
-    $sel = $sel->fetchAll();
-
-    foreach ($sel as $row) {
-        $_SESSION["database"] = "products";
-        $_SESSION["item_code"] = $row["item_code"];
-        header("Refresh:0; url=http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php");
-        return;
-    }
-    $sel = $conn->prepare("SELECT * FROM `medicines` WHERE name='" . $_POST["search_input"] . "'");
-    $sel->execute();
-    $sel = $sel->fetchAll();
-
-    foreach ($sel as $row) {
-        $_SESSION["database"] = "medicines";
-        $_SESSION["item_code"] = $row["item_code"];
-        header("Refresh:0; url=http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php");
-        return;
-    }?>
-    <script>
-        if(window.history.replaceState)
-         window.history.replaceState(null,null,window.location.href);
-    </script>
-    <?php
-    $pr_not_found=true;
-}
-
-if (isset($pr_not_found)) { ?>
-    <div id="pr_not_found">
-        <img src="http://localhost/php/medicine_website/user_panel/header/pr_not_found.jpeg" alt="">
-        <button id="ok_btn">OK</button>
-    </div>
-<?php
-} ?>

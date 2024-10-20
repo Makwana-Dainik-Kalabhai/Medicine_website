@@ -31,57 +31,58 @@
                     <?php
                     include("C:/xampp/htdocs/php/medicine_website/database.php");
 
-                    $sel_cart = $conn->prepare("SELECT * FROM `cart` WHERE email='" . $_SESSION["email"] . "'");
-                    $sel_cart->execute();
-                    $sel_cart = $sel_cart->fetchAll();
+                    $sel = $conn->prepare("SELECT *,cart.quantity FROM `cart` JOIN `products` ON products.item_code=cart.item_code WHERE email='" . $_SESSION["email"] . "'");
+                    $sel->execute();
+                    $sel = $sel->fetchAll();
 
-                    foreach ($sel_cart as $row_cart) {
-                        $sel_item = $conn->prepare("SELECT * FROM `products` WHERE `item_code`='" . $row_cart["item_code"] . "'");
-                        $sel_item->execute();
-                        $sel_item = $sel_item->fetchAll();
+                    foreach ($sel as $row) {
+                        // $sel_item = $conn->prepare("SELECT * FROM `products` WHERE `item_code`='" . $row["item_code"] . "'");
+                        // $sel_item->execute();
+                        // $sel_item = $sel_item->fetchAll();
 
 
-                        foreach ($sel_item as $row_item) { ?>
+                        // foreach ($sel_item as $row) { 
+                    ?>
 
-                            <div id='products'>
-                                <div id='product_img'>
-                                    <img src='http://localhost/php/medicine_website/user_panel/shop/imgs/products/product_imgs/<?php echo unserialize($row_item["item_img"])[0]; ?>'>
+                        <div id='products'>
+                            <div id='product_img'>
+                                <img src='http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo unserialize($row["item_img"])[0]; ?>'>
 
-                                    <form action='update_qua.php' method='post'>
+                                <form action='update_qua.php' method='post'>
 
-                                        <input type="hidden" name="item_code" value="<?php echo $row_item["item_code"]; ?>" />
-                                        <button id="minus" name="minus">-</button>
-                                        <input type="number" value="<?php echo $row_cart["quantity"]; ?>" name="quantity" id="quantity" />
-                                        <button id="plus" name="plus">+</button>
-                                    </form>
-                                </div>
-
-                                <a href='http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php?item_code=<?php echo $row_item['item_code']; ?>' id='box'>
-                                    <div id="product_details">
-                                        <span id="name"><?php echo $row_item["name"]; ?></span>
-
-                                        <!-- Price -->
-                                        <?php if ($row_item["discount"] != 0) { ?>
-                                            <span id="price">&#8377;<?php echo $row_item["price"]; ?></span>
-                                        <?php } ?>
-                                        <span id="off_price">&#8377;<?php echo $row_item["offer_price"]; ?></span>
-
-                                        <!-- Discount -->
-                                        <?php if ($row_item["discount"] != 0) { ?>
-                                            <span id="dis">GET <?php echo $row_item["discount"]; ?>% off</span>
-                                        <?php } ?>
-                                        <span id="def"><?php echo $row_item["definition"]; ?></span>
-                                        <span id="delivery">
-                                            <?php
-                                            date_default_timezone_set('Asia/Calcutta');
-                                            $date = strtotime("+4 days");
-
-                                            echo "Delivery by " . date("D, M d", $date); ?></span>
-                                        <a href="http://localhost/php/medicine_website/user_panel/cart/remove.php?item_code=<?php echo $row_item["item_code"]; ?>" id="remove_btn">REMOVE</a>
-                                    </div>
-                                </a>
+                                    <input type="hidden" name="item_code" value="<?php echo $row["item_code"]; ?>" />
+                                    <button id="minus" name="minus">-</button>
+                                    <input type="number" value="<?php echo $row["quantity"]; ?>" name="quantity" id="quantity" />
+                                    <button id="plus" name="plus">+</button>
+                                </form>
                             </div>
-                    <?php }
+
+                            <a href='http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php?item_code=<?php echo $row['item_code']; ?>' id='box'>
+                                <div id="product_details">
+                                    <span id="name"><?php echo $row["name"]; ?></span>
+
+                                    <!-- Price -->
+                                    <?php if ($row["discount"] != 0) { ?>
+                                        <span id="price">&#8377;<?php echo $row["price"]; ?></span>
+                                    <?php } ?>
+                                    <span id="off_price">&#8377;<?php echo $row["offer_price"]; ?></span>
+
+                                    <!-- Discount -->
+                                    <?php if ($row["discount"] != 0) { ?>
+                                        <span id="dis">GET <?php echo $row["discount"]; ?>% off</span>
+                                    <?php } ?>
+                                    <span id="def"><?php echo $row["definition"]; ?></span>
+                                    <span id="delivery">
+                                        <?php
+                                        date_default_timezone_set('Asia/Calcutta');
+                                        $date = strtotime("+4 days");
+
+                                        echo "Delivery by " . date("D, M d", $date); ?></span>
+                                    <a href="http://localhost/php/medicine_website/user_panel/cart/remove.php?item_code=<?php echo $row["item_code"]; ?>" id="remove_btn">REMOVE</a>
+                                </div>
+                            </a>
+                        </div>
+                    <?php
                     } ?>
                 </div>
 
@@ -95,36 +96,29 @@
                             <?php
                             $total_val = 0;
                             $total_save = 0;
-                            foreach ($sel_cart as $row_cart) {
-                                $sel_item = $conn->prepare("SELECT * FROM `products` WHERE `item_code`='" . $row_cart["item_code"] . "'");
-                                $sel_item->execute();
-                                $sel_item = $sel_item->fetchAll();
+                            foreach ($sel as $row) {
+                                if ($row["discount"] != 0) {
+                                    $save = (($row["price"] - $row["offer_price"]) * $row["quantity"]);
+                                }
+                                $mul_qua_price = $row["quantity"] * $row["offer_price"];
+                                $total_val += $mul_qua_price;
 
-
-                                foreach ($sel_item as $row_item) {
-                                    if ($row_item["discount"] != 0) {
-                                        $save = (($row_item["price"] - $row_item["offer_price"]) * $row_cart["quantity"]);
-                                    }
-                                    $mul_qua_price = $row_cart["quantity"] * $row_item["price"];
-                                    $total_val += $mul_qua_price;
-
-                                    if (isset($save)) {
-                                        $total_save += $save;
-                                    }
+                                if (isset($save)) {
+                                    $total_save += $save;
+                                }
                             ?>
 
-                                    <!-- Multiply quantity with price for every item -->
-                                    <tr>
-                                        <th><?php echo $row_item["name"]; ?><span> (<?php echo $row_cart["quantity"]; ?>* &#8377;<?php echo $row_item["price"]; ?>)</span></th>
-                                        <td>&#8377;<?php echo $mul_qua_price; ?></td>
-                                    </tr>
+                                <!-- Multiply quantity with price for every item -->
+                                <tr>
+                                    <th><?php echo $row["name"]; ?><span> (<?php echo $row["quantity"]; ?>* &#8377;<?php echo $row["offer_price"]; ?>)</span></th>
+                                    <td>&#8377;<?php echo $mul_qua_price; ?></td>
+                                </tr>
 
-                                <?php }
+                            <?php }
 
-                                // Add Tax & Delivery charges into total value
-                                $charges = ($total_val * 0.18);
-                                $pay_val = ($total_val + $charges + 40); ?>
-                            <?php } ?>
+                            // Add Tax & Delivery charges into total value
+                            $charges = ($total_val * 0.18);
+                            $pay_val = ($total_val + $charges + 40); ?>
                         </table>
                     </div>
                     <div id='total_value'>
@@ -165,7 +159,7 @@
             </div>
         <?php } ?>
 
-        
+
         <?php if ($cart_count == 0) { ?>
             <div id='empty'>
                 <h1>Your Cart is empty, Add your choices</h1>

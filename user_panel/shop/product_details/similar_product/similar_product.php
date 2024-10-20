@@ -87,12 +87,12 @@
 
         include("C:/xampp/htdocs/php/medicine_website/database.php");
 
-        $sel_cat = $conn->prepare("SELECT * FROM `".$_SESSION["database"]."` WHERE item_code='" . $_SESSION["item_code"] . "'");
+        $sel_cat = $conn->prepare("SELECT * FROM `products` WHERE item_code='" . $_SESSION["item_code"] . "'");
         $sel_cat->execute();
         $sel_cat = $sel_cat->fetchAll();
 
         foreach ($sel_cat as $row_cat) {
-            $sel_rel = $conn->prepare("SELECT * FROM `".$_SESSION["database"]."` WHERE `category`='".$row_cat["category"]."'");
+            $sel_rel = $conn->prepare("SELECT * FROM `products` WHERE `category`='".$row_cat["category"]."' AND `item_code`!='".$_SESSION["item_code"]."'");
             $sel_rel->execute();
             $sel_rel = $sel_rel->fetchAll(); ?>
 
@@ -101,7 +101,7 @@
                     <div id="box">
                         <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php?item_code=<?php echo $row_rel["item_code"]; ?>">
                             <div id="product_img">
-                                <img src="<?php echo $_SESSION["img_path"] . unserialize($row_rel["item_img"])[0]; ?>" />
+                                <img src="http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo unserialize($row_rel["item_img"])[0]; ?>" />
                             </div>
                             <div id="details">
                                 <span id="name"><?php echo $row_rel["name"]; ?></span>

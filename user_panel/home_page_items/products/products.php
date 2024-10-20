@@ -18,7 +18,7 @@
             <?php
             include("C:/xampp/htdocs/php/medicine_website/database.php");
 
-            $sel = $conn->prepare("SELECT * FROM `products` GROUP BY `category`");
+            $sel = $conn->prepare("SELECT * FROM `products` WHERE `status`='device' GROUP BY `category`");
             $sel->execute();
             $sel = $sel->fetchAll();
 
@@ -41,14 +41,14 @@
     <div>
         <div id="products">
             <?php
-            $sel = $conn->prepare("SELECT * FROM `products` ORDER BY `time` DESC LIMIT 10");
+            $sel = $conn->prepare("SELECT * FROM `products` WHERE `status`='device' ORDER BY `time` DESC LIMIT 10");
             $sel->execute();
             $sel = $sel->fetchAll();
             
             foreach ($sel as $row) { ?>
                 <div class="box">
                     <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php?item_code=<?php echo $row["item_code"]; ?>">
-                        <img src="http://localhost/php/medicine_website/user_panel/shop/imgs/products/product_imgs/<?php echo unserialize($row["item_img"])[0]; ?>" />
+                        <img src="http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo unserialize($row["item_img"])[0]; ?>" />
                         <span id="name"><?php echo $row["name"]; ?></span>
                         <div>
                             <?php if ($row["discount"] != 0) { ?>

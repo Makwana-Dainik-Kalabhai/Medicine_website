@@ -1,23 +1,50 @@
 <?php
 session_start();
+include("C:/xampp/htdocs/php/medicine_website/database.php");
 
 // ! Unset searched_data & category
 if (isset($_SESSION["category"])) {
     unset($_SESSION["category"]);
 }
+if (isset($_SESSION["status"])) {
+    unset($_SESSION["status"]);
+}
+if (isset($_POST["search_input"])) {
+    $_SESSION["search_input"] = $_POST["search_input"];
 
+    $sel = $conn->prepare("SELECT * FROM `products`");
+    $sel->execute();
+    $sel = $sel->fetchAll();
+
+    foreach ($sel as $row) {
+        if (isset($_SESSION["search_input"][0]))
+            $firstChar = $_SESSION["search_input"][0] == $row["category"][0];
+        if (isset($_SESSION["search_input"][1]))
+            $secChar = $_SESSION["search_input"][1] == $row["category"][1];
+        if (isset($_SESSION["search_input"][2]))
+            $thirdChar = $_SESSION["search_input"][2] == $row["category"][2];
+
+        if ($firstChar && $secChar && $thirdChar) {
+            $_SESSION["category"] = $row["category"];
+            $_SESSION["status"] = $row["status"];
+            unset($_SESSION["search_input"]);
+            break;
+        }
+    }
+}
 if (isset($_GET["category"])) {
     $_SESSION["category"] = $_GET["category"];
 }
-if (isset($_GET["database"])) {
-    $_SESSION["database"] = $_GET["database"];
 
-    if ($_SESSION["database"] == "medicines") {
-        $_SESSION["img_path"] = "http://localhost/php/medicine_website/user_panel/shop/imgs/medicines/medicine_imgs/";
-    } else {
-        $_SESSION["img_path"] = "http://localhost/php/medicine_website/user_panel/shop/imgs/products/product_imgs/";
-    }
+if (isset($_GET["status"])) {
+    $_SESSION["status"] = $_GET["status"];
 }
+
+if (isset($_GET["category"]) && isset($_GET["status"])) {
+    $_SESSION["category"] = $_GET["category"];
+    $_SESSION["status"] = $_GET["status"];
+}
+
 ?>
 
 <meta charset="UTF-8">
@@ -103,31 +130,33 @@ if (isset($_GET["database"])) {
             <hr>
 
             <div id="cat_products">
-
                 <div id="category_main">
                     <div id="cat_head">
                         <h1>Categories</h1>
                     </div>
                     <div id="categories">
                         <?php
-                        include("C:/xampp/htdocs/php/medicine_website/database.php");
-
-                        $sel_cat = $conn->prepare("SELECT * FROM `" . $_SESSION["database"] . "` GROUP BY `category`");
+                        $sel_cat = $conn->prepare("SELECT * FROM `products` GROUP BY `category`");
+                        if(isset($_SESSION["status"]))
+                        {
+                            $sel_cat = $conn->prepare("SELECT * FROM `products` WHERE `status`='" . $_SESSION["status"] . "' GROUP BY `category`");
+                        }
                         $sel_cat->execute();
                         $sel_cat = $sel_cat->fetchAll(); ?>
 
                         <div>
-                            <?php
-                            foreach ($sel_cat as $row_cat) {
-                                if (isset($_GET["category"]) && $_GET["category"] == $row_cat["category"]) { ?>
-                                    <button value="<?php echo $row_cat["category"]; ?>" style="background-color:#ffcccc;"><?php echo $row_cat["category"]; ?></button>
-                                <?php }
+                            <?php if (!isset($_SESSION["search_input"])) {
+                                foreach ($sel_cat as $row_cat) {
+                                    if (isset($_SESSION["category"]) && $_SESSION["category"] == $row_cat["category"]) { ?>
+                                        <button value="<?php echo $row_cat["category"]; ?>" style="background-color:#ffcccc;"><?php echo $row_cat["category"]; ?></button>
+                                    <?php }
 
-                                //
-                                else { ?>
-                                    <button value="<?php echo $row_cat["category"]; ?>" style="background-color:transparent;"><?php echo $row_cat["category"]; ?></button>
+                                    //
+                                    else { ?>
+                                        <button value="<?php echo $row_cat["category"]; ?>" style="background-color:transparent;"><?php echo $row_cat["category"]; ?></button>
 
                             <?php }
+                                }
                             } ?>
                         </div>
 
@@ -137,7 +166,11 @@ if (isset($_GET["database"])) {
                         $max_discount = 0;
                         $min_discount = 50;
 
-                        $sel = $conn->prepare("SELECT * FROM `" . $_SESSION["database"] . "`");
+                        $sel = $conn->prepare("SELECT * FROM `products`");
+                        if(isset($_SESSION["status"]))
+                        {
+                            $sel = $conn->prepare("SELECT * FROM `products` WHERE `status`='" . $_SESSION["status"] . "'");
+                        }
                         $sel->execute();
                         $sel = $sel->fetchAll();
 
@@ -168,7 +201,7 @@ if (isset($_GET["database"])) {
                         </div>
                         <div id="discount_range">
                             <span>Discount</span>
-                            <input type="range" name="" min="<?php echo $min_discount; ?>" value="<?php echo $max_discount; ?>" max="<?php echo $max_discount; ?>" oninput="document.getElementById('max_discount').value = this.value+'%'">
+                            <input type="range" name="" min="<?php echo $min_discount; ?>" value="10" max="<?php echo $max_discount; ?>" oninput="document.getElementById('max_discount').value = this.value+'%'">
                             <output id="min_discount"><?php echo $min_discount; ?></output>
                             <output id="max_discount"></output>
                         </div>
@@ -176,26 +209,34 @@ if (isset($_GET["database"])) {
                 </div>
                 <div id="products">
                     <?php
-                    $query = "SELECT * FROM `" . $_SESSION["database"] . "`";
-                    if (isset($_GET["category"])) {
-                        $query = "SELECT * FROM `" . $_SESSION["database"] . "` WHERE `category` = '" . $_GET["category"] . "'";
+                    $query = "SELECT * FROM `products` WHERE `discount`<10";
+                    if (isset($_SESSION["status"])) {
+                        $query = "SELECT * FROM `products` WHERE `status`='" . $_SESSION["status"] . "' AND `discount`<10";
+                    }
+                    if (isset($_SESSION["category"]) && isset($_SESSION["status"])) {
+                        $query = "SELECT * FROM `products` WHERE `category` = '" . $_SESSION["category"] . "' AND `status`='" . $_SESSION["status"] . "' AND `discount`<10";
+                    }
+                    if (isset($_SESSION["search_input"])) {
+                        $query = "SELECT * FROM `products` WHERE `name` LIKE '%" . $_SESSION["search_input"] . "%' AND `discount`<10";
                     }
 
                     $sel = $conn->prepare($query);
                     $sel->execute();
                     $sel = $sel->fetchAll();
+                    $pr_not_found = true;
 
                     foreach ($sel as $row) {
-                        $contain_data = true; ?>
+                        $contain_data = true;
+                        unset($pr_not_found); ?>
 
                         <div id="box">
-                            <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php?database=<?php echo $_SESSION["database"]; ?>&item_code=<?php echo $row["item_code"]; ?>">
+                            <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php?item_code=<?php echo $row["item_code"]; ?>">
                                 <div id="product_img">
                                     <?php
                                     if ($row["discount"] != 0) { ?>
                                         <span>&ensp;-<?php echo $row["discount"]; ?>%</span>
                                     <?php } ?>
-                                    <img src="<?php echo $_SESSION["img_path"] . unserialize($row["item_img"])[0]; ?>" alt="" />
+                                    <img src="http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo unserialize($row["item_img"])[0]; ?>" alt="" />
                                 </div>
                                 <div id="product_details">
                                     <span id="name"><?php echo $row["name"]; ?></span>
@@ -214,11 +255,15 @@ if (isset($_GET["database"])) {
                                 <a href="http://localhost/php/medicine_website/user_panel/form/login_form.php" id="add_cart"><i class="fa-solid fa-cart-plus"></i>&ensp;Add to Cart</a>
                             <?php } ?>
                             <?php if (isset($_SESSION["email"])) { ?>
-                                <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/verify_cart.php" id="add_cart"><i class="fa-solid fa-cart-plus"></i>&ensp;Add to Cart</a>
+                                <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/verify_cart.php?item_code=<?php echo $row["item_code"]; ?>" id="add_cart"><i class="fa-solid fa-cart-plus"></i>&ensp;Add to Cart</a>
                             <?php } ?>
                         </div>
                     <?php }
-                    ?>
+                    //
+                    if (isset($pr_not_found)) { ?>
+                        <img id="pr_not_found" src="http://localhost/php/medicine_website/user_panel/header/pr_not_found.jpeg" alt="">
+                    <?php
+                    } ?>
                 </div>
             </div>
         </div>

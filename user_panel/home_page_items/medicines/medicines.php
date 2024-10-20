@@ -8,12 +8,12 @@
     <?php
     include("C:/xampp/htdocs/php/medicine_website/database.php");
 
-    $sel = $conn->prepare("SELECT * FROM `medicines` GROUP BY `category`");
+    $sel = $conn->prepare("SELECT * FROM `products` WHERE `status`='medicine' GROUP BY `category`");
     $sel->execute();
     $sel = $sel->fetchAll();
 
     foreach ($sel as $row) { ?>
-        <a href="http://localhost/php/medicine_website/user_panel/shop/pr_main_page/pr_main_page.php?category=<?php echo $row["category"]; ?>&database=medicines"><img src="http://localhost/php/medicine_website/user_panel/shop/imgs/medicines/category_img/<?php echo $row["category"]; ?>.png" /></a>
+        <a href="http://localhost/php/medicine_website/user_panel/shop/pr_main_page/pr_main_page.php?category=<?php echo $row["category"]; ?>"><img src="http://localhost/php/medicine_website/user_panel/shop/imgs/medicines/category_img/<?php echo $row["category"]; ?>.png" /></a>
     <?php } ?>
 </div>
 
@@ -28,9 +28,9 @@
 
             foreach ($sel as $row) { ?>
                 <div id="box">
-                    <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php?database=medicines&item_code=<?php echo $row["item_code"]; ?>">
+                    <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php?item_code=<?php echo $row["item_code"]; ?>">
                         <div id="product_img">
-                            <img src="http://localhost/php/medicine_website/user_panel/shop/imgs/medicines/medicine_imgs/<?php echo unserialize($row["item_img"])[0]; ?>" />
+                            <img src="http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo unserialize($row["item_img"])[0]; ?>" />
 
                             <?php if (!isset($_SESSION["email"])) { ?>
                                 <a href="http://localhost/php/medicine_website/user_panel/form/login_form.php"><i class="fa-solid fa-heart"></i></a>
@@ -64,15 +64,16 @@
                                                     echo $row["discount"];
                                                 } ?>% off</span>
                         </div>
-                        <a href="" id="add_cart"><i class="fa-solid fa-cart-plus"></i> Add to cart</a>
+                        <!-- //* Add to Cart button -->
+                        <?php if (!isset($_SESSION["email"])) { ?>
+                            <a href="http://localhost/php/medicine_website/user_panel/form/login_form.php" id="add_cart"><i class="fa-solid fa-cart-plus"></i>&ensp;Add to Cart</a>
+                        <?php } ?>
+                        <?php if (isset($_SESSION["email"])) { ?>
+                            <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/verify_cart.php" id="add_cart"><i class="fa-solid fa-cart-plus"></i>&ensp;Add to Cart</a>
+                        <?php } ?>
                     </a>
                 </div>
             <?php } ?>
         </div>
     </div>
 </div>
-
-<!-- <div id="order_description">
-    <?php //include("C:/xampp/htdocs/php/medicine_website/user_panel/shop/medicines/medicines_cat_des.php"); 
-    ?>
-</div> -->

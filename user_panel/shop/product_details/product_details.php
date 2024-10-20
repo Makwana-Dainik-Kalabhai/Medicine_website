@@ -4,14 +4,8 @@ if (isset($_GET["item_code"])) {
     $_SESSION["item_code"] = $_GET["item_code"];
 }
 
-if (isset($_GET["database"])) {
-    $_SESSION["database"] = $_GET["database"];
-
-    if ($_SESSION["database"] == "medicines") {
-        $_SESSION["img_path"] = "http://localhost/php/medicine_website/user_panel/shop/imgs/medicines/medicine_imgs/";
-    } else {
-        $_SESSION["img_path"] = "http://localhost/php/medicine_website/user_panel/shop/imgs/products/product_imgs/";
-    }
+if (isset($_GET["status"])) {
+    $_SESSION["status"] = $_GET["status"];
 }
 ?>
 
@@ -38,7 +32,7 @@ if (isset($_GET["database"])) {
             <?php
             include("C:/xampp/htdocs/php/medicine_website/database.php");
 
-            $sel = $conn->prepare("SELECT * FROM `" . $_SESSION["database"] . "` WHERE item_code='" . $_SESSION["item_code"] . "'");
+            $sel = $conn->prepare("SELECT * FROM `products` WHERE item_code='" . $_SESSION["item_code"] . "'");
             $sel->execute();
             $sel = $sel->fetchAll();
 
@@ -53,7 +47,7 @@ if (isset($_GET["database"])) {
                             <figure class="fig">
                                 <?php foreach (unserialize($row["item_img"]) as $img) { ?>
                                     <div id="img">
-                                        <img src="<?php echo $_SESSION["img_path"] . $img; ?>" />
+                                        <img src="http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo $img; ?>" />
                                     </div>
                                 <?php $count_img++;
                                 } ?>
@@ -86,7 +80,7 @@ if (isset($_GET["database"])) {
 
                     <div id="main_imgs">
                         <?php foreach (unserialize($row["item_img"]) as $img) { ?>
-                            <img id="full" src="<?php echo $_SESSION["img_path"] . $img; ?>" />
+                            <img id="full" src="http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo $img; ?>" />
                         <?php } ?>
 
                         <!-- //! Discount btn -->
@@ -162,7 +156,7 @@ if (isset($_GET["database"])) {
     <div id="advance_details">
         <div>
             <div id="btns">
-                <?php if ($_SESSION["database"] == "products") { ?>
+                <?php if ($_SESSION["status"] == "device") { ?>
                     <button value="description" class="clicked_btn">Description</button>
                     <button value="features">Features</button>
                     <button value="specification">Specification</button>
@@ -178,7 +172,7 @@ if (isset($_GET["database"])) {
 
 
             <?php
-            if ($_SESSION["database"] == "products")
+            if ($_SESSION["status"] == "device")
                 disProductDetalis();
             else
                 disMedicineDetalis();
@@ -186,7 +180,7 @@ if (isset($_GET["database"])) {
         </div>
     </div>
     <!-- //! Similar Products -->
-    <?php include("./related_product/related_product.php"); ?>
+    <?php include("./similar_product/similar_product.php"); ?>
 
     <!-- //! Ratings & Reviews -->
     <div id="ratings_div">
@@ -274,34 +268,34 @@ function disMedicineDetalis()
             </div>
             <div id="benefits">
                 <?php if ($row["benefits"] != null) {
-                    foreach (unserialize($row["benefits"]) as $ben) { ?>
-                        <?php if (isset($ben[0])) { ?>
-                            <li><?php echo $ben[0]; ?></li>
-                        <?php }
-                        //
-                        else if (isset($ben[0]) && isset($ben[1])) { ?>
+                    foreach (unserialize($row["benefits"]) as $ben) {
+                        if (isset($ben[0]) && isset($ben[1])) { ?>
                             <p>
                                 <li style="display: inline;font-weight: 700;"><?php echo $ben[0]; ?></li>
                                 <span>: -&ensp;<?php echo $ben[1]; ?></span>
                             </p>
-                        <?php } ?>
+                        <?php }
+                        //
+                        else if (isset($ben[0])) { ?>
+                            <li><?php echo $ben[0]; ?></li>
                 <?php }
+                    }
                 } ?>
             </div>
             <div id="how_use">
                 <?php if ($row["how_use"] != null) {
-                    foreach (unserialize($row["how_use"]) as $how) { ?>
-                        <?php if (isset($how[0])) { ?>
-                            <li><?php echo $how[0]; ?></li>
-                        <?php }
-                        //
-                        else if (isset($how[0]) && isset($how[1])) { ?>
+                    foreach (unserialize($row["how_use"]) as $how) {
+                        if (isset($how[0]) && isset($how[1])) { ?>
                             <p>
                                 <li style="display: inline;font-weight: 700;"><?php echo $how[0]; ?></li>
                                 <span>: -&ensp;<?php echo $how[1]; ?></span>
                             </p>
-                        <?php } ?>
+                        <?php }
+                        //
+                        else if (isset($how[0])) { ?>
+                            <li><?php echo $how[0]; ?></li>
                 <?php }
+                    }
                 } ?>
             </div>
             <div id="safety">
@@ -314,18 +308,18 @@ function disMedicineDetalis()
             </div>
             <div id="other_info">
                 <?php if ($row["other_info"] != null) {
-                    foreach (unserialize($row["other_info"]) as $inf) { ?>
-                        <?php if (isset($inf[0])) { ?>
-                            <li><?php echo $inf[0]; ?></li>
-                        <?php }
-                        //
-                        else if (isset($inf[0]) && isset($inf[1])) { ?>
+                    foreach (unserialize($row["other_info"]) as $inf) {
+                        if (isset($inf[0]) && isset($inf[1])) { ?>
                             <p>
                                 <li style="display: inline;font-weight: 700;"><?php echo $inf[0]; ?></li>
                                 <span>: -&ensp;<?php echo $inf[1]; ?></span>
                             </p>
-                        <?php } ?>
+                        <?php }
+                        //
+                        else if (isset($inf[0])) { ?>
+                            <li><?php echo $inf[0]; ?></li>
                 <?php }
+                    }
                 } ?>
             </div>
             <div id="faqs">
