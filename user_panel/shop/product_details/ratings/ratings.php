@@ -8,7 +8,7 @@ if (isset($_SESSION["email"])) {
     $sel = $sel->fetchAll();
 
     foreach ($sel as $row) {
-        if ($row["status"] == "rate" || $row["status"]=="both") {
+        if ($row["status"] == "rate" || $row["status"] == "both") {
             $contain_rating = $row["rate"];
         }
     }
@@ -70,16 +70,16 @@ if (isset($_SESSION["email"])) {
                     if (isset($contain_rating)) { ?>
                         <!-- //! Already Rate -->
                         <div class="stars already">
-                            <?php $i = 0;
-                            while ($i < 5) {
-                                if ($i < $contain_rating) { ?>
-                                    <a href="javascript:SendPlaylist(); return false;"><i class="fa-solid fa-star" style="color:#ffaf1a;"></i></a>
+                            <?php $i = 5;
+                            while ($i > 0) {
+                                if ($i > $contain_rating) { ?>
+                                    <a href="javascript:SendPlaylist(); return false;"><i class="fa-solid fa-star"></i></a>
                                 <?php }
                                 //
                                 else { ?>
-                                    <a href="javascript:SendPlaylist(); return false;"><i class="fa-solid fa-star"></i></a>
+                                    <a href="javascript:SendPlaylist(); return false;"><i class="fa-solid fa-star" style="color:#ffaf1a;"></i></a>
                             <?php }
-                                $i++;
+                                $i--;
                             } ?>
                         </div>
                     <?php }
@@ -138,28 +138,37 @@ if (isset($_SESSION["email"])) {
 </div>
 
 
-<?php
-$sel = $conn->prepare("SELECT * FROM `ratings` INNER JOIN `user_login_data` ON ratings.email=user_login_data.email  WHERE `item_code`='" . $_SESSION["item_code"] . "' ORDER BY `time`");
-$sel->execute();
-$sel = $sel->fetchAll();
-?>
 <!-- //! Show Reviews -->
 <div id="show_review">
     <h1>Reviews</h1>
     <hr />
     <?php
     $email = "";
+    $sel = $conn->prepare("SELECT *, ratings.email FROM `ratings` INNER JOIN `user_login_data` ON ratings.email=user_login_data.email  WHERE `item_code`='" . $_SESSION["item_code"] . "' ORDER BY `time`");
+    $sel->execute();
+    $sel = $sel->fetchAll();
+    $total_data=0;
     foreach ($sel as $row) {
         if (isset($_SESSION["email"]) && $row["email"] == $_SESSION["email"]) {
             disRev($row);
             $email = $row["email"];
         }
+        $total_data++;
     }
-    foreach ($sel as $row) {
-        if ($row["email"] != $email)
-            disRev($row);
-    }
-    ?>
+
+    $sel = $conn->prepare("SELECT *, ratings.email FROM `ratings` INNER JOIN `user_login_data` ON ratings.email=user_login_data.email  WHERE `item_code`='" . $_SESSION["item_code"] . "' ORDER BY `time` LIMIT 1");
+    $sel->execute();
+    $sel = $sel->fetchAll(); ?>
+    <div id="all_reviews">
+        <?php foreach ($sel as $row) {
+            if ($row["email"] != $email) {
+                disRev($row);
+            }
+        } ?>
+        <input type="hidden" value="<?php echo $total_data; ?>" id="total_data" />
+    </div>
+    <hr>
+    <button id="more_btn">MORE%</button>
 </div>
 
 

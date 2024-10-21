@@ -243,14 +243,7 @@ progress::before {
 #review p {
     width: 100%;
     display: block;
-    white-space: nowrap;
     font-size: 0.55em;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-    /* white-space: pre-wrap; */
 }
 
 #review .fa-trash {
@@ -271,4 +264,15 @@ progress::before {
     font-size: 0.5em;
     font-weight: 600;
     margin: 0 !important;
+}
+
+#show_review #more_btn {
+    display: block;
+    width: 100%;
+    color: #0000b3;
+    font-size: 0.7em;
+    font-weight: 600;
+    text-align: center;
+    border: none;
+    background-color: transparent;
 }

@@ -9,6 +9,10 @@ if (isset($_SESSION["category"])) {
 if (isset($_SESSION["status"])) {
     unset($_SESSION["status"]);
 }
+if(isset($_SESSION["search_input"]))
+{
+    unset($_SESSION["search_input"]);
+}
 if (isset($_POST["search_input"])) {
     $_SESSION["search_input"] = $_POST["search_input"];
 

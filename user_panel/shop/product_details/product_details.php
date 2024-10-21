@@ -184,7 +184,7 @@ if (isset($_GET["status"])) {
 
     <!-- //! Ratings & Reviews -->
     <div id="ratings_div">
-        <?php include("./ratings/ratings.php"); ?>
+        <?php include("C:/xampp/htdocs/php/medicine_website/user_panel/shop/product_details/ratings/ratings.php"); ?>
     </div>
     </main>
 

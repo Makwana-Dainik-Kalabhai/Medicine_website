@@ -23,7 +23,7 @@
             $sel = $sel->fetchAll();
 
             foreach ($sel as $row) { ?>
-                    <a href="http://localhost/php/medicine_website/user_panel/shop/pr_main_page/pr_main_page.php?category=<?php echo $row["category"]; ?>&database=products" class="box">
+                    <a href="http://localhost/php/medicine_website/user_panel/shop/pr_main_page/pr_main_page.php?category=<?php echo $row["category"]; ?>&status=device" class="box">
                         <img src="http://localhost/php/medicine_website/user_panel/shop/imgs/products/product_imgs/<?php echo unserialize($row["item_img"])[0]; ?>" />
                         <span class="category"><?php echo $row["category"]; ?></span>
                     </a>
@@ -47,7 +47,7 @@
             
             foreach ($sel as $row) { ?>
                 <div class="box">
-                    <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php?item_code=<?php echo $row["item_code"]; ?>">
+                    <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php?item_code=<?php echo $row["item_code"]; ?>&status=device">
                         <img src="http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo unserialize($row["item_img"])[0]; ?>" />
                         <span id="name"><?php echo $row["name"]; ?></span>
                         <div>
