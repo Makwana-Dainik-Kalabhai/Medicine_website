@@ -103,14 +103,7 @@
 
                          <p class="mt-5">
                               <li>Returns and Refunds: -</li>
-                              <p>
-                                   &#9755;&ensp;<u>Returns</u>: -
-                                   Our return policy is outlined separately. Please review this policy before initiating a return.
-                              </p>
-                              <p>
-                                   &#9755;&ensp;<u>Refunds</u>: -
-                                   Refunds will be processed according to our return policy. Please allow 7-10 business days for the refund to appear in your account.
-                              </p>
+                              <p>No Returns are Allowed</p>
                          </p>
 
                          <p class="mt-5">

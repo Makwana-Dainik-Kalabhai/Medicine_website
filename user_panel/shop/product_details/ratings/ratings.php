@@ -147,7 +147,7 @@ if (isset($_SESSION["email"])) {
     $sel = $conn->prepare("SELECT *, ratings.email FROM `ratings` INNER JOIN `user_login_data` ON ratings.email=user_login_data.email  WHERE `item_code`='" . $_SESSION["item_code"] . "' ORDER BY `time`");
     $sel->execute();
     $sel = $sel->fetchAll();
-    $total_data=0;
+    $total_data = 0;
     foreach ($sel as $row) {
         if (isset($_SESSION["email"]) && $row["email"] == $_SESSION["email"]) {
             disRev($row);
@@ -167,8 +167,10 @@ if (isset($_SESSION["email"])) {
         } ?>
         <input type="hidden" value="<?php echo $total_data; ?>" id="total_data" />
     </div>
-    <hr>
-    <button id="more_btn">MORE%</button>
+    <?php if ($total_data > 1) { ?>
+        <hr>
+        <button id="more_btn">MORE%</button>
+    <?php } ?>
 </div>
 
 

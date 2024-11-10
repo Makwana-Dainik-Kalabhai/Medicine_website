@@ -95,8 +95,8 @@ if (isset($_GET["category"]) && isset($_GET["status"])) {
             <div id="return">
                 <i class="fa-solid fa-truck-fast"></i>
                 <div>
-                    <span>30/14 days Returns</span>
-                    <span>Return within 30/14 days</span>
+                    <span>No Returns</span>
+                    <span>No Returns are Allowed</span>
                 </div>
             </div>
 

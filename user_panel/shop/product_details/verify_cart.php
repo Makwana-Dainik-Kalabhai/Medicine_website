@@ -25,7 +25,7 @@ if (isset($conn_item)) {
 }
 
 if (!isset($conn_item)) {
-    $insert = $conn->prepare("INSERT INTO `cart` VALUES('" . $_SESSION["email"] . "','" . $_SESSION["item_code"] . "','1','')");
+    $insert = $conn->prepare("INSERT INTO `cart` VALUES('" . $_SESSION["email"] . "','" . $_SESSION["item_code"] . "','1')");
     $insert->execute();
 
     header("Refresh:0; url=http://localhost/php/medicine_website/user_panel/cart/cart.php");

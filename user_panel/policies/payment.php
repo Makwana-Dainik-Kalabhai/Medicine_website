@@ -45,9 +45,7 @@
                     <p class="mt-5">
                         <li>Accepted Payment Methods We accept the following payment methods for your convenience: -</li>
                     <ul>
-                        <li>Credit and Debit Cards</li>
-                        <li>Digital Wallets (Paytm, Phonepe, Google Pay etc.)</li>
-                        <li>Bank Transfers</li>
+                        <li>Razorpay</li>
                         <li>Cash on Delivery</li>
                     </ul>
                     </p>
@@ -69,14 +67,7 @@
 
                     <p class="mt-5">
                         <li>Refunds and Returns: -</li>
-                    <p>
-                        &#9755;&ensp;<u>Refunds</u>: -
-                        Once we receive and inspect the returned item, we will process your refund within 7-10 business days. Refunds will be issued to the original payment method used for the purchase.
-                    </p>
-                    <p>
-                        &#9755;&ensp;<u>Exchanges</u>: -
-                        We do not offer direct exchanges. If you wish to exchange an item, please return the original item and place a new order for the desired product.
-                    </p>
+                        <p>No Returns are Allowed</p>
                     </p>
 
                     <p class="mt-5">

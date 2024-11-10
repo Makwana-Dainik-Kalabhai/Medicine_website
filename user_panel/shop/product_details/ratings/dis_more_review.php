@@ -5,8 +5,15 @@ include("C:/xampp/htdocs/php/medicine_website/database.php");
 $sel = $conn->prepare("SELECT *, ratings.email FROM `ratings` INNER JOIN `user_login_data` ON ratings.email=user_login_data.email  WHERE `item_code`='" . $_SESSION["item_code"] . "' ORDER BY `time` LIMIT " . $_POST["limit"] . "");
 $sel->execute();
 $sel = $sel->fetchAll();
-foreach ($sel as $row) {
-    if ($row["email"] != $_SESSION["email"]) {
+
+if (isset($_SESSION["email"])) {
+    foreach ($sel as $row) {
+        if ($row["email"] != $_SESSION["email"]) {
+            disRev($row);
+        }
+    }
+} else {
+    foreach ($sel as $row) {
         disRev($row);
     }
 }

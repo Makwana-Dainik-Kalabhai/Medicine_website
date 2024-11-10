@@ -108,7 +108,7 @@
 
                     <p class="mt-5">
                         <li>Returns and Exchanges: -</li>
-                        <p>Due to the nature of our products, please refer to our Refund and Return Policy for information regarding returns or exchanges.</p>
+                        <p>No Returns are Allowed</p>
                     </p>
 
                     <p class="mt-5">

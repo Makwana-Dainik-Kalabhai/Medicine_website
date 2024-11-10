@@ -3,22 +3,25 @@ session_start();
 
 include("C:/xampp/htdocs/php/medicine_website/database.php");
 
-if (isset($_POST["quantity"]) && isset($_POST["item_code"])) {
 
+if (isset($_POST["quantity"]) && isset($_POST["item_code"])) {
+    $sel = $conn->prepare("SELECT * FROM `products` WHERE `item_code` = ".$_POST["item_code"]."");
+    $sel->execute();
+    $sel = $sel->fetchAll();
+
+    foreach($sel as $row) {
+        $avQuantity = $row["quantity"];
+    }
+
+    $quantity = $_POST["quantity"];
     if (isset($_POST["minus"])) {
         if ($_POST["quantity"] > 1) {
             $quantity = $_POST["quantity"] - 1;
-        } else {
-            $quantity = $_POST["quantity"];
         }
     }
     if (isset($_POST["plus"])) {
-        if ($_POST["quantity"] < 10) {
+        if ($_POST["quantity"] < 5 && $_POST["quantity"]<=$avQuantity) {
             $quantity = $_POST["quantity"] + 1;
-        }
-        //
-        else {
-            $quantity = $_POST["quantity"];
         }
     }
     $item_code = $_POST["item_code"];

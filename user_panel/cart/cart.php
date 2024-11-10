@@ -31,17 +31,11 @@
                     <?php
                     include("C:/xampp/htdocs/php/medicine_website/database.php");
 
-                    $sel = $conn->prepare("SELECT *,cart.quantity FROM `cart` JOIN `products` ON products.item_code=cart.item_code WHERE email='" . $_SESSION["email"] . "'");
+                    $sel = $conn->prepare("SELECT *,cart.quantity FROM `cart` INNER JOIN `products` ON products.item_code=cart.item_code WHERE email='" . $_SESSION["email"] . "'");
                     $sel->execute();
                     $sel = $sel->fetchAll();
 
                     foreach ($sel as $row) {
-                        // $sel_item = $conn->prepare("SELECT * FROM `products` WHERE `item_code`='" . $row["item_code"] . "'");
-                        // $sel_item->execute();
-                        // $sel_item = $sel_item->fetchAll();
-
-
-                        // foreach ($sel_item as $row) { 
                     ?>
 
                         <div id='products'>
@@ -55,6 +49,13 @@
                                     <input type="number" value="<?php echo $row["quantity"]; ?>" name="quantity" id="quantity" />
                                     <button id="plus" name="plus">+</button>
                                 </form>
+                                <?php if ($row["quantity"] > 5) { ?>
+                                    <p class="available">Available</p>
+                                <?php } else if ($row["quantity"] > 5) { ?>
+                                    <p class="available">Only <?php echo $row["quantity"]; ?> Quantity available</p>
+                                <?php } else { ?>
+                                    <p class="not-available">Not Available</p>
+                                <?php } ?>
                             </div>
 
                             <a href='http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php?item_code=<?php echo $row['item_code']; ?>' id='box'>
