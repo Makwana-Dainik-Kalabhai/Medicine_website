@@ -125,8 +125,10 @@ if (isset($_GET["status"])) {
 
 
                     <!-- //* Check that available in stock or not -->
-                    <?php if ($row["quantity"] > 0) { ?>
+                    <?php if ($row["quantity"] > 4) { ?>
                         <span id="available">Available in Stock</span>
+                    <?php } else if ($row["quantity"] < 5) { ?>
+                        <span id="not_available">Only <?php echo $row["quantity"]; ?> Quantity available</span>
                     <?php } else { ?>
                         <span id="not_available">Out of Stock</span>
                     <?php } ?>

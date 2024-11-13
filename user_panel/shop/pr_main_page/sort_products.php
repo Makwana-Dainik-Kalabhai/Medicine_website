@@ -1,20 +1,7 @@
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
-
-    #pr_not_available {
-        width: fit-content;
-        padding: 3% 0 0 5%;
-        font-size: 25px;
-        font-family: "Rubik", sans-serif;
-    }
-
-    #pr_not_available p {
-        line-height: 1.2;
-        font-weight: 400;
-    }
-
-    #pr_not_available span {
-        font-weight: 500;
+    #pr_not_found {
+        width: 50%;
+        margin: 0 auto;
     }
 </style>
 
@@ -106,9 +93,6 @@ foreach ($sel as $row) {
 <?php }
 
 if (isset($product_count) && $product_count == 0) { ?>
-    <div id="pr_not_available">
-        <p>Products are not available <?php if (isset($_SESSION["category"])) { ?>in the category of <span><?php echo $_SESSION["category"]; ?></span><?php } ?></p>
-        <p> with &#8377;<span><?php echo $_POST["price_range"]; ?></span> price and <span><?php echo $_POST["discount_range"]; ?></span>% discount.</p>
-    </div>
+    <img id="pr_not_found" src="http://localhost/php/medicine_website/user_panel/header/pr_not_found.jpeg" alt="" />
 <?php }
 ?>

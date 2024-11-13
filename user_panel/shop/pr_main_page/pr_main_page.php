@@ -13,6 +13,8 @@ if(isset($_SESSION["search_input"]))
 {
     unset($_SESSION["search_input"]);
 }
+
+// ! Set Data
 if (isset($_POST["search_input"])) {
     $_SESSION["search_input"] = $_POST["search_input"];
 
@@ -39,7 +41,6 @@ if (isset($_POST["search_input"])) {
 if (isset($_GET["category"])) {
     $_SESSION["category"] = $_GET["category"];
 }
-
 if (isset($_GET["status"])) {
     $_SESSION["status"] = $_GET["status"];
 }
@@ -265,7 +266,7 @@ if (isset($_GET["category"]) && isset($_GET["status"])) {
                     <?php }
                     //
                     if (isset($pr_not_found)) { ?>
-                        <img id="pr_not_found" src="http://localhost/php/medicine_website/user_panel/header/pr_not_found.jpeg" alt="">
+                        <img id="pr_not_found" src="http://localhost/php/medicine_website/user_panel/header/pr_not_found.jpeg" alt=""/>
                     <?php
                     } ?>
                 </div>

@@ -139,8 +139,8 @@ main {
 
 /* If wishlist is empty, then dispay that */
 #empty_wishlist {
-    width: 65%;
-    padding: 5% 7%;
+    width: 100%;
+    padding: 5% 0;
     margin: 3% auto;
     background-color: white;
     display: grid;
@@ -148,10 +148,16 @@ main {
     border-radius: 10px;
 }
 
+#empty_wishlist #links {
+    width: 35%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
 #empty_wishlist a {
     color: white;
     border: none;
-    font-size: 0.8em;
+    font-size: 0.7em;
     font-weight: 600;
     padding: 0.3% 3%;
     background-color: #30819c;

@@ -20,12 +20,12 @@
 
     <main>
         <?php
-
         if ($cart_count != 0) { ?>
             <div id='cart'>
                 <div id="product">
                     <div id='cart_header'>
                         <h1>My Cart(<?php echo $cart_count; ?>)</h1>
+                        <span>You can Order maximum 5 products.</span>
                     </div>
 
                     <?php
@@ -36,23 +36,36 @@
                     $sel = $sel->fetchAll();
 
                     foreach ($sel as $row) {
+                        $sel_qua = $conn->prepare("SELECT * FROM `products` WHERE item_code='" . $row["item_code"] . "'");
+                        $sel_qua->execute();
+                        $sel_qua = $sel_qua->fetchAll();
+
+                        $prod_qua = $sel_qua[0]["quantity"];
+                        if ($prod_qua == 0) {
+                            $up = $conn->prepare("UPDATE `cart` SET `quantity`=0 WHERE item_code='" . $row["item_code"] . "' AND email='" . $_SESSION["email"] . "'");
+                            $up->execute();
+                        }
                     ?>
 
                         <div id='products'>
                             <div id='product_img'>
                                 <img src='http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo unserialize($row["item_img"])[0]; ?>'>
 
-                                <form action='update_qua.php' method='post'>
+                                <?php if ($prod_qua != 0) { ?>
+                                    <form action='update_qua.php' method='post'>
+                                        <input type="hidden" name="item_code" value="<?php echo $row["item_code"]; ?>" />
+                                        <button id="minus" name="minus" <?php if (!($row["quantity"] > 1)) { echo "disabled"; } ?>>-</button>
 
-                                    <input type="hidden" name="item_code" value="<?php echo $row["item_code"]; ?>" />
-                                    <button id="minus" name="minus">-</button>
-                                    <input type="number" value="<?php echo $row["quantity"]; ?>" name="quantity" id="quantity" />
-                                    <button id="plus" name="plus">+</button>
-                                </form>
-                                <?php if ($row["quantity"] > 5) { ?>
+                                        <input type="number" value="<?php echo $row["quantity"]; ?>" name="quantity" id="quantity" readonly />
+
+                                        <button id="plus" name="plus" <?php if (!($row["quantity"] < $prod_qua && $row["quantity"] < 6)) { echo "disabled"; } ?>>+</button>
+                                    </form>
+                                <?php }
+
+                                if ($prod_qua > 5) { ?>
                                     <p class="available">Available</p>
-                                <?php } else if ($row["quantity"] > 5) { ?>
-                                    <p class="available">Only <?php echo $row["quantity"]; ?> Quantity available</p>
+                                <?php } else if ($prod_qua < 5 && $prod_qua > 0) { ?>
+                                    <p class="not-available">Only <?php echo $prod_qua; ?> Quantity available</p>
                                 <?php } else { ?>
                                     <p class="not-available">Not Available</p>
                                 <?php } ?>
@@ -107,15 +120,15 @@
                                 if (isset($save)) {
                                     $total_save += $save;
                                 }
-                            ?>
 
-                                <!-- Multiply quantity with price for every item -->
-                                <tr>
-                                    <th><?php echo $row["name"]; ?><span> (<?php echo $row["quantity"]; ?>* &#8377;<?php echo $row["offer_price"]; ?>)</span></th>
-                                    <td>&#8377;<?php echo $mul_qua_price; ?></td>
-                                </tr>
-
+                                if ($row["quantity"] != 0) { ?>
+                                    <!-- Multiply quantity with price for every item -->
+                                    <tr>
+                                        <th><?php echo $row["name"]; ?><span> (<?php echo $row["quantity"]; ?>* &#8377;<?php echo $row["offer_price"]; ?>)</span></th>
+                                        <td>&#8377;<?php echo $mul_qua_price; ?></td>
+                                    </tr>
                             <?php }
+                            }
 
                             // Add Tax & Delivery charges into total value
                             $charges = ($total_val * 0.18);
@@ -163,8 +176,11 @@
 
         <?php if ($cart_count == 0) { ?>
             <div id='empty'>
-                <h1>Your Cart is empty, Add your choices</h1>
-                <a href="http://localhost/php/medicine_website/user_panel/shop/pr_main_page/pr_main_page.php">Add your choice</a>
+                <img src="empty.png" alt="" />
+                <div id="links">
+                    <a href="http://localhost/php/medicine_website/user_panel/shop/pr_main_page/pr_main_page.php?status=medicine">Add Medicines</a>
+                    <a href="http://localhost/php/medicine_website/user_panel/shop/pr_main_page/pr_main_page.php?status=device">Add Medical Deices</a>
+                </div>
             </div>
         <?php } ?>
     </main>
