@@ -40,35 +40,16 @@
 
 
 #nav1 #logo {
-    width: 15%;
-    display: flex;
-    align-items: center;
+    width: 13%;
     font-size: 0.95em;
     font-weight: 600;
     margin-left: 2%;
     background-color: white;
     border-radius: 25px;
 }
-#nav1 #logo span {
-    color: #0000b3 !important;
-}
 
 #nav1 #logo>img {
-    width: 11%;
-    height: 11%;
-    margin-left: 3%;
-    animation: rotate 5s linear infinite;
-    border-radius: 50%;
-}
-
-@keyframes rotate {
-    from {
-        transform: rotate(0deg);
-    }
-
-    to {
-        transform: rotate(360deg);
-    }
+    width: 100%;
 }
 
 

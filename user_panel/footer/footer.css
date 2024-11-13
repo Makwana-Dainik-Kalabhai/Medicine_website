@@ -35,17 +35,11 @@
 
 /* Footer-1 logo */
 #company #logo {
-    display: flex;
-    align-items: center;
-    width: 3%;
-    height: 100%;
-    text-shadow: 3.5px 2px 0px white;
-    font-weight: 600;
+    width: 20%;
 }
 
 #company #logo img {
     width: 100%;
-    animation: none;
 }
 
 #logo span {
@@ -71,10 +65,10 @@
 
 #footer2 #all_links {
     display: flex;
+    justify-content: space-evenly;
 }
 
 #footer2 #all_links>div {
-    display: block;
     width: 100%;
 }
 
@@ -142,17 +136,11 @@
 }
 
 #payment img {
-    width: 10.5%;
-    margin-top: -1.5%;
-    margin-right: 1.5%;
-}
-
-#payment #paytm {
-    width: 5.5%;
+    width: 13%;
 }
 
 #payment #cash {
-    width: 6.5%;
+    width: 8%;
     transform: rotate(45deg);
 }
 

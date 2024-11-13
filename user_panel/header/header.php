@@ -16,7 +16,7 @@
 <nav id="main_nav" class="header-visible">
     <nav id="nav1">
         <div id="logo">
-            <img src="http://localhost/php/medicine_website/user_panel/header/logo.png" alt="">&nbsp;health<span>Group</span>
+            <img src="http://localhost/php/medicine_website/user_panel/header/logo1.png" alt="img not found">
         </div>
         <div id="login_btns">
             <?php if (!isset($_SESSION["email"])) { ?>

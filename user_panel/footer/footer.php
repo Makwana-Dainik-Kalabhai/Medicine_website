@@ -12,7 +12,7 @@
         <hr>
         <div id="company">
             <div id="logo">
-                <img src="http://localhost/php/medicine_website/user_panel/footer/logo.png" alt="">&nbsp;health<span>Group</span>
+                <img src="http://localhost/php/medicine_website/user_panel/footer/logo1.png" alt="">
             </div>
             <div id="description">
                 <span>healthGroup.com is one of the best company that provides best services. We provide best medicines, medical products and healthy life.</span>
@@ -43,9 +43,6 @@
                 <a href="">FAQs</a>
             </div>
             <div>
-                <span>Categories</span>
-            </div>
-            <div>
                 <div id="office_address">
                     <span>Office Address</span>
                     <p>34, Kameshwar park, opp. Swaminarayan Mandir, Hirawadi road, Saidpur bogha, Ahmedabad, Gujarat India-382 345</p>
@@ -58,13 +55,10 @@
         </div>
     </div>
 
-
     <div id="footer3">
         <span>Our Payment methods</span>
         <div id="payment">
-            <img src="http://localhost/php/medicine_website/user_panel/footer/g_pay.png" alt="">
-            <img src="http://localhost/php/medicine_website/user_panel/footer/phonepe.png" alt="">
-            <img id="paytm" src="http://localhost/php/medicine_website/user_panel/footer/paytm.png" alt="">
+            <img src="http://localhost/php/medicine_website/user_panel/footer/razorpay.png" alt="">
             <img id="cash" src="http://localhost/php/medicine_website/user_panel/footer/cash.png" alt="">
         </div>
     </div>
