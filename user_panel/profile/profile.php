@@ -215,7 +215,7 @@
                                     <div class="row mb-4">
                                         <div class="col-md-6">
                                             <label class="form-label">City:</label>
-                                            <input type="text" name="city" value="<?php echo unserialize($row["address"])["city"]; ?>" class="form-control" placeholder="Ahmedabar" />
+                                            <input type="text" name="city" value="<?php echo unserialize($row["address"])["city"]; ?>" class="form-control" placeholder="Ahmedabad" />
                                         </div>
                                         <div class="col-md-6">
                                             <label class="form-label">State:</label>

@@ -11,13 +11,11 @@
     border-top: 1px solid rgba(128, 128, 128, 0.2);
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
-
 #main_footer>div {
     width: 85%;
     padding: 1%;
     margin: 0 auto;
-    font-family: "Josefin Sans", sans-serif;
+    font-family: "Rubik", sans-serif;
 }
 
 /* //! Footer-1 */
@@ -40,10 +38,6 @@
 
 #company #logo img {
     width: 100%;
-}
-
-#logo span {
-    color: #0000b3;
 }
 
 #company #description {
@@ -79,12 +73,12 @@
 }
 
 #footer2 #all_links span {
-    font-size: 0.67em;
+    font-size: 0.65em;
     font-weight: 600;
 }
 
 #footer2 #all_links a {
-    font-size: 0.58em;
+    font-size: 0.55em;
     font-weight: 400;
     line-height: 1.5;
 }
@@ -99,7 +93,7 @@
 
 #footer2 #office_address p {
     color: gray;
-    font-size: 0.65em;
+    font-size: 0.6em;
     margin-top: 5px;
 }
 
@@ -108,13 +102,13 @@
 }
 
 #footer2 #cus_care span {
-    font-size: 0.9em;
+    font-size: 0.85em;
     font-weight: 400;
 }
 
 #footer2 #cus_care p {
     color: red;
-    font-size: 1em;
+    font-size: 0.9em;
 }
 
 
@@ -127,7 +121,7 @@
 
 #payment span {
     display: block;
-    font-size: 0.9em;
+    font-size: 0.7em;
 }
 
 #payment {

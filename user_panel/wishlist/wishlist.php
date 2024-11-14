@@ -75,7 +75,7 @@ function displayItems($row)
     <div id='wishlist_products'>
 
         <div id='products'>
-            <a href='http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php?item_code=<?php echo $row['item_code']; ?>' id='box'>
+            <a href='http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php?status=<?php echo $row["status"]; ?>&item_code=<?php echo $row['item_code']; ?>' id='box'>
                 <div id='product_img'>
                     <img src='http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo unserialize($row['item_img'])[0]; ?>' />
                 </div>

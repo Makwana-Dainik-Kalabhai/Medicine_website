@@ -139,7 +139,7 @@ if (isset($_GET["status"])) {
                             <a href="http://localhost/php/medicine_website/user_panel/form/login_form.php" id="buy_btn"><i class="fa-solid fa-shopping-bag"></i>&ensp;Buy Now</a>
                         <?php } ?>
                         <?php if (isset($_SESSION["email"])) { ?>
-                            <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/verify_cart.php" id="buy_btn"><i class="fa-solid fa-shopping-bag"></i>&ensp;Buy Now</a>
+                            <a href="http://localhost/php/medicine_website/user_panel/shop/buy_now/buy_now.php?product=one" id="buy_btn"><i class="fa-solid fa-shopping-bag"></i>&ensp;Buy Now</a>
                         <?php } ?>
 
                         <!-- //* Add to Cart button -->

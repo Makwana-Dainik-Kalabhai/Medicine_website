@@ -54,11 +54,15 @@
                                 <?php if ($prod_qua != 0) { ?>
                                     <form action='update_qua.php' method='post'>
                                         <input type="hidden" name="item_code" value="<?php echo $row["item_code"]; ?>" />
-                                        <button id="minus" name="minus" <?php if (!($row["quantity"] > 1)) { echo "disabled"; } ?>>-</button>
+                                        <button id="minus" name="minus" <?php if (!($row["quantity"] > 1)) {
+                                                                            echo "disabled";
+                                                                        } ?>>-</button>
 
                                         <input type="number" value="<?php echo $row["quantity"]; ?>" name="quantity" id="quantity" readonly />
 
-                                        <button id="plus" name="plus" <?php if (!($row["quantity"] < $prod_qua && $row["quantity"] < 6)) { echo "disabled"; } ?>>+</button>
+                                        <button id="plus" name="plus" <?php if (!($row["quantity"] < $prod_qua && $row["quantity"] < 6)) {
+                                                                            echo "disabled";
+                                                                        } ?>>+</button>
                                     </form>
                                 <?php }
 
@@ -71,7 +75,7 @@
                                 <?php } ?>
                             </div>
 
-                            <a href='http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php?item_code=<?php echo $row['item_code']; ?>' id='box'>
+                            <a href='http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php?status=<?php echo $row["status"]; ?>&item_code=<?php echo $row['item_code']; ?>' id='box'>
                                 <div id="product_details">
                                     <span id="name"><?php echo $row["name"]; ?></span>
 
@@ -92,7 +96,9 @@
                                         $date = strtotime("+4 days");
 
                                         echo "Delivery by " . date("D, M d", $date); ?></span>
-                                    <a href="http://localhost/php/medicine_website/user_panel/cart/remove.php?item_code=<?php echo $row["item_code"]; ?>" id="remove_btn">REMOVE</a>
+
+                                    <a href="http://localhost/php/medicine_website/user_panel/cart/remove.php?item_code=<?php echo $row["item_code"]; ?>" id="remove_btn"><i class='fa-solid fa-trash'></i></a>
+                                    <a href="http://localhost/php/medicine_website/user_panel/shop/buy_now/buy_now.php?product=one" id="buy_btn">Buy Now</a>
                                 </div>
                             </a>
                         </div>
@@ -164,7 +170,7 @@
                         </table>
                     </div>
                     <div id='btns'>
-                        <a href='http://localhost/php/mysql/icecream_website/user/order/buy_cart.php'><i class='fa-solid fa-bag-shopping'></i> Buy Now</a>
+                        <a href="http://localhost/php/medicine_website/user_panel/shop/buy_now/buy_now.php?product=multiple"><i class='fa-solid fa-bag-shopping'></i> Buy Now</a>
                         <a href='empty_cart.php'>Empty Cart</a>
                     </div>
                     <hr>

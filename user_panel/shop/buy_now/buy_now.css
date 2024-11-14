@@ -1,0 +1,126 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    width: 100%;
+}
+
+main {
+    position: relative;
+    width: 100%;
+    font-size: 30px;
+    padding: 5% 0;
+    background-color: #f2f2f2;
+    font-family: "Rubik", sans-serif;
+}
+
+.buy_now_main {
+    width: 70%;
+    padding: 2% 5%;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 5px;
+}
+
+/*! Selected Products */
+.buy_now_main .products {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.buy_now_main #card {
+    position: relative;
+    width: 22%;
+    height: 400px;
+    margin: 1%;
+    padding: 0 1%;
+    border: 0.5px solid rgba(0, 0, 0, 0.16);
+    border-radius: 5px;
+}
+.buy_now_main #card * {
+    text-decoration: none;
+}
+.buy_now_main #card img {
+    height: 40%;
+    padding: 5%;
+    object-fit: contain;
+}
+.buy_now_main #card-body {
+    padding: 2%;
+}
+.buy_now_main .card-title {
+    color: black;
+    font-size: 0.55em;
+}
+.buy_now_main .off_price {
+    color: red;
+    font-size: 0.6em;
+    padding: 0;
+}
+.buy_now_main .price {
+    color: gray;
+    font-size: 0.55em;
+    text-decoration: line-through !important;
+}
+
+/* .buy_now_main .card {
+    width: 22%;
+    margin: 1%;
+    padding: 0 1%;
+}
+.buy_now_main .card img {
+    height: 45%;
+    padding: 1%;
+    object-fit: contain;
+}
+
+.buy_now_main .card-title {
+    font-size: 0.55em;
+}
+.buy_now_main .quantity label {
+    color: rgb(104, 103, 103);
+    font-size: 0.45em;
+    font-weight: 400;
+}
+.buy_now_main .quantity input {
+    width: 40%;
+    margin: auto;
+    font-size: 0.5em;
+} */
+
+/*! User details form */
+.buy_now_main form {
+    margin-top: 7%;
+}
+
+.buy_now_main .head {
+    color: red;
+    font-size: 0.5em;
+    font-weight: 600;
+}
+
+.buy_now_main .sub-head {
+    color: #30819c;
+    font-size: 0.7em;
+    font-weight: 600;
+    margin-top: 5%;
+}
+
+.buy_now_main .form-label {
+    font-size: 0.6em;
+}
+
+.buy_now_main .form-control {
+    font-size: 0.5em;
+}
+
+.buy_now_main .btns button {
+    font-size: 0.55em;
+    color: white;
+    border: none;
+    border-radius: 1px;
+    background-color: #30819c;
+    margin-top: -5px;
+}
