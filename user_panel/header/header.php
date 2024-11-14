@@ -40,12 +40,12 @@
         </div>
         <div id="nav2_btns">
             <div class="btn">
-                <a href="">Products <i class="fa-solid fa-caret-down"></i></a>
+                <a href="http://localhost/php/medicine_website/user_panel/shop/pr_main_page/pr_main_page.php?status=device">Products <i class="fa-solid fa-caret-down"></i></a>
                 <div><?php include("C:/xampp/htdocs/php/medicine_website/user_panel/header/all_menus/products.php"); ?></div>
             </div>
 
             <div class="btn">
-                <a href="">Medicines <i class="fa-solid fa-caret-down"></i></a>
+                <a href="http://localhost/php/medicine_website/user_panel/shop/pr_main_page/pr_main_page.php?status=medicine">Medicines <i class="fa-solid fa-caret-down"></i></a>
                 <div><?php include("C:/xampp/htdocs/php/medicine_website/user_panel/header/all_menus/medicines.php"); ?></div>
             </div>
 

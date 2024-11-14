@@ -1,4 +1,7 @@
-<?php session_start(); ?>
+<?php
+session_start();
+include("C:/xampp/htdocs/php/medicine_website/database.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,35 +42,18 @@
                 }
 
                 foreach ($select as $row) { ?>
-                    <div id="card">
+                    <div class="card">
                         <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php?status=<?php echo $row["status"]; ?>&item_code=<?php echo $row['item_code']; ?>">
                             <img src="http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo unserialize($row["item_img"])[0]; ?>" alt="...">
-                            <div id="card-body">
-                                <h5 class="card-title"><?php echo $row["name"]; ?></h5>
-                                <div>
-                                    <span class="off_price">₹<?php echo $row["offer_price"]; ?></span>
-                                    <span class="price">₹<?php echo $row["price"]; ?></span>
-                                </div>
+                            <div class="card-body p-2">
+                                <h5 class="card-title m-0"><?php echo $row["name"]; ?></h5>
+                                <p class="card-text m-0"><span class="off_price">₹<?php echo $row["offer_price"]; ?></span> <span class="price"><?php if ($row["offer_price"] !== $row["price"]) echo "₹" . $row["price"]; ?></span></p>
                             </div>
                         </a>
-                        <table>
-                            <tr>
-                                <td><span>Quantity</span></td>
-                            </tr>
-                            <tr>
-                                <td><input type="number" class="form-control" value="<?php echo $row["quantity"]; ?>" /></td>
-                            </tr>
-                        </table>
-                        <!-- <div class="row quantity">
-                            <div class="col-md-6">
-                                <label for="quantity" class="form-label">Quantity</label>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <input type="number" class="form-control" value="<?php echo $row["quantity"]; ?>" />
-                                </div>
-                            </div>
-                        </div> -->
+                        <p><?php echo $row["item_code"]; ?></p>
+                        <label class="form-label mx-2 mt-3">Quantity:</label>
+                        <input type="hidden" id="item_code" value="<?php echo $row["item_code"]; ?>" />
+                        <input id="quantity" type="number" name="quantity" value="<?php echo $row["quantity"]; ?>" class="form-control mx-2 mb-3" />
                     </div>
                 <?php } ?>
             </div>

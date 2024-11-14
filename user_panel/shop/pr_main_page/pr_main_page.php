@@ -54,7 +54,7 @@ if (isset($_GET["category"]) && isset($_GET["status"])) {
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Buy Now</title>
+<title>Choose One Now</title>
 <?php include("C:/xampp/htdocs/php/medicine_website/user_panel/links.php"); ?>
 
 <style>
