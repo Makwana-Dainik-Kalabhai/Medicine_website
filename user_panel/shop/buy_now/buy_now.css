@@ -29,6 +29,7 @@ main {
     display: flex;
     flex-wrap: wrap;
 }
+
 .buy_now_main .card {
     position: relative;
     width: 22%;
@@ -37,7 +38,9 @@ main {
     border: 0.5px solid rgba(0, 0, 0, 0.16);
     border-radius: 5px;
 }
+
 .buy_now_main .remove_btn {
+    color: gray;
     position: absolute;
     top: 2%;
     right: 6%;
@@ -45,6 +48,11 @@ main {
     border: 0;
     background-color: transparent;
 }
+
+.buy_now_main .remove_btn:hover {
+    color: black;
+}
+
 .buy_now_main .card a {
     color: black;
     width: 100%;
@@ -52,6 +60,7 @@ main {
 }
 
 .buy_now_main .card img {
+    display: block;
     width: 80%;
     padding: 5%;
     margin: 0 auto;
@@ -69,13 +78,11 @@ main {
     color: red;
     font-size: 0.6em;
 }
-
 .buy_now_main .card .price {
     color: gray;
     font-size: 0.6em;
     text-decoration: line-through;
 }
-
 .buy_now_main .card label {
     color: gray;
     font-size: 0.45em;
@@ -85,6 +92,10 @@ main {
     width: 40%;
     font-size: 0.5em;
 }
+.buy_now_main .card .not-available {
+    color: red;
+    font-size: 0.5em;
+}
 
 
 /*! User details form */
@@ -92,17 +103,11 @@ main {
     margin-top: 7%;
 }
 
-.buy_now_main .head {
-    color: red;
-    font-size: 0.5em;
-    font-weight: 600;
-}
-
 .buy_now_main .sub-head {
     color: #30819c;
     font-size: 0.7em;
     font-weight: 600;
-    margin-top: 5%;
+    margin-top: 3%;
 }
 
 .buy_now_main .form-label {

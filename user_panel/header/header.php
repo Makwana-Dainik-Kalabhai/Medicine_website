@@ -13,6 +13,7 @@
 
 <nav id="fake_main_nav"></nav>
 
+<div id="top_load"></div>
 <nav id="main_nav" class="header-visible">
     <nav id="nav1">
         <div id="logo">

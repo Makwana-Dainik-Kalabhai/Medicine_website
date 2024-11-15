@@ -3,6 +3,15 @@
     padding: 0;
 }
 
+#top_load {
+    display: none;
+    position: fixed;
+    top: 0;
+    height: 5px;
+    background-color: red;
+    z-index: 10;
+}
+
 .header-hidden {
     transform: translateY(-53%);
     transition: transform 0.3s ease;

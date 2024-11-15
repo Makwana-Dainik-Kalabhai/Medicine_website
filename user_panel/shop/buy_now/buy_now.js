@@ -12,17 +12,20 @@ $(document).ready(function() {
             }
         });
     });
-
+    
     $(".card #quantity").change(function() {
         let quantity = $(this).val();
         let item_code = $(this).siblings("#item_code").val();
-
+        
         $.ajax({
             type: "POST",
             url: "buy_now.php",
             data: {
                 quantity: quantity,
                 item_code: item_code
+            },
+            success: function() {
+                location.reload();
             }
         });
     });

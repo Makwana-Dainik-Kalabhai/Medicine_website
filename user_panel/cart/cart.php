@@ -93,7 +93,7 @@
                                 if ($prod_qua > 5) { ?>
                                     <p class="available">Available</p>
                                 <?php } else if ($prod_qua < 5 && $prod_qua > 0) { ?>
-                                    <p class="not-available">Only <?php echo $prod_qua; ?> Quantity available</p>
+                                    <p class="not-available">Only <?php echo $prod_qua; ?> Quantity Available</p>
                                 <?php } else { ?>
                                     <p class="not-available">Not Available</p>
                                 <?php } ?>
