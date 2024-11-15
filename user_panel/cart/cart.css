@@ -12,7 +12,7 @@ body {
 main {
     width: 100%;
     font-size: 25px;
-    padding: 4% 0;  
+    padding: 4% 0;
 }
 
 #cart {
@@ -50,6 +50,10 @@ main {
 }
 
 /* //! All Products */
+#cart .disable {
+    background-color: #ffe6e6;
+}
+
 #products {
     padding: 2% 0;
     width: 100%;
@@ -125,6 +129,7 @@ main {
     width: 80%;
     padding: 3%;
 }
+
 #products #remove_btn {
     position: absolute;
     top: 0;
@@ -135,6 +140,7 @@ main {
     text-decoration: none;
     border-radius: 2px;
 }
+
 #products #remove_btn:hover {
     color: black;
 }
@@ -192,6 +198,7 @@ main {
     color: white;
     background-color: #3ca1c3;
     text-decoration: none;
+    border: none;
     border-radius: 2px;
 }
 

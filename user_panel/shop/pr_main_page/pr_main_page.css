@@ -257,7 +257,6 @@ output {
 #box a {
     display: block;
     width: 100%;
-    height: fit-content;
     color: black;
     text-decoration: none;
 }
@@ -323,6 +322,7 @@ output {
     border: 2px solid #30819c;
     text-align: center;
     border-radius: 3px;
+    background-color: transparent;
 }
 
 /* //!person search pr & if pr not found*/

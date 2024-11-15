@@ -29,8 +29,6 @@ main {
     display: flex;
     flex-wrap: wrap;
 }
-
-
 .buy_now_main .card {
     position: relative;
     width: 22%;
@@ -38,6 +36,14 @@ main {
     padding: 0 1%;
     border: 0.5px solid rgba(0, 0, 0, 0.16);
     border-radius: 5px;
+}
+.buy_now_main .remove_btn {
+    position: absolute;
+    top: 2%;
+    right: 6%;
+    font-size: 0.55em;
+    border: 0;
+    background-color: transparent;
 }
 .buy_now_main .card a {
     color: black;

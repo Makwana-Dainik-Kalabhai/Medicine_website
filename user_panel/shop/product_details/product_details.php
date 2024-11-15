@@ -35,159 +35,157 @@ if (isset($_GET["status"])) {
             $sel = $conn->prepare("SELECT * FROM `products` WHERE item_code='" . $_SESSION["item_code"] . "'");
             $sel->execute();
             $sel = $sel->fetchAll();
+            $row = $sel[0];
 
             $count_img = 0;
-
-
-            foreach ($sel as $row) { ?>
-                <div id="product_img">
-                    <div id="sub_imgs">
-                        <button id="prev"><i class="fa-solid fa-angle-up"></i></button>
-                        <div id="imgs">
-                            <figure class="fig">
-                                <?php foreach (unserialize($row["item_img"]) as $img) { ?>
-                                    <div id="img">
-                                        <img src="http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo $img; ?>" />
-                                    </div>
-                                <?php $count_img++;
-                                } ?>
-                            </figure>
-                        </div>
-                        <button id="next"><i class="fa-solid fa-angle-down"></i></button>
+            ?>
+            <div id="product_img">
+                <div id="sub_imgs">
+                    <button id="prev"><i class="fa-solid fa-angle-up"></i></button>
+                    <div id="imgs">
+                        <figure class="fig">
+                            <?php foreach (unserialize($row["item_img"]) as $img) { ?>
+                                <div id="img">
+                                    <img src="http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo $img; ?>" />
+                                </div>
+                            <?php $count_img++;
+                            } ?>
+                        </figure>
                     </div>
-                    <script>
-                        var martop = 0;
-                        <?php $total_mar = - (($count_img / 2) * 100); ?>
+                    <button id="next"><i class="fa-solid fa-angle-down"></i></button>
+                </div>
+                <script>
+                    var martop = 0;
+                    <?php $total_mar = - (($count_img / 2) * 100); ?>
 
-                        $(document).ready(() => {
-                            <?php
-                            if ($count_img >= 4) { ?>
-                                $("#prev").click(function() {
-                                    if (martop < 0) {
-                                        martop = martop + 100;
-                                        $("#sub_imgs figure").css("margin-top", martop + "%");
-                                    }
-                                });
-                                $("#next").click(function() {
-                                    if (martop > <?php echo $total_mar; ?>) {
-                                        martop = martop - 100;
-                                        $("#sub_imgs figure").css("margin-top", martop + "%");
-                                    }
-                                });
-                            <?php } ?>
-                        });
-                    </script>
-
-                    <div id="main_imgs">
-                        <?php foreach (unserialize($row["item_img"]) as $img) { ?>
-                            <img id="full" src="http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo $img; ?>" />
-                        <?php } ?>
-
-                        <!-- //! Discount btn -->
-                        <?php if ($row["discount"] != 0) { ?>
-                            <span id="discount">-<?php echo $row["discount"]; ?>%</span>
-                        <?php } ?>
-
-                        <!-- //! Like btn -->
-                        <?php if (!isset($_SESSION["email"])) { ?>
-                            <a href="http://localhost/php/medicine_website/user_panel/form/login_form.php" id="like"><i class="fa-solid fa-heart"></i></a>
-                        <?php } ?>
-                        <?php if (isset($_SESSION["email"])) {
-                            $sel_item = $conn->prepare("SELECT * FROM `wishlist`");
-                            $sel_item->execute();
-                            $sel_item = $sel_item->fetchAll();
-
-                            foreach ($sel_item as $row_item) {
-                                if ($_SESSION["item_code"] == $row_item["item_code"]) {
-                                    $con_item = $row_item["item_code"];
+                    $(document).ready(() => {
+                        <?php
+                        if ($count_img >= 4) { ?>
+                            $("#prev").click(function() {
+                                if (martop < 0) {
+                                    martop = martop + 100;
+                                    $("#sub_imgs figure").css("margin-top", martop + "%");
                                 }
-                            }
-
-                            if (isset($con_item)) { ?>
-                                <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/verify_like.php?type=delete" id="like" style="color:red;"><i class="fa-solid fa-heart"></i></a>
-                            <?php }
-                            //
-                            if (!isset($con_item)) { ?>
-                                <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/verify_like.php?type=insert" id="like" style="color:gray;"><i class="fa-solid fa-heart"></i></a>
-                            <?php } ?>
+                            });
+                            $("#next").click(function() {
+                                if (martop > <?php echo $total_mar; ?>) {
+                                    martop = martop - 100;
+                                    $("#sub_imgs figure").css("margin-top", martop + "%");
+                                }
+                            });
                         <?php } ?>
-                    </div>
-                </div>
+                    });
+                </script>
 
-                <div id="product_details">
-                    <span id="name"><?php echo $row["name"]; ?></span>
-                    <hr>
-                    <span id="definition"><?php echo $row["definition"]; ?></span>
+                <div id="main_imgs">
+                    <?php foreach (unserialize($row["item_img"]) as $img) { ?>
+                        <img id="full" src="http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo $img; ?>" />
+                    <?php } ?>
+
+                    <!-- //! Discount btn -->
                     <?php if ($row["discount"] != 0) { ?>
-                        <span id="price">&#8377;<?php echo $row["price"]; ?></span>
-                    <?php } ?>
-                    <span id="off_price">&#8377;<?php echo $row["offer_price"]; ?></span>
-
-
-                    <!-- //* Check that available in stock or not -->
-                    <?php if ($row["quantity"] > 4) { ?>
-                        <span id="available">Available in Stock</span>
-                    <?php } else if ($row["quantity"] < 5) { ?>
-                        <span id="not_available">Only <?php echo $row["quantity"]; ?> Quantity available</span>
-                    <?php } else { ?>
-                        <span id="not_available">Out of Stock</span>
+                        <span id="discount">-<?php echo $row["discount"]; ?>%</span>
                     <?php } ?>
 
-                    <div id="btns">
-                        <!-- //* Buy btns -->
-                        <?php if (!isset($_SESSION["email"])) { ?>
-                            <a href="http://localhost/php/medicine_website/user_panel/form/login_form.php" id="buy_btn"><i class="fa-solid fa-shopping-bag"></i>&ensp;Buy Now</a>
-                        <?php } ?>
-                        <?php if (isset($_SESSION["email"])) { ?>
-                            <a href="http://localhost/php/medicine_website/user_panel/shop/buy_now/buy_now.php?product=one" id="buy_btn"><i class="fa-solid fa-shopping-bag"></i>&ensp;Buy Now</a>
-                        <?php } ?>
+                    <!-- //! Like btn -->
+                    <?php if (!isset($_SESSION["email"])) { ?>
+                        <a href="http://localhost/php/medicine_website/user_panel/form/login_form.php" id="like"><i class="fa-solid fa-heart"></i></a>
+                    <?php } ?>
+                    <?php if (isset($_SESSION["email"])) {
+                        $sel_item = $conn->prepare("SELECT * FROM `wishlist`");
+                        $sel_item->execute();
+                        $sel_item = $sel_item->fetchAll();
 
-                        <!-- //* Add to Cart button -->
-                        <?php if (!isset($_SESSION["email"])) { ?>
-                            <a href="http://localhost/php/medicine_website/user_panel/form/login_form.php" id="add_cart"><i class="fa-solid fa-cart-plus"></i>&ensp;Add to Cart</a>
+                        foreach ($sel_item as $row_item) {
+                            if ($_SESSION["item_code"] == $row_item["item_code"]) {
+                                $con_item = $row_item["item_code"];
+                            }
+                        }
+
+                        if (isset($con_item)) { ?>
+                            <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/verify_like.php?type=delete" id="like" style="color:red;"><i class="fa-solid fa-heart"></i></a>
+                        <?php }
+                        //
+                        if (!isset($con_item)) { ?>
+                            <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/verify_like.php?type=insert" id="like" style="color:gray;"><i class="fa-solid fa-heart"></i></a>
                         <?php } ?>
-                        <?php if (isset($_SESSION["email"])) { ?>
-                            <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/verify_cart.php" id="add_cart"><i class="fa-solid fa-cart-plus"></i>&ensp;Add to Cart</a>
-                        <?php } ?>
-                    </div>
+                    <?php } ?>
                 </div>
-        </div>
-    <?php } ?>
-
-
-    <div id="advance_details">
-        <div>
-            <div id="btns">
-                <?php if ($_SESSION["status"] == "device") { ?>
-                    <button value="description" class="clicked_btn">Description</button>
-                    <button value="features">Features</button>
-                    <button value="specification">Specification</button>
-                <?php } else { ?>
-                    <button value="description" class="clicked_btn">Description</button>
-                    <button value="benefits">Benefits</button>
-                    <button value="how_use">How to Use</button>
-                    <button value="safety">Safety</button>
-                    <button value="other_info">Other Info.</button>
-                    <button value="faqs">FAQs</button>
-                <?php } ?>
             </div>
 
+            <div id="product_details">
+                <span id="name"><?php echo $row["name"]; ?></span>
+                <hr>
+                <span id="definition"><?php echo $row["definition"]; ?></span>
+                <?php if ($row["discount"] != 0) { ?>
+                    <span id="price">&#8377;<?php echo $row["price"]; ?></span>
+                <?php } ?>
+                <span id="off_price">&#8377;<?php echo $row["offer_price"]; ?></span>
 
-            <?php
-            if ($_SESSION["status"] == "device")
-                disProductDetalis();
-            else
-                disMedicineDetalis();
-            ?>
+
+                <!-- //* Check that available in stock or not -->
+                <?php if ($row["quantity"] > 4) { ?>
+                    <span id="available">Available in Stock</span>
+                <?php } else if ($row["quantity"] < 5) { ?>
+                    <span id="not_available">Only <?php echo $row["quantity"]; ?> Quantity available</span>
+                <?php } else { ?>
+                    <span id="not_available">Out of Stock</span>
+                <?php } ?>
+
+                <div id="btns">
+                    <!-- //* Buy btns -->
+                    <?php if (!isset($_SESSION["email"])) { ?>
+                        <a href="http://localhost/php/medicine_website/user_panel/form/login_form.php" id="buy_btn"><i class="fa-solid fa-shopping-bag"></i>&ensp;Buy Now</a>
+                    <?php } ?>
+                    <?php if (isset($_SESSION["email"])) { ?>
+                        <a href="http://localhost/php/medicine_website/user_panel/shop/buy_now/buy_now.php?item_code=<?php echo $row["item_code"]; ?>&product=one" id="buy_btn"><i class="fa-solid fa-shopping-bag"></i>&ensp;Buy Now</a>
+                    <?php } ?>
+
+                    <!-- //* Add to Cart button -->
+                    <?php if (!isset($_SESSION["email"])) { ?>
+                        <a href="http://localhost/php/medicine_website/user_panel/form/login_form.php" id="add_cart"><i class="fa-solid fa-cart-plus"></i>&ensp;Add to Cart</a>
+                    <?php } ?>
+                    <?php if (isset($_SESSION["email"])) { ?>
+                        <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/verify_cart.php" id="add_cart"><i class="fa-solid fa-cart-plus"></i>&ensp;Add to Cart</a>
+                    <?php } ?>
+                </div>
+            </div>
         </div>
-    </div>
-    <!-- //! Similar Products -->
-    <?php include("./similar_product/similar_product.php"); ?>
 
-    <!-- //! Ratings & Reviews -->
-    <div id="ratings_div">
-        <?php include("C:/xampp/htdocs/php/medicine_website/user_panel/shop/product_details/ratings/ratings.php"); ?>
-    </div>
+
+        <div id="advance_details">
+            <div>
+                <div id="btns">
+                    <?php if ($_SESSION["status"] == "device") { ?>
+                        <button value="description" class="clicked_btn">Description</button>
+                        <button value="features">Features</button>
+                        <button value="specification">Specification</button>
+                    <?php } else { ?>
+                        <button value="description" class="clicked_btn">Description</button>
+                        <button value="benefits">Benefits</button>
+                        <button value="how_use">How to Use</button>
+                        <button value="safety">Safety</button>
+                        <button value="other_info">Other Info.</button>
+                        <button value="faqs">FAQs</button>
+                    <?php } ?>
+                </div>
+
+
+                <?php
+                if ($_SESSION["status"] == "device")
+                    disProductDetalis();
+                else
+                    disMedicineDetalis();
+                ?>
+            </div>
+        </div>
+        <!-- //! Similar Products -->
+        <?php include("./similar_product/similar_product.php"); ?>
+
+        <!-- //! Ratings & Reviews -->
+        <div id="ratings_div">
+            <?php include("C:/xampp/htdocs/php/medicine_website/user_panel/shop/product_details/ratings/ratings.php"); ?>
+        </div>
     </main>
 
     <footer>

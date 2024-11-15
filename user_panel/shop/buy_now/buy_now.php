@@ -18,6 +18,24 @@ include("C:/xampp/htdocs/php/medicine_website/database.php");
     <?php include("buy_now.js"); ?>
 </script>
 
+<?php
+if (isset($_POST["item_code"])) {
+    $up = $conn->prepare("DELETE FROM `cart` WHERE `item_code`='" . $_POST["item_code"] . "'");
+    $up->execute();
+}
+if (isset($_POST["quantity"]) && isset($_POST["item_code"])) {
+    $sel = $conn->prepare("SELECT * FROM `products` WHERE item_code='" . $_POST["item_code"] . "'");
+    $sel->execute();
+    $sel = $sel->fetchAll();
+
+    $sel = $sel[0];
+    if ($_POST["quantity"] < 6 && $_POST["quantity"] < $sel["quantity"]) {
+        $up = $conn->prepare("UPDATE `cart` SET `quantity`='" . $_POST["quantity"] . "' WHERE `email`='" . $_SESSION["email"] . "' AND `item_code`='" . $_POST["item_code"] . "'");
+        $up->execute();
+    }
+}
+?>
+
 <body>
     <header>
         <?php include("C:/xampp/htdocs/php/medicine_website/user_panel/header/header.php"); ?>
@@ -32,17 +50,19 @@ include("C:/xampp/htdocs/php/medicine_website/database.php");
             <div class="products">
                 <?php
                 if (isset($_GET["product"]) && $_GET["product"] == "multiple") {
-                    $select = $conn->prepare("SELECT *, cart.quantity FROM `cart` INNER JOIN `products` ON products.item_code=cart.item_code");
+                    $select = $conn->prepare("SELECT *, cart.quantity FROM `cart` INNER JOIN `products` ON products.item_code=cart.item_code WHERE `email`='" . $_SESSION["email"] . "'");
                     $select->execute();
                     $select = $select->fetchAll();
                 } else {
-                    $select = $conn->prepare("SELECT * FROM `products` WHERE item_code='" . $_SESSION["item_code"] . "'");
+                    $select = $conn->prepare("SELECT * FROM `products` WHERE item_code='" . $_GET["item_code"] . "'");
                     $select->execute();
                     $select = $select->fetchAll();
                 }
 
                 foreach ($select as $row) { ?>
                     <div class="card">
+                        <button value="<?php echo $row["item_code"]; ?>" class="remove_btn"><i class='fa-solid fa-trash'></i></button>
+
                         <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php?status=<?php echo $row["status"]; ?>&item_code=<?php echo $row['item_code']; ?>">
                             <img src="http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo unserialize($row["item_img"])[0]; ?>" alt="...">
                             <div class="card-body p-2">
@@ -50,10 +70,9 @@ include("C:/xampp/htdocs/php/medicine_website/database.php");
                                 <p class="card-text m-0"><span class="off_price">₹<?php echo $row["offer_price"]; ?></span> <span class="price"><?php if ($row["offer_price"] !== $row["price"]) echo "₹" . $row["price"]; ?></span></p>
                             </div>
                         </a>
-                        <p><?php echo $row["item_code"]; ?></p>
                         <label class="form-label mx-2 mt-3">Quantity:</label>
                         <input type="hidden" id="item_code" value="<?php echo $row["item_code"]; ?>" />
-                        <input id="quantity" type="number" name="quantity" value="<?php echo $row["quantity"]; ?>" class="form-control mx-2 mb-3" />
+                        <input id="quantity" type="number" name="quantity" value="<?php echo $row["quantity"]; ?>" min="1" class="form-control mx-2 mb-3" />
                     </div>
                 <?php } ?>
             </div>

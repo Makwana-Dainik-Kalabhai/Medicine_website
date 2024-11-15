@@ -1,8 +1,6 @@
 <?php
 session_start();
-
 include("C:/xampp/htdocs/php/medicine_website/database.php");
-
 
 if (isset($_POST["quantity"]) && isset($_POST["item_code"])) {
     if (isset($_POST["minus"])) {

@@ -9,8 +9,7 @@ if (isset($_SESSION["category"])) {
 if (isset($_SESSION["status"])) {
     unset($_SESSION["status"]);
 }
-if(isset($_SESSION["search_input"]))
-{
+if (isset($_SESSION["search_input"])) {
     unset($_SESSION["search_input"]);
 }
 
@@ -142,8 +141,7 @@ if (isset($_GET["category"]) && isset($_GET["status"])) {
                     <div id="categories">
                         <?php
                         $sel_cat = $conn->prepare("SELECT * FROM `products` GROUP BY `category`");
-                        if(isset($_SESSION["status"]))
-                        {
+                        if (isset($_SESSION["status"])) {
                             $sel_cat = $conn->prepare("SELECT * FROM `products` WHERE `status`='" . $_SESSION["status"] . "' GROUP BY `category`");
                         }
                         $sel_cat->execute();
@@ -172,8 +170,7 @@ if (isset($_GET["category"]) && isset($_GET["status"])) {
                         $min_discount = 50;
 
                         $sel = $conn->prepare("SELECT * FROM `products`");
-                        if(isset($_SESSION["status"]))
-                        {
+                        if (isset($_SESSION["status"])) {
                             $sel = $conn->prepare("SELECT * FROM `products` WHERE `status`='" . $_SESSION["status"] . "'");
                         }
                         $sel->execute();
@@ -200,13 +197,13 @@ if (isset($_GET["category"]) && isset($_GET["status"])) {
 
                         <div id="price_range">
                             <span>Price range</span>
-                            <input type="range" name="" min="<?php echo $min_price; ?>" value="<?php echo $max_price; ?>" max="<?php echo $max_price; ?>" oninput="document.getElementById('max_price').value = '&#8377;'+this.value">
+                            <input type="range" min="<?php echo $min_price; ?>" value="<?php echo $max_price; ?>" max="<?php echo $max_price; ?>" oninput="document.getElementById('max_price').value = '&#8377;'+this.value">
                             <output id="min_price">&#8377;<?php echo $min_price; ?></output>
                             <output id="max_price"></output>
                         </div>
                         <div id="discount_range">
                             <span>Discount</span>
-                            <input type="range" name="" min="<?php echo $min_discount; ?>" value="10" max="<?php echo $max_discount; ?>" oninput="document.getElementById('max_discount').value = this.value+'%'">
+                            <input type="range" min="<?php echo $min_discount; ?>" value="<?php echo $min_discount; ?>" max="<?php echo $max_discount; ?>" oninput="document.getElementById('max_discount').value = this.value+'%'">
                             <output id="min_discount"><?php echo $min_discount; ?></output>
                             <output id="max_discount"></output>
                         </div>
@@ -260,13 +257,15 @@ if (isset($_GET["category"]) && isset($_GET["status"])) {
                                 <a href="http://localhost/php/medicine_website/user_panel/form/login_form.php" id="add_cart"><i class="fa-solid fa-cart-plus"></i>&ensp;Add to Cart</a>
                             <?php } ?>
                             <?php if (isset($_SESSION["email"])) { ?>
-                                <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/verify_cart.php?item_code=<?php echo $row["item_code"]; ?>" id="add_cart"><i class="fa-solid fa-cart-plus"></i>&ensp;Add to Cart</a>
+                                <form action="http://localhost/php/medicine_website/user_panel/shop/pr_main_page/add_cart.php" method="post">
+                                    <button name="add_cart" value="<?php echo $row["item_code"]; ?>" id="add_cart"><i class="fa-solid fa-cart-plus"></i>&ensp;Add to Cart</button>
+                                </form>
                             <?php } ?>
                         </div>
                     <?php }
                     //
                     if (isset($pr_not_found)) { ?>
-                        <img id="pr_not_found" src="http://localhost/php/medicine_website/user_panel/header/pr_not_found.jpeg" alt=""/>
+                        <img id="pr_not_found" src="http://localhost/php/medicine_website/user_panel/header/pr_not_found.jpeg" alt="" />
                     <?php
                     } ?>
                 </div>
@@ -278,5 +277,4 @@ if (isset($_GET["category"]) && isset($_GET["status"])) {
         <?php include("C:/xampp/htdocs/php/medicine_website/user_panel/footer/footer.php"); ?>
     </footer>
 </body>
-
 </html>

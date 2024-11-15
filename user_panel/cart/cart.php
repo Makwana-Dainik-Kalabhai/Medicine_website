@@ -13,6 +13,28 @@
     <?php include("cart.css"); ?>
 </style>
 
+<script>
+    $(document).ready(function() {
+        $("#products #product_details button").click(function() {
+            alert("Please! Remove the not available Product");
+            let bool = true,
+                i = 0;
+            setInterval(() => {
+                if (i < 6) {
+                    if (bool) {
+                        $(this).parentsUntil("#product").css("background-color", "#ffcccc");
+                        bool = false;
+                    } else {
+                        $(this).parentsUntil("#product").css("background-color", "white");
+                        bool = true;
+                    }
+                    i++;
+                }
+            }, 200);
+        });
+    });
+</script>
+
 <body>
     <header>
         <?php include("C:/xampp/htdocs/php/medicine_website/user_panel/header/header.php"); ?>
@@ -47,7 +69,9 @@
                         }
                     ?>
 
-                        <div id='products'>
+                        <div id="products" class="<?php if ($row["quantity"] <= 0) {
+                                                        echo "disable";
+                                                    } ?>">
                             <div id='product_img'>
                                 <img src='http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo unserialize($row["item_img"])[0]; ?>'>
 
@@ -60,7 +84,7 @@
 
                                         <input type="number" value="<?php echo $row["quantity"]; ?>" name="quantity" id="quantity" readonly />
 
-                                        <button id="plus" name="plus" <?php if (!($row["quantity"] < $prod_qua && $row["quantity"] < 6)) {
+                                        <button id="plus" name="plus" <?php if (!($row["quantity"] < $prod_qua && $row["quantity"] < 5)) {
                                                                             echo "disabled";
                                                                         } ?>>+</button>
                                     </form>
@@ -97,8 +121,15 @@
 
                                         echo "Delivery by " . date("D, M d", $date); ?></span>
 
+                                    <!-- //Remove Btn -->
                                     <a href="http://localhost/php/medicine_website/user_panel/cart/remove.php?item_code=<?php echo $row["item_code"]; ?>" id="remove_btn"><i class='fa-solid fa-trash'></i></a>
-                                    <a href="http://localhost/php/medicine_website/user_panel/shop/buy_now/buy_now.php?product=one" id="buy_btn">Buy Now</a>
+
+                                    <!-- //Buy Btn -->
+                                    <?php if ($row["quantity"] <= 0) {
+                                        $notAv = $row["item_code"];
+                                    } else { ?>
+                                        <a href="http://localhost/php/medicine_website/user_panel/shop/buy_now/buy_now.php?item_code=<?php echo $row["item_code"]; ?>&product=one" id="buy_btn"><i class='fa-solid fa-bag-shopping'></i> Buy Now</a>
+                                    <?php } ?>
                                 </div>
                             </a>
                         </div>
@@ -137,8 +168,7 @@
                             }
 
                             // Add Tax & Delivery charges into total value
-                            $charges = ($total_val * 0.18);
-                            $pay_val = ($total_val + $charges + 40); ?>
+                            $pay_val = ($total_val + 40); ?>
                         </table>
                     </div>
                     <div id='total_value'>
@@ -151,10 +181,10 @@
                     </div>
                     <div id='charges'>
                         <table>
-                            <tr>
+                            <!-- <tr>
                                 <th>+TAX</th>
                                 <td>&#8377;<?php echo $charges; ?></td>
-                            </tr>
+                            </tr> -->
                             <tr>
                                 <th>+Delivery Charges</th>
                                 <td>&#8377;40</td>
@@ -170,7 +200,11 @@
                         </table>
                     </div>
                     <div id='btns'>
-                        <a href="http://localhost/php/medicine_website/user_panel/shop/buy_now/buy_now.php?product=multiple"><i class='fa-solid fa-bag-shopping'></i> Buy Now</a>
+                        <?php if (isset($notAv)) { ?>
+                            <a href="#" onclick="alert('Please! Remove Not Available Product First');"><i class='fa-solid fa-bag-shopping'></i> Buy Now</a>
+                        <?php } else { ?>
+                            <a href="http://localhost/php/medicine_website/user_panel/shop/buy_now/buy_now.php?product=multiple"><i class='fa-solid fa-bag-shopping'></i> Buy Now</a>
+                        <?php } ?>
                         <a href='empty_cart.php'>Empty Cart</a>
                     </div>
                     <hr>
