@@ -1,11 +1,9 @@
 <?php
-
 include("C:/xampp/htdocs/php/medicine_website/database.php");
 
 if ($_POST["search_val"] != null) {
     $select = $conn->prepare("SELECT * FROM `products` WHERE `category` LIKE '%" . $_POST["search_val"] . "%' GROUP BY `category`");
     $select->execute();
-
     $select = $select->fetchAll();
 
     foreach ($select as $row) { ?>
@@ -15,7 +13,6 @@ if ($_POST["search_val"] != null) {
 
     $select = $conn->prepare("SELECT * FROM `products` WHERE name LIKE '%" . $_POST["search_val"] . "%'");
     $select->execute();
-
     $select = $select->fetchAll();
 
     foreach ($select as $row) { ?>

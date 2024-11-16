@@ -12,7 +12,6 @@ $api_key = "rzp_test_omt6wXyJiqN0lX";
 $api_secret = "7e63a7DNPonx2Rh3WoDMR3fj";
 
 $api = new Api($api_key, $api_secret);
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -126,69 +125,93 @@ if (isset($_POST["quantity"]) && isset($_POST["item_code"])) {
                 <div class="row mb-4">
                     <div class="col-md-6">
                         <label class="form-label">Name:</label>
-                        <input type="text" name="name" id="name" value="<?php echo $row["name"]; ?>" class="form-control py-4" placeholder="User Name" required />
+                        <input type="text" name="name" id="name" value="<?php echo $row["name"]; ?>" class="form-control py-4" placeholder="User Name" />
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">Phone:</label>
                         <input type="text" name="phone" value="<?php if ($row["phone"] != 0) {
                                                                     echo $row["phone"];
-                                                                } ?>" class="form-control py-4" maxlength="14" placeholder="0123456789" required />
+                                                                } ?>" class="form-control py-4" maxlength="14" placeholder="0123456789" />
                     </div>
                 </div>
                 <div class="row mb-5">
                     <div class="col-md-12">
                         <label class="form-label">Email ID:</label>
-                        <input type="email" name="email" value="<?php echo $row["email"]; ?>" class="form-control py-4" placeholder="Email ID" required />
+                        <input type="email" name="email" value="<?php echo $row["email"]; ?>" class="form-control py-4" placeholder="Email ID" />
                     </div>
                 </div>
+
                 <p class="sub-head">Address:</p>
                 <hr />
                 <div class="row mb-4">
                     <div class="col-md-8">
                         <label class="form-label">Street:</label>
-                        <input type="text" name="street" value="<?php echo unserialize($row["address"])["street"]; ?>" class="form-control py-4" placeholder="Apartment Name" required />
+                        <input type="text" name="street" value="<?php echo unserialize($row["address"])["street"]; ?>" class="form-control py-4" placeholder="Apartment Name" />
                     </div>
                     <div class="col-md-4">
                         <label class="form-label">House no.:</label>
-                        <input type="text" name="house_no" value="<?php echo unserialize($row["address"])["house_no"]; ?>" class="form-control py-4" placeholder="D/302" required />
+                        <input type="text" name="house_no" value="<?php echo unserialize($row["address"])["house_no"]; ?>" class="form-control py-4" placeholder="D/302" />
                     </div>
                 </div>
                 <div class="row mb-4">
                     <div class="col-md-8">
                         <label class="form-label">Apartment suite:</label>
-                        <input type="text" name="suite" value="<?php echo unserialize($row["address"])["suite"]; ?>" class="form-control py-4" placeholder="near by Apartment Name" required />
+                        <input type="text" name="suite" value="<?php echo unserialize($row["address"])["suite"]; ?>" class="form-control py-4" placeholder="near by Apartment Name" />
                     </div>
                     <div class="col-md-4">
                         <label class="form-label">Pincode:</label>
-                        <input type="number" name="pincode" value="<?php echo unserialize($row["address"])["pincode"]; ?>" class="form-control py-4" placeholder="382480" required />
+                        <input type="number" name="pincode" value="<?php echo unserialize($row["address"])["pincode"]; ?>" class="form-control py-4" placeholder="382480" />
                     </div>
                 </div>
-                <div class="row mb-4">
+                <div class="row mb-5">
                     <div class="col-md-6">
                         <label class="form-label">City:</label>
-                        <input type="text" name="city" value="<?php echo unserialize($row["address"])["city"]; ?>" class="form-control py-4" placeholder="Ahmedabad" required />
+                        <input type="text" name="city" value="<?php echo unserialize($row["address"])["city"]; ?>" class="form-control py-4" placeholder="Ahmedabad" />
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">State:</label>
-                        <input type="text" name="state" value="<?php echo unserialize($row["address"])["state"]; ?>" class="form-control py-4" placeholder="Gujarat" required />
+                        <input type="text" name="state" value="<?php echo unserialize($row["address"])["state"]; ?>" class="form-control py-4" placeholder="Gujarat" />
                     </div>
                 </div>
-                <input type="hidden" value="<?php echo $total; ?>" name="total" />
+
+                <p class="sub-head">Payment:</p>
+                <hr />
+                <div class="row mb-4">
+                    <div class="col-md-12">
+                        <label class="form-label">Payment Type:</label>
+                        <select name="payment_type" id="payment_type" class="form-select py-3">
+                            <option value="sel"><--Select Payment Type--></option>
+                            <option value="Razorpay">Razorpay</option>
+                            <option value="Cash On Delivery">Cash On Delivery</option>
+                        </select>
+                    </div>
+                </div>
+                <input type="hidden" name="total" value="<?php echo $total; ?>" />
+                <input type="hidden" name="delivery_date" value="<?php echo $date; ?>" />
+                <?php include("gen_order_id.php"); ?>
+                <input type="hidden" name="order_id" value="<?php echo $order_id; ?>" />
+                <hr />
+                <button class="purchase px-5 py-3 mt-5"><i class="fa-solid fa-shopping-bag"></i>&ensp;Purchase</button>
 
                 <?php
-                $sel_items = $conn->prepare("SELECT * FROM `cart` WHERE `email`='" . $_SESSION["email"] . "'");
-                $sel_items->execute();
-                $sel_items = $sel_items->fetchAll();
+                if (isset($_GET["product"]) && $_GET["product"] == "multiple") {
+                    $sel_items = $conn->prepare("SELECT * FROM `cart` WHERE `email`='" . $_SESSION["email"] . "'");
+                    $sel_items->execute();
+                    $sel_items = $sel_items->fetchAll();
+
+                    $items = $sel_items; ?>
+                    <input type="hidden" name="item_code" value="<?php print_r($items); ?>" />
+                <?php } else { ?>
+                    <input type="hidden" name="item_code" value="<?php echo $_SESSION["item_code"]; ?>" />
+                <?php }
 
                 $res = $api->order->create(array(
                     'receipt' => '123',
                     'amount' => $total * 100,
                     'currency' => 'INR'
                 ));
-                if (!empty($res["id"])) {
-                ?>
+                if (!empty($res["id"])) { ?>
 
-                    <hr />
                     <button id="rzp-button1" class="pay_btn px-5 py-3">Pay Now<br />₹<?php echo $total; ?></button>
                     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
@@ -200,7 +223,7 @@ if (isset($_POST["quantity"]) && isset($_POST["item_code"])) {
                         let state = document.querySelector("input[name='state']").value;
                         let pin = document.querySelector("input[name='pincode']").value;
 
-                        let add = (`${hno} ${street} near ${suite}, ${city}, ${state} - ${pin}`);
+                        let add = [hno, street, suite, city, state, pin];
 
                         var options = {
                             "key": "rzp_test_omt6wXyJiqN0lX",
@@ -209,7 +232,7 @@ if (isset($_POST["quantity"]) && isset($_POST["item_code"])) {
                             "name": "healthGroup Pvt. Ltd.",
                             "description": "healthGroup.com is one of the best company that provides best services. We provide best medicines, medical products and healthy life.",
                             "image": "http://localhost/php/medicine_website/user_panel/header/logo1.png",
-                            "order_id": "<?php echo $res["id"]; ?>",
+                            "order_id": "<?php echo $order_id; ?>",
                             "handler": function(response) {
                                 $.ajax({
                                     type: "POST",
@@ -217,8 +240,13 @@ if (isset($_POST["quantity"]) && isset($_POST["item_code"])) {
                                     data: {
                                         name: document.querySelector("input[name='name']").value,
                                         email: document.querySelector("input[name='email']").value,
-                                        contact: document.querySelector("input[name='phone']").value
-
+                                        phone: document.querySelector("input[name='phone']").value,
+                                        address: add,
+                                        items: <?php if (isset($items)) {
+                                                    echo $items;
+                                                } else {
+                                                    echo $_SESSION["item_code"];
+                                                } ?>,
                                     }
                                 });
                             },
