@@ -117,88 +117,134 @@ if (isset($_POST["quantity"]) && isset($_POST["item_code"])) {
             $select->execute();
             $select = $select->fetchAll();
 
-            foreach ($select as $row) {
-                $res = $api->order->create(
-                    array(
-                        "amount" => $total * 100,
-                        "currency" => "INR"
-                    )
-                );
+            foreach ($select as $row) { ?>
 
-                if (!empty($res["id"])) { ?>
-                    <form action="http://localhost/php/payment/vendor/success.php" method="POST">
-                        <h4 class="text-danger">All Fields are required*</h4>
+                <h4 class="text-danger">All Fields are required*</h4>
 
-                        <p class="sub-head">Personal Details:</p>
-                        <hr />
-                        <div class="row mb-4">
-                            <div class="col-md-6">
-                                <label class="form-label">Name:</label>
-                                <input type="text" name="name" value="<?php echo $row["name"]; ?>" class="form-control py-4" placeholder="User Name" required />
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Phone:</label>
-                                <input type="text" name="phone" value="<?php if ($row["phone"] != 0) {
-                                                                            echo $row["phone"];
-                                                                        } ?>" class="form-control py-4" maxlength="14" placeholder="0123456789" required />
-                            </div>
-                        </div>
-                        <div class="row mb-5">
-                            <div class="col-md-12">
-                                <label class="form-label">Email ID:</label>
-                                <input type="email" name="email" value="<?php echo $row["email"]; ?>" class="form-control py-4" placeholder="Email ID" required />
-                            </div>
-                        </div>
-                        <p class="sub-head">Address:</p>
-                        <hr />
-                        <div class="row mb-4">
-                            <div class="col-md-8">
-                                <label class="form-label">Street:</label>
-                                <input type="text" name="street" value="<?php echo unserialize($row["address"])["street"]; ?>" class="form-control py-4" placeholder="Apartment Name" required />
-                            </div>
-                            <div class="col-md-4">
-                                <label class="form-label">House no.:</label>
-                                <input type="text" name="house_no" value="<?php echo unserialize($row["address"])["house_no"]; ?>" class="form-control py-4" placeholder="D/302" required />
-                            </div>
-                        </div>
-                        <div class="row mb-4">
-                            <div class="col-md-8">
-                                <label class="form-label">Apartment suite:</label>
-                                <input type="text" name="suite" value="<?php echo unserialize($row["address"])["suite"]; ?>" class="form-control py-4" placeholder="near by Apartment Name" required />
-                            </div>
-                            <div class="col-md-4">
-                                <label class="form-label">Pincode:</label>
-                                <input type="number" name="pincode" value="<?php echo unserialize($row["address"])["pincode"]; ?>" class="form-control py-4" placeholder="382480" required />
-                            </div>
-                        </div>
-                        <div class="row mb-4">
-                            <div class="col-md-6">
-                                <label class="form-label">City:</label>
-                                <input type="text" name="city" value="<?php echo unserialize($row["address"])["city"]; ?>" class="form-control py-4" placeholder="Ahmedabad" required />
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">State:</label>
-                                <input type="text" name="state" value="<?php echo unserialize($row["address"])["state"]; ?>" class="form-control py-4" placeholder="Gujarat" required />
-                            </div>
-                        </div>
-                        <input type="hidden" value="<?php echo $total; ?>" name="total" />
-                        <script
-                            src="https://checkout.razorpay.com/v1/checkout.js"
-                            data-key="rzp_test_omt6wXyJiqN0lX"
-                            data-amount="<?php echo $_POST["total"]; ?>"
-                            data-currency="INR"
-                            data-order_id="<?php echo $res["id"]; ?>"
-                            data-buttontext="Pay Now"
-                            data-name="healthGroup Pvt. Ltd."
-                            data-description="healthGroup.com is one of the best company that provides best services. We provide best medicines, medical products and healthy life."
-                            data-image="http://localhost/php/medicine_website/user_panel/header/logo1.png"
-                            data-prefill.name="<?php echo $_POST["name"]; ?>"
-                            data-prefill.email="<?php echo $_POST["email"]; ?>"
-                            data-theme.color="#30819c"
-                            id="pay_btn">
-                        </script>
-                        <input type="hidden" custom="Hidden Element" name="hidden" />
-                    </form>
+                <p class="sub-head">Personal Details:</p>
+                <hr />
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <label class="form-label">Name:</label>
+                        <input type="text" name="name" id="name" value="<?php echo $row["name"]; ?>" class="form-control py-4" placeholder="User Name" required />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Phone:</label>
+                        <input type="text" name="phone" value="<?php if ($row["phone"] != 0) {
+                                                                    echo $row["phone"];
+                                                                } ?>" class="form-control py-4" maxlength="14" placeholder="0123456789" required />
+                    </div>
+                </div>
+                <div class="row mb-5">
+                    <div class="col-md-12">
+                        <label class="form-label">Email ID:</label>
+                        <input type="email" name="email" value="<?php echo $row["email"]; ?>" class="form-control py-4" placeholder="Email ID" required />
+                    </div>
+                </div>
+                <p class="sub-head">Address:</p>
+                <hr />
+                <div class="row mb-4">
+                    <div class="col-md-8">
+                        <label class="form-label">Street:</label>
+                        <input type="text" name="street" value="<?php echo unserialize($row["address"])["street"]; ?>" class="form-control py-4" placeholder="Apartment Name" required />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">House no.:</label>
+                        <input type="text" name="house_no" value="<?php echo unserialize($row["address"])["house_no"]; ?>" class="form-control py-4" placeholder="D/302" required />
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-md-8">
+                        <label class="form-label">Apartment suite:</label>
+                        <input type="text" name="suite" value="<?php echo unserialize($row["address"])["suite"]; ?>" class="form-control py-4" placeholder="near by Apartment Name" required />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Pincode:</label>
+                        <input type="number" name="pincode" value="<?php echo unserialize($row["address"])["pincode"]; ?>" class="form-control py-4" placeholder="382480" required />
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <label class="form-label">City:</label>
+                        <input type="text" name="city" value="<?php echo unserialize($row["address"])["city"]; ?>" class="form-control py-4" placeholder="Ahmedabad" required />
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">State:</label>
+                        <input type="text" name="state" value="<?php echo unserialize($row["address"])["state"]; ?>" class="form-control py-4" placeholder="Gujarat" required />
+                    </div>
+                </div>
+                <input type="hidden" value="<?php echo $total; ?>" name="total" />
+
+                <?php
+                $sel_items = $conn->prepare("SELECT * FROM `cart` WHERE `email`='" . $_SESSION["email"] . "'");
+                $sel_items->execute();
+                $sel_items = $sel_items->fetchAll();
+
+                $res = $api->order->create(array(
+                    'receipt' => '123',
+                    'amount' => $total * 100,
+                    'currency' => 'INR'
+                ));
+                if (!empty($res["id"])) {
+                ?>
+
+                    <hr />
+                    <button id="rzp-button1" class="pay_btn px-5 py-3">Pay Now<br />₹<?php echo $total; ?></button>
+                    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+                    <script>
+                        let hno = document.querySelector("input[name='house_no']").value;
+                        let street = document.querySelector("input[name='street']").value;
+                        let suite = document.querySelector("input[name='suite']").value;
+                        let city = document.querySelector("input[name='city']").value;
+                        let state = document.querySelector("input[name='state']").value;
+                        let pin = document.querySelector("input[name='pincode']").value;
+
+                        let add = (`${hno} ${street} near ${suite}, ${city}, ${state} - ${pin}`);
+
+                        var options = {
+                            "key": "rzp_test_omt6wXyJiqN0lX",
+                            "amount": <?php echo $total * 100; ?>,
+                            "currency": "INR",
+                            "name": "healthGroup Pvt. Ltd.",
+                            "description": "healthGroup.com is one of the best company that provides best services. We provide best medicines, medical products and healthy life.",
+                            "image": "http://localhost/php/medicine_website/user_panel/header/logo1.png",
+                            "order_id": "<?php echo $res["id"]; ?>",
+                            "handler": function(response) {
+                                $.ajax({
+                                    type: "POST",
+                                    url: "http://localhost/php/medicine_website/user_panel/shop/buy_now/success.php",
+                                    data: {
+                                        name: document.querySelector("input[name='name']").value,
+                                        email: document.querySelector("input[name='email']").value,
+                                        contact: document.querySelector("input[name='phone']").value
+
+                                    }
+                                });
+                            },
+                            "callback_url": "http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php",
+                            "prefill": {
+                                "name": document.querySelector("input[name='name']").value,
+                                "email": document.querySelector("input[name='email']").value,
+                                "contact": document.querySelector("input[name='phone']").value
+                            },
+                            "notes": {
+                                "address": add
+                            },
+                            "theme": {
+                                "color": "#30819c"
+                            }
+                        };
+                        var rzp1 = new Razorpay(options);
+                        rzp1.on('payment.failed', function(response) {
+                            alert("Transaction Failed");
+                        });
+
+                        document.getElementById('rzp-button1').onclick = function(e) {
+                            rzp1.open();
+                            e.preventDefault();
+                        }
+                    </script>
                 <?php } ?>
             <?php } ?>
         </div>

@@ -55,21 +55,26 @@
 
 
                 <span class="heading">Signup Now</span>
-                <span class="description">Signup to access your orders, book appoitment, get health tips and for many more</span>
 
                 <form action="verify.php" method="post" enctype="multipart/form-data">
                     <label for="sign_name">Name:</label>
-                    <input type="text" name="sign_name" pattern="[A-Za-z ]*" placeholder="Enter your Name" required />
+                    <input type="text" name="sign_name" pattern="[A-Za-z ]*" placeholder="Enter Name" required />
 
                     <label for="sign_email">Email:</label>
-                    <input type="email" name="sign_email" placeholder="Enter your Email ID" required />
-
+                    <input type="email" name="sign_email" placeholder="Enter Email ID" required />
+                    
                     <label for="sign_pass">Password:</label>
                     <div class="pass_div">
-                        <input type="password" name="sign_pass" class="pass" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Enter your Password" required />
+                        <input type="password" name="sign_pass" class="pass" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Enter Password" required />
                         <i class="fa-regular fa-eye"></i><i class="fa-regular fa-eye-slash"></i>
                     </div>
                     <span id="pass_des">Minimum 8 digits, 1 Uppercase, 1 Lowercase letter</span>
+                    
+                    <label for="sign_phone">Phone:</label>
+                    <input type="number" name="sign_phone" maxlength="10" placeholder="Enter Phone no." required />
+
+                    <label for="sign_address">Address:</label>
+                    <textarea name="sign_address" placeholder="Enter Address"></textarea>
 
                     <div class="btns">
                         <input type="submit" value="signUp" name="sign_submit" />

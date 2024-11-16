@@ -10,7 +10,7 @@
 
     #related_Product_main p {
         color: white;
-        font-weight: 600;
+        font-weight: 500;
         line-height: 2;
         margin-left: 1.5%;
     }

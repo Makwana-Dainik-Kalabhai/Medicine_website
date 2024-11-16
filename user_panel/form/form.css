@@ -10,26 +10,24 @@ body {
 main {
     width: 100%;
     padding: 4% 0 7% 0;
+    background-color: #f2f2f2;
 }
-
-@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Mukta:wght@200;300;400;500;600;700;800&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
 
 /* signUp and Login Forms */
 .regi_form {
     display: flex;
     margin: 3% auto;
-    width: 65%;
+    width: 75%;
     background-color: white;
+    overflow: hidden !important;
     border-radius: 5px;
-    box-shadow: 0px 0px 3px 1px gray;
-    overflow: hidden;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
 .regi_form>div {
     width: 100%;
     position: relative;
-    padding: 1% 2%;
+    padding: 2%;
     font-size: 30px;
     font-family: "Mukta", sans-serif;
 }
@@ -38,11 +36,15 @@ main {
 /* //! Left Image */
 .left_img {
     width: 100%;
-    padding: 2%;
+    display: flex;
+    justify-content: center;
 }
 
 .left_img img {
-    width: 100%;
+    display: block;
+    width: 90%;
+    margin: auto;
+    padding: 2%;
 }
 
 
@@ -105,7 +107,13 @@ main {
 
 .regi_form form {
     margin-top: 7%;
-    height: 350px;
+}
+
+.regi_form #sign_form form {
+    height: 550px;
+}
+.regi_form #login_form form {
+    height: 300px;
 }
 
 /* //! Input types */
@@ -117,13 +125,19 @@ main {
     margin-top: 3%;
 }
 
-.regi_form input {
+.regi_form input, .regi_form textarea {
     width: 90%;
     padding: 1% 0;
     font-size: 0.65em;
     outline: none;
+}
+.regi_form input {
+    outline: none;
     border: none;
     border-bottom: 1px solid gray;
+}
+.regi_form textarea {
+    border: 1px solid gray;
 }
 
 .pass_div {
@@ -144,7 +158,7 @@ main {
     font-size: 0.55em;
 }
 
-.regi_form input::placeholder {
+.regi_form input::placeholder, .regi_form textarea::placeholder {
     font-size: 0.9em;
 }
 

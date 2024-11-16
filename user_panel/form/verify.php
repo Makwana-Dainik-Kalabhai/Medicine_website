@@ -19,7 +19,7 @@ if (isset($_POST["sign_submit"])) {
         public $address;
         public $status;
 
-        function setValue($name, $email, $pass)
+        function setValue($name, $email, $pass, $phone, $address)
         {
             $this->profile_img = "";
             $this->name = $name;
@@ -27,8 +27,8 @@ if (isset($_POST["sign_submit"])) {
             $this->age = 0;
             $this->email = $email;
             $this->pass = $pass;
-            $this->phone = 0;
-            $this->address = "";
+            $this->phone = $phone;
+            $this->address = $address;
             $this->status = "Active";
         }
 
@@ -54,7 +54,7 @@ if (isset($_POST["sign_submit"])) {
 
         $U = new User();
         //! Set values of user
-        $U->setValue($_POST["sign_name"], $_POST["sign_email"], $_POST["sign_pass"]);
+        $U->setValue($_POST["sign_name"], $_POST["sign_email"], $_POST["sign_pass"], $_POST["phone"], $_POST["address"]);
 
         //! Insert it into database.
         $U->insertValue();
