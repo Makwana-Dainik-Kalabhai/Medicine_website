@@ -78,20 +78,24 @@ main {
     color: red;
     font-size: 0.6em;
 }
+
 .buy_now_main .card .price {
     color: gray;
     font-size: 0.6em;
     text-decoration: line-through;
 }
+
 .buy_now_main .card label {
     color: gray;
     font-size: 0.45em;
     margin-left: 1%;
 }
+
 .buy_now_main .card input {
     width: 40%;
     font-size: 0.5em;
 }
+
 .buy_now_main .card .not-available {
     color: red;
     font-size: 0.5em;
@@ -114,7 +118,8 @@ main {
     font-size: 0.6em;
 }
 
-.buy_now_main .form-control, .buy_now_main .form-select {
+.buy_now_main .form-control,
+.buy_now_main .form-select {
     font-size: 0.5em;
 }
 
@@ -129,9 +134,11 @@ main {
     background-color: #30819c;
     margin-top: -5px;
 }
+
 .buy_now_main .purchase:hover {
     background-color: #2a7189;
 }
+
 .buy_now_main .pay_btn {
     display: none;
     font-size: 0.55em;

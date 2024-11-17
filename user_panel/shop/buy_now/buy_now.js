@@ -1,3 +1,112 @@
+function validateForm() {
+  //! Phone
+  $("input[name='phone']").keyup(function () {
+    if ($(this).val() == "") {
+      $(this).css("border", "2px solid red");
+      $(this).siblings("b").text("Please! Enter the Phone no.");
+    } //
+    else if ($(this).val().length != 10) {
+      $(this).css("border", "2px solid red");
+      $(this).siblings("b").text("Enter 10 digit number");
+    } //
+    else {
+      $(this).css("border", "none");
+      $(this).siblings("b").text("");
+      phoneErr = false;
+    }
+  });
+  //! Email
+  $("input[name='email']").keyup(function () {
+    if ($(this).val() == "") {
+      $(this).css("border", "2px solid red");
+      $(this).siblings("b").text("Please! Enter the Email");
+    } //
+    // else if ($(this).val() != /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/) {
+    //   $(this).css("border", "2px solid red");
+    //   $(this).siblings("b").text("Enter valid Email");
+    // } //
+    else {
+      $(this).css("border", "none");
+      $(this).siblings("b").text("");
+      emailErr = false;
+    }
+  });
+  //! House no.
+  $("input[name='house_no']").keydown(function () {
+    if ($(this).val() == "") {
+      $(this).css("border", "2px solid red");
+      $(this).siblings("b").text("Please! Enter the House no.");
+    } //
+    else {
+      $(this).css("border", "none");
+      $(this).siblings("b").text("");
+      hnoErr = false;
+    }
+  });
+  //! Street
+  $("input[name='street']").keydown(function () {
+    if ($(this).val() == "") {
+      $(this).css("border", "2px solid red");
+      $(this).siblings("b").text("Please! Enter the Street.");
+    } //
+    else {
+      $(this).css("border", "none");
+      $(this).siblings("b").text("");
+      streetErr = false;
+    }
+  });
+  //! Suite
+  $("input[name='suite']").keydown(function () {
+    if ($(this).val() == "") {
+      $(this).css("border", "2px solid red");
+      $(this).siblings("b").text("Please! Enter the Apartment(Suite)");
+    } //
+    else {
+      $(this).css("border", "none");
+      $(this).siblings("b").text("");
+      suiteErr = false;
+    }
+  });
+  //! City
+  $("input[name='city']").keydown(function () {
+    if ($(this).val() == "") {
+      $(this).css("border", "2px solid red");
+      $(this).siblings("b").text("Please! Enter the City");
+    } //
+    else {
+      $(this).css("border", "none");
+      $(this).siblings("b").text("");
+      cityErr = false;
+    }
+  });
+  //! State
+  $("input[name='state']").keydown(function () {
+    if ($(this).val() == "") {
+      $(this).css("border", "none");
+      $(this).css("border", "2px solid red");
+      $(this).siblings("b").text("Please! Enter the State");
+    } //
+    else {
+      $(this).siblings("b").text("");
+      stateErr = false;
+    }
+  });
+  //! Pincode
+  $("input[name='pincode']").keydown(function () {
+    if ($(this).val() == "") {
+      $(this).css("border", "2px solid red");
+      $(this).siblings("b").text("Please! Enter the Pincode");
+    } //
+    else if ($(this).val().length != 6) {
+      $(this).css("border", "2px solid red");
+      $(this).siblings("b").text("Please! Enter the 6 digit Pincode");
+    } else {
+      $(this).siblings("b").text("");
+      pinErr = false;
+    }
+  });
+}
+
 $(document).ready(function () {
   var items = [];
   var off_price = [];
@@ -69,6 +178,27 @@ $(document).ready(function () {
     });
   });
 
+  //! Validate Form
+  var emailErr = false,
+    phoneErr = false;
+  var hnoErr = false,
+    streetErr = false,
+    suiteErr = false,
+    cityErr = false,
+    stateErr = false,
+    pinErr = false;
+
+  validateForm(
+    emailErr,
+    phoneErr,
+    hnoErr,
+    streetErr,
+    suiteErr,
+    cityErr,
+    stateErr,
+    pinErr
+  );
+
   $(".buy_now_main .purchase").click(function () {
     let order_id = $("input[name='order_id']").val();
 
@@ -92,38 +222,39 @@ $(document).ready(function () {
     let address = [hno, street, suite, city, state, pin];
     let delivery_date = $("input[name='delivery_date']").val();
 
-    if(!(validateForm(name,email,phone,hno,street,suite,city,state,pin))) {
-      return;
+    if (
+      name != "" &&
+      !(emailErr && email == "") &&
+      !(phoneErr && phone == "") &&
+      !(hnoErr && hno == "") &&
+      !(streetErr && street == "") &&
+      !(suiteErr && suite == "") &&
+      !(cityErr && city == "") &&
+      !(stateErr && state == "") &&
+      !(pinErr && pin == "")
+    ) {
+      $.ajax({
+        type: "POST",
+        url: "success.php",
+        data: {
+          order_id: order_id,
+          name: name,
+          email: email,
+          phone: phone,
+          items: items,
+          offer_price: off_price,
+          price: price,
+          quantity: quantity,
+          payment_type: "Cash On Delivery",
+          payment_status: "Pending",
+          total: total,
+          delivery_address: address,
+          delivery_date: delivery_date,
+        },
+        success: function (data) {
+          alert("Order Placed Successfully");
+        },
+      });
     }
-
-    $.ajax({
-      type: "POST",
-      url: "success.php",
-      data: {
-        order_id: order_id,
-        name: name,
-        email: email,
-        phone: phone,
-        items: items,
-        offer_price: off_price,
-        price: price,
-        quantity: quantity,
-        payment_type: "Cash On Delivery",
-        payment_status: "Pending",
-        total: total,
-        delivery_address: address,
-        delivery_date: delivery_date,
-      },
-      success: function (data) {
-        alert("Order Placed Successfully");
-      },
-    });
   });
 });
-
-function validateForm(name,email,phone,hno,street,suite,city,state,pin) {
-  if(name == null) {
-    alert("Null");
-    return false;
-  }
-}

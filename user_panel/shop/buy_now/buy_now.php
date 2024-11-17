@@ -131,60 +131,69 @@ if (isset($_POST["remove_item"])) {
             $select = $select->fetchAll();
 
             foreach ($select as $row) { ?>
-
-                <h4 class="text-danger mt-5">All Fields are required*</h4>
-
-                <p class="sub-head">Personal Details:</p>
-                <hr />
-                <div class="row mb-4">
-                    <div class="col-md-6">
-                        <label class="form-label">Name:</label>
-                        <input type="text" name="name" pattern="[a-zA-Z ]*" id="name" value="<?php echo $row["name"]; ?>" class="form-control py-4" placeholder="User Name" required />
+                <div class="user-details">
+                    <h4 class="text-danger mt-5">All Fields are required*</h4>
+                    <p class="sub-head">Personal Details:</p>
+                    <hr />
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <label class="form-label">Name:</label>
+                            <input type="text" name="name" pattern="[a-zA-Z ]*" title="Please! ENter name" id="name" value="<?php echo $row["name"]; ?>" class="form-control py-4" placeholder="User Name" required />
+                            <b></b>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Phone:</label>
+                            <input type="number" name="phone" minlength="10" maxlength="10" title="Please! Enter 10 digits Phone" value="<?php if ($row["phone"] != 0) {
+                                                                                                                                                echo $row["phone"];
+                                                                                                                                            } ?>" class="form-control py-4" maxlength="14" placeholder="0123456789" required />
+                            <b></b>
+                        </div>
                     </div>
-                    <div class="col-md-6">
-                        <label class="form-label">Phone:</label>
-                        <input type="number" name="phone" pattern="[0-9]{10}" value="<?php if ($row["phone"] != 0) {
-                                                                                            echo $row["phone"];
-                                                                                        } ?>" class="form-control py-4" maxlength="14" placeholder="0123456789" required />
+                    <div class="row mb-5">
+                        <div class="col-md-12">
+                            <label class="form-label">Email ID:</label>
+                            <input type="email" name="email" value="<?php echo $row["email"]; ?>" class="form-control py-4" placeholder="Email ID" required />
+                            <b></b>
+                        </div>
                     </div>
-                </div>
-                <div class="row mb-5">
-                    <div class="col-md-12">
-                        <label class="form-label">Email ID:</label>
-                        <input type="email" name="email" value="<?php echo $row["email"]; ?>" class="form-control py-4" placeholder="Email ID" required />
+                    
+                    <p class="sub-head">Address:</p>
+                    <hr />
+                    <div class="row mb-4">
+                        <div class="col-md-8">
+                            <label class="form-label">Street:</label>
+                            <input type="text" name="street" value="<?php echo unserialize($row["address"])["street"]; ?>" class="form-control py-4" placeholder="Apartment Name" required />
+                            <b></b>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">House no.:</label>
+                            <input type="text" name="house_no" value="<?php echo unserialize($row["address"])["house_no"]; ?>" class="form-control py-4" placeholder="D/302" required />
+                            <b></b>
+                        </div>
                     </div>
-                </div>
-
-                <p class="sub-head">Address:</p>
-                <hr />
-                <div class="row mb-4">
-                    <div class="col-md-8">
-                        <label class="form-label">Street:</label>
-                        <input type="text" name="street" value="<?php echo unserialize($row["address"])["street"]; ?>" class="form-control py-4" placeholder="Apartment Name" required />
+                    <div class="row mb-4">
+                        <div class="col-md-8">
+                            <label class="form-label">Apartment suite:</label>
+                            <input type="text" name="suite" value="<?php echo unserialize($row["address"])["suite"]; ?>" class="form-control py-4" placeholder="near by Apartment Name" required />
+                            <b></b>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Pincode:</label>
+                            <input type="number" name="pincode" value="<?php echo unserialize($row["address"])["pincode"]; ?>" class="form-control py-4" placeholder="382480" required />
+                            <b></b>
+                        </div>
                     </div>
-                    <div class="col-md-4">
-                        <label class="form-label">House no.:</label>
-                        <input type="text" name="house_no" value="<?php echo unserialize($row["address"])["house_no"]; ?>" class="form-control py-4" placeholder="D/302" required />
-                    </div>
-                </div>
-                <div class="row mb-4">
-                    <div class="col-md-8">
-                        <label class="form-label">Apartment suite:</label>
-                        <input type="text" name="suite" value="<?php echo unserialize($row["address"])["suite"]; ?>" class="form-control py-4" placeholder="near by Apartment Name" required />
-                    </div>
-                    <div class="col-md-4">
-                        <label class="form-label">Pincode:</label>
-                        <input type="number" name="pincode" value="<?php echo unserialize($row["address"])["pincode"]; ?>" class="form-control py-4" placeholder="382480" required />
-                    </div>
-                </div>
-                <div class="row mb-5">
-                    <div class="col-md-6">
-                        <label class="form-label">City:</label>
-                        <input type="text" name="city" value="<?php echo unserialize($row["address"])["city"]; ?>" class="form-control py-4" placeholder="Ahmedabad" required />
-                    </div>
-                    <div class="col-md-6">
-                        <label class="form-label">State:</label>
-                        <input type="text" name="state" value="<?php echo unserialize($row["address"])["state"]; ?>" class="form-control py-4" placeholder="Gujarat" required />
+                    <div class="row mb-5">
+                        <div class="col-md-6">
+                            <label class="form-label">City:</label>
+                            <input type="text" name="city" value="<?php echo unserialize($row["address"])["city"]; ?>" class="form-control py-4" placeholder="Ahmedabad" required />
+                            <b></b>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">State:</label>
+                            <input type="text" name="state" value="<?php echo unserialize($row["address"])["state"]; ?>" class="form-control py-4" placeholder="Gujarat" required />
+                            <b></b>
+                        </div>
                     </div>
                 </div>
 
@@ -201,6 +210,7 @@ if (isset($_POST["remove_item"])) {
                     </div>
                 </div>
                 <button class="purchase px-5 py-3 mt-5"><i class="fa-solid fa-shopping-bag"></i>&ensp;Purchase</button>
+
                 <?php
                 if (isset($_GET["product"]) && $_GET["product"] == "multiple") {
                     $sel_items = $conn->prepare("SELECT item_code FROM `cart` WHERE `email`='" . $_SESSION["email"] . "'");
