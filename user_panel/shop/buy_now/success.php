@@ -2,7 +2,7 @@
 session_start();
 include("C:/xampp/htdocs/php/medicine_website/database.php");
 
-if (isset($_POST["payment_type"]) && $_POST["payment_type"] == "Cash On Delivery") {
+if (isset($_POST["payment_type"])) {
 
     class Data
     {
@@ -10,7 +10,10 @@ if (isset($_POST["payment_type"]) && $_POST["payment_type"] == "Cash On Delivery
         public $name;
         public $email;
         public $phone;
-        public $item_code;
+        public $items;
+        public $off_price;
+        public $price;
+        public $quantity;
         public $payment_type;
         public $payment_status;
         public $status;
@@ -24,24 +27,27 @@ if (isset($_POST["payment_type"]) && $_POST["payment_type"] == "Cash On Delivery
             $this->name = $_POST["name"];
             $this->email = $_POST["email"];
             $this->phone = $_POST["phone"];
-            $this->item_code = $_POST["item_code"];
+            $this->items = $_POST["items"];
+            $this->off_price = $_POST["offer_price"];
+            $this->price = $_POST["price"];
+            $this->quantity = $_POST["quantity"];
             $this->payment_type = $_POST["payment_type"];
-            $this->payment_status = "Cash On Delivery";
+            $this->payment_status = $_POST["payment_status"];
             $this->status = "Processing";
             $this->total = $_POST["total"];
             $this->del_address = $_POST["delivery_address"];
-            $this->del_date = $_POST["delivery_date"];
+            $this->del_date = date("Y-m-d 00:00:00.000000", $_POST["delivery_date"]);
         }
 
         function insertValues()
         {
             global $conn;
 
-            if (isset($_POST["item_code"][2])) {
-                $in = $conn->prepare("INSERT INTO `orders` VALUES('" . $this->order_id . "','" . $this->name . "','" . $this->email . "','" . $this->phone . "','" . serialize($this->item_code) . "',NOW(),'Cash On Delivery','Pending','Processing','" . $this->total . "','" . serialize($this->del_address) . "','" . $this->del_date . "')");
+            if (isset($_POST["items"][2])) {
+                $in = $conn->prepare("INSERT INTO `orders` VALUES('" . $this->order_id . "','" . $this->name . "','" . $this->email . "','" . $this->phone . "','" . serialize($this->items) . "','" . serialize($this->off_price) . "','" . serialize($this->price) . "','" . serialize($this->quantity) . "',NOW(),'" . $this->payment_type . "','" . $this->payment_status . "','" . $this->status . "','" . $this->total . "','" . serialize($this->del_address) . "','" . $this->del_date . "')");
                 $in->execute();
             } else {
-                $in = $conn->prepare("INSERT INTO `orders` VALUES('" . $this->order_id . "','" . $this->name . "','" . $this->email . "','" . $this->phone . "','" . $this->item_code . "',NOW(),'Cash On Delivery','Pending','Processing','" . $this->total . "','" . serialize($this->del_address) . "','" . $this->del_date . "')");
+                $in = $conn->prepare("INSERT INTO `orders` VALUES('" . $this->order_id . "','" . $this->name . "','" . $this->email . "','" . $this->phone . "','" . serialize($this->items) . "','" . serialize($this->off_price) . "','" . serialize($this->price) . "','" . serialize($this->quantity) . "',NOW(),'" . $this->payment_type . "','" . $this->payment_status . "','" . $this->status . "','" . $this->total . "','" . serialize($this->del_address) . "','" . $this->del_date . "')");
                 $in->execute();
             }
         }
