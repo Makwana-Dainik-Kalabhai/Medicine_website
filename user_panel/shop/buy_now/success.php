@@ -16,6 +16,7 @@
 
     h1 {
         background-color: transparent;
+        line-height: 3 !important;
     }
 
     #rzp-button1 {
@@ -27,15 +28,18 @@
         border: none;
         border-radius: 3px;
         cursor: pointer;
+        margin-right: 5%;
     }
 
     #rzp-button1:hover {
         background-color: #e60000;
     }
 </style>
+
 <?php
 session_start();
 include("C:/xampp/htdocs/php/medicine_website/database.php");
+include("C:/xampp/htdocs/php/medicine_website/user_panel/links.php");
 
 require "./payment/vendor/autoload.php";
 
@@ -71,10 +75,19 @@ class Data
         $this->name = $_POST["form_name"];
         $this->email = $_POST["form_email"];
         $this->phone = $_POST["form_phone"];
-        $this->items = serialize($_POST["form_items"]);
-        $this->off_price = serialize($_POST["form_off_price"]);
-        $this->price = serialize($_POST["form_price"]);
-        $this->quantity = serialize($_POST["form_quantity"]);
+
+        if (isset($_POST["form_items"][1])) {
+            $this->items = serialize($_POST["form_items"]);
+            $this->off_price = serialize($_POST["form_off_price"]);
+            $this->price = serialize($_POST["form_price"]);
+            $this->quantity = serialize($_POST["form_quantity"]);
+        }//
+        else {
+            $this->items = implode(",", $_POST["form_items"]);
+            $this->off_price = implode(",", $_POST["form_off_price"]);
+            $this->price = implode(",", $_POST["form_price"]);
+            $this->quantity = implode(",", $_POST["form_quantity"]);
+        }
         $this->payment_type = $_POST["form_pay_type"];
         $this->payment_status = $_POST["form_pay_status"];
         $this->status = "Processing";
@@ -95,23 +108,27 @@ class Data
         global $conn;
 
         if (isset($_POST["items"][2])) {
-            $in = $conn->prepare("INSERT INTO `orders` VALUES('" . $this->order_id . "','" . $this->name . "','" . $this->email . "','" . $this->phone . "','" . serialize($this->items) . "','" . serialize($this->off_price) . "','" . serialize($this->price) . "','" . serialize($this->quantity) . "',NOW(),'" . $this->payment_type . "','" . $this->payment_status . "','" . $this->status . "','" . $this->total . "','" . serialize($this->del_address) . "','" . $this->del_date . "')");
+            $in = $conn->prepare("INSERT INTO `orders` VALUES('" . $this->order_id . "','" . $this->name . "','" . $this->email . "','" . $this->phone . "','" . $this->items . "','" . $this->off_price . "','" . $this->price . "','" . $this->quantity . "',NOW(),'" . $this->payment_type . "','" . $this->payment_status . "','" . $this->status . "','" . $this->total . "','" . serialize($this->del_address) . "','" . $this->del_date . "')");
             $in->execute();
         } else {
-            $in = $conn->prepare("INSERT INTO `orders` VALUES('" . $this->order_id . "','" . $this->name . "','" . $this->email . "','" . $this->phone . "','" . serialize($this->items) . "','" . serialize($this->off_price) . "','" . serialize($this->price) . "','" . serialize($this->quantity) . "',NOW(),'" . $this->payment_type . "','" . $this->payment_status . "','" . $this->status . "','" . $this->total . "','" . serialize($this->del_address) . "','" . $this->del_date . "')");
+            $in = $conn->prepare("INSERT INTO `orders` VALUES('" . $this->order_id . "','" . $this->name . "','" . $this->email . "','" . $this->phone . "','" . $this->items . "','" . $this->off_price . "','" . $this->price . "','" . $this->quantity . "',NOW(),'" . $this->payment_type . "','" . $this->payment_status . "','" . $this->status . "','" . $this->total . "','" . serialize($this->del_address) . "','" . $this->del_date . "')");
             $in->execute();
         }
-        header("Refresh:0; url=http://localhost/php/medicine_website/user_panel/orders/orders.php");
     }
 }
 
-if (isset($_POST["pay_now"]) && $_POST["pay_now"]=="purchase") {
+if (isset($_POST["pay_now"]) && $_POST["pay_now"] == "purchase") {
     $data = new Data();
     $data->setValues();
-    $data->insertValues();
+    $data->insertValues(); ?>
+    <script>
+        window.location.href = "http://localhost/php/medicine_website/user_panel/orders/orders.php";
+        alert("Order Placed Successfully");
+    </script>
+    <?php
 }
 
-if (isset($_POST["pay_now"]) && $_POST["pay_now"]=="razorpay") {
+if (isset($_POST["pay_now"]) && $_POST["pay_now"] == "razorpay") {
     global $api;
     $data = new Data();
     $data->setValues();
@@ -126,7 +143,7 @@ if (isset($_POST["pay_now"]) && $_POST["pay_now"]=="razorpay") {
     if (!empty($res["id"])) { ?>
         <div id="pay_now">
             <h1>Confirm Payment?</h1>
-            <button id="rzp-button1" class="pay_btn px-5 py-3">Pay Now<br />₹<?php echo $data->total; ?></button>
+            <button id="rzp-button1">Pay Now<br />₹<?php echo $data->total; ?></button>
         </div>
         <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
@@ -140,14 +157,14 @@ if (isset($_POST["pay_now"]) && $_POST["pay_now"]=="razorpay") {
                 "image": "http://localhost/php/medicine_website/user_panel/header/logo1.png",
                 "order_id": "<?php echo $res["id"]; ?>",
                 "handler": function(response) {
-                    alert("Order Placed Successfully");
                     <?php $data->insertValues(); ?>
+                    window.location.href = "http://localhost/php/medicine_website/user_panel/orders/orders.php";
+                    alert("Order Placed Successfully");
                 },
-                "callback_url": "http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php",
                 "prefill": {
-                    "name": "<?php echo $_POST["form_name"]; ?>",
-                    "email": "<?php echo $_POST["form_email"]; ?>",
-                    "contact": "<?php echo $_POST["form_phone"]; ?>",
+                    "name": "<?php echo $data->name; ?>",
+                    "email": "<?php echo $data->email; ?>",
+                    "contact": <?php echo $data->phone; ?>,
                 },
                 "notes": {
                     "address": "<?php echo $address; ?>"

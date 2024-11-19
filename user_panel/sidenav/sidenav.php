@@ -34,16 +34,26 @@ if (isset($_SESSION["email"])) {
 
     $sel_like = $conn->prepare("SELECT * FROM `wishlist` WHERE `email`='" . $_SESSION["email"] . "'");
     $sel_like->execute();
-
+    $sel_like = $sel_like->fetchAll();
+    
     foreach ($sel_like as $row) {
         $like_count++;
     }
-
+    
     $sel_cart = $conn->prepare("SELECT * FROM `cart` WHERE `email`='" . $_SESSION["email"] . "'");
     $sel_cart->execute();
+    $sel_cart = $sel_cart->fetchAll();
 
     foreach ($sel_cart as $row) {
         $cart_count++;
+    }
+
+    $sel_order = $conn->prepare("SELECT * FROM `orders` WHERE `email`='" . $_SESSION["email"] . "'");
+    $sel_order->execute();
+    $sel_order = $sel_order->fetchAll();
+
+    foreach ($sel_order as $row) {
+        $order_count++;
     }
 } ?>
 
@@ -84,8 +94,8 @@ if (!isset($_SESSION["email"])) { ?>
     <a href="http://localhost/php/medicine_website/user_panel/form/login_form.php"><i class="fa-solid fa-bag-shopping"></i>&ensp;My Orders</a>
 <?php }
 
-if (isset($_SESSION["email"])) { ?>
-    <a href=""><i class="fa-solid fa-bag-shopping"></i>&ensp;My Orders
+if (isset($_SESSION["email"]) && $order_count>0) { ?>
+    <a href="http://localhost/php/medicine_website/user_panel/orders/orders.php"><i class="fa-solid fa-bag-shopping"></i>&ensp;My Orders
         <?php if ($order_count != 0) { ?>
             <span class="count"><?php echo $order_count; ?></span>
         <?php } ?>

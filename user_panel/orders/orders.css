@@ -1,0 +1,146 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    width: 100%;
+}
+
+main {
+    width: 100%;
+    font-size: 30px;
+    padding: 4% 0;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: gray;
+    border-radius: 25px;
+}
+
+/* Wishlist main div */
+#order {
+    width: 70%;
+    margin: 3% auto;
+}
+
+/* //!Wishlist Header */
+#order_header {
+    margin: 0.1% 0;
+    border-radius: 5px;
+    background-color: white;
+}
+
+#order_header h1 {
+    color: #1e5162;
+    font-size: 0.8em;
+}
+#order_header h1 span {
+    padding: 0 1%;
+    background-color: #f2f2f2;
+    border-radius: 10px;
+}
+
+/* //! Filters */
+#order #filters {
+    display: flex;
+    justify-content: space-between;
+}
+#order #filters #btns{
+    display: flex;
+    justify-content: space-between;
+    width: 35%;
+    padding: 0.6% 0.7%;
+    margin-top: 2%;
+    background-color: #3ca1c3;
+    border: 1px solid black;
+    border-radius: 7px;
+}
+#filters #btns button {
+    color: white;
+    width: 100%;
+    font-size: 0.55em;
+    font-weight: 700;
+    padding: 0.3% 1%;
+    border: none;
+    border-radius: 5px;
+    background-color: transparent;
+}
+#filters #btns button.active {
+    color: black;
+    background-color: white;
+}
+#order #filters select {
+    color: white;
+    width: fit-content;
+    font-size: 0.55em;
+    font-weight: 700;
+    padding: 0 1%;
+    margin-top: 2%;
+    background-color: #3ca1c3;
+    border-radius: 7px;
+}
+#order #filters select option {
+    color: black;
+    background-color: #f2f2f2;
+}
+
+/* //! All Orders */
+#orders {
+    margin-top: 4%;
+    border-radius: 7px;
+    border: 1px solid gray;
+    overflow: hidden;
+}
+#orders #order_details {
+    padding: 1% 0;
+    background-color: rgba(242, 242, 242, 0.75);
+    border-bottom: 1px solid gray;
+}
+#orders #order_details .row {
+    line-height: 1;
+    padding: 0 8%;
+}
+#orders #order_details label {
+    color: gray;
+    font-size: 0.5em;
+}
+#orders #order_details span {
+    font-size: 0.55em;
+    font-weight: 600;
+}
+#orders #order_details a {
+    font-size: 0.55em;
+    font-weight: 600;
+}
+
+/* //** Order Items */
+#orders #items {
+    background-color: #fff;
+}
+#orders #items .box {
+    display: flex;
+    padding: 3% 7%;
+    border-bottom: 1px solid #cccccc;
+}
+#orders .box .item_details {
+    margin-left: 5%;
+}
+#orders .box .item_details #name {
+    font-size: 0.7em;
+    font-weight: 600;
+}
+#orders .item_img {
+    width: 13%;
+    padding: 1%;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+}
+#orders .item_img img {
+    width: 100%;
+}

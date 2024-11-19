@@ -45,7 +45,6 @@
                     displayItems($row);
                 } ?>
             </div>
-            </div>
         <?php }
 
 

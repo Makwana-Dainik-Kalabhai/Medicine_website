@@ -21,7 +21,7 @@ include("C:/xampp/htdocs/php/medicine_website/database.php");
 
 <?php
 if (isset($_POST["remove_item"])) {
-    $up = $conn->prepare("DELETE FROM `cart` WHERE `item_code`='" . $_POST["item_code"] . "'");
+    $up = $conn->prepare("DELETE FROM `cart` WHERE `item_code`='" . $_POST["item_code"] . "' AND `email`='".$_SESSION["email"]."'");
     $up->execute();
 }
 ?>
