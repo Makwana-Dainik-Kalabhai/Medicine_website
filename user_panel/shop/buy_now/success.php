@@ -81,7 +81,7 @@ class Data
             $this->off_price = serialize($_POST["form_off_price"]);
             $this->price = serialize($_POST["form_price"]);
             $this->quantity = serialize($_POST["form_quantity"]);
-        }//
+        } //
         else {
             $this->items = implode(",", $_POST["form_items"]);
             $this->off_price = implode(",", $_POST["form_off_price"]);
@@ -106,13 +106,41 @@ class Data
     function insertValues()
     {
         global $conn;
-
         if (isset($_POST["items"][2])) {
-            $in = $conn->prepare("INSERT INTO `orders` VALUES('" . $this->order_id . "','" . $this->name . "','" . $this->email . "','" . $this->phone . "','" . $this->items . "','" . $this->off_price . "','" . $this->price . "','" . $this->quantity . "',NOW(),'" . $this->payment_type . "','" . $this->payment_status . "','" . $this->status . "','" . $this->total . "','" . serialize($this->del_address) . "','" . $this->del_date . "')");
+            $in = $conn->prepare("INSERT INTO `orders` VALUES('" . $this->order_id . "','" . $this->name . "','" . $this->email . "','" . $this->phone . "','" . $this->items . "','" . $this->off_price . "','" . $this->price . "','" . $this->quantity . "',NOW(),'" . $this->payment_type . "','" . $this->payment_status . "','" . $this->status . "','" . $this->total . "','" . serialize($this->del_address) . "','" . $this->del_date . "','Your Order is Processing for Shipping')");
             $in->execute();
         } else {
-            $in = $conn->prepare("INSERT INTO `orders` VALUES('" . $this->order_id . "','" . $this->name . "','" . $this->email . "','" . $this->phone . "','" . $this->items . "','" . $this->off_price . "','" . $this->price . "','" . $this->quantity . "',NOW(),'" . $this->payment_type . "','" . $this->payment_status . "','" . $this->status . "','" . $this->total . "','" . serialize($this->del_address) . "','" . $this->del_date . "')");
+            $in = $conn->prepare("INSERT INTO `orders` VALUES('" . $this->order_id . "','" . $this->name . "','" . $this->email . "','" . $this->phone . "','" . $this->items . "','" . $this->off_price . "','" . $this->price . "','" . $this->quantity . "',NOW(),'" . $this->payment_type . "','" . $this->payment_status . "','" . $this->status . "','" . $this->total . "','" . serialize($this->del_address) . "','" . $this->del_date . "','Your Order is Processing for Shipping')");
             $in->execute();
+        }
+    }
+
+    function updateValues()
+    {
+        global $conn;
+        $sel = $conn->prepare("SELECT * FROM `products`");
+        $sel->execute();
+        $sel = $sel->fetchAll();
+
+        foreach ($sel as $row) {
+            if (isset($_POST["form_items"][1])) {
+                for ($i = 0; $i < count($_POST["form_items"]); $i++) {
+                    if ($row["item_code"] == $_POST["form_items"][$i]) {
+                        $upQua = $row["quantity"] - $_POST["form_quantity"][$i];
+
+                        $up = $conn->prepare("UPDATE `products` SET `quantity`=$upQua");
+                        $up->execute();
+                    }
+                }
+            }
+            else {
+                if ($row["item_code"] == implode(",",$_POST["form_items"])) {
+                    $upQua = $row["quantity"] - implode(",",$_POST["form_quantity"]);
+    
+                    $up = $conn->prepare("UPDATE `products` SET `quantity`=$upQua");
+                    $up->execute();
+                }
+            }
         }
     }
 }
@@ -120,7 +148,8 @@ class Data
 if (isset($_POST["pay_now"]) && $_POST["pay_now"] == "purchase") {
     $data = new Data();
     $data->setValues();
-    $data->insertValues(); ?>
+    $data->insertValues();
+    $data->updateValues(); ?>
     <script>
         window.location.href = "http://localhost/php/medicine_website/user_panel/orders/orders.php";
         alert("Order Placed Successfully");
@@ -157,7 +186,8 @@ if (isset($_POST["pay_now"]) && $_POST["pay_now"] == "razorpay") {
                 "image": "http://localhost/php/medicine_website/user_panel/header/logo1.png",
                 "order_id": "<?php echo $res["id"]; ?>",
                 "handler": function(response) {
-                    <?php $data->insertValues(); ?>
+                    <?php $data->insertValues();
+                    $data->updateValues(); ?>
                     window.location.href = "http://localhost/php/medicine_website/user_panel/orders/orders.php";
                     alert("Order Placed Successfully");
                 },

@@ -21,7 +21,7 @@ include("C:/xampp/htdocs/php/medicine_website/database.php");
 
 <?php
 if (isset($_POST["remove_item"])) {
-    $up = $conn->prepare("DELETE FROM `cart` WHERE `item_code`='" . $_POST["item_code"] . "' AND `email`='".$_SESSION["email"]."'");
+    $up = $conn->prepare("DELETE FROM `cart` WHERE `item_code`='" . $_POST["item_code"] . "' AND `email`='" . $_SESSION["email"] . "'");
     $up->execute();
 }
 ?>
@@ -56,6 +56,7 @@ if (isset($_POST["remove_item"])) {
                     $prod_qua = $row["quantity"];
                     $date = strtotime($row["delivery_date"]);
                     $delivery = date("d M, Y", $date);
+                    $count++;
                 ?>
 
                     <!-- //! All Fields related to Product -->
@@ -65,7 +66,9 @@ if (isset($_POST["remove_item"])) {
                     <input type="hidden" name="total" />
 
                     <div class="card">
-                        <button value="<?php echo $row["item_code"]; ?>" class="remove_btn"><i class='fa-solid fa-trash'></i></button>
+                        <?php if (isset($_GET["product"]) && $_GET["product"] == "multiple") { ?>
+                            <button value="<?php echo $row["item_code"]; ?>" class="remove_btn"><i class='fa-solid fa-trash'></i></button>
+                        <?php } ?>
 
                         <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php?status=<?php echo $row["status"]; ?>&item_code=<?php echo $row['item_code']; ?>">
                             <img src="http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo unserialize($row["item_img"])[0]; ?>" alt="...">
@@ -105,11 +108,14 @@ if (isset($_POST["remove_item"])) {
 
                             $delivery = date("d M, Y", $date);
                         }
+                        else {
+                            $delivery = date("d M, Y", strtotime($row["delivery_date"]));
+                        }
                         if ($prod_qua < 5 && $prod_qua > 0) { ?>
                             <p class="not-available">Only <?php echo $prod_qua; ?> Quantity Available</p>
                         <?php } ?>
                     </div>
-                <?php $count++;
+                <?php
                 } ?>
             </div>
             <h4 class="text-success mt-4">Expected Delivery:&emsp;<?php echo $delivery; ?></h4>

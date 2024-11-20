@@ -5,6 +5,7 @@
 
 body {
     width: 100%;
+    background-color: #f2f2f2 !important;
 }
 
 main {
@@ -25,8 +26,11 @@ main {
 
 /* Wishlist main div */
 #order {
-    width: 70%;
+    width: 75%;
     margin: 3% auto;
+    padding: 2% 4%;
+    background-color: white;
+    border-radius: 10px;
 }
 
 /* //!Wishlist Header */
@@ -47,6 +51,9 @@ main {
 }
 
 /* //! Filters */
+.disabled {
+    background-color: #f2f2f2;
+}
 #order #filters {
     display: flex;
     justify-content: space-between;
@@ -54,11 +61,11 @@ main {
 #order #filters #btns{
     display: flex;
     justify-content: space-between;
-    width: 35%;
-    padding: 0.6% 0.7%;
+    width: 42.5%;
+    padding: 0.4% 0.7%;
     margin-top: 2%;
     background-color: #3ca1c3;
-    border: 1px solid black;
+    border: 1px solid gray;
     border-radius: 7px;
 }
 #filters #btns button {
@@ -66,14 +73,26 @@ main {
     width: 100%;
     font-size: 0.55em;
     font-weight: 700;
-    padding: 0.3% 1%;
+    padding: 0.2% 1%;
     border: none;
     border-radius: 5px;
     background-color: transparent;
 }
+#filters #btns button span {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    line-height: 1.2;
+    padding: 0 2%;
+    background-color: red;
+    border-radius: 50%;
+}
 #filters #btns button.active {
     color: black;
     background-color: white;
+}
+#filters #btns button.active span {
+    color: white;
 }
 #order #filters select {
     color: white;
@@ -98,13 +117,27 @@ main {
     overflow: hidden;
 }
 #orders #order_details {
+    position: relative;
     padding: 1% 0;
-    background-color: rgba(242, 242, 242, 0.75);
+    background-color: #d8ecf3;
     border-bottom: 1px solid gray;
 }
+#orders #order_details>span {
+    position: absolute;
+    left: 2%;
+    top: 50%;
+    transform: translate(0, -50%);
+    font-size: 1.2em !important;
+}
 #orders #order_details .row {
-    line-height: 1;
-    padding: 0 8%;
+    line-height: 0.8;
+    padding: 0 7%;
+}
+#orders #order_details .delivery {
+    color: green;
+    margin-top: 3%;
+    font-size: 0.55em;
+    font-weight: 600;
 }
 #orders #order_details label {
     color: gray;
@@ -118,6 +151,11 @@ main {
     font-size: 0.55em;
     font-weight: 600;
 }
+#orders #order_details #delivery {
+    color: green;
+    font-size: 0.55em;
+    font-weight: 600;
+}
 
 /* //** Order Items */
 #orders #items {
@@ -128,19 +166,61 @@ main {
     padding: 3% 7%;
     border-bottom: 1px solid #cccccc;
 }
-#orders .box .item_details {
-    margin-left: 5%;
-}
-#orders .box .item_details #name {
-    font-size: 0.7em;
-    font-weight: 600;
-}
 #orders .item_img {
-    width: 13%;
+    width: 14%;
     padding: 1%;
     border: 1px solid #cccccc;
     border-radius: 5px;
 }
 #orders .item_img img {
     width: 100%;
+}
+#orders .box .item_details {
+    width: 50%;
+    margin-left: 5%;
+    padding: 0.5% 0;
+    font-size: 0.65em;
+    font-weight: 600;
+}
+#orders .box .item_details .name {
+    display: block;
+    line-height: 1.2;
+}
+#orders .box .item_details .off_price {
+    color: red;
+    line-height: 1.2;
+}
+#orders .box .item_details .price {
+    font-size: 0.95em;
+    color: gray;
+    text-decoration: line-through;
+    line-height: 1.2;
+}
+#orders .box .item_details .description {
+    color: gray;
+    font-size: 0.8em;
+}
+#orders .btns {
+    margin-top: 5%;
+    font-size: 0.75em;
+}
+#orders .btns a {
+    color: black;
+    padding: 1% 2%;
+    margin-right: 2%;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    text-decoration: none;
+    background-color: rgba(242, 242, 242, 0.75);
+}
+#orders .btns a:hover {
+    background-color: #e6e6e6;
+}
+#orders .btns a:first-child {
+    border: 1px solid #ff3333;
+    color: white;
+    background-color: #ff3333;
+}
+#orders .btns a:first-child:hover {
+    background-color: red;
 }

@@ -90,8 +90,9 @@ if (isset($_GET["status"])) {
                     <!-- //! Like btn -->
                     <?php if (!isset($_SESSION["email"])) { ?>
                         <a href="http://localhost/php/medicine_website/user_panel/form/login_form.php" id="like"><i class="fa-solid fa-heart"></i></a>
-                    <?php } ?>
-                    <?php if (isset($_SESSION["email"])) {
+                        <?php }
+
+                    if (isset($_SESSION["email"])) {
                         $sel_item = $conn->prepare("SELECT * FROM `wishlist`");
                         $sel_item->execute();
                         $sel_item = $sel_item->fetchAll();
@@ -108,7 +109,10 @@ if (isset($_GET["status"])) {
                         //
                         if (!isset($con_item)) { ?>
                             <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/verify_like.php?type=insert" id="like" style="color:gray;"><i class="fa-solid fa-heart"></i></a>
-                        <?php } ?>
+                    <?php }
+                    }
+                    if (isset($_SESSION["status"]) && $_SESSION["status"]=="medicine") { ?>
+                    <span id="expiry">Expiry:&ensp;<?php echo $row["expiry"]; ?></span>
                     <?php } ?>
                 </div>
             </div>
@@ -137,7 +141,7 @@ if (isset($_GET["status"])) {
                     <?php if (!isset($_SESSION["email"])) { ?>
                         <a href="http://localhost/php/medicine_website/user_panel/form/login_form.php" id="buy_btn"><i class="fa-solid fa-shopping-bag"></i>&ensp;Buy Now</a>
                     <?php } ?>
-                    <?php if (isset($_SESSION["email"])) { ?>
+                    <?php if (isset($_SESSION["email"]) && $row["quantity"] > 0) { ?>
                         <a href="http://localhost/php/medicine_website/user_panel/shop/buy_now/buy_now.php?item_code=<?php echo $row["item_code"]; ?>&product=one" id="buy_btn"><i class="fa-solid fa-shopping-bag"></i>&ensp;Buy Now</a>
                     <?php } ?>
 
