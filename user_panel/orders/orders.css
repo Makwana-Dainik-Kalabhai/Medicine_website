@@ -44,6 +44,7 @@ main {
     color: #1e5162;
     font-size: 0.8em;
 }
+
 #order_header h1 span {
     padding: 0 1%;
     background-color: #f2f2f2;
@@ -54,11 +55,13 @@ main {
 .disabled {
     background-color: #f2f2f2;
 }
+
 #order #filters {
     display: flex;
     justify-content: space-between;
 }
-#order #filters #btns{
+
+#order #filters #btns {
     display: flex;
     justify-content: space-between;
     width: 42.5%;
@@ -68,6 +71,7 @@ main {
     border: 1px solid gray;
     border-radius: 7px;
 }
+
 #filters #btns button {
     color: white;
     width: 100%;
@@ -78,6 +82,7 @@ main {
     border-radius: 5px;
     background-color: transparent;
 }
+
 #filters #btns button span {
     display: inline-block;
     width: 20px;
@@ -87,13 +92,16 @@ main {
     background-color: red;
     border-radius: 50%;
 }
+
 #filters #btns button.active {
     color: black;
     background-color: white;
 }
+
 #filters #btns button.active span {
     color: white;
 }
+
 #order #filters select {
     color: white;
     width: fit-content;
@@ -104,9 +112,43 @@ main {
     background-color: #3ca1c3;
     border-radius: 7px;
 }
+
 #order #filters select option {
     color: black;
     background-color: #f2f2f2;
+}
+
+
+/* //! Order Cancellation Form */
+#order #cancel_form {
+    display: none;
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    padding: 1.5% 3%;
+    border-radius: 7px;
+    background-color: white;
+    z-index: 7;
+}
+
+#order #cancel_form h2 {
+    font-size: 1em;
+}
+
+#order #cancel_form button {
+    font-size: 0.7em;
+    font-weight: 600;
+    padding: 0.2% 5%;
+    color: white;
+    background-color: #ff3333;
+    border: none;
+    border-radius: 4px;
+    margin-right: 1%;
+}
+
+#order #cancel_form button:hover {
+    background-color: #e60000;
 }
 
 /* //! All Orders */
@@ -116,111 +158,173 @@ main {
     border: 1px solid gray;
     overflow: hidden;
 }
+
 #orders #order_details {
     position: relative;
     padding: 1% 0;
     background-color: #d8ecf3;
     border-bottom: 1px solid gray;
 }
-#orders #order_details>span {
+
+#orders #order_details #order_no {
     position: absolute;
     left: 2%;
     top: 50%;
     transform: translate(0, -50%);
     font-size: 1.2em !important;
 }
+
 #orders #order_details .row {
     line-height: 0.8;
-    padding: 0 7%;
-}
-#orders #order_details .delivery {
-    color: green;
-    margin-top: 3%;
-    font-size: 0.55em;
+    margin-left: 7%;
     font-weight: 600;
 }
+
+#orders #order_details #invoice {
+    font-size: 0.55em;
+}
+
+#orders #order_details .delivery {
+    color: green;
+    font-size: 0.55em;
+}
+
+/** Cancel Btn */
+#orders #order_details .cancel {
+    font-size: 0.55em;
+}
+
+#orders #order_details .cancel_btn {
+    color: black;
+    padding: 1.5% 2%;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    background-color: rgba(242, 242, 242, 1);
+}
+
+#orders #order_details .cancel_btn:hover {
+    background-color: #e6e6e6;
+}
+
 #orders #order_details label {
     color: gray;
     font-size: 0.5em;
 }
+
 #orders #order_details span {
     font-size: 0.55em;
-    font-weight: 600;
-}
-#orders #order_details a {
-    font-size: 0.55em;
-    font-weight: 600;
-}
-#orders #order_details #delivery {
-    color: green;
-    font-size: 0.55em;
-    font-weight: 600;
 }
 
-/* //** Order Items */
+/*? Order Items */
 #orders #items {
     background-color: #fff;
 }
+
 #orders #items .box {
     display: flex;
     padding: 3% 7%;
     border-bottom: 1px solid #cccccc;
 }
+
 #orders .item_img {
-    width: 14%;
-    padding: 1%;
+    position: relative;
+    width: 15%;
+    padding: 1.5%;
     border: 1px solid #cccccc;
     border-radius: 5px;
+    background-color: white;
 }
+
+#orders .item_img #discount {
+    display: grid;
+    place-items: center;
+    min-width: 25px;
+    min-height: 25px;
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    padding: 1%;
+    color: white;
+    background-color: red;
+    font-size: 0.53em;
+    font-weight: 600;
+    border-radius: 50%;
+}
+
 #orders .item_img img {
     width: 100%;
 }
+
 #orders .box .item_details {
-    width: 50%;
-    margin-left: 5%;
+    width: 60%;
+    margin-left: 7%;
     padding: 0.5% 0;
     font-size: 0.65em;
     font-weight: 600;
 }
+
 #orders .box .item_details .name {
     display: block;
     line-height: 1.2;
 }
+
 #orders .box .item_details .off_price {
     color: red;
     line-height: 1.2;
 }
+
 #orders .box .item_details .price {
     font-size: 0.95em;
     color: gray;
     text-decoration: line-through;
     line-height: 1.2;
 }
+
 #orders .box .item_details .description {
     color: gray;
     font-size: 0.8em;
 }
+
 #orders .btns {
-    margin-top: 5%;
+    margin-top: 3.5%;
     font-size: 0.75em;
 }
+
 #orders .btns a {
     color: black;
-    padding: 1% 2%;
+    padding: 0.7% 2%;
     margin-right: 2%;
     border: 1px solid #cccccc;
     border-radius: 5px;
     text-decoration: none;
     background-color: rgba(242, 242, 242, 0.75);
 }
+
+#orders .btns a:hover .fa-arrows-rotate {
+    transition: all 0.3s linear;
+    transform: rotate(110deg);
+}
+
 #orders .btns a:hover {
     background-color: #e6e6e6;
 }
+
 #orders .btns a:first-child {
     border: 1px solid #ff3333;
     color: white;
     background-color: #ff3333;
 }
+
 #orders .btns a:first-child:hover {
     background-color: red;
+}
+
+#orders .box table {
+    width: 20%;
+    height: fit-content;
+    font-size: 0.5em;
+    margin-top: 2%;
+}
+#orders .box table tr {
+    line-height: 1.8;
 }

@@ -1,11 +1,8 @@
 <?php
 session_start();
 
-session_unset();
-session_destroy();
+unset($_SESSION["email"]);?>
 
-echo "<script>
-        var startpt = ( window.history.length - 4) * -1;
-        window.history.go(startpt);
-        </script>";
-?>
+<script>
+        window.history.go(-1);
+</script>

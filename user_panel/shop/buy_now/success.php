@@ -91,7 +91,13 @@ class Data
         $this->payment_type = $_POST["form_pay_type"];
         $this->payment_status = $_POST["form_pay_status"];
         $this->status = "Processing";
-        $this->total = $_POST["form_total"];
+
+        if($_POST["form_total"]<1000) {
+            $this->total = $_POST["form_total"]+50;
+        }
+        else {
+            $this->total = $_POST["form_total"];
+        }
 
         array_push($this->del_address, $_POST["form_house_no"]);
         array_push($this->del_address, $_POST["form_street"]);
@@ -128,7 +134,7 @@ class Data
                     if ($row["item_code"] == $_POST["form_items"][$i]) {
                         $upQua = $row["quantity"] - $_POST["form_quantity"][$i];
 
-                        $up = $conn->prepare("UPDATE `products` SET `quantity`=$upQua");
+                        $up = $conn->prepare("UPDATE `products` SET `quantity`=$upQua WHERE `item_code`='".$row["item_code"]."'");
                         $up->execute();
                     }
                 }
@@ -137,7 +143,7 @@ class Data
                 if ($row["item_code"] == implode(",",$_POST["form_items"])) {
                     $upQua = $row["quantity"] - implode(",",$_POST["form_quantity"]);
     
-                    $up = $conn->prepare("UPDATE `products` SET `quantity`=$upQua");
+                    $up = $conn->prepare("UPDATE `products` SET `quantity`=$upQua WHERE `item_code`='".$row["item_code"]."'");
                     $up->execute();
                 }
             }

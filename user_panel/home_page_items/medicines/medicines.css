@@ -54,7 +54,6 @@
     top: 18%;
     margin-top: 2%;
     padding: 0 2%;
-    z-index: 2;
 }
 
 
@@ -88,7 +87,7 @@
     right: 3%;
     bottom: 1%;
     font-size: 0.8em;
-    z-index: 6;
+    /* z-index: 1; */
 }
 
 #product_img .fa-heart:hover {

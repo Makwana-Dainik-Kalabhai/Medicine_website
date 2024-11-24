@@ -51,9 +51,12 @@ if (isset($_SESSION["email"])) {
     $sel_order = $conn->prepare("SELECT * FROM `orders` WHERE `email`='" . $_SESSION["email"] . "'");
     $sel_order->execute();
     $sel_order = $sel_order->fetchAll();
+    $order_exist = false;
 
     foreach ($sel_order as $row) {
-        $order_count++;
+        if($row["status"]=="Processing")
+            $order_count++;
+        $order_exist = true;
     }
 } ?>
 
@@ -94,7 +97,7 @@ if (!isset($_SESSION["email"])) { ?>
     <a href="http://localhost/php/medicine_website/user_panel/form/login_form.php"><i class="fa-solid fa-bag-shopping"></i>&ensp;My Orders</a>
 <?php }
 
-if (isset($_SESSION["email"]) && $order_count>0) { ?>
+if (isset($_SESSION["email"]) && $order_exist) { ?>
     <a href="http://localhost/php/medicine_website/user_panel/orders/orders.php"><i class="fa-solid fa-bag-shopping"></i>&ensp;My Orders
         <?php if ($order_count != 0) { ?>
             <span class="count"><?php echo $order_count; ?></span>

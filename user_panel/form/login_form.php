@@ -37,53 +37,51 @@ if ($_SESSION["time"] <= time()) {
                 <img src="http://localhost/php/medicine_website/user_panel/form/image.avif" alt="">
             </div>
 
-            <?php if (!isset($_SESSION["admin_user"])) { ?>
-                <div id="login_form">
+            <div id="login_form">
 
-                    <?php if (isset($_SESSION["form_error"])) { ?>
-                        <div id='form_error'><i class='fa-solid fa-circle-info'></i>
-                            <?php echo $_SESSION["form_error"]; ?>
-                        </div>
-                    <?php } ?>
+                <?php if (isset($_SESSION["form_error"])) { ?>
+                    <div id='form_error'><i class='fa-solid fa-circle-info'></i>
+                        <?php echo $_SESSION["form_error"]; ?>
+                    </div>
+                <?php } ?>
 
-                    <?php if (isset($_SESSION["form_succ"])) {
-                    ?>
-                        <div id='form_succ'>
-                            <?php echo $_SESSION["form_succ"];
-                            ?>
-                            <script>
-                                setTimeout(() => {
-                                    location.href = "http://localhost/php/medicine_website/index.php"
-                                    return;
+                <?php if (isset($_SESSION["form_succ"])) {
+                ?>
+                    <div id='form_succ'>
+                        <?php echo $_SESSION["form_succ"];
+                        ?>
+                        <script>
+                            setTimeout(() => {
+                                history.go(-2);
+                                return;
 
-                                }, 2000);
-                            </script>
-                        </div>
-                    <?php }
-                    ?>
+                            }, 2000);
+                        </script>
+                    </div>
+                <?php }
+                ?>
 
-                    <span class="heading">Login Now</span>
-                    <span class="description">Login now to access your orders, book appoitment, get heath tips and for many more</span>
+                <span class="heading">Login Now</span>
+                <span class="description">Login now to access your orders, book appoitment, get heath tips and for many more</span>
 
-                    <form action="verify.php" method="post" enctype="multipart/form-data">
-                        <label for="login_email">Email:</label>
-                        <input type="email" name="login_email" placeholder="Enter your Email ID" required />
+                <form action="verify.php" method="post" enctype="multipart/form-data">
+                    <label for="login_email">Email:</label>
+                    <input type="email" name="login_email" placeholder="Enter your Email ID" required />
 
-                        <label for="login_pass">Password:</label>
-                        <div class="pass_div">
-                            <input type="password" name="login_pass" class="pass" placeholder="Enter your Password" required />
-                            <i class="fa-regular fa-eye"></i><i class="fa-regular fa-eye-slash"></i>
-                        </div>
-                        <a href="http://localhost/php/medicine_website/user_panel/forgot_pass/forgot_pass.php" id="forget_pass_link">Forget Password?</a>
+                    <label for="login_pass">Password:</label>
+                    <div class="pass_div">
+                        <input type="password" name="login_pass" class="pass" placeholder="Enter your Password" required />
+                        <i class="fa-regular fa-eye"></i><i class="fa-regular fa-eye-slash"></i>
+                    </div>
+                    <a href="http://localhost/php/medicine_website/user_panel/forgot_pass/forgot_pass.php" id="forget_pass_link">Forget Password?</a>
 
-                        <div class="btns">
-                            <input type="submit" value="Login" name="login_submit" />
-                            <input type="reset" value="Reset" />
-                            <a href="http://localhost/php/medicine_website/user_panel/form/sign_form.php">Create an Account</a>
-                        </div>
-                    </form>
-                </div>
-            <?php } ?>
+                    <div class="btns">
+                        <input type="submit" value="Login" name="login_submit" />
+                        <input type="reset" value="Reset" />
+                        <a href="http://localhost/php/medicine_website/user_panel/form/sign_form.php">Create an Account</a>
+                    </div>
+                </form>
+            </div>
         </div>
     </main>
     <footer>

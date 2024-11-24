@@ -27,7 +27,7 @@ include("C:/xampp/htdocs/php/medicine_website/database.php");
 
     <main>
         <?php
-        if ($order_count != 0) { ?>
+        if ($order_exist) { ?>
 
             <div id='order'>
                 <div id='order_header'>
@@ -79,16 +79,24 @@ include("C:/xampp/htdocs/php/medicine_website/database.php");
 
                 <div id="all_orders">
                     <?php
-                    $sel = $conn->prepare("SELECT * FROM `orders` WHERE `email`='" . $_SESSION["email"] . "'");
+                    $sel = $conn->prepare("SELECT * FROM `orders` WHERE `email`='" . $_SESSION["email"] . "' ORDER BY `time`");
                     $sel->execute();
                     $sel = $sel->fetchAll();
                     $i = 1;
 
                     foreach ($sel as $row) {
                         if ($row["status"] == "Processing") { ?>
+                            <!-- //! Cancel Order Form -->
+                            <form id="cancel_form" action="http://localhost/php/medicine_website/user_panel/orders/cancel.php" method="post">
+                                <h2 class="mb-5">Are You sure to Cancel the Order?</h2>
+                                <input type="hidden" name="order_id" value="<?php echo $row["order_id"]; ?>" />
+                                <button name="cancel_yes">Yes</button>
+                                <button name="cancel_no">No</button>
+                            </form>
+
                             <div id="orders">
                                 <div id="order_details">
-                                    <span><?php echo $i; ?></span>
+                                    <span id="order_no"><?php echo $i; ?></span>
                                     <div class="row">
                                         <div class="col-md-2">
                                             <label>Order Placed</label>
@@ -107,7 +115,8 @@ include("C:/xampp/htdocs/php/medicine_website/database.php");
                                         <div class="col-md-2">
                                             <span><?php
                                                     $date = strtotime($row["time"]);
-                                                    echo date("M d, Y", $date); ?></span>
+                                                    echo date("M d, Y", $date); ?>
+                                            </span>
                                         </div>
                                         <div class="col-md-2">
                                             <span>₹<?php echo $row["total_price"]; ?></span>
@@ -115,15 +124,22 @@ include("C:/xampp/htdocs/php/medicine_website/database.php");
                                         <div class="col-md-3">
                                             <span><?php echo $row["name"]; ?></span>
                                         </div>
-                                        <div class="col-md-3">
-                                            <a href="">View Invoice</a>
-                                        </div>
+                                        <?php if ($row["status"] != "Cancelled") { ?>
+                                            <div class="col-md-3">
+                                                <a href="http://localhost/php/medicine_website/user_panel/orders/PDF/genInvoice.php?order_id=<?php echo $row["order_id"]; ?>" id="invoice">View Invoice</a>
+                                            </div>
+                                        <?php } ?>
                                     </div>
-                                    <div class="row">
+                                    <div class="row mt-5">
                                         <div class="col-md-9 delivery">
                                             Expected Delivery:&ensp;<?php
                                                                     $date = strtotime($row["delivery_date"]);
                                                                     echo date("M d, Y", $date); ?>
+                                        </div>
+                                        <div class="col-md-3 cancel">
+                                            <?php if ($row["status"] == "Processing") { ?>
+                                                Cancel Order?&ensp;<button class="cancel_btn"><i class="fa-solid fa-xmark"></i> Cancel</button>
+                                            <?php } ?>
                                         </div>
                                     </div>
                                 </div>
@@ -153,14 +169,14 @@ function displayItems($row)
     global $conn;
     if (str_contains($row["items"], "{") && str_contains($row["items"], ":") && str_contains($row["items"], '"') && str_contains($row["items"], "}")) { ?>
         <?php
-        foreach (unserialize($row["items"]) as $item) { ?>
+        for ($i=0; $i<count(unserialize($row["items"])); $i++) { ?>
             <div class="box">
-                <?php $sel = $conn->prepare("SELECT * FROM `products` WHERE `item_code`=$item");
+                <?php $sel = $conn->prepare("SELECT * FROM `products` WHERE `item_code`='".unserialize($row["items"])[$i]."'");
                 $sel->execute();
                 $sel = $sel->fetchAll();
 
                 foreach ($sel as $r) {
-                    itemDetails($row, $r, $multiple = true);
+                    itemDetails($row, $r, unserialize($row["quantity"])[$i]);
                 } ?>
             </div>
         <?php
@@ -173,21 +189,24 @@ function displayItems($row)
             $sel = $sel->fetchAll();
 
             foreach ($sel as $r) {
-                itemDetails($row, $r, $multiple = false);
+                itemDetails($row, $r, $row["quantity"]);
             } ?>
         </div>
     <?php
     }
 }
 
-function itemDetails($row, $r, $multiple)
+function itemDetails($row, $r, $quantity)
 { ?>
     <div class="item_img">
+        <?php if ($r["discount"] > 0) { ?>
+            <span id="discount">-<?php echo $r["discount"]; ?></span>
+        <?php } ?>
         <img src="http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo unserialize($r["item_img"])[0]; ?>" />
     </div>
     <div class="item_details">
         <span class="name"><?php echo $r["name"]; ?></span>
-        <span class="off_price">₹<?php echo $r["offer_price"]; ?></span>
+        <span class="off_price">₹<?php echo $r["offer_price"]; ?></span>&nbsp;
         <span class="price">₹<?php echo $r["price"]; ?></span>
         <p class="description"><?php echo $row["description"]; ?></p>
         <div class="btns">
@@ -197,10 +216,21 @@ function itemDetails($row, $r, $multiple)
                 <a href="http://localhost/php/medicine_website/user_panel/shop/buy_now/buy_now.php?item_code=<?php echo $r["item_code"]; ?>&product=one"><i class="fa-solid fa-arrows-rotate"></i> Buy it Again</a>
             <?php } ?>
             <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php?item_code=<?php echo $r["item_code"]; ?>&status=<?php echo $r["status"]; ?>"><i class="fa-solid fa-eye"></i> View Item</a>
-            <?php if ($row["status"] != "Cancelled" && !$multiple) { ?>
-                <a href="http://localhost/php/medicine_website/user_panel/orders/cancel.php?order_id=<?php echo $row["order_id"]; ?>"><i class="fa-solid fa-xmark"></i> Cancel</a>
-            <?php } ?>
         </div>
     </div>
+    <table>
+        <tr>
+            <th>Price</th>
+            <td class="text-right">₹<?php echo $r["offer_price"]; ?></td>
+        </tr>
+        <tr>
+            <th>Quantity</th>
+            <td class="text-right"><?php echo $quantity; ?></td>
+        </tr>
+        <tr class="border-top">
+            <th>Sub Total</th>
+            <td class="text-right">₹<?php echo $r["offer_price"] * $quantity; ?></td>
+        </tr>
+    </table>
 <?php }
 ?>

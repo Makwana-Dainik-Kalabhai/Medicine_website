@@ -1,24 +1,38 @@
-<style></style>
 <?php
 session_start();
-include("C:/xampp/htdocs/php/medicine_website/database.php"); ?>
+include("C:/xampp/htdocs/php/medicine_website/database.php");
 
-<form action="" method="post">
-    <input type="hidden" name="order_id" value="<?php echo $_GET["order_id"]; ?>" />
-    <h1>Are you sure to Cancel the Order?</h1>
-    <button name="yes">Yes</button>
-    <button name="no">No</button>
-</form>
+if (isset($_POST["cancel_yes"])) {
+    $cancel = $conn->prepare("UPDATE `orders` SET `status`='Cancelled',`description`='This Order is Cancelled Now.' WHERE `order_id`='" . $_POST["order_id"] . "'");
+    $cancel->execute();
 
-<?php
-if (isset($_POST["yes"])) {
-    $cancel = $conn->prepare("UPDATE `order` SET `status`='Cancelled' WHERE `order_id`='".$_POST["order_id"]."'");
-    $cancel->execute(); ?>
-    <script>alert("Order Cancelled Successfully");</script>
-    <?php header("Refresh:0; url=http://localhost/php/medicine_website/user_panel/orders/orders.php");
+    $sel = $conn->prepare("SELECT * FROM `orders` WHERE `order_id`='" . $_POST["order_id"] . "'");
+    $sel->execute();
+    $sel = $sel->fetchAll();
+
+    foreach ($sel as $row) {
+        if (str_contains($row["items"], "{") && str_contains($row["items"], ":") && str_contains($row["items"], '"') && str_contains($row["items"], "}")) {
+            for ($i = 0; $i < count(unserialize($row["items"])); $i++) {
+                $selPro = $conn->prepare("SELECT * FROM `products` WHERE `item_code`='" . unserialize($row["items"])[$i] . "'");
+                $selPro->execute();
+                $selPro = $selPro->fetchAll();
+
+                foreach ($selPro as $rPro) {
+                    $upQuan = $rPro["quantity"] + unserialize($row["quantity"])[$i];
+                }
+                $upPro = $conn->prepare("UPDATE `products` SET `quantity`=$upQuan WHERE `item_code`='" . unserialize($row["items"])[$i] . "'");
+                $upPro->execute();
+            }
+        }
+    }
+?>
+    <script>
+        alert("Order Cancelled Successfully");
+    </script>
+<?php header("Refresh:0; url=http://localhost/php/medicine_website/user_panel/orders/orders.php");
 }
 
-if (isset($_POST["no"])) {
+if (isset($_POST["cancel_no"])) {
     header("Refresh:0; url=http://localhost/php/medicine_website/user_panel/orders/orders.php");
 }
 ?>

@@ -7,6 +7,12 @@ $(document).ready(function() {
         $(this).css("background-color","white");
     });
 
+    // ! Cancel the Order
+    $("#orders .cancel_btn").click(function() {
+        $("#order #cancel_form").css("display","block");
+        $(".brightness").css("display","block");
+    })
+
     $("#filters button").click(function() {
         let btn = $(this).val();
         let time = $("#time_period").val();

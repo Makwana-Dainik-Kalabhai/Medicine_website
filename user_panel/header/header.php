@@ -10,7 +10,7 @@
     <?php include("C:/xampp/htdocs/php/medicine_website/user_panel/header/header.js"); ?>
 </script>
 
-
+<div class="brightness"></div>
 <nav id="fake_main_nav"></nav>
 
 <div id="top_load"></div>

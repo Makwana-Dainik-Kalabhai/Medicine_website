@@ -44,7 +44,7 @@
                         ?>
                         <script>
                             setTimeout(() => {
-                                location.href = "http://localhost/php/medicine_website/index.php"
+                                history.go(-2);
                                 return;
 
                             }, 2000);

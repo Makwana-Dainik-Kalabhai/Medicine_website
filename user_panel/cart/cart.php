@@ -47,7 +47,7 @@
                 <div id="product">
                     <div id='cart_header'>
                         <h1>My Cart(<?php echo $cart_count; ?>)</h1>
-                        <span>You can Order maximum 5 products.</span>
+                        <span>You can Order maximum 5 Quantities.</span>
                     </div>
 
                     <?php
@@ -90,7 +90,7 @@
                                     </form>
                                 <?php }
 
-                                if ($prod_qua > 5) { ?>
+                                if ($prod_qua > 4) { ?>
                                     <p class="available">Available</p>
                                 <?php } else if ($prod_qua < 5 && $prod_qua > 0) { ?>
                                     <p class="not-available">Only <?php echo $prod_qua; ?> Quantity Available</p>
@@ -117,7 +117,7 @@
                                     <span id="delivery">
                                         <?php
                                         date_default_timezone_set('Asia/Calcutta');
-                                        $date = strtotime("+4 days");
+                                        $date = strtotime($row["delivery_date"]);
 
                                         echo "Delivery by " . date("D, M d", $date); ?></span>
 
@@ -165,10 +165,7 @@
                                         <td>&#8377;<?php echo $mul_qua_price; ?></td>
                                     </tr>
                             <?php }
-                            }
-
-                            // Add Tax & Delivery charges into total value
-                            $pay_val = ($total_val + 40); ?>
+                            } ?>
                         </table>
                     </div>
                     <div id='total_value'>
@@ -181,21 +178,19 @@
                     </div>
                     <div id='charges'>
                         <table>
-                            <!-- <tr>
-                                <th>+TAX</th>
-                                <td>&#8377;<?php echo $charges; ?></td>
-                            </tr> -->
-                            <tr>
-                                <th>+Delivery Charges</th>
-                                <td>&#8377;40</td>
-                            </tr>
+                            <?php if ($total_val < 1000) { ?>
+                                <tr>
+                                    <th>+Delivery Charges</th>
+                                    <td>&#8377;50</td>
+                                </tr>
+                            <?php } ?>
                         </table>
                     </div>
                     <div id='total_payble_value'>
                         <table>
                             <tr>
                                 <th>Total Payble Value</th>
-                                <td>&#8377;<?php echo $pay_val; ?></td>
+                                <td>&#8377;<?php if ($total_val < 1000) { echo $total_val+50; } else { echo $total_val; }; ?></td>
                             </tr>
                         </table>
                     </div>

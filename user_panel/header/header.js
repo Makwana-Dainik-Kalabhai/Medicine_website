@@ -27,20 +27,24 @@ $(document).ready(() => {
     };
 
     var dis_menu = false;
-    $("#menu").click(() => {
+    $("#menu i").click(() => {
         if (!dis_menu) {
             $("#side_nav").css("left", "0");
+            $(".brightness").css("display","block");
+            $(".carousel-indicators").css("z-index","0");
             dis_menu = true;
         }
         else if (dis_menu) {
             $("#side_nav").css("left", "-100%");
+            $(".brightness").css("display","none");
+            $(".carousel-indicators").css("z-index","1");
             dis_menu = false;
         }
     });
 
     $("#search_input").keyup(function (e) {
         $("#searched_items #new_items").html("");
-
+        
         var search_val = $("#search_input").val();
 
         $.ajax({
@@ -55,16 +59,18 @@ $(document).ready(() => {
             }
         });
     });
-
+    
     $("#search_box #search_input").focus(() => {
         $("#searched_items").show();
     });
     $("#searched_items").click(() => {
         $("#searched_items").show();
     });
-
-    $("main, footer").click(() => {
+    
+    $(".brightness").click(() => {
         $("#side_nav").css("left", "-100%");
+        $(".brightness").css("display","none");
+        $(".carousel-indicators").css("z-index","1");
         dis_menu = false;
         $(".regi_form").css({ margin: "0 auto" });
         $("#searched_items").hide();
