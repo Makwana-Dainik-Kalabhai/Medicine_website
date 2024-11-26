@@ -186,67 +186,47 @@ if (isset($_POST["sub"])) {
 <?php
 $conn = new PDO("mysql:host=localhost;dbname=medicine_website", "root", "");
 
-// $cat = "cold and fever";
-// $item_img = [
-//     "Superior Wheelchair 24-inch Rear Mag Wheel(1).jpg",
-//     "Superior Wheelchair 24-inch Rear Mag Wheel(2).jpg"
-// ];
-// $name = "Lama Cough Syrup 100 ml";
-// $def = "";
-// $off_price = 73.95;
-// $price = 85;
-// $dis = 13;
-// $weight = "100ml";
-// $quantity = 10;
-// $expiry = "Nov 2026";
+$cat = "bone and joint pain";
+$item_img = [
+    "Superior Wheelchair 24-inch Rear Mag Wheel(1).jpg",
+    "Superior Wheelchair 24-inch Rear Mag Wheel(2).jpg"
+];
+$name = "Lama Cough Syrup 100 ml";
+$def = "";
+$off_price = 73.95;
+$price = 85;
+$dis = 13;
+$weight = "100ml";
+$quantity = 10;
+$expiry = "Nov 2026";
 
-// $des_img = [];
+$des_img = [];
 
-// $des = [
-//     ["Effective medicine for Cough, Cold, Bronchitis, Whooping Cough, Asthmatic Cough."]
-// ];
-// $benefit = [
-//     ["It may help by thinning and loosening mucus in the airways, clearing congestion and making breathing easier."],
-//     ["It may help relieve of cough, sneezing or runny nose due to the common cold."]
-// ];
-// $how_use = [
-//     ["1-2 teaspoon thrice daily or as directed by the physician."]
-// ];
-// $safety = [
-//     "The product information contained herein is for informational purposes only and is not intended to diagnose, treat, or prevent.",
-//     "Read the label carefully before use. Do not exceed the recommended dose.",
-//     "Keep out of the reach and sight of children."
-// ];
-// $other_info = [
-//     ["Ingredients", "Pipal (Piper longum) Tagar (Valeriana wallichi) Sonth (Zingiber officinale) Nagarmotha (Cyperus rotundus) Kantikari (Solanum Surattense) Tulsi (Ocimum sanctrum) Talispatra (Abies webbiana) Kalimarich (Piper nigrum) Dalchini (Cinnamomum zeylanicum) Apamarg (Achyaranthes aspera) Ganiyari (Clerodendrum plomidis) Somlata (Sarcostemma acidum) Basak (Adhatoda vasica) Pudina (Mentha sylvestris)"]
-// ];
+$des = [
+    ["Effective medicine for Cough, Cold, Bronchitis, Whooping Cough, Asthmatic Cough."]
+];
+$benefit = [
+    ["It may help by thinning and loosening mucus in the airways, clearing congestion and making breathing easier."],
+    ["It may help relieve of cough, sneezing or runny nose due to the common cold."]
+];
+$how_use = [
+    ["1-2 teaspoon thrice daily or as directed by the physician."]
+];
+$safety = [
+    "The product information contained herein is for informational purposes only and is not intended to diagnose, treat, or prevent.",
+    "Read the label carefully before use. Do not exceed the recommended dose.",
+    "Keep out of the reach and sight of children."
+];
+$other_info = [
+    ["Ingredients", "Pipal (Piper longum) Tagar (Valeriana wallichi) Sonth (Zingiber officinale) Nagarmotha (Cyperus rotundus) Kantikari (Solanum Surattense) Tulsi (Ocimum sanctrum) Talispatra (Abies webbiana) Kalimarich (Piper nigrum) Dalchini (Cinnamomum zeylanicum) Apamarg (Achyaranthes aspera) Ganiyari (Clerodendrum plomidis) Somlata (Sarcostemma acidum) Basak (Adhatoda vasica) Pudina (Mentha sylvestris)"]
+];
 
-// $faqs = [
-//     []
-// ];
-// $item_code = "1010";
+$faqs = [
+    []
+];
+$item_code = "1010";
 
-// // $query = "INSERT INTO `medicines` VALUES ('',NOW(),'$cat','','','" . serialize($def) . "','$off_price','$price','$dis','" . serialize($weight) . "','$quantity','$expiry','','','','" . serialize($how_use) . "','" . serialize($safety) . "','" . serialize($other_info) . "','','$item_code')";
-// $query = "INSERT INTO `medicines` VALUES ('',NOW(),'$cat','" . serialize($item_img) . "','$name','$def','$off_price','$price','$dis','$weight','$quantity','$expiry','" . serialize($des_img) . "','" . serialize($des) . "','" . serialize($benefit) . "','" . serialize($how_use) . "','" . serialize($safety) . "','" . serialize($other_info) . "','" . serialize($faqs) . "','$item_code')";
-// $insert = $conn->prepare($query);
-// $insert->execute();
-
-// for ($i = 1000; $i < 1024; $i++) {
-//     $up = $conn->prepare("UPDATE `products` SET `item_code`='$i' WHERE `item_code`='p$i'");
-//     // $up->execute();
-
-//     
-// }
-
-
-$sel = $conn->prepare("SELECT * FROM `medicines`");
-$sel->execute();
-$sel = $sel->fetchAll();
-
-$i = 1024;
-$in = $conn->prepare("INSERT INTO `products` (`time`, `category`,`item_img`,`name`,`definition`,`offer_price`,`price`,`discount`,`weight`,`quantity`,`expiry`,`desc_img`,`description`,`benefits`,`how_use`,`safety`,`other_info`,`faqs`,`delivery_date`,`item_code`)
-SELECT `time`, `category`,`item_img`,`name`,`definition`,`offer_price`,`price`,`discount`,`weight`,`quantity`,`expiry`,`desc_img`,`description`,`benefits`,`how_use`,`safety`,`other_info`,`faqs`,`delivery_date`,`item_code`
-FROM `medicines`");
+$in = $conn->prepare("INSERT INTO `products` VALUES(NOW(), '$cat',`item_img`,`name`,`definition`,`offer_price`,`price`,`discount`,`weight`,`quantity`,`expiry`,`desc_img`,`description`,`benefits`,`how_use`,`safety`,`other_info`,`faqs`,`delivery_date`,`item_code`");
 // $in->execute();
 echo "<script>
                alert('Item Code: $i');

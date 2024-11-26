@@ -1,10 +1,3 @@
-<style>
-    #pr_not_found {
-        width: 50%;
-        margin: 0 auto;
-    }
-</style>
-
 <?php
 session_start();
 
@@ -95,6 +88,6 @@ foreach ($sel as $row) {
 <?php }
 
 if (isset($product_count) && $product_count == 0) { ?>
-    <img id="pr_not_found" src="http://localhost/php/medicine_website/user_panel/header/pr_not_found.jpeg" alt="" />
+    <img id="pr_not_found" src="http://localhost/php/medicine_website/user_panel/shop/pr_main_page/pr_not_found.png" alt="Items not Found" />
 <?php }
 ?>

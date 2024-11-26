@@ -329,6 +329,6 @@ output {
 #pr_not_found {
     display: block;
     width: 60%;
-    height: 70%;
-    margin: auto;
+    height: 55%;
+    margin: 1% auto;
 }

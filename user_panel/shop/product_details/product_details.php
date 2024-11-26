@@ -109,10 +109,10 @@ if (isset($_GET["status"])) {
                         //
                         if (!isset($con_item)) { ?>
                             <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/verify_like.php?type=insert" id="like" style="color:gray;"><i class="fa-solid fa-heart"></i></a>
-                    <?php }
+                        <?php }
                     }
-                    if (isset($_SESSION["status"]) && $_SESSION["status"]=="medicine") { ?>
-                    <span id="expiry">Expiry:&ensp;<?php echo $row["expiry"]; ?></span>
+                    if (isset($_SESSION["status"]) && $_SESSION["status"] == "medicine") { ?>
+                        <span id="expiry">Expiry:&ensp;<?php echo $row["expiry"]; ?></span>
                     <?php } ?>
                 </div>
             </div>
@@ -183,6 +183,7 @@ if (isset($_GET["status"])) {
                 ?>
             </div>
         </div>
+        <img src="" alt="">
         <!-- //! Similar Products -->
         <?php include("./similar_product/similar_product.php"); ?>
 
@@ -250,7 +251,15 @@ function disProductDetalis()
                 </table>
             </div>
         </div>
-    <?php }
+    <?php } ?>
+    <div id=description_img>
+        <?php if ($row["desc_img"] != "") {
+            foreach (unserialize($row["desc_img"]) as $img) { ?>
+                <img src="http://localhost/php/medicine_website/user_panel/shop/desc_imgs/<?php echo $img; ?>" alt="" />
+        <?php }
+        } ?>
+    </div>
+    <?php
 }
 //
 //* Display Medicine Details
@@ -340,5 +349,12 @@ function disMedicineDetalis()
                 } ?>
             </div>
         </div>
-<?php }
-} ?>
+    <?php } ?>
+    <div id=description_img>
+        <?php if ($row["desc_img"] != "") {
+            foreach (unserialize($row["desc_img"]) as $img) { ?>
+                <img src="http://localhost/php/medicine_website/user_panel/shop/desc_imgs/<?php echo $img; ?>" alt="" />
+        <?php }
+        } ?>
+    </div>
+<?php } ?>

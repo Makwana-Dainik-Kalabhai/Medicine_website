@@ -211,15 +211,18 @@ if (isset($_GET["category"]) && isset($_GET["status"])) {
                 </div>
                 <div id="products">
                     <?php
-                    $query = "SELECT * FROM `products` WHERE `discount`<10";
+                    $query = "SELECT * FROM `products` WHERE `discount`<=$min_discount";
+                    if (isset($_SESSION["category"])) {
+                        $query = "SELECT * FROM `products` WHERE `category`='" . $_SESSION["category"] . "' AND `discount`<=$min_discount";
+                    }
                     if (isset($_SESSION["status"])) {
-                        $query = "SELECT * FROM `products` WHERE `status`='" . $_SESSION["status"] . "' AND `discount`<10";
+                        $query = "SELECT * FROM `products` WHERE `status`='" . $_SESSION["status"] . "' AND `discount`<=$min_discount";
                     }
                     if (isset($_SESSION["category"]) && isset($_SESSION["status"])) {
-                        $query = "SELECT * FROM `products` WHERE `category` = '" . $_SESSION["category"] . "' AND `status`='" . $_SESSION["status"] . "' AND `discount`<10";
+                        $query = "SELECT * FROM `products` WHERE `category` = '" . $_SESSION["category"] . "' AND `status`='" . $_SESSION["status"] . "' AND `discount`<=$min_discount";
                     }
                     if (isset($_SESSION["search_input"])) {
-                        $query = "SELECT * FROM `products` WHERE `name` LIKE '%" . $_SESSION["search_input"] . "%' AND `discount`<10";
+                        $query = "SELECT * FROM `products` WHERE `name` LIKE '%" . $_SESSION["search_input"] . "%' AND `discount`<=$min_discount";
                     }
 
                     $sel = $conn->prepare($query);
@@ -265,7 +268,7 @@ if (isset($_GET["category"]) && isset($_GET["status"])) {
                     <?php }
                     //
                     if (isset($pr_not_found)) { ?>
-                        <img id="pr_not_found" src="http://localhost/php/medicine_website/user_panel/header/pr_not_found.jpeg" alt="" />
+                        <img id="pr_not_found" src="http://localhost/php/medicine_website/user_panel/shop/pr_main_page/pr_not_found.png" alt="Items not Found" />
                     <?php
                     } ?>
                 </div>

@@ -24,10 +24,10 @@
 
             foreach ($sel as $row) { ?>
                     <a href="http://localhost/php/medicine_website/user_panel/shop/pr_main_page/pr_main_page.php?category=<?php echo $row["category"]; ?>&status=device" class="box">
-                        <img src="http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo unserialize($row["item_img"])[0]; ?>" />
+                        <img src="http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo unserialize($row["item_img"])[0]; ?>" alt="Img not Found"/>
                         <span class="category"><?php echo $row["category"]; ?></span>
                     </a>
-            <?php } ?>
+            <?php } ?>  
         </div>
     </div>
 </div>
