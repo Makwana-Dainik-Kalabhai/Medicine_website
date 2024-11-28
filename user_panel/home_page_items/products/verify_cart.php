@@ -8,8 +8,8 @@ $sel->execute();
 $sel = $sel->fetchAll();
 
 foreach ($sel as $row) {
-    if ($_SESSION["item_code"] == $row["item_code"]) {
-        $conn_item = $row["item_code"];
+    if ($_SESSION["product_id"] == $row["product_id"]) {
+        $conn_item = $row["product_id"];
     }
 }
 
@@ -20,16 +20,16 @@ if (isset($conn_item)) {
 }
 
 if (!isset($conn_item)) {
-    if(str_starts_with($_SESSION["item_code"], 'p')) {
+    if(str_starts_with($_SESSION["product_id"], 'p')) {
         date_default_timezone_set('Asia/Calcutta');
         $date = strtotime("+4 days");
     }
-    if(str_starts_with($_SESSION["item_code"], 'm')) {
+    if(str_starts_with($_SESSION["product_id"], 'm')) {
         date_default_timezone_set('Asia/Calcutta');
         $date = strtotime("+1 days");
     }
 
-    $insert = $conn->prepare("INSERT INTO `cart` VALUES('" . $_SESSION["email"] . "','" . $_GET["item_code"] . "','1','$date')");
+    $insert = $conn->prepare("INSERT INTO `cart` VALUES('" . $_SESSION["email"] . "','" . $_GET["product_id"] . "','1','$date')");
     $insert->execute();
 
     $_SESSION["task_success"] = "Product is successfully added into the cart";?>

@@ -1,7 +1,7 @@
 <?php
 include("C:/xampp/htdocs/php/medicine_website/database.php");
 
-$select = $conn->prepare("SELECT * FROM `ratings` WHERE `item_code`='" . $_SESSION["item_code"] . "'");
+$select = $conn->prepare("SELECT * FROM `ratings` WHERE `product_id`='" . $_SESSION["product_id"] . "'");
 $select->execute();
 $select = $select->fetchAll();
 

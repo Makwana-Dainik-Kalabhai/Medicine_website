@@ -3,11 +3,6 @@ $(document).ready(function () {
     window.history.replaceState(null, null, window.location.href);
   }
 
-  $("#price_range #max_price").html("&#8377;" + $("#price_range input").val());
-  $("#discount_range #max_discount").html(
-    $("#discount_range input").val() + "%"
-  );
-
   //! All Variables
   var filter;
   var category;

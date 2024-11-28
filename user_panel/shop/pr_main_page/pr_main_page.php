@@ -29,7 +29,7 @@ if (isset($_POST["search_input"])) {
         if (isset($_SESSION["search_input"][2]))
             $thirdChar = $_SESSION["search_input"][2] == $row["category"][2];
 
-        if ($firstChar && $secChar && $thirdChar) {
+        if (isset($firstChar) && isset($secChar) && isset($thirdChar)) {
             $_SESSION["category"] = $row["category"];
             $_SESSION["status"] = $row["status"];
             unset($_SESSION["search_input"]);
@@ -146,7 +146,6 @@ if (isset($_GET["category"]) && isset($_GET["status"])) {
                         }
                         $sel_cat->execute();
                         $sel_cat = $sel_cat->fetchAll(); ?>
-
                         <div>
                             <?php if (!isset($_SESSION["search_input"])) {
                                 foreach ($sel_cat as $row_cat) {
@@ -165,7 +164,7 @@ if (isset($_GET["category"]) && isset($_GET["status"])) {
 
                         <?php
                         $max_price = 0;
-                        $min_price = 5000;
+                        $min_price = 500000;
                         $max_discount = 0;
                         $min_discount = 50;
 
@@ -197,32 +196,47 @@ if (isset($_GET["category"]) && isset($_GET["status"])) {
 
                         <div id="price_range">
                             <span>Price range</span>
-                            <input type="range" min="<?php echo $min_price; ?>" value="<?php echo $max_price; ?>" max="<?php echo $max_price; ?>" oninput="document.getElementById('max_price').value = '&#8377;'+this.value">
+                            <input type="range" min="<?php echo $min_price; ?>" value="<?php echo $max_price; ?>" max="<?php echo $max_price; ?>" oninput="document.getElementById('max_price').value = '&#8377;'+this.value" />
                             <output id="min_price">&#8377;<?php echo $min_price; ?></output>
-                            <output id="max_price"></output>
+                            <output id="max_price">&#8377;<?php echo $max_price; ?></output>
                         </div>
                         <div id="discount_range">
                             <span>Discount</span>
-                            <input type="range" min="<?php echo $min_discount; ?>" value="<?php echo $min_discount; ?>" max="<?php echo $max_discount; ?>" oninput="document.getElementById('max_discount').value = this.value+'%'">
+                            <input type="range" min="<?php echo $min_discount; ?>" value="0" max="<?php echo $max_discount; ?>" oninput="document.getElementById('max_discount').value = this.value+'%'" />
                             <output id="min_discount"><?php echo $min_discount; ?></output>
-                            <output id="max_discount"></output>
+                            <output id="max_discount"><?php echo $max_discount; ?>%</output>
                         </div>
                     </div>
                 </div>
                 <div id="products">
                     <?php
                     $query = "SELECT * FROM `products` WHERE `discount`<=$min_discount";
-                    if (isset($_SESSION["category"])) {
-                        $query = "SELECT * FROM `products` WHERE `category`='" . $_SESSION["category"] . "' AND `discount`<=$min_discount";
-                    }
-                    if (isset($_SESSION["status"])) {
-                        $query = "SELECT * FROM `products` WHERE `status`='" . $_SESSION["status"] . "' AND `discount`<=$min_discount";
-                    }
-                    if (isset($_SESSION["category"]) && isset($_SESSION["status"])) {
-                        $query = "SELECT * FROM `products` WHERE `category` = '" . $_SESSION["category"] . "' AND `status`='" . $_SESSION["status"] . "' AND `discount`<=$min_discount";
-                    }
-                    if (isset($_SESSION["search_input"])) {
-                        $query = "SELECT * FROM `products` WHERE `name` LIKE '%" . $_SESSION["search_input"] . "%' AND `discount`<=$min_discount";
+                    if (isset($_SESSION["price_range"]) && isset($_SESSION["discount_range"])) {
+                        if (isset($_SESSION["category"])) {
+                            $query = "SELECT * FROM `products` WHERE `category`='" . $_SESSION["category"] . "' AND `offer_price`<=" . $_SESSION["price_range"] . " AND `discount`<=" . $_SESSION["discount_range"] . "";
+                        }
+                        if (isset($_SESSION["status"])) {
+                            $query = "SELECT * FROM `products` WHERE `status`='" . $_SESSION["status"] . "' AND `offer_price`<=" . $_SESSION["price_range"] . " AND `discount`<=" . $_SESSION["discount_range"] . "";
+                        }
+                        if (isset($_SESSION["category"]) && isset($_SESSION["status"])) {
+                            $query = "SELECT * FROM `products` WHERE `category` = '" . $_SESSION["category"] . "' AND `status`='" . $_SESSION["status"] . "' AND `offer_price`<=" . $_SESSION["price_range"] . " AND `discount`<=" . $_SESSION["discount_range"] . "";
+                        }
+                        if (isset($_SESSION["search_input"])) {
+                            $query = "SELECT * FROM `products` WHERE `name` LIKE '%" . $_SESSION["search_input"] . "%' AND `offer_price`<=" . $_SESSION["price_range"] . " AND `discount`<=" . $_SESSION["discount_range"] . "";
+                        }
+                    } else {
+                        if (isset($_SESSION["category"])) {
+                            $query = "SELECT * FROM `products` WHERE `category`='" . $_SESSION["category"] . "' AND `discount`<=$min_discount";
+                        }
+                        if (isset($_SESSION["status"])) {
+                            $query = "SELECT * FROM `products` WHERE `status`='" . $_SESSION["status"] . "' AND `discount`<=$min_discount";
+                        }
+                        if (isset($_SESSION["category"]) && isset($_SESSION["status"])) {
+                            $query = "SELECT * FROM `products` WHERE `category` = '" . $_SESSION["category"] . "' AND `status`='" . $_SESSION["status"] . "' AND `discount`<=$min_discount";
+                        }
+                        if (isset($_SESSION["search_input"])) {
+                            $query = "SELECT * FROM `products` WHERE `name` LIKE '%" . $_SESSION["search_input"] . "%' AND `discount`<=$min_discount";
+                        }
                     }
 
                     $sel = $conn->prepare($query);
@@ -235,7 +249,7 @@ if (isset($_GET["category"]) && isset($_GET["status"])) {
                         unset($pr_not_found); ?>
 
                         <div id="box">
-                            <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php?item_code=<?php echo $row["item_code"]; ?>">
+                            <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php?product_id=<?php echo $row["product_id"]; ?>">
                                 <div id="product_img">
                                     <?php
                                     if ($row["discount"] != 0) { ?>
@@ -261,7 +275,7 @@ if (isset($_GET["category"]) && isset($_GET["status"])) {
                             <?php } ?>
                             <?php if (isset($_SESSION["email"])) { ?>
                                 <form action="http://localhost/php/medicine_website/user_panel/shop/pr_main_page/add_cart.php" method="post">
-                                    <button name="add_cart" value="<?php echo $row["item_code"]; ?>" id="add_cart"><i class="fa-solid fa-cart-plus"></i>&ensp;Add to Cart</button>
+                                    <button name="add_cart" value="<?php echo $row["product_id"]; ?>" id="add_cart"><i class="fa-solid fa-cart-plus"></i>&ensp;Add to Cart</button>
                                 </form>
                             <?php } ?>
                         </div>
@@ -282,3 +296,9 @@ if (isset($_GET["category"]) && isset($_GET["status"])) {
 </body>
 
 </html>
+
+<?php
+if (isset($_SESSION["price_range"]) && isset($_SESSION["discount_range"])) {
+    unset($_SESSION["price_range"], $_SESSION["discount_range"]);
+}
+?>

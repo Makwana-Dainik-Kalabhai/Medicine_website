@@ -37,7 +37,7 @@
                 // Database
                 include("C:/xampp/htdocs/php/medicine_website/database.php");
 
-                $sel = $conn->prepare("SELECT * FROM `wishlist` INNER JOIN `products` ON wishlist.item_code=products.item_code");
+                $sel = $conn->prepare("SELECT * FROM `wishlist` INNER JOIN `products` ON wishlist.product_id=products.product_id");
                 $sel->execute();
                 $sel = $sel->fetchAll();
 
@@ -74,7 +74,7 @@ function displayItems($row)
     <div id='wishlist_products'>
 
         <div id='products'>
-            <a href='http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php?status=<?php echo $row["status"]; ?>&item_code=<?php echo $row['item_code']; ?>' id='box'>
+            <a href='http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php?status=<?php echo $row["status"]; ?>&product_id=<?php echo $row['product_id']; ?>' id='box'>
                 <div id='product_img'>
                     <img src='http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo unserialize($row['item_img'])[0]; ?>' />
                 </div>
@@ -95,7 +95,7 @@ function displayItems($row)
                     <span id="def"><?php echo $row["definition"]; ?></span>
                 </div>
             </a>
-            <a href='remove.php?remove_item=<?php echo $row['item_code']; ?>' id='remove_btn'><i class='fa-solid fa-trash'></i></a>
+            <a href='remove.php?remove_item=<?php echo $row['product_id']; ?>' id='remove_btn'><i class='fa-solid fa-trash'></i></a>
         </div>
     <?php
 }

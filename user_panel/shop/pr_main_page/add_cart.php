@@ -9,7 +9,7 @@ if (isset($_POST["add_cart"])) {
     $sel = $sel->fetchAll();
 
     foreach ($sel as $row) {
-        if ($_POST["add_cart"] == $row["item_code"]) {
+        if ($_POST["add_cart"] == $row["product_id"]) {
             header("Refresh:0; url=http://localhost/php/medicine_website/user_panel/cart/cart.php");
             return;
         }

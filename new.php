@@ -224,9 +224,9 @@ $other_info = [
 $faqs = [
     []
 ];
-$item_code = "1010";
+$product_id = "1010";
 
-$in = $conn->prepare("INSERT INTO `products` VALUES(NOW(), '$cat',`item_img`,`name`,`definition`,`offer_price`,`price`,`discount`,`weight`,`quantity`,`expiry`,`desc_img`,`description`,`benefits`,`how_use`,`safety`,`other_info`,`faqs`,`delivery_date`,`item_code`");
+$in = $conn->prepare("INSERT INTO `products` VALUES(NOW(), '$cat',`item_img`,`name`,`definition`,`offer_price`,`price`,`discount`,`weight`,`quantity`,`expiry`,`desc_img`,`description`,`benefits`,`how_use`,`safety`,`other_info`,`faqs`,`delivery_date`,`product_id`");
 // $in->execute();
 echo "<script>
                alert('Item Code: $i');

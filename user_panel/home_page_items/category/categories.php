@@ -65,7 +65,7 @@ foreach($sel as $row) {
     }
 }
 
-$sel = $conn->prepare("SELECT * FROM `medicines`");
+$sel = $conn->prepare("SELECT * FROM `products` WHERE `status`='medicine'");
 $sel->execute();
 $sel = $sel->fetchAll();
 $max_me_dis = 0;

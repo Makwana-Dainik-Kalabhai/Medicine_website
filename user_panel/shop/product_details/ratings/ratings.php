@@ -3,7 +3,7 @@ include("C:/xampp/htdocs/php/medicine_website/database.php");
 
 //! Get raters
 if (isset($_SESSION["email"])) {
-    $sel = $conn->prepare("SELECT * FROM `ratings` WHERE `email`='" . $_SESSION["email"] . "' AND `item_code`='" . $_SESSION["item_code"] . "'");
+    $sel = $conn->prepare("SELECT * FROM `ratings` WHERE `email`='" . $_SESSION["email"] . "' AND `product_id`='" . $_SESSION["product_id"] . "'");
     $sel->execute();
     $sel = $sel->fetchAll();
 
@@ -144,7 +144,7 @@ if (isset($_SESSION["email"])) {
     <hr />
     <?php
     $email = "";
-    $sel = $conn->prepare("SELECT *, ratings.email FROM `ratings` INNER JOIN `user_login_data` ON ratings.email=user_login_data.email  WHERE `item_code`='" . $_SESSION["item_code"] . "' ORDER BY `time`");
+    $sel = $conn->prepare("SELECT *, ratings.email FROM `ratings` INNER JOIN `user_login_data` ON ratings.email=user_login_data.email  WHERE `product_id`='" . $_SESSION["product_id"] . "' ORDER BY `time`");
     $sel->execute();
     $sel = $sel->fetchAll();
     $total_data = 0;
@@ -156,7 +156,7 @@ if (isset($_SESSION["email"])) {
         $total_data++;
     }
 
-    $sel = $conn->prepare("SELECT *, ratings.email FROM `ratings` INNER JOIN `user_login_data` ON ratings.email=user_login_data.email  WHERE `item_code`='" . $_SESSION["item_code"] . "' ORDER BY `time` LIMIT 1");
+    $sel = $conn->prepare("SELECT *, ratings.email FROM `ratings` INNER JOIN `user_login_data` ON ratings.email=user_login_data.email  WHERE `product_id`='" . $_SESSION["product_id"] . "' ORDER BY `time` LIMIT 1");
     $sel->execute();
     $sel = $sel->fetchAll(); ?>
     <div id="all_reviews">

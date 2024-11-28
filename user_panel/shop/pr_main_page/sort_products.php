@@ -57,7 +57,7 @@ $sel = $sel->fetchAll();
 foreach ($sel as $row) {
     $product_count++; ?>
     <div id="box">
-        <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php?item_code=<?php echo $row["item_code"]; ?>">
+        <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php?product_id=<?php echo $row["product_id"]; ?>">
             <div id="product_img">
                 <?php
                 if ($row["discount"] != 0) { ?>
@@ -81,7 +81,7 @@ foreach ($sel as $row) {
         <?php } ?>
         <?php if (isset($_SESSION["email"])) { ?>
             <form action="http://localhost/php/medicine_website/user_panel/shop/pr_main_page/add_cart.php" method="post">
-                <button name="add_cart" value="<?php echo $row["item_code"]; ?>" id="add_cart"><i class="fa-solid fa-cart-plus"></i>&ensp;Add to Cart</button>
+                <button name="add_cart" value="<?php echo $row["product_id"]; ?>" id="add_cart"><i class="fa-solid fa-cart-plus"></i>&ensp;Add to Cart</button>
             </form>
         <?php } ?>
     </div>

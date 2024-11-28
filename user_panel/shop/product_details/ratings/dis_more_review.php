@@ -2,7 +2,7 @@
 session_start();
 include("C:/xampp/htdocs/php/medicine_website/database.php");
 
-$sel = $conn->prepare("SELECT *, ratings.email FROM `ratings` INNER JOIN `user_login_data` ON ratings.email=user_login_data.email  WHERE `item_code`='" . $_SESSION["item_code"] . "' ORDER BY `time` LIMIT " . $_POST["limit"] . "");
+$sel = $conn->prepare("SELECT *, ratings.email FROM `ratings` INNER JOIN `user_login_data` ON ratings.email=user_login_data.email  WHERE `product_id`='" . $_SESSION["product_id"] . "' ORDER BY `time` LIMIT " . $_POST["limit"] . "");
 $sel->execute();
 $sel = $sel->fetchAll();
 

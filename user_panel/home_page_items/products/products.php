@@ -23,7 +23,7 @@
             $sel = $sel->fetchAll();
 
             foreach ($sel as $row) { ?>
-                    <a href="http://localhost/php/medicine_website/user_panel/shop/pr_main_page/pr_main_page.php?category=<?php echo $row["category"]; ?>&status=device" class="box">
+                    <a href="http://localhost/php/medicine_website/user_panel/shop/pr_main_page/pr_main_page.php?status=device&category=<?php echo $row["category"]; ?>" class="box">
                         <img src="http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo unserialize($row["item_img"])[0]; ?>" alt="Img not Found"/>
                         <span class="category"><?php echo $row["category"]; ?></span>
                     </a>
@@ -47,7 +47,7 @@
             
             foreach ($sel as $row) { ?>
                 <div class="box">
-                    <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php?item_code=<?php echo $row["item_code"]; ?>&status=device">
+                    <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php?product_id=<?php echo $row["product_id"]; ?>&status=device">
                         <img src="http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo unserialize($row["item_img"])[0]; ?>" />
                         <span id="name"><?php echo $row["name"]; ?></span>
                         <div>
@@ -62,7 +62,7 @@
                         <a href="http://localhost/php/medicine_website/user_panel/form/login_form.php" id="add_cart"><i class="fa-solid fa-cart-plus"></i>&ensp;Add to Cart</a>
                     <?php } ?>
                     <?php if (isset($_SESSION["email"])) { ?>
-                        <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/verify_cart.php?item_code=<?php echo $row["item_code"]; ?>" id="add_cart"><i class="fa-solid fa-cart-plus"></i>&ensp;Add to Cart</a>
+                        <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/verify_cart.php?product_id=<?php echo $row["product_id"]; ?>" id="add_cart"><i class="fa-solid fa-cart-plus"></i>&ensp;Add to Cart</a>
                     <?php } ?>
                 </div>
             <?php } ?>

@@ -131,19 +131,19 @@ class Data
         foreach ($sel as $row) {
             if (isset($_POST["form_items"][1])) {
                 for ($i = 0; $i < count($_POST["form_items"]); $i++) {
-                    if ($row["item_code"] == $_POST["form_items"][$i]) {
+                    if ($row["product_id"] == $_POST["form_items"][$i]) {
                         $upQua = $row["quantity"] - $_POST["form_quantity"][$i];
 
-                        $up = $conn->prepare("UPDATE `products` SET `quantity`=$upQua WHERE `item_code`='".$row["item_code"]."'");
+                        $up = $conn->prepare("UPDATE `products` SET `quantity`=$upQua WHERE `product_id`='".$row["product_id"]."'");
                         $up->execute();
                     }
                 }
             }
             else {
-                if ($row["item_code"] == implode(",",$_POST["form_items"])) {
+                if ($row["product_id"] == implode(",",$_POST["form_items"])) {
                     $upQua = $row["quantity"] - implode(",",$_POST["form_quantity"]);
     
-                    $up = $conn->prepare("UPDATE `products` SET `quantity`=$upQua WHERE `item_code`='".$row["item_code"]."'");
+                    $up = $conn->prepare("UPDATE `products` SET `quantity`=$upQua WHERE `product_id`='".$row["product_id"]."'");
                     $up->execute();
                 }
             }

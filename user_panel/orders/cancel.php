@@ -13,14 +13,14 @@ if (isset($_POST["cancel_yes"])) {
     foreach ($sel as $row) {
         if (str_contains($row["items"], "{") && str_contains($row["items"], ":") && str_contains($row["items"], '"') && str_contains($row["items"], "}")) {
             for ($i = 0; $i < count(unserialize($row["items"])); $i++) {
-                $selPro = $conn->prepare("SELECT * FROM `products` WHERE `item_code`='" . unserialize($row["items"])[$i] . "'");
+                $selPro = $conn->prepare("SELECT * FROM `products` WHERE `product_id`='" . unserialize($row["items"])[$i] . "'");
                 $selPro->execute();
                 $selPro = $selPro->fetchAll();
 
                 foreach ($selPro as $rPro) {
                     $upQuan = $rPro["quantity"] + unserialize($row["quantity"])[$i];
                 }
-                $upPro = $conn->prepare("UPDATE `products` SET `quantity`=$upQuan WHERE `item_code`='" . unserialize($row["items"])[$i] . "'");
+                $upPro = $conn->prepare("UPDATE `products` SET `quantity`=$upQuan WHERE `product_id`='" . unserialize($row["items"])[$i] . "'");
                 $upPro->execute();
             }
         }

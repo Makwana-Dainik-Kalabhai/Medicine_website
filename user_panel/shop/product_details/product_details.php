@@ -1,7 +1,7 @@
 <?php session_start();
 
-if (isset($_GET["item_code"])) {
-    $_SESSION["item_code"] = $_GET["item_code"];
+if (isset($_GET["product_id"])) {
+    $_SESSION["product_id"] = $_GET["product_id"];
 }
 
 if (isset($_GET["status"])) {
@@ -32,7 +32,7 @@ if (isset($_GET["status"])) {
             <?php
             include("C:/xampp/htdocs/php/medicine_website/database.php");
 
-            $sel = $conn->prepare("SELECT * FROM `products` WHERE item_code='" . $_SESSION["item_code"] . "'");
+            $sel = $conn->prepare("SELECT * FROM `products` WHERE product_id='" . $_SESSION["product_id"] . "'");
             $sel->execute();
             $sel = $sel->fetchAll();
             $row = $sel[0];
@@ -98,8 +98,8 @@ if (isset($_GET["status"])) {
                         $sel_item = $sel_item->fetchAll();
 
                         foreach ($sel_item as $row_item) {
-                            if ($_SESSION["item_code"] == $row_item["item_code"]) {
-                                $con_item = $row_item["item_code"];
+                            if ($_SESSION["product_id"] == $row_item["product_id"]) {
+                                $con_item = $row_item["product_id"];
                             }
                         }
 
@@ -142,7 +142,7 @@ if (isset($_GET["status"])) {
                         <a href="http://localhost/php/medicine_website/user_panel/form/login_form.php" id="buy_btn"><i class="fa-solid fa-shopping-bag"></i>&ensp;Buy Now</a>
                     <?php } ?>
                     <?php if (isset($_SESSION["email"]) && $row["quantity"] > 0) { ?>
-                        <a href="http://localhost/php/medicine_website/user_panel/shop/buy_now/buy_now.php?item_code=<?php echo $row["item_code"]; ?>&product=one" id="buy_btn"><i class="fa-solid fa-shopping-bag"></i>&ensp;Buy Now</a>
+                        <a href="http://localhost/php/medicine_website/user_panel/shop/buy_now/buy_now.php?product_id=<?php echo $row["product_id"]; ?>&product=one" id="buy_btn"><i class="fa-solid fa-shopping-bag"></i>&ensp;Buy Now</a>
                     <?php } ?>
 
                     <!-- //* Add to Cart button -->

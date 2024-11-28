@@ -127,7 +127,7 @@ function displayItems($row)
             <div class="box <?php if ($_SESSION["filterBtn"] == "Cancelled") {
                                 echo "disabled";
                             } ?>">
-                <?php $sel = $conn->prepare("SELECT * FROM `products` WHERE `item_code`='" . unserialize($row["items"])[$i] . "'");
+                <?php $sel = $conn->prepare("SELECT * FROM `products` WHERE `product_id`='" . unserialize($row["items"])[$i] . "'");
                 $sel->execute();
                 $sel = $sel->fetchAll();
 
@@ -142,7 +142,7 @@ function displayItems($row)
                             echo "disabled";
                         } ?>">
             <?php
-            $sel = $conn->prepare("SELECT * FROM `products` WHERE `item_code`='" . $row["items"] . "'");
+            $sel = $conn->prepare("SELECT * FROM `products` WHERE `product_id`='" . $row["items"] . "'");
             $sel->execute();
             $sel = $sel->fetchAll();
 
@@ -169,11 +169,11 @@ function itemDetails($row, $r, $quantity)
         <p class="description"><?php echo $row["description"]; ?></p>
         <div class="btns">
             <?php if ($_SESSION["filterBtn"] == "Cancelled") { ?>
-                <a href="http://localhost/php/medicine_website/user_panel/shop/buy_now/buy_now.php?item_code=<?php echo $r["item_code"]; ?>&product=one"><i class="fa-solid fa-arrows-rotate"></i> Buy</a>
+                <a href="http://localhost/php/medicine_website/user_panel/shop/buy_now/buy_now.php?product_id=<?php echo $r["product_id"]; ?>&product=one"><i class="fa-solid fa-arrows-rotate"></i> Buy</a>
             <?php } else { ?>
-                <a href="http://localhost/php/medicine_website/user_panel/shop/buy_now/buy_now.php?item_code=<?php echo $r["item_code"]; ?>&product=one"><i class="fa-solid fa-arrows-rotate"></i> Buy it Again</a>
+                <a href="http://localhost/php/medicine_website/user_panel/shop/buy_now/buy_now.php?product_id=<?php echo $r["product_id"]; ?>&product=one"><i class="fa-solid fa-arrows-rotate"></i> Buy it Again</a>
             <?php } ?>
-            <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php?item_code=<?php echo $r["item_code"]; ?>&status=<?php echo $r["status"]; ?>"><i class="fa-solid fa-eye"></i> View Item</a>
+            <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php?product_id=<?php echo $r["product_id"]; ?>&status=<?php echo $r["status"]; ?>"><i class="fa-solid fa-eye"></i> View Item</a>
         </div>
     </div>
     <table>

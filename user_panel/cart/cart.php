@@ -53,18 +53,18 @@
                     <?php
                     include("C:/xampp/htdocs/php/medicine_website/database.php");
 
-                    $sel = $conn->prepare("SELECT *,cart.quantity FROM `cart` INNER JOIN `products` ON products.item_code=cart.item_code WHERE email='" . $_SESSION["email"] . "'");
+                    $sel = $conn->prepare("SELECT *,cart.quantity FROM `cart` INNER JOIN `products` ON products.product_id=cart.product_id WHERE email='" . $_SESSION["email"] . "'");
                     $sel->execute();
                     $sel = $sel->fetchAll();
 
                     foreach ($sel as $row) {
-                        $sel_qua = $conn->prepare("SELECT * FROM `products` WHERE item_code='" . $row["item_code"] . "'");
+                        $sel_qua = $conn->prepare("SELECT * FROM `products` WHERE product_id='" . $row["product_id"] . "'");
                         $sel_qua->execute();
                         $sel_qua = $sel_qua->fetchAll();
 
                         $prod_qua = $sel_qua[0]["quantity"];
                         if ($prod_qua == 0) {
-                            $up = $conn->prepare("UPDATE `cart` SET `quantity`=0 WHERE item_code='" . $row["item_code"] . "' AND email='" . $_SESSION["email"] . "'");
+                            $up = $conn->prepare("UPDATE `cart` SET `quantity`=0 WHERE product_id='" . $row["product_id"] . "' AND email='" . $_SESSION["email"] . "'");
                             $up->execute();
                         }
                     ?>
@@ -77,7 +77,7 @@
 
                                 <?php if ($prod_qua != 0) { ?>
                                     <form action='update_qua.php' method='post'>
-                                        <input type="hidden" name="item_code" value="<?php echo $row["item_code"]; ?>" />
+                                        <input type="hidden" name="product_id" value="<?php echo $row["product_id"]; ?>" />
                                         <button id="minus" name="minus" <?php if (!($row["quantity"] > 1)) {
                                                                             echo "disabled";
                                                                         } ?>>-</button>
@@ -99,7 +99,7 @@
                                 <?php } ?>
                             </div>
 
-                            <a href='http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php?status=<?php echo $row["status"]; ?>&item_code=<?php echo $row['item_code']; ?>' id='box'>
+                            <a href='http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php?status=<?php echo $row["status"]; ?>&product_id=<?php echo $row['product_id']; ?>' id='box'>
                                 <div id="product_details">
                                     <span id="name"><?php echo $row["name"]; ?></span>
 
@@ -122,13 +122,13 @@
                                         echo "Delivery by " . date("D, M d", $date); ?></span>
 
                                     <!-- //Remove Btn -->
-                                    <a href="http://localhost/php/medicine_website/user_panel/cart/remove.php?item_code=<?php echo $row["item_code"]; ?>" id="remove_btn"><i class='fa-solid fa-trash'></i></a>
+                                    <a href="http://localhost/php/medicine_website/user_panel/cart/remove.php?product_id=<?php echo $row["product_id"]; ?>" id="remove_btn"><i class='fa-solid fa-trash'></i></a>
 
                                     <!-- //Buy Btn -->
                                     <?php if ($row["quantity"] <= 0) {
-                                        $notAv = $row["item_code"];
+                                        $notAv = $row["product_id"];
                                     } else { ?>
-                                        <a href="http://localhost/php/medicine_website/user_panel/shop/buy_now/buy_now.php?item_code=<?php echo $row["item_code"]; ?>&product=one" id="buy_btn"><i class='fa-solid fa-bag-shopping'></i> Buy Now</a>
+                                        <a href="http://localhost/php/medicine_website/user_panel/shop/buy_now/buy_now.php?product_id=<?php echo $row["product_id"]; ?>&product=one" id="buy_btn"><i class='fa-solid fa-bag-shopping'></i> Buy Now</a>
                                     <?php } ?>
                                 </div>
                             </a>
