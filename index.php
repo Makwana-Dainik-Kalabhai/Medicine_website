@@ -17,7 +17,7 @@
     <header>
         <?php include("C:/xampp/htdocs/php/medicine_website/user_panel/header/header.php"); ?>
     </header>
-    
+
     <main>
         <div id="img_slider">
             <?php include("C:/xampp/htdocs/php/medicine_website/user_panel/home_page_items/img_slider/img_slider.php"); ?>
@@ -48,6 +48,7 @@
         <?php include("C:/xampp/htdocs/php/medicine_website/user_panel/footer/footer.php"); ?>
     </footer>
 </body>
+
 </html>
 
 <?php
@@ -72,33 +73,24 @@ if (isset($_SESSION["search_input"])) {
 ?>
 
 <?php
+deliveryDate();
 
-deliveryDate("medicines");
-deliveryDate("products");
-
-function deliveryDate($table)
+function deliveryDate()
 {
     date_default_timezone_set('Asia/Calcutta');
     $today = strtotime("today");
 
-    if($table == "medicines")
-    {
-        date_default_timezone_set('Asia/Calcutta');
-        $date = strtotime("+1 days");
-    }
-    else {
-        date_default_timezone_set('Asia/Calcutta');
-        $date = strtotime("+4 days");
-    }
+    date_default_timezone_set('Asia/Calcutta');
+    $date = strtotime("+4 days");
 
     global $conn, $today;
-    $sel = $conn->prepare("SELECT * FROM `$table`");
+    $sel = $conn->prepare("SELECT * FROM `products`");
     $sel->execute();
     $sel = $sel->fetchAll();
 
     foreach ($sel as $row) {
         if ($row["delivery_date"] == $today) {
-            $up = $conn->prepare("UPDATE `$table` SET `delivery_date`='$date'");
+            $up = $conn->prepare("UPDATE `products` SET `delivery_date`='$date'");
             $up->execute();
         }
     }

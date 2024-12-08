@@ -85,7 +85,7 @@ foreach ($sel as $row) {
     $count = 1;
     if (str_contains($row["items"], "{") && str_contains($row["items"], ":") && str_contains($row["items"], '"') && str_contains($row["items"], "}")) {
         for ($i = 0; $i < count(unserialize($row["items"])); $i++) {
-            $selPr = $conn->prepare("SELECT * FROM `products` WHERE `item_code`='" . unserialize($row["items"])[$i] . "'");
+            $selPr = $conn->prepare("SELECT * FROM `products` WHERE `product_id`='" . unserialize($row["items"])[$i] . "'");
             $selPr->execute();
             $selPr = $selPr->fetchAll();
 
@@ -110,7 +110,7 @@ foreach ($sel as $row) {
         }
     } else {
         $i = 0;
-        $selPr = $conn->prepare("SELECT * FROM `products` WHERE `item_code`='" . $row["items"] . "'");
+        $selPr = $conn->prepare("SELECT * FROM `products` WHERE `product_id`='" . $row["items"] . "'");
         $selPr->execute();
         $selPr = $selPr->fetchAll();
 

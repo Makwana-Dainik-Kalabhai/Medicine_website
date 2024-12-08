@@ -70,12 +70,13 @@ $(document).ready(function () {
 
   //! Remove Product
   $(".card .remove_btn").click(function () {
-    let item_code = $(this).val();
+    let product_id = $(this).val();
+    
     $.ajax({
       type: "POST",
       url: "buy_now.php",
       data: {
-        item_code: item_code,
+        product_id: product_id,
       },
       success: function () {
         location.reload();
