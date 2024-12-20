@@ -74,8 +74,27 @@ if (!isset($_SESSION["email"])) { ?>
                         <label for="sign_phone">Phone:</label>
                         <input type="number" name="sign_phone" maxlength="10" placeholder="Enter Phone no." required />
 
-                        <label for="sign_address">Address:</label>
-                        <textarea name="sign_address" placeholder="Enter Address"></textarea>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="house_no">House No.:</label>
+                                <input type="text" name="house_no" placeholder="House No." required />
+                            </div>
+                            <div class="col-md-6">
+                                <label for="street">Street:</label>
+                                <input type="text" name="street" placeholder="Street" required />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="suite">Apartment Suite:</label>
+                                <input type="text" name="suite" placeholder="Apartment Suite" required />
+                            </div>
+                            <div class="col-md-6">
+                                <label for="pincode">Pincode:</label>
+                                <input type="text" name="pincode" placeholder="Pincode" required />
+                            </div>
+                        </div>
+                        <!-- <textarea name="sign_address" placeholder="Enter Address"></textarea> -->
 
                         <div class="btns">
                             <input type="submit" value="signUp" name="sign_submit" />

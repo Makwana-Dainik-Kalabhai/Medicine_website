@@ -19,7 +19,7 @@ if (isset($_POST["sign_submit"])) {
         public $address;
         public $status;
 
-        function setValue($name, $email, $pass, $phone, $address)
+        function setValue($name, $email, $pass, $phone)
         {
             $this->profile_img = "";
             $this->name = $name;
@@ -28,14 +28,21 @@ if (isset($_POST["sign_submit"])) {
             $this->email = $email;
             $this->pass = $pass;
             $this->phone = $phone;
-            $this->address = $address;
+            $this->address = array(
+                "house_no" => $_POST["house_no"],
+                "street" => $_POST["street"],
+                "suite" => $_POST["suite"],
+                "city" => "Ahmedabad",
+                "state" => "Gujarat",
+                "pincode" => $_POST["pincode"]
+            );
             $this->status = "Active";
         }
 
         function insertValue()
         {
             global $conn;
-            $insert = $conn->prepare("INSERT INTO `user_login_data` VALUES ('" . $this->profile_img . "','" . $this->name . "','" . $this->gender . "','" . $this->age . "','" . $this->email . "','" . $this->pass . "','" . $this->phone . "','" . $this->address . "','" . $this->status . "','')");
+            $insert = $conn->prepare("INSERT INTO `user_login_data` VALUES ('" . $this->profile_img . "','" . $this->name . "','" . $this->gender . "','" . $this->age . "','" . $this->email . "','" . $this->pass . "','" . $this->phone . "','" . serialize($this->address) . "','" . $this->status . "','')");
             $insert->execute();
         }
     }
@@ -60,7 +67,7 @@ if (isset($_POST["sign_submit"])) {
         $U->insertValue();
 
         $_SESSION["form_succ"] = "signUp Successfully";
-        header("Refresh:0; url=http://localhost/php/medicine_website/user_panel/form/sign_form.php");
+        header("Refresh:0; url=http://localhost/php/medicine_website/user_panel/form/login_form.php");
         return;
     } else {
         $_SESSION["form_error"] = "Email Id is already Exist";

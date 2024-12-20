@@ -287,12 +287,12 @@ main {
     border-bottom: 0.5px solid rgba(128, 128, 128, 0.3);
 }
 #advance_details #description_img {
-    width: 90%;
+    width: 100%;
     margin: 0 auto;
 }
 #advance_details #description_img img {
     width: 100%;
-    padding: 2% 5%;
+    padding: 2%;
     margin: 1% 0;
     border: 2px solid gray;
     border-radius: 5px;

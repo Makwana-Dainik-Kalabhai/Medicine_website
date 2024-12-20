@@ -110,7 +110,7 @@ main {
 }
 
 .regi_form #sign_form form {
-    height: 550px;
+    height: 625px;
 }
 .regi_form #login_form form {
     height: 300px;
@@ -125,21 +125,20 @@ main {
     margin-top: 3%;
 }
 
-.regi_form input, .regi_form textarea {
+.regi_form input, .regi_form .row {
     width: 90%;
     padding: 1% 0;
-    font-size: 0.65em;
-    outline: none;
+}
+.regi_form .row input {
+    width: 100%;
+    padding: 0;
 }
 .regi_form input {
+    font-size: 0.65em;
     outline: none;
     border: none;
     border-bottom: 1px solid gray;
 }
-.regi_form textarea {
-    border: 1px solid gray;
-}
-
 .pass_div {
     position: relative;
 }
@@ -171,7 +170,7 @@ main {
 }
 
 
-.btns {
+.regi_form .btns {
     position: absolute;
     bottom: 3%;
     width: 100%;
