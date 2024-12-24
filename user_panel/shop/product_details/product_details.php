@@ -38,6 +38,7 @@ if (isset($_GET["status"])) {
             $row = $sel[0];
 
             $count_img = 0;
+            $category = $row["category"];
             ?>
             <div id="product_img">
                 <div id="sub_imgs">
@@ -181,11 +182,32 @@ if (isset($_GET["status"])) {
                 else
                     disMedicineDetalis();
                 ?>
+                <div id=description_img>
+                    <?php if ($row["desc_img"] != "") {
+                        foreach (unserialize($row["desc_img"]) as $img) { ?>
+                            <img src="http://localhost/php/medicine_website/user_panel/shop/desc_imgs/<?php echo $img; ?>" alt="" />
+                    <?php }
+                    } ?>
+                </div>
             </div>
         </div>
-        <img src="" alt="">
+
         <!-- //! Similar Products -->
-        <?php include("./similar_product/similar_product.php"); ?>
+        <?php
+        foreach ($sel as $row) {
+            $sel = $conn->prepare("SELECT * FROM `products` WHERE `category`='$category'");
+            $sel->execute();
+            $sel = $sel->fetchAll();
+
+            $total_product = 0;
+
+            foreach ($sel as $row) {
+                $total_product++;
+            }
+            if ($total_product > 1) {
+                include("./similar_product/similar_product.php");
+            }
+        } ?>
 
         <!-- //! Ratings & Reviews -->
         <div id="ratings_div">
@@ -211,9 +233,17 @@ function disProductDetalis()
         <div id="details">
             <div id="description">
                 <?php if ($row["description"] != null) {
-                    foreach (unserialize($row["description"]) as $des) { ?>
-                        <li><?php echo $des; ?></li>
-                    <?php
+                    foreach (unserialize($row["description"]) as $des) {
+                        if (isset($des[0]) && isset($des[1])) { ?>
+                            <p>
+                                <li style="display: inline;font-weight: 700;"><?php echo $des[0]; ?></li>
+                                <span>: -&ensp;<?php echo $des[1]; ?></span>
+                            </p>
+                        <?php }
+                        //
+                        else if (isset($des[0])) { ?>
+                            <li><?php echo $des[0]; ?></li>
+                    <?php }
                     }
                 }
                 if ($row["link"] != null) { ?>
@@ -224,9 +254,18 @@ function disProductDetalis()
             <div id="features">
                 <ol>
                     <?php if ($row["features"] != null) {
-                        foreach (unserialize($row["features"]) as $fea) { ?>
-                            <li><?php echo $fea; ?></li>
+                        foreach (unserialize($row["features"]) as $fea) {
+                            if (isset($fea[0]) && isset($fea[1])) { ?>
+                                <p>
+                                    <li style="display: inline;font-weight: 700;"><?php echo $fea[0]; ?></li>
+                                    <span>: -&ensp;<?php echo $fea[1]; ?></span>
+                                </p>
+                            <?php }
+                            //
+                            else if (isset($fea[0])) { ?>
+                                <li><?php echo $fea[0]; ?></li>
                     <?php }
+                        }
                     } ?>
                 </ol>
             </div>
@@ -252,13 +291,6 @@ function disProductDetalis()
             </div>
         </div>
     <?php } ?>
-    <div id=description_img>
-        <?php if ($row["desc_img"] != "") {
-            foreach (unserialize($row["desc_img"]) as $img) { ?>
-                <img src="http://localhost/php/medicine_website/user_panel/shop/desc_imgs/<?php echo $img; ?>" alt="" />
-        <?php }
-        } ?>
-    </div>
     <?php
 }
 //
@@ -273,8 +305,15 @@ function disMedicineDetalis()
             <div id="description">
                 <?php if ($row["description"] != null) {
                     foreach (unserialize($row["description"]) as $des) {
-                        foreach ($des as $d) { ?>
-                            <li><?php echo $d; ?></li>
+                        if (isset($des[0]) && isset($des[1])) { ?>
+                            <p>
+                                <li style="display: inline;font-weight: 700;"><?php echo $des[0]; ?></li>
+                                <span>: -&ensp;<?php echo $des[1]; ?></span>
+                            </p>
+                        <?php }
+                        //
+                        else if (isset($des[0])) { ?>
+                            <li><?php echo $des[0]; ?></li>
                 <?php }
                     }
                 } ?>
@@ -313,9 +352,17 @@ function disMedicineDetalis()
             </div>
             <div id="safety">
                 <?php if ($row["safety"] != null) {
-                    foreach (unserialize($row["safety"]) as $saf) { ?>
-                        <li><?php echo $saf; ?></li>
-                <?php
+                    foreach (unserialize($row["safety"]) as $saf) {
+                        if (isset($how[0]) && isset($how[1])) { ?>
+                            <p>
+                                <li style="display: inline;font-weight: 700;"><?php echo $saf[0]; ?></li>
+                                <span>: -&ensp;<?php echo $saf[1]; ?></span>
+                            </p>
+                        <?php }
+                        //
+                        else if (isset($saf[0])) { ?>
+                            <li><?php echo $saf[0]; ?></li>
+                <?php }
                     }
                 } ?>
             </div>
@@ -350,11 +397,4 @@ function disMedicineDetalis()
             </div>
         </div>
     <?php } ?>
-    <div id=description_img>
-        <?php if ($row["desc_img"] != "") {
-            foreach (unserialize($row["desc_img"]) as $img) { ?>
-                <img src="http://localhost/php/medicine_website/user_panel/shop/desc_imgs/<?php echo $img; ?>" alt="" />
-        <?php }
-        } ?>
-    </div>
 <?php } ?>

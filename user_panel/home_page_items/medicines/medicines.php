@@ -13,7 +13,7 @@
     $sel = $sel->fetchAll();
 
     foreach ($sel as $row) { ?>
-        <a href="http://localhost/php/medicine_website/user_panel/shop/pr_main_page/pr_main_page.php?category=<?php echo $row["category"]; ?>&status=medicine"><img src="http://localhost/php/medicine_website/user_panel/shop/category_img/<?php echo $row["category"]; ?>.png" /></a>
+        <a href="http://localhost/php/medicine_website/user_panel/shop/pr_main_page/pr_main_page.php?category=<?php echo $row["category"]; ?>&status=medicine"><img src="http://localhost/php/medicine_website/user_panel/shop/category_img/<?php echo $row["cat_img"]; ?>" /></a>
     <?php } ?>
 </div>
 

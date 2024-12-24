@@ -24,7 +24,7 @@
 
             foreach ($sel as $row) { ?>
                     <a href="http://localhost/php/medicine_website/user_panel/shop/pr_main_page/pr_main_page.php?status=device&category=<?php echo $row["category"]; ?>" class="box">
-                        <img src="http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo unserialize($row["item_img"])[0]; ?>" alt="Img not Found"/>
+                        <img src="http://localhost/php/medicine_website/user_panel/shop/category_img/<?php echo $row["cat_img"]; ?>" alt="Img not Found"/>
                         <span class="category"><?php echo $row["category"]; ?></span>
                     </a>
             <?php } ?>  
