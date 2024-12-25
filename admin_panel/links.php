@@ -9,18 +9,12 @@
 <link rel="shortcut icon" href="http://localhost/php/medicine_website/logo.ico" type="image/x-icon" />
 
 <!-- //! Core JS Files   -->
-<!-- <script src="http://localhost/php/medicine_website/admin_panel/assets/js/core/jquery.min.js"></script>
+<script src="http://localhost/php/medicine_website/admin_panel/assets/js/core/jquery.min.js"></script>
 <script src="http://localhost/php/medicine_website/admin_panel/assets/js/core/popper.min.js"></script>
 <script src="http://localhost/php/medicine_website/admin_panel/assets/js/core/bootstrap.min.js"></script>
-<script src="http://localhost/php/medicine_website/admin_panel/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script> -->
-<!-- Chart JS -->
-<!-- <script src="http://localhost/php/medicine_website/admin_panel/assets/js/plugins/chartjs.min.js"></script> -->
-<!--  Notifications Plugin    -->
-<!-- <script src="http://localhost/php/medicine_website/admin_panel/assets/js/plugins/bootstrap-notify.js"></script> -->
-<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
-<!-- <script src="http://localhost/php/medicine_website/admin_panel/assets/js/paper-dashboard.min.js?v=2.0.1" type="text/javascript"></script> -->
+<script src="http://localhost/php/medicine_website/admin_panel/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
 
-<!-- Database -->
+<!-- //! Database -->
 <?php include("C:/xampp/htdocs/php/medicine_website/database.php"); ?>
 
 <!-- //! Jquery Link -->
@@ -32,3 +26,6 @@
 
 <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.0.2/css/buttons.dataTables.min.css">
 <script src="https://cdn.datatables.net/buttons/3.0.2/js/dataTables.buttons.min.js"></script>
+
+<!-- //! Bootstrap CDN -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

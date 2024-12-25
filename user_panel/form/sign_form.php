@@ -72,7 +72,7 @@ if (!isset($_SESSION["email"])) { ?>
                         <span id="pass_des">Minimum 8 digits, 1 Uppercase, 1 Lowercase letter</span>
 
                         <label for="sign_phone">Phone:</label>
-                        <input type="number" name="sign_phone" maxlength="10" placeholder="Enter Phone no." required />
+                        <input type="number" name="sign_phone" pattern="[0-9].{10,10}" minlength="10" maxlength="10" placeholder="Enter Phone no." title="Please! Enter 10 digit number" required />
 
                         <div class="row">
                             <div class="col-md-6">
@@ -91,10 +91,9 @@ if (!isset($_SESSION["email"])) { ?>
                             </div>
                             <div class="col-md-6">
                                 <label for="pincode">Pincode:</label>
-                                <input type="text" name="pincode" placeholder="Pincode" required />
+                                <input type="number" pattern="[0-9].{6,6}" minlength="6" maxlength="6" name="pincode" placeholder="Pincode" title="Please! Enter 6 digit pincode" required />
                             </div>
                         </div>
-                        <!-- <textarea name="sign_address" placeholder="Enter Address"></textarea> -->
 
                         <div class="btns">
                             <input type="submit" value="signUp" name="sign_submit" />

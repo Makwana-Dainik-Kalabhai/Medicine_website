@@ -10,15 +10,3 @@
     border-radius: 50%;
     filter: contrast(110%);
 }
-
-.card {
-    overflow: hidden;
-}
-.table-title {
-    color: white;
-    font-weight: 600;
-}
-.row>div {
-    display: flex;
-    align-items: center;
-}
