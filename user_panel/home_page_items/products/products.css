@@ -29,6 +29,7 @@
 
 #product_shop_category>p {
     color: #1e5162;
+    font-weight: 500;
     margin: 1% 0;
     font-family: "Ubuntu", sans-serif;
 }
@@ -102,6 +103,7 @@
 
 #popular_product>p {
     color: #1e5162;
+    font-weight: 500;
     margin: 1% 0;
     font-family: "Ubuntu", sans-serif;
 }

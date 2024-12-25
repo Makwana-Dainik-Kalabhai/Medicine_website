@@ -1,12 +1,12 @@
 <div class="logo">
     <a href="https://www.creative-tim.com" class="simple-text logo-mini">
-        <div class="logo-image-small">
+        <!-- <div class="logo-image-small">
             <img src="./assets/img/logo-small.png">
-        </div>
+        </div> -->
         <!-- <p>CT</p> -->
     </a>
     <a href="https://www.creative-tim.com" class="simple-text logo-normal">
-        Creative Tim
+        Admin Panel
         <!-- <div class="logo-image-big">
             <img src="../assets/img/logo-big.png">
           </div> -->
@@ -15,9 +15,9 @@
 <div class="sidebar-wrapper">
     <ul class="nav">
         <li class="active ">
-            <a href="./dashboard.html">
-                <i class="nc-icon nc-bank"></i>
-                <p>Dashboard</p>
+            <a href="./users/user.php">
+                <i class="fa-solid fa-user"></i>
+                <p>Users</p>
             </a>
         </li>
         <li>
@@ -27,7 +27,7 @@
             </a>
         </li>
         <li>
-            <a href="./map.html">
+            <a href="./map.php">
                 <i class="nc-icon nc-pin-3"></i>
                 <p>Maps</p>
             </a>

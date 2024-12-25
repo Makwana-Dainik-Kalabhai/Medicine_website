@@ -6,7 +6,7 @@
 /* //! Shop by category */
 #medicine_shop_category {
     width: 100%;
-    padding: 1% 2%;
+    padding: 2%;
     margin: 0 auto;
     margin-bottom: 2.5%;
     background: linear-gradient(white, #76bdd5);
@@ -14,15 +14,19 @@
 
 #medicine_shop_category>p {
     color: black;
+    font-weight: 500;
     margin: 1% 0;
 }
 
 #medicine_shop_category>a {
-    margin: 0 0.5%;
+    margin: 0 1%;
 }
 
 #medicine_shop_category img {
     width: 17.5%;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 1px 1px 3px 0.5px #f2f2f2;
 }
 
 
@@ -44,6 +48,7 @@
 
 #popular_picks p {
     color: black;
+    font-weight: 500;
     padding: 1.5% 2%;
 }
 

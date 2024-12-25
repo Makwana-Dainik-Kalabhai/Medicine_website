@@ -54,6 +54,12 @@ if (isset($_POST["sign_submit"])) {
     $sel_email = $sel_email->fetchAll();
 
     foreach ($sel_email as $row) {
+
+        if ($row["email"] == $_POST["sign_email"] && $row["status"] == "Blocked") {
+            $_SESSION["form_error"] = "You are blocked, So you can't signUp";
+            header("Refresh:0; url=http://localhost/php/medicine_website/user_panel/form/sign_form.php");
+            return;
+        }
         $contain_email = $row["email"];
     }
 
@@ -67,12 +73,20 @@ if (isset($_POST["sign_submit"])) {
         $U->insertValue();
 
         $_SESSION["form_succ"] = "signUp Successfully";
+
+        if (isset($_SESSION["form_error"])) {
+            unset($_SESSION["form_error"]);
+        }
+
         header("Refresh:0; url=http://localhost/php/medicine_website/user_panel/form/login_form.php");
         return;
     } else {
         $_SESSION["form_error"] = "Email Id is already Exist";
-        header("Refresh:0; url=http://localhost/php/medicine_website/user_panel/form/sign_form.php");
 
+        if (isset($_SESSION["form_succ"])) {
+            unset($_SESSION["form_succ"]);
+        }
+        header("Refresh:0; url=http://localhost/php/medicine_website/user_panel/form/sign_form.php");
         //
     }
 }
@@ -91,34 +105,6 @@ if (isset($_POST["login_submit"])) {
     $login_email = $_POST["login_email"];
     $login_pass = $_POST["login_pass"];
 
-    //! Select user
-    $sel_user = $conn->prepare("SELECT * FROM `user_login_data`");
-    $sel_user->execute();
-    $sel_user = $sel_user->fetchAll();
-
-    foreach ($sel_user as $row_user) {
-        if ($login_email == $row_user["email"] && $login_pass == $row_user["pass"]) {
-
-            $_SESSION["email"] = $row_user["email"];
-            $_SESSION["form_succ"] = "Login Successfully";
-
-            header("Refresh:0; url=http://localhost/php/medicine_website/user_panel/form/login_form.php");
-            return;
-        }
-        //
-        if ($login_email == $row_user["email"] && $login_pass != $row_user["pass"]) {
-            $_SESSION["form_error"] = "Invalid Password";
-
-            header("Refresh:0; url=http://localhost/php/medicine_website/user_panel/form/login_form.php");
-        }
-        //
-        else if ($login_email != $row_user["email"] && $login_pass == $row_user["pass"]) {
-            $_SESSION["form_error"] = "Invalid Email ID";
-
-            header("Refresh:0; url=http://localhost/php/medicine_website/user_panel/form/login_form.php");
-        }
-    }
-
     //! Select Admin
     $sel_admin = $conn->prepare("SELECT * FROM `admin_login_data`");
     $sel_admin->execute();
@@ -128,7 +114,11 @@ if (isset($_POST["login_submit"])) {
 
         if ($login_email == $row_admin["email"] && $login_pass == $row_admin["pass"]) {
 
-            $_SESSION["email"] = $row_admin["email"];
+            $_SESSION["admin_email"] = $row_admin["email"];
+
+            if (isset($_SESSION["form_error"])) {
+                unset($_SESSION["form_error"]);
+            }
 
             header("Refresh:0; url='http://localhost/php/medicine_website/admin_panel/index.php'");
             return;
@@ -137,11 +127,66 @@ if (isset($_POST["login_submit"])) {
         if ($login_email == $row_admin["email"] && $login_pass != $row_admin["pass"]) {
             $_SESSION["form_error"] = "Invalid Password";
 
+            if (isset($_SESSION["form_succ"])) {
+                unset($_SESSION["form_succ"]);
+            }
+
             header("Refresh:0; url=http://localhost/php/medicine_website/user_panel/form/login_form.php");
         }
         //
         else {
             $_SESSION["form_error"] = "Invalid Email ID";
+
+            if (isset($_SESSION["form_succ"])) {
+                unset($_SESSION["form_succ"]);
+            }
+
+            header("Refresh:0; url=http://localhost/php/medicine_website/user_panel/form/login_form.php");
+        }
+    }
+
+    //! Select user
+    $sel_user = $conn->prepare("SELECT * FROM `user_login_data`");
+    $sel_user->execute();
+    $sel_user = $sel_user->fetchAll();
+
+    foreach ($sel_user as $row_user) {
+
+        if ($login_email == $row_user["email"] && $row_user["status"] == "Blocked") {
+            $_SESSION["form_error"] = "You are blocked, So you can't Login";
+            header("Refresh:0; url=http://localhost/php/medicine_website/user_panel/form/login_form.php");
+            return;
+        }
+
+        if ($login_email == $row_user["email"] && $login_pass == $row_user["pass"]) {
+
+            $_SESSION["email"] = $row_user["email"];
+            $_SESSION["form_succ"] = "Login Successfully";
+
+            if (isset($_SESSION["form_error"])) {
+                unset($_SESSION["form_error"]);
+            }
+
+            header("Refresh:0; url=http://localhost/php/medicine_website/user_panel/form/login_form.php");
+            return;
+        }
+        //
+        if ($login_email == $row_user["email"] && $login_pass != $row_user["pass"]) {
+            $_SESSION["form_error"] = "Invalid Password";
+
+            if (isset($_SESSION["form_succ"])) {
+                unset($_SESSION["form_succ"]);
+            }
+
+            header("Refresh:0; url=http://localhost/php/medicine_website/user_panel/form/login_form.php");
+        }
+        //
+        else if ($login_email != $row_user["email"] && $login_pass == $row_user["pass"]) {
+            $_SESSION["form_error"] = "Invalid Email ID";
+
+            if (isset($_SESSION["form_succ"])) {
+                unset($_SESSION["form_succ"]);
+            }
 
             header("Refresh:0; url=http://localhost/php/medicine_website/user_panel/form/login_form.php");
         }

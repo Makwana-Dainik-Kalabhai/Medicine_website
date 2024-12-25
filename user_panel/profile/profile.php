@@ -54,7 +54,7 @@
                     <div id="left_div">
                         <?php if ($row["profile_img"] == null) { ?>
                             <div id="profile_img">
-                                <img src="user.png" alt="">
+                                <img src="http://localhost/php/medicine_website/user_panel/profile/user.png" alt="">
                                 <span id="name"><?php echo $row["name"]; ?></span>
                                 <span id="email"><?php echo $row["email"]; ?></span>
                             </div>

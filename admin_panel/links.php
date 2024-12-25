@@ -1,25 +1,34 @@
 <!-- //! Fonts and icons     -->
-<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
 
 <!-- //! CSS Files -->
-<link href="./assets/css/bootstrap.min.css" rel="stylesheet" />
-<link href="./assets/css/paper-dashboard.css?v=2.0.1" rel="stylesheet" />
+<link href="http://localhost/php/medicine_website/admin_panel/assets/css/bootstrap.min.css" rel="stylesheet" />
+<link href="http://localhost/php/medicine_website/admin_panel/assets/css/paper-dashboard.css?v=2.0.1" rel="stylesheet" />
 
 <!-- //! Favicon -->
 <link rel="shortcut icon" href="http://localhost/php/medicine_website/logo.ico" type="image/x-icon" />
 
-
 <!-- //! Core JS Files   -->
-<script src="./assets/js/core/jquery.min.js"></script>
-<script src="./assets/js/core/popper.min.js"></script>
-<script src="./assets/js/core/bootstrap.min.js"></script>
-<script src="./assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-<!--  Google Maps Plugin    -->
-<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+<!-- <script src="http://localhost/php/medicine_website/admin_panel/assets/js/core/jquery.min.js"></script>
+<script src="http://localhost/php/medicine_website/admin_panel/assets/js/core/popper.min.js"></script>
+<script src="http://localhost/php/medicine_website/admin_panel/assets/js/core/bootstrap.min.js"></script>
+<script src="http://localhost/php/medicine_website/admin_panel/assets/js/plugins/perfect-scrollbar.jquery.min.js"></script> -->
 <!-- Chart JS -->
-<script src="./assets/js/plugins/chartjs.min.js"></script>
+<!-- <script src="http://localhost/php/medicine_website/admin_panel/assets/js/plugins/chartjs.min.js"></script> -->
 <!--  Notifications Plugin    -->
-<script src="./assets/js/plugins/bootstrap-notify.js"></script>
+<!-- <script src="http://localhost/php/medicine_website/admin_panel/assets/js/plugins/bootstrap-notify.js"></script> -->
 <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
-<script src="./assets/js/paper-dashboard.min.js?v=2.0.1" type="text/javascript"></script>
+<!-- <script src="http://localhost/php/medicine_website/admin_panel/assets/js/paper-dashboard.min.js?v=2.0.1" type="text/javascript"></script> -->
+
+<!-- Database -->
+<?php include("C:/xampp/htdocs/php/medicine_website/database.php"); ?>
+
+<!-- //! Jquery Link -->
+<script src="http://localhost/php/mysql/icecream_website/jquery-3.7.1.js"></script>
+
+<!-- Data Table Links -->
+<link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
+<script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.0.2/css/buttons.dataTables.min.css">
+<script src="https://cdn.datatables.net/buttons/3.0.2/js/dataTables.buttons.min.js"></script>
