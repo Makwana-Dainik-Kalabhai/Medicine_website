@@ -26,7 +26,7 @@ if (isset($_GET["product_id"])) {
         <?php include("C:/xampp/htdocs/php/medicine_website/admin_panel/sidenav.php"); ?>
 
         <div class="main-panel">
-            <?php include("C:/xampp/htdocs/php/medicine_website/admin_panel/topnav.php"); ?>
+            <?php include("C:/xampp/htdocs/php/medicine_website/admin_panel/header/header.php"); ?>
 
             <div class="content">
                 <?php
@@ -200,7 +200,7 @@ if (isset($_GET["product_id"])) {
                                         <img class="desc-img mt-4" src="http://localhost/php/medicine_website/user_panel/shop/desc_imgs/<?php echo unserialize($row["desc_img"])[0]; ?>" />
                                     <?php } ?>
                                 </div>
-                                <div class="col-md-4 border py-2"><a href="http://localhost/php/medicine_website/admin_panel/products/additional_info/" class="btn btn-light">Change</a></div>
+                                <div class="col-md-4 border py-2"><a href="http://localhost/php/medicine_website/admin_panel/products/additional_info/desc_imgs/" class="btn btn-light">Change</a></div>
                             </div>
                         <?php } ?>
                         <?php if ($row["description"] != null) { ?>
@@ -208,7 +208,7 @@ if (isset($_GET["product_id"])) {
                                 <div class="col-md-2 border py-2"><?php echo $i;
                                                                     $i++; ?>)</div>
                                 <div class="col-md-5 border py-2">Description of the Product</div>
-                                <div class="col-md-4 border py-2"><a href="http://localhost/php/medicine_website/admin_panel/products/additional_info/" class="btn btn-light">Change</a></div>
+                                <div class="col-md-4 border py-2"><a href="http://localhost/php/medicine_website/admin_panel/products/additional_info/desc_imgs/" class="btn btn-light">Change</a></div>
                             </div>
                         <?php } ?>
                         <?php if ($row["features"] != null) { ?>
@@ -216,7 +216,7 @@ if (isset($_GET["product_id"])) {
                                 <div class="col-md-2 border py-2"><?php echo $i;
                                                                     $i++; ?>)</div>
                                 <div class="col-md-5 border py-2">Features of the Product</div>
-                                <div class="col-md-4 border py-2"><a href="http://localhost/php/medicine_website/admin_panel/products/additional_info/" class="btn btn-light">Change</a></div>
+                                <div class="col-md-4 border py-2"><a href="http://localhost/php/medicine_website/admin_panel/products/additional_info/desc_imgs/" class="btn btn-light">Change</a></div>
                             </div>
                         <?php } ?>
                         <?php if ($row["specification"] != null) { ?>
@@ -224,7 +224,7 @@ if (isset($_GET["product_id"])) {
                                 <div class="col-md-2 border py-2"><?php echo $i;
                                                                     $i++; ?>)</div>
                                 <div class="col-md-5 border py-2">Specifications of the Product</div>
-                                <div class="col-md-4 border py-2"><a href="http://localhost/php/medicine_website/admin_panel/products/additional_info/" class="btn btn-light">Change</a></div>
+                                <div class="col-md-4 border py-2"><a href="http://localhost/php/medicine_website/admin_panel/products/additional_info/desc_imgs/" class="btn btn-light">Change</a></div>
                             </div>
                         <?php } ?>
                         <?php if ($row["faqs"] != null) { ?>
@@ -232,7 +232,7 @@ if (isset($_GET["product_id"])) {
                                 <div class="col-md-2 border py-2"><?php echo $i;
                                                                     $i++; ?>)</div>
                                 <div class="col-md-5 border py-2">Frequently asked questions of the Product</div>
-                                <div class="col-md-4 border py-2"><a href="http://localhost/php/medicine_website/admin_panel/products/additional_info/" class="btn btn-light">Change</a></div>
+                                <div class="col-md-4 border py-2"><a href="http://localhost/php/medicine_website/admin_panel/products/additional_info/desc_imgs/" class="btn btn-light">Change</a></div>
                             </div>
                         <?php } ?>
                     </div>

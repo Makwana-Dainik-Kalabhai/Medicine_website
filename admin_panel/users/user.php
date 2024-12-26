@@ -15,7 +15,7 @@
   $(document).ready(() => {
     $(".user-list").DataTable();
 
-    $(".active-btn").click(function() {
+    $(".active-user").click(function() {
       let email = $(this).val();
 
       $.ajax({
@@ -30,7 +30,7 @@
         }
       });
     });
-    $(".block-btn").click(function() {
+    $(".block-user").click(function() {
       let email = $(this).val();
 
       $.ajax({
@@ -60,7 +60,7 @@ if (isset($_POST["email"])) {
     <?php include("C:/xampp/htdocs/php/medicine_website/admin_panel/sidenav.php"); ?>
 
     <div class="main-panel">
-      <?php include("C:/xampp/htdocs/php/medicine_website/admin_panel/topnav.php"); ?>
+      <?php include("C:/xampp/htdocs/php/medicine_website/admin_panel/header/header.php"); ?>
 
       <div class="content">
         <div class="card">
@@ -121,11 +121,11 @@ if (isset($_POST["email"])) {
                   <?php if ($r_user["status"] == "Active") { ?>
                     <td class="col-md-1 text-success fw-bolder"><?php echo $r_user["status"]; ?>&emsp;
 
-                      <button class="btn btn-dark block-btn" value="<?php echo $r_user["email"]; ?>">Block</button>
+                      <button class="btn btn-dark block-user" value="<?php echo $r_user["email"]; ?>">Block</button>
                     </td>
                   <?php } else { ?>
                     <td class="col-md-1 text-danger fw-bolder"><?php echo $r_user["status"]; ?>&emsp;
-                      <button class="btn btn-success active-btn" value="<?php echo $r_user["email"]; ?>">Active</button>
+                      <button class="btn btn-success active-user" value="<?php echo $r_user["email"]; ?>">Active</button>
                     </td>
                   <?php } ?>
                 </tr>

@@ -22,7 +22,7 @@
         <?php include("C:/xampp/htdocs/php/medicine_website/admin_panel/sidenav.php"); ?>
 
         <div class="main-panel">
-            <?php include("C:/xampp/htdocs/php/medicine_website/admin_panel/topnav.php"); ?>
+            <?php include("C:/xampp/htdocs/php/medicine_website/admin_panel/header/header.php"); ?>
 
             <div class="content">
                 <div class="card">
@@ -64,7 +64,8 @@
                                                             else echo "-"; ?></td>
                                     <td class="col-md-1">₹<?php echo $row["offer_price"]; ?></td>
                                     <td class="col-md-1">₹<?php echo $row["price"]; ?></td>
-                                    <td class="col-md-1"><?php if($row["discount"]!=0) echo $row["discount"]."%"; else echo "-";  ?></td>
+                                    <td class="col-md-1"><?php if ($row["discount"] != 0) echo $row["discount"] . "%";
+                                                            else echo "-";  ?></td>
                                     <td class="col-md-1"><?php echo $row["quantity"]; ?></td>
                                     <td class="col-md-1">
                                         <?php $date = strtotime($row["delivery_date"]);

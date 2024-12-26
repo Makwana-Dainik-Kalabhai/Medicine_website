@@ -22,7 +22,7 @@
         <?php include("C:/xampp/htdocs/php/medicine_website/admin_panel/sidenav.php"); ?>
         
         <div class="main-panel">
-            <?php include("C:/xampp/htdocs/php/medicine_website/admin_panel/topnav.php"); ?>
+            <?php include("C:/xampp/htdocs/php/medicine_website/admin_panel/header/header.php"); ?>
 
             <div class="content">
                 <div class="card">

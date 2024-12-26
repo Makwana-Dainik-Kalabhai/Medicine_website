@@ -258,7 +258,7 @@
         </div>
       </div>
       <footer class="footer footer-black  footer-white ">
-        <?php include("C:/xampp/htdocs/php/medicine_website/admin_panel/footer.php"); ?>
+        <?php include("C:/xampp/htdocs/php/medicine_website/admin_panel/footer/footer.php"); ?>
       </footer>
     </div>
   </div>

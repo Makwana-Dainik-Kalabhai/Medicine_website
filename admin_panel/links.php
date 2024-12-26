@@ -20,7 +20,7 @@
 <!-- //! Jquery Link -->
 <script src="http://localhost/php/mysql/icecream_website/jquery-3.7.1.js"></script>
 
-<!-- Data Table Links -->
+<!-- //! Data Table Links -->
 <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">
 <script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
 
