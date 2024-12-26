@@ -64,7 +64,7 @@
                                                             else echo "-"; ?></td>
                                     <td class="col-md-1">₹<?php echo $row["offer_price"]; ?></td>
                                     <td class="col-md-1">₹<?php echo $row["price"]; ?></td>
-                                    <td class="col-md-1"><?php echo $row["discount"]; ?>%</td>
+                                    <td class="col-md-1"><?php if($row["discount"]!=0) echo $row["discount"]."%"; else echo "-";  ?></td>
                                     <td class="col-md-1"><?php echo $row["quantity"]; ?></td>
                                     <td class="col-md-1">
                                         <?php $date = strtotime($row["delivery_date"]);

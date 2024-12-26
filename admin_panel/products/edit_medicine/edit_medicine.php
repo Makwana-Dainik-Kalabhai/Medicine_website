@@ -1,3 +1,9 @@
+<?php
+session_start();
+if (isset($_GET["product_id"])) {
+    $_SESSION["product_id"] = $_GET["product_id"];
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,19 +15,6 @@
     <title>Edit Medicine</title>
     <?php include("C:/xampp/htdocs/php/medicine_website/admin_panel/links.php"); ?>
 </head>
-
-<style>
-    .carousel-control-prev span {
-        color: black !important;
-        font-weight: 800;
-    }
-
-    .category-img {
-        display: block;
-        width: 60%;
-        margin: auto;
-    }
-</style>
 
 <script>
     <?php include("C:/xampp/htdocs/php/medicine_website/admin_panel/products/edit_medicine/edit_medicine.js"); ?>
@@ -37,7 +30,7 @@
 
             <div class="content">
                 <?php
-                $sel = $conn->prepare("SELECT * FROM `products` WHERE `product_id`='" . $_GET["product_id"] . "'");
+                $sel = $conn->prepare("SELECT * FROM `products` WHERE `product_id`='" . $_SESSION["product_id"] . "'");
                 $sel->execute();
                 $sel = $sel->fetchAll();
 
@@ -49,25 +42,41 @@
 
                     <!-- //! Category Details -->
                     <div class="card px-5 py-4 mb-5">
-                        <h5 class="text-danger">Category Details</h5>
-                        <div class="row">
-                            <div class="col-md-4 border pb-3 p-2">Category Image</div>
-                            <div class="col-md-4 border pb-3 p-2">Category Name</div>
-                            <div class="col-md-4 border pb-3 p-2">Change Category Image</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4 border p-2">
-                                <img class="category-img" src="http://localhost/php/medicine_website/user_panel/shop/category_img/<?php echo $row["cat_img"]; ?>" />
+                        <!-- //** Product details updated successfully -->
+                        <?php if (isset($_SESSION["success"])) { ?>
+                            <div class="alert alert-success" role="alert">
+                                <?php echo $_SESSION["success"]; ?>
+                                <script>
+                                    $(document).ready(function() {
+                                        $(".alert").fadeOut(10000);
+                                        <?php unset($_SESSION["success"]); ?>
+                                    });
+                                </script>
                             </div>
-                            <div class="col-md-4 border p-2">
-                                <input type="text" class="form-control category" value="<?php echo $row["category"]; ?>" />
+                        <?php } ?>
+
+                        <form action="http://localhost/php/medicine_website/admin_panel/products/edit_medicine/update_data.php" method="post" enctype="multipart/form-data">
+                            <h5 class="text-danger">Category Details</h5>
+                            <div class="row">
+                                <div class="col-md-4 border pb-3 p-2">Category Image</div>
+                                <div class="col-md-4 border pb-3 p-2">Category Name</div>
+                                <div class="col-md-4 border pb-3 p-2">Change Category Image</div>
                             </div>
-                            <div class="col-md-4 border p-2">
-                                <input type="checkbox" class="mb-4" />&ensp;Are you want to change category image?
-                                <input type="file" class="form-control cat-img" disabled="true" accept="image/png, image/jpeg, image/jpg" />
+                            <div class="row">
+                                <input type="hidden" name="product-id" value="<?php echo $row["product_id"]; ?>" />
+                                <div class="col-md-4 border p-2">
+                                    <img class="category-img d-block w-50 m-auto" src="http://localhost/php/medicine_website/user_panel/shop/category_img/<?php echo $row["cat_img"]; ?>" />
+                                </div>
+                                <div class="col-md-4 border p-2">
+                                    <input type="text" name="category" class="form-control" value="<?php echo $row["category"]; ?>">
+                                </div>
+                                <div class="col-md-4 border p-2">
+                                    <input type="checkbox" class="mb-4" />&ensp;Are you want to change category image?
+                                    <input type="file" name="cat-img" class="form-control" value="<?php echo $row["cat_img"]; ?>" disabled="true" accept="image/png, image/jpeg, image/jpg" />
+                                </div>
                             </div>
-                        </div>
-                        <button class="btn btn-light m-0 mt-3 update-category">Update Category Details</button>
+                            <button class="btn btn-danger m-0 mt-3 w-100" name="update-category">Update Category Details</button>
+                        </form>
                     </div>
 
 
@@ -113,59 +122,70 @@
 
                                 </div>
                             </div>
+
                             <div class="col-md-6">
-                                <div class="row">
-                                    <p class="text-danger fs-3 my-2">Product Name</p>
-                                    <input type="text" class="name" class="form-control" value="<?php echo $row["name"]; ?>" />
-                                </div>
-                                <div class="row">
-                                    <p class="text-danger fs-3 mt-4 mb-2">Definition</p>
-                                    <textarea class="definition border p-2" value="<?php echo $row["definition"]; ?>" rows="8" cols="100"><?php echo $row["definition"]; ?></textarea>
-                                </div>
-                                <div class="row mt-4">
-                                    <div class="col-md-5">
-                                        <p class="text-danger fs-3 m-0">Discount</p>
-                                        <input type="number" class="discount form-control" value="<?php echo $row["discount"]; ?>">
+                                <form action="http://localhost/php/medicine_website/admin_panel/products/edit_medicine/update_data.php" method="post" enctype="multipart/form-data">
+                                    <div class="row">
+                                        <p class="text-danger fs-3 my-2">Product Name</p>
+                                        <input type="text" name="name" class="form-control" value="<?php echo $row["name"]; ?>" />
                                     </div>
-                                </div>
-                                <div class="row mt-4">
-                                    <div class="col-md-5">
-                                        <p class="text-danger fs-3 m-0">Offer Price</p>
-                                        <input type="number" class="offer-price form-control" value="<?php echo $row["offer_price"]; ?>">
+                                    <div class="row">
+                                        <p class="text-danger fs-3 mt-4 mb-2">Definition</p>
+                                        <textarea name="definition" class="border p-2" value="<?php echo $row["definition"]; ?>" rows="8" cols="100"><?php echo $row["definition"]; ?></textarea>
                                     </div>
-                                    <div class="col-md-5">
-                                        <p class="text-danger fs-3 m-0">Price</p>
-                                        <input type="number" class="price form-control" value="<?php echo $row["price"]; ?>">
+                                    <div class="row mt-4">
+                                        <div class="col-md-5">
+                                            <p class="text-danger fs-3 m-0">Discount</p>
+                                            <input type="number" name="discount" class="form-control" value="<?php echo $row["discount"]; ?>">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row mt-4">
-                                    <div class="col-md-5">
-                                        <p class="text-danger fs-3 m-0">Quantity</p>
-                                        <input type="number" class="quantity form-control" value="<?php echo $row["quantity"]; ?>">
+                                    <div class="row mt-4">
+                                        <div class="col-md-5">
+                                            <p class="text-danger fs-3 m-0">Offer Price</p>
+                                            <input type="number" name="offer-price" class="form-control" value="<?php echo $row["offer_price"]; ?>">
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="text-danger fs-3 m-0">Price</p>
+                                            <input type="number" name="price" class="form-control" value="<?php echo $row["price"]; ?>">
+                                        </div>
                                     </div>
-                                    <div class="col-md-5">
-                                        <p class="text-danger fs-3 m-0">Weight</p>
-                                        <input type="text" class="weight form-control" value="<?php echo $row["weight"]; ?>">
+                                    <div class="row mt-4">
+                                        <div class="col-md-5">
+                                            <p class="text-danger fs-3 m-0">Quantity</p>
+                                            <input type="number" name="quantity" class="form-control" value="<?php echo $row["quantity"]; ?>">
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="text-danger fs-3 m-0">Weight</p>
+                                            <input type="text" name="weight" class="form-control" value="<?php echo $row["weight"]; ?>">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row mt-4">
-                                    <div class="col-md-5">
-                                        <p class="text-danger fs-3 m-0">Expiry Date</p>
-                                        <input type="text" class="expiry form-control" value="<?php echo $row["expiry"]; ?>">
+                                    <div class="row mt-4">
+                                        <div class="col-md-5">
+                                            <p class="text-danger fs-3 m-0">Expiry Date</p>
+                                            <input type="text" name="expiry" class="form-control" value="<?php echo $row["expiry"]; ?>">
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="text-danger fs-3 m-0">Delivery Date</p>
+                                            <input type="text" name="delivery-date" class="form-control" value="<?php echo $row["delivery_date"]; ?>">
+                                        </div>
                                     </div>
-                                    <div class="col-md-5">
-                                        <p class="text-danger fs-3 m-0">Delivery Date</p>
-                                        <input type="text" class="delivery-date form-control" value="<?php echo $row["delivery_date"]; ?>">
+                                    <div class="row mt-4">
+                                        <div class="col-md-12">
+                                            <p class="text-danger fs-3 m-0">External link(video) that describes the Product:</p>
+                                            <a href="<?php echo $row["link"]; ?>"><?php echo $row["link"]; ?></a>
+                                            <input type="text" name="link" class="form-control mt-2" value="<?php echo $row["link"]; ?>">
+                                        </div>
                                     </div>
-                                </div>
+                                    <button class="btn btn-danger m-0 mt-4 w-100" name="update-product">Update Product Details</button>
+                                </form>
                             </div>
                         </div>
-                        <button class="btn btn-light m-0 mt-5 update-product">Update Product Details</button>
                     </div>
 
 
 
                     <!-- //! Additional Information -->
+                    <?php $i = 1; ?>
                     <div class="card p-5 mt-5">
                         <h5 class="text-danger">Edit Additional Information</h5>
                         <div class="row">
@@ -173,46 +193,67 @@
                             <div class="col-md-5 border pb-3 py-2">Information</div>
                             <div class="col-md-4 border pb-3 py-2">Change</div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-2 border py-2">1)</div>
-                            <div class="col-md-5 border py-2">
-                                Images for Description of the Product. Such as...
-                                <?php if (isset(unserialize($row["desc_img"])[0])) { ?>
-                                    <img class="desc-img mt-4" src="http://localhost/php/medicine_website/user_panel/shop/desc_imgs/<?php echo unserialize($row["desc_img"])[0]; ?>" />
-                                <?php } ?>
+                        <?php if ($row["desc_img"] != null) { ?>
+                            <div class="row">
+                                <div class="col-md-2 border py-2"><?php echo $i;
+                                                                    $i++; ?>)</div>
+                                <div class="col-md-5 border py-2">
+                                    Images for Description of the Product. Such as...
+                                    <?php if (isset(unserialize($row["desc_img"])[0])) { ?>
+                                        <img class="desc-img mt-4" src="http://localhost/php/medicine_website/user_panel/shop/desc_imgs/<?php echo unserialize($row["desc_img"])[0]; ?>" />
+                                    <?php } ?>
+                                </div>
+                                <div class="col-md-4 border py-2"><a href="http://localhost/php/medicine_website/admin_panel/products/additional_info/edit_desc_imgs.php" class="btn btn-light">Change</a></div>
                             </div>
-                            <div class="col-md-4 border py-2"><button class="btn btn-light">Change</button></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-2 border py-2">2)</div>
-                            <div class="col-md-5 border py-2">Description of the Product</div>
-                            <div class="col-md-4 border py-2"><button class="btn btn-light">Change</button></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-2 border py-2">3)</div>
-                            <div class="col-md-5 border py-2">Benefits of the Product</div>
-                            <div class="col-md-4 border py-2"><button class="btn btn-light">Change</button></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-2 border py-2">4)</div>
-                            <div class="col-md-5 border py-2">How to use the Product</div>
-                            <div class="col-md-4 border py-2"><button class="btn btn-light">Change</button></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-2 border py-2">5)</div>
-                            <div class="col-md-5 border py-2">Safety Information for the Product</div>
-                            <div class="col-md-4 border py-2"><button class="btn btn-light">Change</button></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-2 border py-2">6)</div>
-                            <div class="col-md-5 border py-2">Other Information of the Product</div>
-                            <div class="col-md-4 border py-2"><button class="btn btn-light">Change</button></div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-2 border py-2">7)</div>
-                            <div class="col-md-5 border py-2">Frequently asked questions of the Product</div>
-                            <div class="col-md-4 border py-2"><button class="btn btn-light">Change</button></div>
-                        </div>
+                        <?php } ?>
+                        <?php if ($row["description"] != null) { ?>
+                            <div class="row">
+                                <div class="col-md-2 border py-2"><?php echo $i;
+                                                                    $i++; ?>)</div>
+                                <div class="col-md-5 border py-2">Description of the Product</div>
+                                <div class="col-md-4 border py-2"><a href="http://localhost/php/medicine_website/admin_panel/products/additional_info/" class="btn btn-light">Change</a></div>
+                            </div>
+                        <?php } ?>
+                        <?php if ($row["benefits"] != null) { ?>
+                            <div class="row">
+                                <div class="col-md-2 border py-2"><?php echo $i;
+                                                                    $i++; ?>)</div>
+                                <div class="col-md-5 border py-2">Benefits of the Product</div>
+                                <div class="col-md-4 border py-2"><a href="http://localhost/php/medicine_website/admin_panel/products/additional_info/" class="btn btn-light">Change</a></div>
+                            </div>
+                        <?php } ?>
+                        <?php if ($row["how_use"] != null) { ?>
+                            <div class="row">
+                                <div class="col-md-2 border py-2"><?php echo $i;
+                                                                    $i++; ?>)</div>
+                                <div class="col-md-5 border py-2">How to use the Product</div>
+                                <div class="col-md-4 border py-2"><a href="http://localhost/php/medicine_website/admin_panel/products/additional_info/" class="btn btn-light">Change</a></div>
+                            </div>
+                        <?php } ?>
+                        <?php if ($row["safety"] != null) { ?>
+                            <div class="row">
+                                <div class="col-md-2 border py-2"><?php echo $i;
+                                                                    $i++; ?>)</div>
+                                <div class="col-md-5 border py-2">Safety Information for the Product</div>
+                                <div class="col-md-4 border py-2"><a href="http://localhost/php/medicine_website/admin_panel/products/additional_info/" class="btn btn-light">Change</a></div>
+                            </div>
+                        <?php } ?>
+                        <?php if ($row["other_info"] != null) { ?>
+                            <div class="row">
+                                <div class="col-md-2 border py-2"><?php echo $i;
+                                                                    $i++; ?>)</div>
+                                <div class="col-md-5 border py-2">Other Information of the Product</div>
+                                <div class="col-md-4 border py-2"><a href="http://localhost/php/medicine_website/admin_panel/products/additional_info/" class="btn btn-light">Change</a></div>
+                            </div>
+                        <?php } ?>
+                        <?php if ($row["faqs"] != null) { ?>
+                            <div class="row">
+                                <div class="col-md-2 border py-2"><?php echo $i;
+                                                                    $i++; ?>)</div>
+                                <div class="col-md-5 border py-2">Frequently asked questions of the Product</div>
+                                <div class="col-md-4 border py-2"><a href="http://localhost/php/medicine_website/admin_panel/products/additional_info/" class="btn btn-light">Change</a></div>
+                            </div>
+                        <?php } ?>
                     </div>
                 <?php } ?>
             </div>
