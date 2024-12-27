@@ -57,6 +57,7 @@ if (isset($_GET["product_id"])) {
 
                         <form action="http://localhost/php/medicine_website/admin_panel/products/edit_medicine/update_data.php" method="post" enctype="multipart/form-data">
                             <h5 class="text-danger">Category Details</h5>
+
                             <div class="row">
                                 <div class="col-md-4 border pb-3 p-2">Category Image</div>
                                 <div class="col-md-4 border pb-3 p-2">Category Name</div>
@@ -67,15 +68,27 @@ if (isset($_GET["product_id"])) {
                                 <div class="col-md-4 border p-2">
                                     <img class="category-img d-block w-50 m-auto" src="http://localhost/php/medicine_website/user_panel/shop/category_img/<?php echo $row["cat_img"]; ?>" />
                                 </div>
-                                <div class="col-md-4 border p-2">
-                                    <input type="text" name="category" class="form-control" value="<?php echo $row["category"]; ?>">
-                                </div>
-                                <div class="col-md-4 border p-2">
-                                    <input type="checkbox" class="mb-4" />&ensp;Are you want to change category image?
-                                    <input type="file" name="cat-img" class="form-control" value="<?php echo $row["cat_img"]; ?>" disabled="true" accept="image/png, image/jpeg, image/jpg" />
+                                <div class="col-md-8">
+                                    <div class="row">
+                                        <div class="col-md-6 border p-3 pb-5">
+                                            <input type="hidden" class="old-cat" value="<?php echo $row["category"]; ?>">
+                                            <input type="text" class="new-cat form-control" name="category" value="<?php echo $row["category"]; ?>">
+                                        </div>
+                                        <div class="col-md-6 border p-3 pb-5">
+                                            <input type="checkbox" class="mb-4" />&ensp;Are you want to change category image?
+                                            <input type="hidden" class="form-control old-cat-img" value="<?php echo $row["cat_img"]; ?>" />
+                                            <input type="file" name="cat-img" class="form-control cat-img" value="<?php echo $row["cat_img"]; ?>" disabled="true" accept="image/png, image/jpeg, image/jpg" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 border p-4" style="color: red;">
+                                            <p>Note:</p>
+                                            **If you update Category name, must to change category image**
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <button class="btn btn-danger m-0 mt-3 w-100" name="update-category">Update Category Details</button>
+                            <button class="update-category btn btn-danger m-0 mt-3 w-100" name="update-category">Update Category Details</button>
                         </form>
                     </div>
 
@@ -256,11 +269,12 @@ if (isset($_GET["product_id"])) {
                     </div>
                 <?php } ?>
             </div>
-
-            <footer class="footer footer-black  footer-white ">
-                <?php include("C:/xampp/htdocs/php/medicine_website/admin_panel/footer/footer.php"); ?>
-            </footer>
         </div>
+
+        <footer class="footer footer-black  footer-white ">
+            <?php include("C:/xampp/htdocs/php/medicine_website/admin_panel/footer/footer.php"); ?>
+        </footer>
+    </div>
 </body>
 
 </html>

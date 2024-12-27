@@ -83,8 +83,7 @@
                                 }
                             } ?>
                         </form>
-                        <input type="hidden" class="last-img" value="<?php echo $i; ?>" />
-                        <button class="btn btn-danger add-btn">ADD More Image</button>
+                        <button class="btn btn-danger add-des-btn" value="<?php echo $i; ?>">ADD More Image</button>
                     <?php } ?>
                 </div>
             </div>

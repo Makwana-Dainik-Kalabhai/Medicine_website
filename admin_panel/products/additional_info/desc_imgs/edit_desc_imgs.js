@@ -20,9 +20,9 @@ $(document).ready(function () {
     }
   });
 
-  var last_img = $(".last-img").val();
+  var last_img = $(".add-des-img").val();
 
-  $(".add-btn").click(function () {  
+  $(".add-des-img").click(function () {  
     $(".desc-imgs-form").append(
       `<div class='row border-bottom py-4'>
         <div class='col-md-1'>${last_img})</div>
