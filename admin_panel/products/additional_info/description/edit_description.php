@@ -11,18 +11,6 @@
     <?php include("C:/xampp/htdocs/php/medicine_website/admin_panel/links.php"); ?>
 </head>
 
-<style>
-    .card {
-        position: relative;
-        width: 100%;
-    }
-
-    .add-description {
-        position: absolute;
-        bottom: 100px;
-    }
-</style>
-
 <script>
     <?php include("C:/xampp/htdocs/php/medicine_website/admin_panel/products/additional_info/description/edit_description.js"); ?>
 </script>
@@ -37,6 +25,19 @@
 
             <div class="content">
                 <div class="card p-5">
+                    <!-- //** Description updated successfully -->
+                    <?php if (isset($_SESSION["success"])) { ?>
+                        <div class="alert alert-success" role="alert">
+                            <?php echo $_SESSION["success"]; ?>
+                            <script>
+                                $(document).ready(function() {
+                                    $(".alert").fadeOut(10000);
+                                    <?php unset($_SESSION["success"]); ?>
+                                });
+                            </script>
+                        </div>
+                    <?php } ?>
+
                     <?php if (isset($_SESSION["error"])) { ?>
                         <div class="alert alert-danger" role="alert">
                             <?php echo $_SESSION["error"]; ?>
@@ -116,13 +117,16 @@
                             <div class="col-md-3 border p-3">
                                 <p>Key</p>
                             </div>
-                            <div class="col-md-8 border p-3">
+                            <div class="col-md-6 border p-3">
                                 <p>Value</p>
+                            </div>
+                            <div class="col-md-2 border p-3">
+                                <p>Delete / Update</p>
                             </div>
                         </div>
 
 
-                        <form action="http://localhost/php/medicine_website/admin_panel/products/additional_info/description/update.php" method="post" enctype="multipart/form-data">
+                        <form class="description-form" action="http://localhost/php/medicine_website/admin_panel/products/additional_info/description/update.php" method="post" enctype="multipart/form-data">
                             <?php
                             if ($row["description"] != null) {
                                 foreach (unserialize($row["description"]) as $des) {
@@ -133,31 +137,32 @@
                                         </div>
                                         <?php if (isset($des[0]) && isset($des[1])) { ?>
                                             <div class="col-md-3 border p-3">
-                                                <input type="text" class="form-control" value="<?php echo $des[0]; ?>" />
+                                                <input type="text" class="form-control" name="key[]" value="<?php echo $des[0]; ?>" />
                                             </div>
-                                            <div class="col-md-8 border p-3">
-                                                <textarea class="border w-100 text-secondary py-1 px-2" value="<?php echo $des[1]; ?>" rows="5"><?php echo $des[1]; ?></textarea>
+                                            <div class="col-md-6 border p-3">
+                                                <textarea class="border w-100 text-secondary py-1 px-2" name="value[]" value="<?php echo $des[1]; ?>" rows="5"><?php echo $des[1]; ?></textarea>
                                             </div>
                                         <?php } //
                                         else { ?>
                                             <div class="col-md-3 border p-3">
-                                                <input type="text" class="form-control" value="-" />
+                                                <input type="text" class="form-control" name="key[]" value="-" />
                                             </div>
-                                            <div class="col-md-8 border p-3">
-                                                <textarea class="border w-100 text-secondary py-1 px-2" value="<?php echo $des[1]; ?>" rows="5"><?php echo $des[0]; ?></textarea>
+                                            <div class="col-md-6 border p-3">
+                                                <textarea class="border w-100 text-secondary py-1 px-2" name="value[]" value="<?php echo $des[1]; ?>" rows="5"><?php echo $des[0]; ?></textarea>
                                             </div>
                                         <?php } ?>
+                                        <div class="col-md-2 border p-3">
+                                            <button class="btn btn-light" name="delete-description" value="<?php echo $i; ?>">Delete</button>
+                                            <button class="btn btn-danger" name="update-description" value="<?php echo $i; ?>">Update</button>
+                                        </div>
                                     </div>
                         <?php $i++;
                                 }
                             }
                         } ?>
-
-                        <div class="description-form pb-5"></div>
-                        <button class="btn btn-danger mt-3 w-100" name="update_details">Update Details</button>
                         </form>
 
-                        <button class="btn btn-light add-description" value="<?php echo $i; ?>">Add More Rows</button>
+                        <button style="width: fit-content;" class="btn btn-light add-description mt-3" value="<?php echo $i; ?>">Add More Rows</button>
                 </div>
             </div>
         </div>

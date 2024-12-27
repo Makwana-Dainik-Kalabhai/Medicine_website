@@ -12,10 +12,13 @@ $(document).ready(function () {
                 <p>${last_index})</p>
             </div>
             <div class="col-md-3 border p-3">
-                <input type="text" class="form-control" />
+                <input type="text" name='key[]' class="form-control" />
             </div>
-            <div class="col-md-8 border p-3">
-                <textarea class="border w-100 text-secondary py-1 px-2" rows="5"></textarea>
+            <div class="col-md-6 border p-3">
+                <textarea class="border w-100 text-secondary py-1 px-2" name='value[]' rows="5"></textarea>
+            </div>
+            <div class="col-md-2 border p-3">
+                <button class="btn btn-danger" name="update-description" value="${last_index}">Update</button>
             </div>
         </div>`
     );

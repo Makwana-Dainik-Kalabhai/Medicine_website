@@ -3,7 +3,15 @@ session_start();
 
 include("C:/xampp/htdocs/php/medicine_website/database.php");
 
-if (isset($_POST["change"]) && $_FILES["desc-img"]["name"] != null) {
+//! Change Description Images
+if (isset($_POST["change"])) {
+    if ($_FILES["desc-img"]["name"] == null) {
+        $_SESSION["error"] = "Please! Select the File";
+        header("Refresh:0; url=http://localhost/php/medicine_website/admin_panel/products/additional_info/desc_imgs/edit_desc_imgs.php");
+
+        return;
+    }
+
     $sel = $conn->prepare("SELECT * FROM `products`");
     $sel->execute();
     $sel = $sel->fetchAll();
@@ -49,8 +57,16 @@ if (isset($_POST["change"]) && $_FILES["desc-img"]["name"] != null) {
 
 
 
-// Add Description Image
+//! Add Description Image
 if (isset($_POST["add"])) {
+    if ($_FILES["new-img"]["name"] == null) {
+        $_SESSION["error"] = "Please! Select the File";
+        header("Refresh:0; url=http://localhost/php/medicine_website/admin_panel/products/additional_info/desc_imgs/edit_desc_imgs.php");
+
+        return;
+    }
+
+
     $sel = $conn->prepare("SELECT * FROM `products` WHERE `product_id`='" . $_SESSION["product_id"] . "'");
     $sel->execute();
     $sel = $sel->fetchAll();
@@ -93,7 +109,7 @@ if (isset($_POST["add"])) {
 
 
 
-// Delete Description Image
+// ! Delete Description Image
 if (isset($_POST["delete"])) {
     $i = 1;
     $desc_img = array();

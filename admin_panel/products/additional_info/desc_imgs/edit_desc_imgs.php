@@ -57,6 +57,7 @@
                             <div class="col-md-2">Change</div>
                             <div class="col-md-1">Delete</div>
                         </div>
+
                         <form action="http://localhost/php/medicine_website/admin_panel/products/additional_info/desc_imgs/update.php" class="desc-imgs-form" method="post" enctype="multipart/form-data">
                             <?php if (isset(unserialize($row["desc_img"])[0])) {
                                 $i = 1;
@@ -73,7 +74,7 @@
                                             <input type="checkbox" class="mt-3 mx-2" /> Are you want to change the image?
                                         </div>
                                         <div class="col-md-2">
-                                            <button class="btn btn-light" disabled="true" name="change" value="<?php echo $i; ?>">Change</button>
+                                            <button class="btn btn-light change-btn" disabled="true" name="change" value="<?php echo $i; ?>">Change</button>
                                         </div>
                                         <div class="col-md-1">
                                             <button class="btn btn-danger" name="delete" value="<?php echo $i; ?>">Delete</button>
@@ -83,7 +84,7 @@
                                 }
                             } ?>
                         </form>
-                        <button class="btn btn-danger add-des-btn" value="<?php echo $i; ?>">ADD More Image</button>
+                        <button class="btn btn-danger add-des-img" value="<?php echo $i; ?>">ADD More Image</button>
                     <?php } ?>
                 </div>
             </div>

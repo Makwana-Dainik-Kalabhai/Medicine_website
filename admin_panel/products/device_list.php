@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
 
-    <title>Medical Devices List</title>
+    <title>Medicines List</title>
     <?php include("C:/xampp/htdocs/php/medicine_website/admin_panel/links.php"); ?>
 </head>
 
@@ -20,7 +20,7 @@
     <div class="wrapper ">
         <!-- // Sidebar -->
         <?php include("C:/xampp/htdocs/php/medicine_website/admin_panel/sidenav.php"); ?>
-        
+
         <div class="main-panel">
             <?php include("C:/xampp/htdocs/php/medicine_website/admin_panel/header/header.php"); ?>
 
@@ -61,13 +61,13 @@
                                     <td class="col-md-2"><?php echo $row["name"]; ?></td>
                                     <td class="col-md-1">₹<?php echo $row["offer_price"]; ?></td>
                                     <td class="col-md-1">₹<?php echo $row["price"]; ?></td>
-                                    <td class="col-md-1"><?php echo $row["discount"]; ?>%</td>
+                                    <td class="col-md-1"><?php if ($row["discount"] != 0) echo $row["discount"] . "%";
+                                                            else echo "-";  ?></td>
                                     <td class="col-md-1"><?php echo $row["quantity"]; ?></td>
                                     <td class="col-md-1">
                                         <?php $date = strtotime($row["delivery_date"]);
-                                    echo date("M d, Y", $date); ?>
+                                        echo date("M d, Y", $date); ?>
                                     </td>
-
                                     <td class="col-md-1">
                                         <a href="http://localhost/php/medicine_website/admin_panel/products/edit_device/edit_device.php?product_id=<?php echo $row["product_id"]; ?>" class="btn btn-secondary text-light">Edit</a>
                                     </td>

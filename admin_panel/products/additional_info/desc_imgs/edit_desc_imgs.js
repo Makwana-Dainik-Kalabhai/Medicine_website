@@ -22,8 +22,8 @@ $(document).ready(function () {
 
   var last_img = $(".add-des-img").val();
 
-  $(".add-des-img").click(function () {  
-    $(".desc-imgs-form").append(
+  $(".add-des-img").click(function () {
+    $(
       `<div class='row border-bottom py-4'>
         <div class='col-md-1'>${last_img})</div>
         <div class='col-md-4'></div>
@@ -32,10 +32,10 @@ $(document).ready(function () {
           <input type='file' name='new-img' class='form-control mt-4' />
         </div>
         <div class='col-md-2'>
-          <button class='btn btn-light' name='add'>Add</button>
+          <button class='btn btn-light add-btn' name='add'>Add</button>
         </div>
       </div>`
-    );
+    ).appendTo(".desc-imgs-form");
     last_img++;
   });
 });
