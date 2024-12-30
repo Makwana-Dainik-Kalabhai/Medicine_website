@@ -2,7 +2,7 @@
     <div class="logo">
         <a href="https://www.creative-tim.com" class="simple-text logo-mini">
             <div class="logo-image-big">
-                <img src="http://localhost/php/medicine_website/logo.png" type="image/x-icon" />
+                <img src="http://localhost/php/medicine_website/admin_panel/admin.png" type="image/x-icon" />
             </div>
         </a>
         <a href="https://www.creative-tim.com" class="simple-text logo-normal">

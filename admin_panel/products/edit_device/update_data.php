@@ -3,6 +3,11 @@ session_start();
 include("C:/xampp/htdocs/php/medicine_website/database.php");
 
 if (isset($_POST["update-category"])) {
+    if ($_FILES["cat-img"]["name"] == null) {
+        $_SESSION["error"] = "Please! Select the File";
+        header("Refresh:0; url=http://localhost/php/medicine_website/admin_panel/products/edit_device/edit_device.php");
+        return;
+    }
 
     if (isset($_FILES["cat-img"])) {
         $update = $conn->prepare("UPDATE `products` SET `category`='" . $_POST["category"] . "', `cat_img`='" . $_FILES["cat-img"]["name"] . "' WHERE `product_id`='" . $_SESSION["product_id"] . "'");
@@ -14,12 +19,15 @@ if (isset($_POST["update-category"])) {
     $update->execute();
 
     $_SESSION["success"] = "Product Category details updated successfully";
-    header("Refresh:0; url=http://localhost/php/medicine_website/admin_panel/products/edit_device/edit_device.php");
-}
+?>
+    <script>
+        window.history.back();
+    </script>
+<?php }
 
 
 if (isset($_POST["update-product"])) {
-    
+
     class Product
     {
         public $name;
@@ -31,7 +39,7 @@ if (isset($_POST["update-product"])) {
         public $weight;
         public $delivery_date;
         public $link;
-        
+
         function insert()
         {
             $this->name = $_POST["name"];
@@ -44,7 +52,7 @@ if (isset($_POST["update-product"])) {
             $this->delivery_date = $_POST["delivery-date"];
             $this->link = $_POST["link"];
         }
-        
+
         function update()
         {
             global $conn;
@@ -53,11 +61,14 @@ if (isset($_POST["update-product"])) {
             $update->execute();
         }
     }
-    
+
     $p = new Product();
     $p->insert();
     $p->update();
-    
+
     $_SESSION["success"] = "Product details updated successfully";
-    header("Refresh:0; url=http://localhost/php/medicine_website/admin_panel/products/edit_device/edit_device.php");
-}
+?>
+    <script>
+        window.history.back();
+    </script>
+<?php }

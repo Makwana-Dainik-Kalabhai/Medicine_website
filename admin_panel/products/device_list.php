@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
 
-    <title>Medicines List</title>
+    <title>Medical Device List</title>
     <?php include("C:/xampp/htdocs/php/medicine_website/admin_panel/links.php"); ?>
 </head>
 

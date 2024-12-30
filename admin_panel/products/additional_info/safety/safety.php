@@ -7,12 +7,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
 
-    <title>Edit Description</title>
+    <title>Edit Safety Info.</title>
     <?php include("C:/xampp/htdocs/php/medicine_website/admin_panel/links.php"); ?>
 </head>
 
 <script>
-    <?php include("C:/xampp/htdocs/php/medicine_website/admin_panel/products/additional_info/description/edit_description.js"); ?>
+    <?php include("C:/xampp/htdocs/php/medicine_website/admin_panel/products/additional_info/safety/safety.js"); ?>
 </script>
 
 <body class="">
@@ -25,26 +25,15 @@
 
             <div class="content">
                 <div class="card p-5">
-                    <!-- //** Description updated successfully -->
+                    <!-- //** safety updated successfully -->
                     <?php if (isset($_SESSION["success"])) { ?>
                         <div class="alert alert-success" role="alert">
                             <?php echo $_SESSION["success"]; ?>
                             <script>
                                 $(document).ready(function() {
+                                    window.location.reload();
                                     $(".alert").fadeOut(10000);
                                     <?php unset($_SESSION["success"]); ?>
-                                });
-                            </script>
-                        </div>
-                    <?php } ?>
-
-                    <?php if (isset($_SESSION["error"])) { ?>
-                        <div class="alert alert-danger" role="alert">
-                            <?php echo $_SESSION["error"]; ?>
-                            <script>
-                                $(document).ready(function() {
-                                    $(".alert").fadeOut(15000);
-                                    <?php unset($_SESSION["error"]); ?>
                                 });
                             </script>
                         </div>
@@ -99,17 +88,17 @@
                             <div class="col-md-7">
                                 <div class="row">
                                     <p class="text-danger fs-3 my-2">Category Name</p>
-                                    <input type="text" name="name" class="form-control" value="<?php echo $row["category"]; ?>" />
+                                    <input type="text" name="name" class="form-control" value="<?php echo $row["category"]; ?>" readonly />
                                 </div>
                                 <div class="row mt-4">
                                     <p class="text-danger fs-3 my-2">Product Name</p>
-                                    <input type="text" name="name" class="form-control" value="<?php echo $row["name"]; ?>" />
+                                    <input type="text" name="name" class="form-control" value="<?php echo $row["name"]; ?>" readonly />
                                 </div>
                             </div>
                         </div>
 
 
-                        <h5 class="text-danger mt-5">Description Details</h5>
+                        <h5 class="text-danger mt-5">Safety Information</h5>
                         <div class="row p-0">
                             <div class="col-md-1 border p-3">
                                 <p>Sr. no.</p>
@@ -126,34 +115,34 @@
                         </div>
 
 
-                        <form class="description-form" action="http://localhost/php/medicine_website/admin_panel/products/additional_info/description/update.php" method="post" enctype="multipart/form-data">
+                        <form class="safety-form" action="http://localhost/php/medicine_website/admin_panel/products/additional_info/safety/update.php" method="post" enctype="multipart/form-data">
                             <?php
-                            if ($row["description"] != null) {
-                                foreach (unserialize($row["description"]) as $des) {
+                            if ($row["safety"] != null) {
+                                foreach (unserialize($row["safety"]) as $saf) {
                             ?>
                                     <div class="row">
                                         <div class="col-md-1 border p-3">
                                             <p><?php echo $i; ?>)</p>
                                         </div>
-                                        <?php if (isset($des[0]) && isset($des[1])) { ?>
+                                        <?php if (isset($saf[0]) && isset($saf[1])) { ?>
                                             <div class="col-md-3 border p-3">
-                                                <input type="text" class="form-control" name="key[]" value="<?php echo $des[0]; ?>" />
+                                                <input type="text" class="form-control" name="key[]" value="<?php echo $saf[0]; ?>" />
                                             </div>
                                             <div class="col-md-6 border p-3">
-                                                <textarea class="border w-100 text-secondary py-1 px-2" name="value[]" value="<?php echo $des[1]; ?>" rows="5"><?php echo $des[1]; ?></textarea>
+                                                <textarea class="border w-100 text-secondary py-1 px-2" name="value[]" value="<?php echo $saf[1]; ?>" rows="5"><?php echo $saf[1]; ?></textarea>
                                             </div>
                                         <?php } //
                                         else { ?>
                                             <div class="col-md-3 border p-3">
-                                                <input type="text" class="form-control" name="key[]" value="-" />
+                                                <input type="text" class="form-control" name="key[]" />
                                             </div>
                                             <div class="col-md-6 border p-3">
-                                                <textarea class="border w-100 text-secondary py-1 px-2" name="value[]" value="<?php echo $des[1]; ?>" rows="5"><?php echo $des[0]; ?></textarea>
+                                                <textarea class="border w-100 text-secondary py-1 px-2" name="value[]" value="<?php echo $saf[1]; ?>" rows="5"><?php echo $saf[0]; ?></textarea>
                                             </div>
                                         <?php } ?>
                                         <div class="col-md-2 border p-3">
-                                            <button class="btn btn-light" name="delete-description" value="<?php echo $i; ?>">Delete</button>
-                                            <button class="btn btn-danger" name="update-description" value="<?php echo $i; ?>">Update</button>
+                                            <button class="btn btn-light" name="delete-safety" value="<?php echo $i; ?>">Delete</button>
+                                            <button class="btn btn-danger" name="update-safety" value="<?php echo $i; ?>">Update</button>
                                         </div>
                                     </div>
                         <?php $i++;
@@ -162,7 +151,7 @@
                         } ?>
                         </form>
 
-                        <button style="width: fit-content;" class="btn btn-light add-description mt-3" value="<?php echo $i; ?>">Add More Rows</button>
+                        <button style="width: fit-content;" class="btn btn-light add-safety mt-3" value="<?php echo $i; ?>">Add More Rows</button>
                 </div>
             </div>
         </div>

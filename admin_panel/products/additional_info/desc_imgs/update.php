@@ -1,14 +1,16 @@
 <?php
 session_start();
-
 include("C:/xampp/htdocs/php/medicine_website/database.php");
 
 //! Change Description Images
 if (isset($_POST["change"])) {
     if ($_FILES["desc-img"]["name"] == null) {
         $_SESSION["error"] = "Please! Select the File";
-        header("Refresh:0; url=http://localhost/php/medicine_website/admin_panel/products/additional_info/desc_imgs/edit_desc_imgs.php");
-
+?>
+        <script>
+            window.history.back();
+        </script>
+    <?php
         return;
     }
 
@@ -52,8 +54,11 @@ if (isset($_POST["change"])) {
             $_SESSION["error"] = "Please! Change name of the Image";
         }
     }
-    header("Refresh:0; url=http://localhost/php/medicine_website/admin_panel/products/additional_info/desc_imgs/edit_desc_imgs.php");
-}
+    ?>
+    <script>
+        window.history.back();
+    </script>
+    <?php }
 
 
 
@@ -61,11 +66,13 @@ if (isset($_POST["change"])) {
 if (isset($_POST["add"])) {
     if ($_FILES["new-img"]["name"] == null) {
         $_SESSION["error"] = "Please! Select the File";
-        header("Refresh:0; url=http://localhost/php/medicine_website/admin_panel/products/additional_info/desc_imgs/edit_desc_imgs.php");
-
+    ?>
+        <script>
+            window.history.back();
+        </script>
+    <?php
         return;
     }
-
 
     $sel = $conn->prepare("SELECT * FROM `products` WHERE `product_id`='" . $_SESSION["product_id"] . "'");
     $sel->execute();
@@ -104,8 +111,11 @@ if (isset($_POST["add"])) {
             $_SESSION["error"] = "Please! Change name of the Image";
         }
     }
-    header("Refresh:0; url=http://localhost/php/medicine_website/admin_panel/products/additional_info/desc_imgs/edit_desc_imgs.php");
-}
+    ?>
+    <script>
+        window.history.back();
+    </script>
+<?php }
 
 
 
@@ -134,6 +144,8 @@ if (isset($_POST["delete"])) {
 
     $up = $conn->prepare("UPDATE `products` SET `desc_img`='" . serialize($desc_img) . "' WHERE `product_id`='" . $_SESSION["product_id"] . "'");
     $up->execute();
-
-    header("Refresh:0; url=http://localhost/php/medicine_website/admin_panel/products/additional_info/desc_imgs/edit_desc_imgs.php");
-}
+?>
+    <script>
+        window.history.back();
+    </script>
+<?php }

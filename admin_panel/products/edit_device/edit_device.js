@@ -26,7 +26,6 @@ $(document).ready(() => {
     }
     //
     else if ($(".old-cat").val() != $(".new-cat").val()) {
-      alert("Disabled");
       $(".update-category").attr("disabled", true);
     }
   });

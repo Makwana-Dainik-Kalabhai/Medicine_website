@@ -29,6 +29,7 @@ if (isset($_GET["product_id"])) {
             <?php include("C:/xampp/htdocs/php/medicine_website/admin_panel/header/header.php"); ?>
 
             <div class="content">
+
                 <?php
                 $sel = $conn->prepare("SELECT * FROM `products` WHERE `product_id`='" . $_SESSION["product_id"] . "'");
                 $sel->execute();
@@ -43,6 +44,18 @@ if (isset($_GET["product_id"])) {
                     <!-- //! Category Details -->
                     <div class="card px-5 py-4 mb-5">
 
+                        <!-- //** Error -->
+                        <?php if (isset($_SESSION["error"])) { ?>
+                            <div class="alert alert-danger" role="alert">
+                                <?php echo $_SESSION["error"]; ?>
+                                <script>
+                                    $(document).ready(function() {
+                                        $(".alert").fadeOut(10000);
+                                        <?php unset($_SESSION["error"]); ?>
+                                    });
+                                </script>
+                            </div>
+                        <?php } ?>
                         <!-- //** Product details updated successfully -->
                         <?php if (isset($_SESSION["success"])) { ?>
                             <div class="alert alert-success" role="alert">
@@ -215,9 +228,9 @@ if (isset($_GET["product_id"])) {
                                 <?php } ?>
                             </div>
                             <?php if ($row["desc_img"] != null) { ?>
-                                <div class="col-md-4 border py-2"><a href="http://localhost/php/medicine_website/admin_panel/products/additional_info/desc_imgs/" class="btn btn-light">Change</a></div>
+                                <div class="col-md-4 border py-2"><a href="http://localhost/php/medicine_website/admin_panel/products/additional_info/desc_imgs/edit_desc_imgs.php" class="btn btn-light">Change</a></div>
                             <?php } else { ?>
-                                <div class="col-md-4 border py-2"><a href="http://localhost/php/medicine_website/admin_panel/products/additional_info/desc_imgs/" class="btn btn-danger">Add</a></div>
+                                <div class="col-md-4 border py-2"><a href="http://localhost/php/medicine_website/admin_panel/products/additional_info/desc_imgs/edit_desc_imgs.php" class="btn btn-danger">Add</a></div>
                             <?php } ?>
                         </div>
 
@@ -228,9 +241,9 @@ if (isset($_GET["product_id"])) {
                             <div class="col-md-5 border py-2">Description of the Product</div>
 
                             <?php if ($row["description"] != null) { ?>
-                                <div class="col-md-4 border py-2"><a href="http://localhost/php/medicine_website/admin_panel/products/additional_info/desc_imgs/" class="btn btn-light">Change</a></div>
+                                <div class="col-md-4 border py-2"><a href="http://localhost/php/medicine_website/admin_panel/products/additional_info/description/description.php" class="btn btn-light">Change</a></div>
                             <?php } else { ?>
-                                <div class="col-md-4 border py-2"><a href="http://localhost/php/medicine_website/admin_panel/products/additional_info/desc_imgs/" class="btn btn-danger">Add</a></div>
+                                <div class="col-md-4 border py-2"><a href="http://localhost/php/medicine_website/admin_panel/products/additional_info/description/description.php" class="btn btn-danger">Add</a></div>
                             <?php } ?>
                         </div>
 
@@ -240,9 +253,9 @@ if (isset($_GET["product_id"])) {
                                                                 $i++; ?>)</div>
                             <div class="col-md-5 border py-2">Features of the Product</div>
                             <?php if ($row["features"] != null) { ?>
-                                <div class="col-md-4 border py-2"><a href="http://localhost/php/medicine_website/admin_panel/products/additional_info/desc_imgs/" class="btn btn-light">Change</a></div>
+                                <div class="col-md-4 border py-2"><a href="http://localhost/php/medicine_website/admin_panel/products/additional_info/features/features.php" class="btn btn-light">Change</a></div>
                             <?php } else { ?>
-                                <div class="col-md-4 border py-2"><a href="http://localhost/php/medicine_website/admin_panel/products/additional_info/desc_imgs/" class="btn btn-danger">Add</a></div>
+                                <div class="col-md-4 border py-2"><a href="http://localhost/php/medicine_website/admin_panel/products/additional_info/features/features.php" class="btn btn-danger">Add</a></div>
                             <?php } ?>
                         </div>
 
@@ -252,9 +265,9 @@ if (isset($_GET["product_id"])) {
                                                                 $i++; ?>)</div>
                             <div class="col-md-5 border py-2">Specifications of the Product</div>
                             <?php if ($row["specification"] != null) { ?>
-                                <div class="col-md-4 border py-2"><a href="http://localhost/php/medicine_website/admin_panel/products/additional_info/desc_imgs/" class="btn btn-light">Change</a></div>
+                                <div class="col-md-4 border py-2"><a href="http://localhost/php/medicine_website/admin_panel/products/additional_info/specifications/specifications.php" class="btn btn-light">Change</a></div>
                             <?php } else { ?>
-                                <div class="col-md-4 border py-2"><a href="http://localhost/php/medicine_website/admin_panel/products/additional_info/desc_imgs/" class="btn btn-danger">Add</a></div>
+                                <div class="col-md-4 border py-2"><a href="http://localhost/php/medicine_website/admin_panel/products/additional_info/specifications/specifications.php" class="btn btn-danger">Add</a></div>
                             <?php } ?>
                         </div>
 
@@ -264,9 +277,9 @@ if (isset($_GET["product_id"])) {
                                                                 $i++; ?>)</div>
                             <div class="col-md-5 border py-2">Frequently asked questions of the Product</div>
                             <?php if ($row["faqs"] != null) { ?>
-                                <div class="col-md-4 border py-2"><a href="http://localhost/php/medicine_website/admin_panel/products/additional_info/desc_imgs/" class="btn btn-light">Change</a></div>
+                                <div class="col-md-4 border py-2"><a href="http://localhost/php/medicine_website/admin_panel/products/additional_info/faqs/faqs.php" class="btn btn-light">Change</a></div>
                             <?php } else { ?>
-                                <div class="col-md-4 border py-2"><a href="http://localhost/php/medicine_website/admin_panel/products/additional_info/desc_imgs/" class="btn btn-danger">Add</a></div>
+                                <div class="col-md-4 border py-2"><a href="http://localhost/php/medicine_website/admin_panel/products/additional_info/faqs/faqs.php" class="btn btn-danger">Add</a></div>
                             <?php } ?>
                         </div>
                     </div>

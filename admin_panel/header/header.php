@@ -58,6 +58,7 @@
                     </a>
                 </li>
             </ul>
+            <img style="width: 20%;" src="http://localhost/php/medicine_website/logo1.png" alt="">
         </div>
     </div>
 </nav>

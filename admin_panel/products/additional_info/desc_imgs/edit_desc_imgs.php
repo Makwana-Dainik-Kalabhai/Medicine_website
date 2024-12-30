@@ -44,6 +44,8 @@
 
                     foreach ($sel as $row) {
                         $count_img = 0;
+                        $i = 1;
+                        
                         foreach (unserialize($row["item_img"]) as $img) {
                             $count_img++;
                         } ?>
@@ -60,7 +62,6 @@
 
                         <form action="http://localhost/php/medicine_website/admin_panel/products/additional_info/desc_imgs/update.php" class="desc-imgs-form" method="post" enctype="multipart/form-data">
                             <?php if (isset(unserialize($row["desc_img"])[0])) {
-                                $i = 1;
                                 foreach (unserialize($row["desc_img"]) as $desc_img) { ?>
                                     <div class="row border-bottom py-4">
                                         <div class="col-md-1"><?php echo $i . ")"; ?></div>
