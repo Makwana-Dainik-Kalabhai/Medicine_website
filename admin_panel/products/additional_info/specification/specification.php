@@ -7,12 +7,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
 
-    <title>Edit Description</title>
+    <title>Edit Specification</title>
     <?php include("C:/xampp/htdocs/php/medicine_website/admin_panel/links.php"); ?>
 </head>
 
 <script>
-    <?php include("C:/xampp/htdocs/php/medicine_website/admin_panel/products/additional_info/description/description.js"); ?>
+    <?php include("C:/xampp/htdocs/php/medicine_website/admin_panel/products/additional_info/specification/specification.js"); ?>
 </script>
 
 <body class="">
@@ -25,7 +25,7 @@
 
             <div class="content">
                 <div class="card p-5">
-                    <!-- //** Description updated successfully -->
+                    <!-- //** specification updated successfully -->
                     <?php if (isset($_SESSION["success"])) { ?>
                         <div class="alert alert-success" role="alert">
                             <?php echo $_SESSION["success"]; ?>
@@ -38,6 +38,7 @@
                             </script>
                         </div>
                     <?php }
+
 
                     $sel = $conn->prepare("SELECT * FROM `products` WHERE `product_id`='" . $_SESSION["product_id"] . "'");
                     $sel->execute();
@@ -96,8 +97,9 @@
                             </div>
                         </div>
 
-                        <h5 class="text-danger mt-5">Description of the Product</h5>
-                        <div class="row p-0 mt-3">
+
+                        <h5 class="text-danger mt-5">Specification of the Product</h5>
+                        <div class="row p-0">
                             <div class="col-md-1 border p-3">
                                 <p>Sr. no.</p>
                             </div>
@@ -113,21 +115,21 @@
                         </div>
 
 
-                        <form class="description-form" action="http://localhost/php/medicine_website/admin_panel/products/additional_info/description/update.php" method="post" enctype="multipart/form-data">
+                        <form class="specification-form" action="http://localhost/php/medicine_website/admin_panel/products/additional_info/specification/update.php" method="post" enctype="multipart/form-data">
                             <?php
-                            if ($row["description"] != null) {
-                                foreach (unserialize($row["description"]) as $des) {
+                            if ($row["specification"] != null) {
+                                foreach (unserialize($row["specification"]) as $spe) {
                             ?>
                                     <div class="row">
                                         <div class="col-md-1 border p-3">
                                             <p><?php echo $i; ?>)</p>
                                         </div>
-                                        <?php if (isset($des[0]) && isset($des[1])) { ?>
+                                        <?php if (isset($spe[0]) && isset($spe[1])) { ?>
                                             <div class="col-md-3 border p-3">
-                                                <input type="text" class="form-control" name="key[]" value="<?php echo $des[0]; ?>" />
+                                                <input type="text" class="form-control" name="key[]" value="<?php echo $spe[0]; ?>" />
                                             </div>
                                             <div class="col-md-6 border p-3">
-                                                <textarea class="border w-100 text-secondary py-1 px-2" name="value[]" value="<?php echo $des[1]; ?>" rows="5"><?php echo $des[1]; ?></textarea>
+                                                <textarea class="border w-100 text-secondary py-1 px-2" name="value[]" value="<?php echo $spe[1]; ?>" rows="5"><?php echo $spe[1]; ?></textarea>
                                             </div>
                                         <?php } //
                                         else { ?>
@@ -135,12 +137,12 @@
                                                 <input type="text" class="form-control" name="key[]" />
                                             </div>
                                             <div class="col-md-6 border p-3">
-                                                <textarea class="border w-100 text-secondary py-1 px-2" name="value[]" value="<?php echo $des[1]; ?>" rows="5"><?php echo $des[0]; ?></textarea>
+                                                <textarea class="border w-100 text-secondary py-1 px-2" name="value[]" value="<?php echo $spe[1]; ?>" rows="5"><?php echo $spe[0]; ?></textarea>
                                             </div>
                                         <?php } ?>
                                         <div class="col-md-2 border p-3">
-                                            <button class="btn btn-light" name="delete-description" value="<?php echo $i; ?>">Delete</button>
-                                            <button class="btn btn-danger" name="update-description" value="<?php echo $i; ?>">Update</button>
+                                            <button class="btn btn-light" name="delete-specification" value="<?php echo $i; ?>">Delete</button>
+                                            <button class="btn btn-danger" name="update-specification" value="<?php echo $i; ?>">Update</button>
                                         </div>
                                     </div>
                         <?php $i++;
@@ -149,7 +151,7 @@
                         } ?>
                         </form>
 
-                        <button style="width: fit-content;" class="btn btn-light add-description mt-3" value="<?php echo $i; ?>">Add More Rows</button>
+                        <button style="width: fit-content;" class="btn btn-light add-specification mt-3" value="<?php echo $i; ?>">Add More Rows</button>
                 </div>
             </div>
         </div>

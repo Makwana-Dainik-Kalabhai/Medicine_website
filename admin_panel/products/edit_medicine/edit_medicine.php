@@ -139,10 +139,10 @@ if (isset($_GET["product_id"])) {
                                         } ?>
                                     </div>
                                     <button class="carousel-control-prev border-0 bg-transparent" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                                        <span class="carousel-control-prev-icon bg-dark" aria-hidden="true"></span>
+                                        <span class="carousel-control-prev-icon bg-dark rounded" aria-hidden="true"></span>
                                     </button>
                                     <button class="carousel-control-next border-0 bg-transparent" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                                        <span class="carousel-control-next-icon bg-dark" aria-hidden="true"></span>
+                                        <span class="carousel-control-next-icon bg-dark rounded" aria-hidden="true"></span>
                                     </button>
                                 </div>
                             </div>

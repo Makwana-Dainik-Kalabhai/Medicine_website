@@ -77,10 +77,10 @@
                                         } ?>
                                     </div>
                                     <button class="carousel-control-prev border-0 bg-transparent" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                                        <span class="carousel-control-prev-icon bg-dark" aria-hidden="true"></span>
+                                        <span class="carousel-control-prev-icon bg-dark rounded" aria-hidden="true"></span>
                                     </button>
                                     <button class="carousel-control-next border-0 bg-transparent" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                                        <span class="carousel-control-next-icon bg-dark" aria-hidden="true"></span>
+                                        <span class="carousel-control-next-icon bg-dark rounded" aria-hidden="true"></span>
                                     </button>
                                 </div>
                             </div>
@@ -98,7 +98,7 @@
                         </div>
 
 
-                        <h5 class="text-danger mt-5">Safety Information</h5>
+                        <h5 class="text-danger mt-5">Safety Information of the Product</h5>
                         <div class="row p-0">
                             <div class="col-md-1 border p-3">
                                 <p>Sr. no.</p>

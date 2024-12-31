@@ -353,7 +353,7 @@ function disMedicineDetalis()
             <div id="safety">
                 <?php if ($row["safety"] != null) {
                     foreach (unserialize($row["safety"]) as $saf) {
-                        if (isset($how[0]) && isset($how[1])) { ?>
+                        if (isset($saf[0]) && isset($saf[1])) { ?>
                             <p>
                                 <li style="display: inline;font-weight: 700;"><?php echo $saf[0]; ?></li>
                                 <span>: -&ensp;<?php echo $saf[1]; ?></span>

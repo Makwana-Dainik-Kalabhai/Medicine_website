@@ -141,10 +141,10 @@ if (isset($_GET["product_id"])) {
                                         } ?>
                                     </div>
                                     <button class="carousel-control-prev border-0 bg-transparent" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                                        <span class="carousel-control-prev-icon bg-dark" aria-hidden="true"></span>
+                                        <span class="carousel-control-prev-icon bg-dark rounded" aria-hidden="true"></span>
                                     </button>
                                     <button class="carousel-control-next border-0 bg-transparent" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                                        <span class="carousel-control-next-icon bg-dark" aria-hidden="true"></span>
+                                        <span class="carousel-control-next-icon bg-dark rounded" aria-hidden="true"></span>
                                     </button>
 
                                 </div>
@@ -259,15 +259,15 @@ if (isset($_GET["product_id"])) {
                             <?php } ?>
                         </div>
 
-                        <!-- //! Specifications -->
+                        <!-- //! Specification -->
                         <div class="row">
                             <div class="col-md-2 border py-2"><?php echo $i;
                                                                 $i++; ?>)</div>
-                            <div class="col-md-5 border py-2">Specifications of the Product</div>
+                            <div class="col-md-5 border py-2">Specification of the Product</div>
                             <?php if ($row["specification"] != null) { ?>
-                                <div class="col-md-4 border py-2"><a href="http://localhost/php/medicine_website/admin_panel/products/additional_info/specifications/specifications.php" class="btn btn-light">Change</a></div>
+                                <div class="col-md-4 border py-2"><a href="http://localhost/php/medicine_website/admin_panel/products/additional_info/specification/specification.php" class="btn btn-light">Change</a></div>
                             <?php } else { ?>
-                                <div class="col-md-4 border py-2"><a href="http://localhost/php/medicine_website/admin_panel/products/additional_info/specifications/specifications.php" class="btn btn-danger">Add</a></div>
+                                <div class="col-md-4 border py-2"><a href="http://localhost/php/medicine_website/admin_panel/products/additional_info/specification/specification.php" class="btn btn-danger">Add</a></div>
                             <?php } ?>
                         </div>
 
