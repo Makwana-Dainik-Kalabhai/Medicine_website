@@ -66,7 +66,7 @@ class Data
     public $payment_status;
     public $status;
     public $total;
-    public $del_address = array();
+    public $del_address;
     public $del_date;
 
     function setValues()
@@ -76,35 +76,24 @@ class Data
         $this->email = $_POST["form_email"];
         $this->phone = $_POST["form_phone"];
 
-        if (isset($_POST["form_items"][1])) {
-            $this->items = serialize($_POST["form_items"]);
-            $this->off_price = serialize($_POST["form_off_price"]);
-            $this->price = serialize($_POST["form_price"]);
-            $this->quantity = serialize($_POST["form_quantity"]);
-        } //
-        else {
-            $this->items = implode(",", $_POST["form_items"]);
-            $this->off_price = implode(",", $_POST["form_off_price"]);
-            $this->price = implode(",", $_POST["form_price"]);
-            $this->quantity = implode(",", $_POST["form_quantity"]);
-        }
+        $this->items = serialize($_POST["form_items"]);
+        $this->off_price = serialize($_POST["form_off_price"]);
+        $this->price = serialize($_POST["form_price"]);
+        $this->quantity = serialize($_POST["form_quantity"]);
+
         $this->payment_type = $_POST["form_pay_type"];
         $this->payment_status = $_POST["form_pay_status"];
         $this->status = "Processing";
+        $this->total = $_POST["form_total"];
 
-        if($_POST["form_total"]<1000) {
-            $this->total = $_POST["form_total"]+50;
-        }
-        else {
-            $this->total = $_POST["form_total"];
-        }
-
-        array_push($this->del_address, $_POST["form_house_no"]);
-        array_push($this->del_address, $_POST["form_street"]);
-        array_push($this->del_address, $_POST["form_suite"]);
-        array_push($this->del_address, $_POST["form_city"]);
-        array_push($this->del_address, $_POST["form_state"]);
-        array_push($this->del_address, $_POST["form_pincode"]);
+        $this->del_address = array(
+            "house_no" => $_POST["form_house_no"],
+            "street" => $_POST["form_street"],
+            "suite" => $_POST["form_suite"],
+            "city" => $_POST["form_city"],
+            "state" => $_POST["form_state"],
+            "pincode" => $_POST["form_pincode"]
+        );
 
         $this->del_date = date("Y-m-d 00:00:00.000000", $_POST["form_del_date"]);
     }
@@ -134,16 +123,15 @@ class Data
                     if ($row["product_id"] == $_POST["form_items"][$i]) {
                         $upQua = $row["quantity"] - $_POST["form_quantity"][$i];
 
-                        $up = $conn->prepare("UPDATE `products` SET `quantity`=$upQua WHERE `product_id`='".$row["product_id"]."'");
+                        $up = $conn->prepare("UPDATE `products` SET `quantity`=$upQua WHERE `product_id`='" . $row["product_id"] . "'");
                         $up->execute();
                     }
                 }
-            }
-            else {
-                if ($row["product_id"] == implode(",",$_POST["form_items"])) {
-                    $upQua = $row["quantity"] - implode(",",$_POST["form_quantity"]);
-    
-                    $up = $conn->prepare("UPDATE `products` SET `quantity`=$upQua WHERE `product_id`='".$row["product_id"]."'");
+            } else {
+                if ($row["product_id"] == implode(",", $_POST["form_items"])) {
+                    $upQua = $row["quantity"] - implode(",", $_POST["form_quantity"]);
+
+                    $up = $conn->prepare("UPDATE `products` SET `quantity`=$upQua WHERE `product_id`='" . $row["product_id"] . "'");
                     $up->execute();
                 }
             }

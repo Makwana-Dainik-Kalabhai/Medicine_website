@@ -21,6 +21,8 @@ $(document).ready(function () {
   for (let i = 0; i < off_price.length; i++) {
     total += off_price[i] * quantity[i];
   }
+  if(total < 1000)
+    total += 50;
   $("#rzp-button1").html(`Pay Now<br />₹${total}`);
 
   for(let i=0; i<items.length; i++) {
@@ -63,6 +65,10 @@ $(document).ready(function () {
     for(let i=0; i<items.length; i++) {
       $(`#form_quantity${i}`).val(quantity[i]);
     }
+
+    if(total < 1000)
+      total += 50;
+
     $("input[name='form_total']").val(total);
 
     $("#rzp-button1").html(`Pay Now<br />₹${total}`);
