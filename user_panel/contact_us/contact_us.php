@@ -24,8 +24,6 @@
     </header>
 
     <main>
-        <div id="intro"><img src="contact_us.png" alt=""></div><br /><br />
-
         <div id="contact_form">
             <h1>Contact us</h1>
             <hr />
@@ -102,6 +100,7 @@
         <?php include("C:/xampp/htdocs/php/medicine_website/user_panel/footer/footer.php"); ?>
     </footer>
 </body>
+
 </html>
 
 <?php

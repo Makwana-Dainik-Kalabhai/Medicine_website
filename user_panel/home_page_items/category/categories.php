@@ -1,6 +1,6 @@
 <style>
     #home_categories>a {
-        width: 420px;
+        width: 35%;
         padding: 0 2%;
         display: flex;
         align-items: center;
@@ -93,14 +93,6 @@ $max_cl_dis = 0;
     <div class="details">
         <span>Medical Devices</span>
         <span>Save Upto <?php echo $max_pr_dis; ?>% off</span>
-    </div>
-    <i class="fa-solid fa-chevron-right"></i>
-</a>
-<a href="" id="cleaning">
-    <img src="http://localhost/php/medicine_website/user_panel/home_page_items/category/cleaning.jpg" alt="">
-    <div class="details">
-        <span>Cleaning Products</span>
-        <span>Save Upto <?php echo $max_cl_dis; ?>% off</span>
     </div>
     <i class="fa-solid fa-chevron-right"></i>
 </a>

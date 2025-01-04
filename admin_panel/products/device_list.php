@@ -27,7 +27,12 @@
             <div class="content">
                 <div class="card">
                     <div class="row">
-                        <span class="mx-5 py-3 text-danger">Medical Device List</span>
+                        <div class="col-md-10">
+                            <h6 class="mx-5 py-4 text-danger">Medical Devices List</h6>
+                        </div>
+                        <div class="col-md-2 pt-2">
+                            <a href="http://localhost/php/medicine_website/admin_panel/products/add_product/add_product.php?status=device" class="btn btn-primary">Add Device</a>
+                        </div>
                     </div>
                 </div>
                 <hr />

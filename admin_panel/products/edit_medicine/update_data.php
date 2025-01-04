@@ -4,9 +4,13 @@ include("C:/xampp/htdocs/php/medicine_website/database.php");
 
 if (isset($_POST["update-category"])) {
     if ($_FILES["cat-img"]["name"] == null) {
-        $_SESSION["error"] = "Please! Select the File";
-        header("Refresh:0; url=http://localhost/php/medicine_website/admin_panel/products/edit_medicine/edit_medicine.php");
-        return;
+        $_SESSION["error"] = "Please! Select the File"; ?>
+
+        <script>
+            window.history.back();
+        </script>
+
+    <?php return;
     }
 
     if (isset($_FILES["cat-img"])) {
@@ -19,7 +23,7 @@ if (isset($_POST["update-category"])) {
     $update->execute();
 
     $_SESSION["success"] = "Product Category details updated successfully";
-?>
+    ?>
     <script>
         window.history.back();
     </script>

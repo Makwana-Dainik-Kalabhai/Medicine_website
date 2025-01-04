@@ -8,16 +8,16 @@ $query = "";
 
 if (isset($_POST["filter"])) {
     if ($_POST["filter"] == "latest") {
-        $_SESSION["condition"] = "time DESC";
+        $_SESSION["filter"] = "time DESC";
     }
     if ($_POST["filter"] == "high to low") {
-        $_SESSION["condition"] = "offer_price DESC";
+        $_SESSION["filter"] = "offer_price DESC";
     }
     if ($_POST["filter"] == "low to high") {
-        $_SESSION["condition"] = "offer_price";
+        $_SESSION["filter"] = "offer_price";
     }
     if ($_POST["filter"] == "discount") {
-        $_SESSION["condition"] = "discount DESC";
+        $_SESSION["filter"] = "discount DESC";
     }
 }
 if (isset($_POST["category"])) {
@@ -30,20 +30,23 @@ if (isset($_POST["price_range"]) && isset($_POST["discount_range"])) {
 }
 
 $query = "SELECT * FROM `products` WHERE `offer_price`<=" . $_SESSION["price_range"] . " AND `discount`<=" . $_POST["discount_range"] . "";
+if (isset($_SESSION["category"])) {
+    $query = "SELECT * FROM `products` WHERE `offer_price`<=" . $_SESSION["price_range"] . " AND `discount`<=" . $_POST["discount_range"] . " AND `category`='" . $_SESSION["category"] . "'";
+}
 if (isset($_SESSION["status"])) {
     $query = "SELECT * FROM `products` WHERE `offer_price`<=" . $_SESSION["price_range"] . " AND `discount`<=" . $_POST["discount_range"] . " AND `status`='" . $_SESSION["status"] . "'";
 }
 if (isset($_SESSION["category"]) && isset($_SESSION["status"])) {
     $query = "SELECT * FROM `products` WHERE `offer_price`<=" . $_SESSION["price_range"] . " AND `discount`<=" . $_POST["discount_range"] . " AND `category`='" . $_SESSION["category"] . "' AND `status`='" . $_SESSION["status"] . "'";
 }
-if (isset($_SESSION["condition"]) && isset($_SESSION["status"])) {
-    $query = "SELECT * FROM `products` WHERE `offer_price`<=" . $_SESSION["price_range"] . " AND `discount`<=" . $_POST["discount_range"] . " AND `status`='" . $_SESSION["status"] . "' ORDER BY " . $_SESSION["condition"] . "";
+if (isset($_SESSION["filter"]) && isset($_SESSION["status"])) {
+    $query = "SELECT * FROM `products` WHERE `offer_price`<=" . $_SESSION["price_range"] . " AND `discount`<=" . $_POST["discount_range"] . " AND `status`='" . $_SESSION["status"] . "' ORDER BY " . $_SESSION["filter"] . "";
 }
-if (isset($_SESSION["condition"]) && isset($_SESSION["category"])) {
-    $query = "SELECT * FROM `products` WHERE `offer_price`<=" . $_SESSION["price_range"] . " AND `discount`<=" . $_POST["discount_range"] . " AND `category`='" . $_SESSION["category"] . "' AND `status`='" . $_SESSION["status"] . "' ORDER BY " . $_SESSION["condition"] . "";
+if (isset($_SESSION["filter"]) && isset($_SESSION["category"])) {
+    $query = "SELECT * FROM `products` WHERE `offer_price`<=" . $_SESSION["price_range"] . " AND `discount`<=" . $_POST["discount_range"] . " AND `category`='" . $_SESSION["category"] . "' ORDER BY " . $_SESSION["filter"] . "";
 }
-if (isset($_SESSION["search_input"]) && isset($_SESSION["condition"])) {
-    $query = "SELECT * FROM `products` WHERE `name` LIKE '%" . $_SESSION["search_input"] . "%' AND `offer_price`<=" . $_SESSION["price_range"] . " AND `discount`<=" . $_POST["discount_range"] . "  ORDER BY " . $_SESSION["condition"] . "";
+if (isset($_SESSION["filter"]) && isset($_SESSION["status"]) && isset($_SESSION["category"])) {
+    $query = "SELECT * FROM `products` WHERE `offer_price`<=" . $_SESSION["price_range"] . " AND `discount`<=" . $_POST["discount_range"] . " AND `category`='" . $_SESSION["category"] . "' AND `status`='" . $_SESSION["status"] . "' ORDER BY " . $_SESSION["filter"] . "";
 }
 
 

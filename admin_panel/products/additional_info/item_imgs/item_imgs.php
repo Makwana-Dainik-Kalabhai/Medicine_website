@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
 
-    <title>Edit Description Images</title>
+    <title>Edit Product Images</title>
     <?php include("C:/xampp/htdocs/php/medicine_website/admin_panel/links.php"); ?>
 </head>
 
@@ -19,7 +19,7 @@
 </style>
 
 <script>
-    <?php include("C:/xampp/htdocs/php/medicine_website/admin_panel/products/additional_info/desc_imgs/edit_desc_imgs.js"); ?>
+    <?php include("C:/xampp/htdocs/php/medicine_website/admin_panel/products/additional_info/item_imgs/item_imgs.js"); ?>
 </script>
 
 <body class="">
@@ -58,7 +58,7 @@
                         } ?>
 
                         <!-- //! Description Images -->
-                        <h5 class="text-danger">Description Images</h5>
+                        <h5 class="text-danger">Product Images</h5>
                         <div class="row border-bottom py-3">
                             <div class="col-md-1">Sr. no.</div>
                             <div class="col-md-4">Images</div>
@@ -67,18 +67,18 @@
                             <div class="col-md-1">Delete</div>
                         </div>
 
-                        <form action="http://localhost/php/medicine_website/admin_panel/products/additional_info/desc_imgs/update.php" class="desc-imgs-form" method="post" enctype="multipart/form-data">
-                            <?php if (isset(unserialize($row["desc_img"])[0])) {
-                                foreach (unserialize($row["desc_img"]) as $desc_img) { ?>
+                        <form action="http://localhost/php/medicine_website/admin_panel/products/additional_info/item_imgs/update.php" class="item-imgs-form" method="post" enctype="multipart/form-data">
+                            <?php if (isset(unserialize($row["item_img"])[0])) {
+                                foreach (unserialize($row["item_img"]) as $item_img) { ?>
                                     <div class="row border-bottom py-4">
                                         <div class="col-md-1"><?php echo $i . ")"; ?></div>
                                         <div class="col-md-4">
-                                            <img class="desc-img" src="http://localhost/php/medicine_website/user_panel/shop/desc_imgs/<?php echo $desc_img; ?>" />
+                                            <img class="item-img" src="http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo $item_img; ?>" />
                                         </div>
                                         <div class="col-md-4">
                                             <p class="text-danger mb-1">File Name:</p>
-                                            <?php echo $desc_img; ?>
-                                            <input type="file" name="desc-img" class="form-control mt-4" disabled="true" value="<?php echo $desc_img; ?>" />
+                                            <?php echo $item_img; ?>
+                                            <input type="file" name="item-img" class="form-control mt-4" disabled="true" value="<?php echo $item_img; ?>" />
                                             <input type="checkbox" class="mt-3 mx-2" /> Are you want to change the image?
                                         </div>
                                         <div class="col-md-2">
@@ -92,7 +92,7 @@
                                 }
                             } ?>
                         </form>
-                        <button class="btn btn-danger add-desc-img" value="<?php echo $i; ?>">ADD More Image</button>
+                        <button class="btn btn-danger add-item-img" value="<?php echo $i; ?>">ADD More Image</button>
                     <?php } ?>
                 </div>
             </div>

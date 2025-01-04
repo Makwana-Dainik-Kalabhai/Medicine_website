@@ -115,7 +115,7 @@ if (isset($_GET["product_id"])) {
 
                                     <!-- //! Change Product Images btn -->
                                     <p class="text-danger fs-3 mx-3 m-0 d-inline">Change Product Images</p>
-                                    <button class="btn btn-light">Change</button>
+                                    <a href="http://localhost/php/medicine_website/admin_panel/products/additional_info/item_imgs/item_imgs.php" class="btn btn-light">Change</a>
 
                                     <div class="carousel-indicators">
                                         <?php for ($i = 0; $i < $count_img; $i++) { ?>

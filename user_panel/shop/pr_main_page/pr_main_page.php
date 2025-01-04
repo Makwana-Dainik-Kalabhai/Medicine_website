@@ -9,34 +9,9 @@ if (isset($_SESSION["category"])) {
 if (isset($_SESSION["status"])) {
     unset($_SESSION["status"]);
 }
-if (isset($_SESSION["search_input"])) {
-    unset($_SESSION["search_input"]);
-}
 
-// ! Set Data
-if (isset($_POST["search_input"])) {
-    $_SESSION["search_input"] = $_POST["search_input"];
 
-    $sel = $conn->prepare("SELECT * FROM `products`");
-    $sel->execute();
-    $sel = $sel->fetchAll();
-
-    foreach ($sel as $row) {
-        if (isset($_SESSION["search_input"][0]))
-            $firstChar = $_SESSION["search_input"][0] == $row["category"][0];
-        if (isset($_SESSION["search_input"][1]))
-            $secChar = $_SESSION["search_input"][1] == $row["category"][1];
-        if (isset($_SESSION["search_input"][2]))
-            $thirdChar = $_SESSION["search_input"][2] == $row["category"][2];
-
-        if (isset($firstChar) && isset($secChar) && isset($thirdChar)) {
-            $_SESSION["category"] = $row["category"];
-            $_SESSION["status"] = $row["status"];
-            unset($_SESSION["search_input"]);
-            break;
-        }
-    }
-}
+// ! If User send GET request
 if (isset($_GET["category"])) {
     $_SESSION["category"] = $_GET["category"];
 }
@@ -49,6 +24,30 @@ if (isset($_GET["category"]) && isset($_GET["status"])) {
     $_SESSION["status"] = $_GET["status"];
 }
 
+
+
+//! If user Search the value
+if (isset($_POST["search_input"]) || isset($_POST["search-btn"]) || isset($_SESSION["search_input"])) {
+    if (isset($_POST["search_input"])) {
+        $_SESSION["search_input"] = $_POST["search_input"];
+    }
+
+    $sel = $conn->prepare("SELECT * FROM `products` GROUP BY `category`");
+    $sel->execute();
+    $sel = $sel->fetchAll();
+
+    foreach ($sel as $row) {
+        $_SESSION["search_input"] = ucfirst($_SESSION["search_input"]);
+
+        if (isset($_SESSION["search_input"][0]) && isset($_SESSION["search_input"][1]) && isset($_SESSION["search_input"][2])) {
+
+            if (($_SESSION["search_input"][0] == $row["category"][0]) && ($_SESSION["search_input"][1] == $row["category"][1]) && ($_SESSION["search_input"][2] == $row["category"][2])) {
+                $_SESSION["category"] = $row["category"];
+                $_SESSION["status"] = $row["status"];
+            }
+        }
+    }
+}
 ?>
 
 <meta charset="UTF-8">
@@ -141,25 +140,27 @@ if (isset($_GET["category"]) && isset($_GET["status"])) {
                     <div id="categories">
                         <?php
                         $sel_cat = $conn->prepare("SELECT * FROM `products` GROUP BY `category`");
+
                         if (isset($_SESSION["status"])) {
                             $sel_cat = $conn->prepare("SELECT * FROM `products` WHERE `status`='" . $_SESSION["status"] . "' GROUP BY `category`");
                         }
                         $sel_cat->execute();
                         $sel_cat = $sel_cat->fetchAll(); ?>
                         <div>
-                            <?php if (!isset($_SESSION["search_input"])) {
-                                foreach ($sel_cat as $row_cat) {
-                                    if (isset($_SESSION["category"]) && $_SESSION["category"] == $row_cat["category"]) { ?>
-                                        <button value="<?php echo $row_cat["category"]; ?>" style="background-color:#ffcccc;"><?php echo $row_cat["category"]; ?></button>
-                                    <?php }
+                            <?php //if (!isset($_SESSION["search_input"])) {
+                            foreach ($sel_cat as $row_cat) {
+                                if (isset($_SESSION["category"]) && $_SESSION["category"] == $row_cat["category"]) { ?>
+                                    <button value="<?php echo $row_cat["category"]; ?>" style="background-color:#ffcccc;"><?php echo $row_cat["category"]; ?></button>
+                                <?php }
 
-                                    //
-                                    else { ?>
-                                        <button value="<?php echo $row_cat["category"]; ?>" style="background-color:transparent;"><?php echo $row_cat["category"]; ?></button>
+                                //
+                                else { ?>
+                                    <button value="<?php echo $row_cat["category"]; ?>" style="background-color:transparent;"><?php echo $row_cat["category"]; ?></button>
 
                             <?php }
-                                }
-                            } ?>
+                            }
+                            //} 
+                            ?>
                         </div>
 
                         <?php
@@ -208,42 +209,28 @@ if (isset($_GET["category"]) && isset($_GET["status"])) {
                         </div>
                     </div>
                 </div>
+                <?php
+                $query = "SELECT * FROM `products` WHERE `discount`<=$min_discount";
+                if (isset($_SESSION["category"])) {
+                    $query = "SELECT * FROM `products` WHERE `category`='" . $_SESSION["category"] . "' AND `discount`<=$min_discount";
+                }
+                if (isset($_SESSION["status"])) {
+                    $query = "SELECT * FROM `products` WHERE `status`='" . $_SESSION["status"] . "' AND `discount`<=$min_discount";
+                }
+                if (isset($_SESSION["category"]) && isset($_SESSION["status"])) {
+                    $query = "SELECT * FROM `products` WHERE `category` = '" . $_SESSION["category"] . "' AND `status`='" . $_SESSION["status"] . "' AND `discount`<=$min_discount";
+                }
+                if (isset($_SESSION["search_input"])) {
+                    $query = "SELECT * FROM `products` WHERE `name` LIKE '%" . $_SESSION["search_input"] . "%' AND `discount`<=$min_discount";
+                }
+
+                $sel = $conn->prepare($query);
+                $sel->execute();
+                $sel = $sel->fetchAll();
+                $pr_not_found = true; ?>
+
                 <div id="products">
                     <?php
-                    $query = "SELECT * FROM `products` WHERE `discount`<=$min_discount";
-                    if (isset($_SESSION["price_range"]) && isset($_SESSION["discount_range"])) {
-                        if (isset($_SESSION["category"])) {
-                            $query = "SELECT * FROM `products` WHERE `category`='" . $_SESSION["category"] . "' AND `offer_price`<=" . $_SESSION["price_range"] . " AND `discount`<=" . $_SESSION["discount_range"] . "";
-                        }
-                        if (isset($_SESSION["status"])) {
-                            $query = "SELECT * FROM `products` WHERE `status`='" . $_SESSION["status"] . "' AND `offer_price`<=" . $_SESSION["price_range"] . " AND `discount`<=" . $_SESSION["discount_range"] . "";
-                        }
-                        if (isset($_SESSION["category"]) && isset($_SESSION["status"])) {
-                            $query = "SELECT * FROM `products` WHERE `category` = '" . $_SESSION["category"] . "' AND `status`='" . $_SESSION["status"] . "' AND `offer_price`<=" . $_SESSION["price_range"] . " AND `discount`<=" . $_SESSION["discount_range"] . "";
-                        }
-                        if (isset($_SESSION["search_input"])) {
-                            $query = "SELECT * FROM `products` WHERE `name` LIKE '%" . $_SESSION["search_input"] . "%' AND `offer_price`<=" . $_SESSION["price_range"] . " AND `discount`<=" . $_SESSION["discount_range"] . "";
-                        }
-                    } else {
-                        if (isset($_SESSION["category"])) {
-                            $query = "SELECT * FROM `products` WHERE `category`='" . $_SESSION["category"] . "' AND `discount`<=$min_discount";
-                        }
-                        if (isset($_SESSION["status"])) {
-                            $query = "SELECT * FROM `products` WHERE `status`='" . $_SESSION["status"] . "' AND `discount`<=$min_discount";
-                        }
-                        if (isset($_SESSION["category"]) && isset($_SESSION["status"])) {
-                            $query = "SELECT * FROM `products` WHERE `category` = '" . $_SESSION["category"] . "' AND `status`='" . $_SESSION["status"] . "' AND `discount`<=$min_discount";
-                        }
-                        if (isset($_SESSION["search_input"])) {
-                            $query = "SELECT * FROM `products` WHERE `name` LIKE '%" . $_SESSION["search_input"] . "%' AND `discount`<=$min_discount";
-                        }
-                    }
-
-                    $sel = $conn->prepare($query);
-                    $sel->execute();
-                    $sel = $sel->fetchAll();
-                    $pr_not_found = true;
-
                     foreach ($sel as $row) {
                         $contain_data = true;
                         unset($pr_not_found); ?>

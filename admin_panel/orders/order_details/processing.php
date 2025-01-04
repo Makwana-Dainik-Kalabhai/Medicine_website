@@ -1,3 +1,10 @@
+<?php
+session_start();
+
+if (isset($_GET["order_id"])) {
+    $_SESSION["order_id"] = $_GET["order_id"];
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,7 +13,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
 
-    <title>Orders List</title>
+    <title>Processing Order</title>
     <?php include("C:/xampp/htdocs/php/medicine_website/admin_panel/links.php"); ?>
 </head>
 
@@ -27,12 +34,14 @@
             <div class="content">
                 <div class="card">
                     <div class="row">
-                        <span class="mx-5 py-3 text-danger">Orders List</span>
+                        <span class="mx-5 py-3" style="color: gray;">
+                            <h6>Order Status - Processing</h6>
+                        </span>
                     </div>
                 </div>
 
                 <?php
-                $sel = $conn->prepare("SELECT * FROM `orders` WHERE `status`='processing'");
+                $sel = $conn->prepare("SELECT * FROM `orders` WHERE `order_id`='" . $_SESSION["order_id"] . "'");
                 $sel->execute();
                 $sel = $sel->fetchAll();
                 $i = 1;
@@ -84,13 +93,12 @@
                             <div class="row py-0" style="color: #30819c;background-color: #f2f2f2;">
                                 <div class="col-md-1 border p-3">Sr. No</div>
                                 <div class="col-md-2 border p-3">Product</div>
+                                <div class="col-md-2 border p-3">Product Name</div>
+                                <div class="col-md-2 border p-3">Delivery Date</div>
                                 <div class="col-md-1 border p-3">Offer Price</div>
                                 <div class="col-md-1 border p-3">Price</div>
                                 <div class="col-md-1 border p-3">Quantity</div>
-                                <div class="col-md-1 border p-3">Payment Type</div>
-                                <div class="col-md-1 border p-3">Payment Status</div>
-                                <div class="col-md-2 border p-3">Delivery Date</div>
-                                <div class="col-md-2 border p-3">Status</div>
+                                <div class="col-md-2 border p-3">Total</div>
                             </div>
                             <?php
                             $pr = 1;
@@ -106,41 +114,68 @@
                                         <div class="col-md-2 border">
                                             <img src="http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo unserialize($rPr["item_img"])[0]; ?>" />
                                         </div>
-                                        <div class="col-md-1 border pt-3">&#8377; <?php echo unserialize($row["offer_price"])[$pr - 1]; ?></div>
-                                        <div class="col-md-1 border pt-3">&#8377; <?php echo unserialize($row["price"])[$pr - 1]; ?></div>
-                                        <div class="col-md-1 border pt-3"><?php echo unserialize($row["quantity"])[$pr - 1]; ?></div>
-                                        <div class="col-md-1 border pt-3"><?php echo $row["payment_type"]; ?></div>
-
-                                        <!-- //* Payment Status -->
-                                        <div class="col-md-1 border pt-3" style="color: <?php if ($row["payment_status"] == "Paid") {
-                                                                                            echo "green";
-                                                                                        } else {
-                                                                                            echo "red";
-                                                                                        } ?>;">
-                                            <?php echo $row["payment_status"]; ?>
-                                        </div>
-
+                                        <div class="col-md-2 border pt-3"><?php echo $rPr["name"]; ?></div>
                                         <div class="col-md-2 border pt-3">
                                             <?php $date = strtotime($row["delivery_date"]);
                                             echo date("M Y, d", $date); ?>
                                         </div>
-                                        <div class="col-md-2 border pt-3">
-                                            <form action="" method="post">
-                                                <input type="hidden" name="order_id" value="<?php echo $row["order_id"]; ?>" />
-                                                <select name="order_status" class="form-control">
-                                                    <option value="<?php echo $row["status"]; ?>"><?php echo $row["status"]; ?></option>
-                                                    <option value="Shipped">Shipped</option>
-                                                    <option value="Cancelled">Cancelled</option>
-                                                </select>
-                                                <button class="btn btn-danger">Update</button>
-                                            </form>
-                                        </div>
+
+                                        <div class="col-md-1 border pt-3">&#8377; <?php echo unserialize($row["offer_price"])[$pr - 1]; ?></div>
+                                        <div class="col-md-1 border pt-3">&#8377; <?php echo unserialize($row["price"])[$pr - 1]; ?></div>
+                                        <div class="col-md-1 border pt-3"><?php echo unserialize($row["quantity"])[$pr - 1]; ?></div>
+                                        <div class="col-md-2 border pt-3">&#8377; <?php echo (unserialize($row["offer_price"])[$pr - 1]) * (unserialize($row["quantity"])[$pr - 1]); ?></div>
                                     </div>
                             <?php
                                 }
                                 $pr++;
                             } ?>
+                            <div class="row">
+                                <div class="col-md-10 border p-3 text-center" style="color: #30819c;">Total Payment</div>
+                                <div class="col-md-2 border p-3">&#8377; <?php echo $row["total_price"]; ?></div>
+                            </div>
                         </div>
+
+                        <form action="" method="post" class="pb-5 px-5">
+                            <input type="hidden" name="order_id" value="<?php echo $row["order_id"]; ?>" />
+
+                            <div class="row">
+                                <p class="my-2 text-danger">Payment Status</p>
+
+                                <?php if ($row["payment_status"] == "Paid") { ?>
+                                    <input type="text" value="<?php echo $row["payment_status"]; ?>" disabled />
+                                <?php } //
+                                else { ?>
+                                    <select name="payment_status" class="form-control">
+                                        <option value="<?php echo $row["payment_status"]; ?>"><?php echo $row["payment_status"]; ?></option>
+
+                                        <?php if ($row["payment_status"] == "Pending") { ?>
+                                            <option value="Paid">Paid</option>
+                                        <?php } else { ?>
+                                            <option value="Pending">Pending</option>
+                                        <?php } ?>
+                                    </select>
+                                <?php } ?>
+                            </div>
+                            <div class="row mt-2">
+                                <p class="my-2 text-danger">Order Status</p>
+
+                                <select name="order_status" class="form-control">
+                                    <option value="<?php echo $row["status"]; ?>"><?php echo $row["status"]; ?></option>
+                                    <option value="Shipped">Shipped</option>
+                                    <option value="Cancelled">Cancelled</option>
+                                </select>
+                            </div>
+                            <div class="row mt-2 mb-4">
+                                <p class="my-2 text-danger">Order Description</p>
+
+                                <select name="order_description" class="form-control">
+                                    <option value="<?php echo $row["description"]; ?>"><?php echo $row["description"]; ?></option>
+                                    <option value="Your Order has been Shipped now.">Your Order has been Shipped now.</option>
+                                    <option value="Your Order has been Cancelled now.">Your Order has been Cancelled now.</option>
+                                </select>
+                            </div>
+                            <button class="btn btn-danger w-100" name="update_order">Update</button>
+                        </form>
                     </div>
                 <?php $i++;
                 } ?>
@@ -151,11 +186,12 @@
             </footer>
         </div>
 </body>
+
 </html>
 
 <?php
-if (isset($_POST["order_status"])) {
-    $up = $conn->prepare("UPDATE `orders` SET `status`='" . $_POST["order_status"] . "' WHERE `order_id`='" . $_POST["order_id"] . "'");
+if (isset($_POST["update_order"])) {
+    $up = $conn->prepare("UPDATE `orders` SET `payment_status`='" . $_POST["payment_status"] . "', `status`='" . $_POST["order_status"] . "' WHERE `order_id`='" . $_POST["order_id"] . "'");
     $up->execute(); ?>
 
     <script>

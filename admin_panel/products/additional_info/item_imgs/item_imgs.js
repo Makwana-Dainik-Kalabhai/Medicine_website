@@ -20,9 +20,9 @@ $(document).ready(function () {
     }
   });
 
-  var last_img = $(".add-desc-img").val();
+  var last_img = $(".add-item-img").val();
 
-  $(".add-desc-img").click(function () {
+  $(".add-item-img").click(function () {
     $(
       `<div class='row border-bottom py-4'>
         <div class='col-md-1'>${last_img})</div>
@@ -35,7 +35,7 @@ $(document).ready(function () {
           <button class='btn btn-light add-btn' name='add'>Add</button>
         </div>
       </div>`
-    ).appendTo(".desc-imgs-form");
+    ).appendTo(".item-imgs-form");
     last_img++;
   });
 });

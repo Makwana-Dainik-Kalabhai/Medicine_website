@@ -6,9 +6,13 @@
     <?php include("C:/xampp/htdocs/php/medicine_website/user_panel/header/header.css"); ?>
 </style>
 
+<script src="https://cdn.botpress.cloud/webchat/v2.2/inject.js"></script>
+<script src="https://files.bpcontent.cloud/2025/01/04/05/20250104054556-PQU4AGVO.js"></script>
+
 <script>
     <?php include("C:/xampp/htdocs/php/medicine_website/user_panel/header/header.js"); ?>
 </script>
+
 
 <div class="brightness"></div>
 <nav id="fake_main_nav"></nav>
@@ -66,7 +70,7 @@
         <div id="search_box">
             <form action="http://localhost/php/medicine_website/user_panel/shop/pr_main_page/pr_main_page.php" method="post">
                 <input type="text" id="search_input" name="search_input" placeholder="Search Here..." />
-                <button><i class="fa-solid fa-magnifying-glass"></i></button>
+                <button name="search-btn"><i class="fa-solid fa-magnifying-glass"></i></buttonn>
             </form>
 
             <?php include("C:/xampp/htdocs/php/medicine_website/database.php"); ?>
@@ -79,7 +83,6 @@
     </nav>
 </nav>
 
-
 <nav id="side_nav">
     <div>
     </div>
@@ -88,3 +91,5 @@
         <?php include("C:/xampp/htdocs/php/medicine_website/user_panel/sidenav/sidenav.php"); ?>
     </div>
 </nav>
+
+<button class="meta-ai-btn" onclick="botpress.open()"><img src="http://localhost/php/medicine_website/user_panel/header/meta.png" alt="">Meta AI</button>

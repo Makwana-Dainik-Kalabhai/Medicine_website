@@ -5,81 +5,76 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
-  <title>Admin Panel</title>
+
+  <title>User's List</title>
   <?php include("C:/xampp/htdocs/php/medicine_website/admin_panel/links.php"); ?>
 </head>
 
+<style>
+  .profile-img {
+    display: block;
+    width: 70px;
+    height: 70px;
+    padding: 2%;
+    margin: auto;
+    border-radius: 50%;
+    filter: contrast(110%);
+  }
+</style>
+
+
+<script>
+  $(document).ready(() => {
+    $(".user-list").DataTable();
+
+    $(".active-user").click(function() {
+      let email = $(this).val();
+
+      $.ajax({
+        type: "POST",
+        url: "http://localhost/php/medicine_website/admin_panel/users/user.php",
+        data: {
+          email: email,
+          status: "Active"
+        },
+        success: function(data) {
+          window.location.reload();
+        }
+      });
+    });
+    $(".block-user").click(function() {
+      let email = $(this).val();
+
+      $.ajax({
+        type: "POST",
+        url: "http://localhost/php/medicine_website/admin_panel/users/user.php",
+        data: {
+          email: email,
+          status: "Blocked"
+        },
+        success: function(data) {
+          window.location.reload();
+        }
+      });
+    });
+  });
+</script>
+
+<?php
+if (isset($_POST["email"])) {
+  $up = $conn->prepare("UPDATE `user_login_data` SET `status`='" . $_POST["status"] . "' WHERE `email`='" . $_POST["email"] . "'");
+  $up->execute();
+}
+?>
+
 <body class="">
   <div class="wrapper ">
-    <div class="sidebar" data-color="white" data-active-color="danger">
-      <?php include("C:/xampp/htdocs/php/medicine_website/admin_panel/sidenav.php"); ?>
-    </div>
+    <?php include("C:/xampp/htdocs/php/medicine_website/admin_panel/sidenav.php"); ?>
 
     <div class="main-panel">
       <!-- Navbar -->
-      <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
-        <div class="container-fluid">
-          <div class="navbar-wrapper">
-            <div class="navbar-toggle">
-              <button type="button" class="navbar-toggler">
-                <span class="navbar-toggler-bar bar1"></span>
-                <span class="navbar-toggler-bar bar2"></span>
-                <span class="navbar-toggler-bar bar3"></span>
-              </button>
-            </div>
-            <a class="navbar-brand" href="javascript:;">Paper Dashboard 2</a>
-          </div>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-bar navbar-kebab"></span>
-            <span class="navbar-toggler-bar navbar-kebab"></span>
-            <span class="navbar-toggler-bar navbar-kebab"></span>
-          </button>
-          <div class="collapse navbar-collapse justify-content-end" id="navigation">
-            <form>
-              <div class="input-group no-border">
-                <input type="text" value="" class="form-control" placeholder="Search...">
-                <div class="input-group-append">
-                  <div class="input-group-text">
-                    <i class="nc-icon nc-zoom-split"></i>
-                  </div>
-                </div>
-              </div>
-            </form>
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link btn-magnify" href="javascript:;">
-                  <i class="nc-icon nc-layout-11"></i>
-                  <p>
-                    <span class="d-lg-none d-md-block">Stats</span>
-                  </p>
-                </a>
-              </li>
-              <li class="nav-item btn-rotate dropdown">
-                <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="nc-icon nc-bell-55"></i>
-                  <p>
-                    <span class="d-lg-none d-md-block">Some Actions</span>
-                  </p>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link btn-rotate" href="javascript:;">
-                  <i class="nc-icon nc-settings-gear-65"></i>
-                  <p>
-                    <span class="d-lg-none d-md-block">Account</span>
-                  </p>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-      <!-- End Navbar -->
+      <?php include("C:/xampp/htdocs/php/medicine_website/admin_panel/header/header.php"); ?>
+
       <div class="content">
         <div class="row">
           <div class="col-lg-3 col-md-6 col-sm-6">
@@ -88,13 +83,23 @@
                 <div class="row">
                   <div class="col-5 col-md-4">
                     <div class="icon-big text-center icon-warning">
-                      <i class="nc-icon nc-globe text-warning"></i>
+                      <img src="http://localhost/php/medicine_website/admin_panel/medicines.jpg" alt="">
                     </div>
                   </div>
                   <div class="col-7 col-md-8">
                     <div class="numbers">
-                      <p class="card-category">Capacity</p>
-                      <p class="card-title">150GB
+                      <p class="card-category">Types of Medicines</p>
+                      <?php
+                      $med = $conn->prepare("SELECT * FROM `products` WHERE `status`='medicine'");
+                      $med->execute();
+                      $med = $med->fetchAll();
+                      $total = 0;
+
+                      foreach ($med as $m) {
+                        $total++;
+                      }
+                      ?>
+                      <p class="card-title"><?php echo $total; ?>
                       <p>
                     </div>
                   </div>
@@ -103,8 +108,45 @@
               <div class="card-footer ">
                 <hr>
                 <div class="stats">
-                  <i class="fa fa-refresh"></i>
-                  Update Now
+                  <i class="fa-solid fa-tablets"></i>
+                  Total <?php echo $total; ?> types of Medicines
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+              <div class="card-body ">
+                <div class="row">
+                  <div class="col-5 col-md-4">
+                    <div class="icon-big text-center icon-warning">
+                      <img src="http://localhost/php/medicine_website/admin_panel/devices.png" alt="">
+                    </div>
+                  </div>
+                  <div class="col-7 col-md-8">
+                    <div class="numbers">
+                      <p class="card-category">Types of Devices</p>
+                      <?php
+                      $dev = $conn->prepare("SELECT * FROM `products` WHERE `status`='device'");
+                      $dev->execute();
+                      $dev = $dev->fetchAll();
+                      $total = 0;
+
+                      foreach ($dev as $d) {
+                        $total++;
+                      }
+                      ?>
+                      <p class="card-title"><?php echo $total; ?>
+                      <p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer ">
+                <hr>
+                <div class="stats">
+                  <i class="fa-solid fa-list"></i>
+                  Total <?php echo $total; ?> types of Medical Devices
                 </div>
               </div>
             </div>
@@ -121,7 +163,17 @@
                   <div class="col-7 col-md-8">
                     <div class="numbers">
                       <p class="card-category">Revenue</p>
-                      <p class="card-title">$ 1,345
+                      <?php
+                      $orders = $conn->prepare("SELECT * FROM `orders` WHERE `status`='Shipped'");
+                      $orders->execute();
+                      $orders = $orders->fetchAll();
+                      $total = 0;
+
+                      foreach ($orders as $o) {
+                        $total += $o["total_price"];
+                      }
+                      ?>
+                      <p class="card-title">&#8377; <?php echo $total; ?>
                       <p>
                     </div>
                   </div>
@@ -130,35 +182,8 @@
               <div class="card-footer ">
                 <hr>
                 <div class="stats">
-                  <i class="fa fa-calendar-o"></i>
-                  Last day
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6 col-sm-6">
-            <div class="card card-stats">
-              <div class="card-body ">
-                <div class="row">
-                  <div class="col-5 col-md-4">
-                    <div class="icon-big text-center icon-warning">
-                      <i class="nc-icon nc-vector text-danger"></i>
-                    </div>
-                  </div>
-                  <div class="col-7 col-md-8">
-                    <div class="numbers">
-                      <p class="card-category">Errors</p>
-                      <p class="card-title">23
-                      <p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="card-footer ">
-                <hr>
-                <div class="stats">
-                  <i class="fa fa-clock-o"></i>
-                  In the last hour
+                  <i class="fa-solid fa-rupee"></i>
+                  Total Revenue including Cost
                 </div>
               </div>
             </div>
@@ -174,8 +199,18 @@
                   </div>
                   <div class="col-7 col-md-8">
                     <div class="numbers">
-                      <p class="card-category">Followers</p>
-                      <p class="card-title">+45K
+                      <p class="card-category">Users</p>
+                      <?php
+                      $users = $conn->prepare("SELECT * FROM `user_login_data`");
+                      $users->execute();
+                      $users = $users->fetchAll();
+                      $total = 0;
+
+                      foreach ($users as $u) {
+                        $total++;
+                      }
+                      ?>
+                      <p class="card-title"><?php echo $total; ?>
                       <p>
                     </div>
                   </div>
@@ -184,77 +219,89 @@
               <div class="card-footer ">
                 <hr>
                 <div class="stats">
-                  <i class="fa fa-refresh"></i>
-                  Update now
+                  <i class="fa-solid fa-user"></i>
+                  Users of the HealthGroup
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="card ">
-              <div class="card-header ">
-                <h5 class="card-title">Users Behavior</h5>
-                <p class="card-category">24 Hours performance</p>
-              </div>
-              <div class="card-body ">
-                <canvas id=chartHours width="400" height="100"></canvas>
-              </div>
-              <div class="card-footer ">
-                <hr>
-                <div class="stats">
-                  <i class="fa fa-history"></i> Updated 3 minutes ago
-                </div>
-              </div>
-            </div>
+
+
+        <!-- //! User's List -->
+        <div class="card">
+          <div class="row">
+            <h6 class="mx-5 py-3 text-danger">User's List</h6>
           </div>
         </div>
-        <div class="row">
-          <div class="col-md-4">
-            <div class="card ">
-              <div class="card-header ">
-                <h5 class="card-title">Email Statistics</h5>
-                <p class="card-category">Last Campaign Performance</p>
-              </div>
-              <div class="card-body ">
-                <canvas id="chartEmail"></canvas>
-              </div>
-              <div class="card-footer ">
-                <div class="legend">
-                  <i class="fa fa-circle text-primary"></i> Opened
-                  <i class="fa fa-circle text-warning"></i> Read
-                  <i class="fa fa-circle text-danger"></i> Deleted
-                  <i class="fa fa-circle text-gray"></i> Unopened
-                </div>
-                <hr>
-                <div class="stats">
-                  <i class="fa fa-calendar"></i> Number of emails sent
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-8">
-            <div class="card card-chart">
-              <div class="card-header">
-                <h5 class="card-title">NASDAQ: AAPL</h5>
-                <p class="card-category">Line Chart with Points</p>
-              </div>
-              <div class="card-body">
-                <canvas id="speedChart" width="400" height="100"></canvas>
-              </div>
-              <div class="card-footer">
-                <div class="chart-legend">
-                  <i class="fa fa-circle text-info"></i> Tesla Model S
-                  <i class="fa fa-circle text-warning"></i> BMW 5 Series
-                </div>
-                <hr />
-                <div class="card-stats">
-                  <i class="fa fa-check"></i> Data information certified
-                </div>
-              </div>
-            </div>
-          </div>
+        <hr />
+
+        <div class="card p-3">
+          <table class="user-list">
+            <thead class="bg-danger text-light">
+              <tr>
+                <th class="col-md-1">Sr.No.</th>
+                <th class="col-md-1">Profile</th>
+                <th class="col-md-2">Name</th>
+                <th class="col-md-3">Email</th>
+                <th class="col-md-1">Phone</th>
+                <th class="col-md-3">Address</th>
+                <th class="col-md-1">Status</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <?php
+              $sel_user = $conn->prepare("SELECT * FROM `user_login_data`");
+              $sel_user->execute();
+              $sel_user = $sel_user->fetchAll();
+              $i = 1;
+
+              foreach ($sel_user as $r_user) { ?>
+                <tr class="border-bottom">
+                  <td class="col-md-1"><?php echo $i . ")"; ?></td>
+                  <td class="col-md-1">
+                    <?php
+                    if ($r_user["profile_img"] != null) { ?>
+                      <img class="profile-img" src="http://localhost/php/medicine_website/user_panel/profile/profile_imgs/<?php echo $r_user["profile_img"]; ?>" />
+                    <?php } else { ?>
+                      <img class="profile-img" src="http://localhost/php/medicine_website/user_panel/profile/user.png" />
+                    <?php } ?>
+                  </td>
+                  <td class="col-md-2"><?php echo $r_user["name"]; ?></td>
+                  <td class="col-md-3"><?php echo $r_user["email"]; ?></td>
+                  <td class="col-md-1"><?php if ($r_user["phone"] != 0) {
+                                          echo $r_user["phone"];
+                                        } else {
+                                          echo "-";
+                                        } ?></td>
+                  <td class="col-md-3"><?php
+                                        if ($r_user["address"] != null && unserialize($r_user["address"])["suite"] != null) {
+                                          $address = unserialize($r_user["address"])["house_no"] . ", " . unserialize($r_user["address"])["street"] . " near " . unserialize($r_user["address"])["suite"] . ", " . unserialize($r_user["address"])["city"] . ", " . unserialize($r_user["address"])["state"] . " - " . unserialize($r_user["address"])["pincode"];
+                                        } else if ($r_user["address"] != null) {
+                                          $address = unserialize($r_user["address"])["house_no"] . ", " . unserialize($r_user["address"])["street"] . ", " . unserialize($r_user["address"])["city"] . ", " . unserialize($r_user["address"])["state"] . " - " . unserialize($r_user["address"])["pincode"];
+                                        } else {
+                                          $address = "-";
+                                        }
+
+                                        echo $address; ?></td>
+
+
+                  <?php if ($r_user["status"] == "Active") { ?>
+                    <td class="col-md-1 text-success fw-bolder"><?php echo $r_user["status"]; ?>&emsp;
+
+                      <button class="btn btn-dark block-user" value="<?php echo $r_user["email"]; ?>">Block</button>
+                    </td>
+                  <?php } else { ?>
+                    <td class="col-md-1 text-danger fw-bolder"><?php echo $r_user["status"]; ?>&emsp;
+                      <button class="btn btn-success active-user" value="<?php echo $r_user["email"]; ?>">Active</button>
+                    </td>
+                  <?php } ?>
+                </tr>
+              <?php $i++;
+              } ?>
+            </tbody>
+          </table>
         </div>
       </div>
       <footer class="footer footer-black  footer-white ">
@@ -262,12 +309,7 @@
       </footer>
     </div>
   </div>
-  <script>
-    $(document).ready(function() {
-      // Javascript method's body can be found in assets/assets-for-demo/js/demo.js
-      demo.initChartsPages();
-    });
-  </script>
+
 </body>
 
 </html>

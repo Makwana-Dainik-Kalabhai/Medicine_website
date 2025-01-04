@@ -1,7 +1,7 @@
 <?php
 session_start();
-if (isset($_GET["product_id"])) {
-    $_SESSION["product_id"] = $_GET["product_id"];
+if (isset($_GET["status"])) {
+    $_SESSION["status"] = $_GET["status"];
 }
 ?>
 <!DOCTYPE html>
@@ -12,12 +12,12 @@ if (isset($_GET["product_id"])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
 
-    <title>Edit Medical Device</title>
+    <?php echo ($_SESSION["status"] == "medicine") ? "<title>Add New Medicine</title>" : "<title>Add New Medicine</title>"; ?>
     <?php include("C:/xampp/htdocs/php/medicine_website/admin_panel/links.php"); ?>
 </head>
 
 <script>
-    <?php include("C:/xampp/htdocs/php/medicine_website/admin_panel/products/edit_device/edit_device.js"); ?>
+    <?php include("C:/xampp/htdocs/php/medicine_website/admin_panel/products/add_product/add_product.js"); ?>
 </script>
 
 <body class="">
@@ -29,7 +29,6 @@ if (isset($_GET["product_id"])) {
             <?php include("C:/xampp/htdocs/php/medicine_website/admin_panel/header/header.php"); ?>
 
             <div class="content">
-
                 <?php
                 $sel = $conn->prepare("SELECT * FROM `products` WHERE `product_id`='" . $_SESSION["product_id"] . "'");
                 $sel->execute();
@@ -43,7 +42,6 @@ if (isset($_GET["product_id"])) {
 
                     <!-- //! Category Details -->
                     <div class="card px-5 py-4 mb-5">
-
                         <!-- //** Error -->
                         <?php if (isset($_SESSION["error"])) { ?>
                             <div class="alert alert-danger" role="alert">
@@ -69,40 +67,49 @@ if (isset($_GET["product_id"])) {
                             </div>
                         <?php } ?>
 
-                        <form action="http://localhost/php/medicine_website/admin_panel/products/edit_device/update_data.php" method="post" enctype="multipart/form-data">
+                        <form action="http://localhost/php/medicine_website/admin_panel/products/add_product/update.php" method="post" enctype="multipart/form-data">
                             <h5 class="text-danger">Category Details</h5>
 
                             <div class="row">
-                                <div class="col-md-4 border pb-3 p-2">Category Image</div>
-                                <div class="col-md-4 border pb-3 p-2">Category Name</div>
-                                <div class="col-md-4 border pb-3 p-2">Change Category Image</div>
+                                <div class="col-md-3 border pb-3 p-2">Category Image</div>
+                                <div class="col-md-3 border pb-3 p-2">Change Category Image</div>
+                                <div class="col-md-3 border pb-3 p-2">Category Name</div>
+                                <div class="col-md-3 border pb-3 p-2">Product ID</div>
                             </div>
                             <div class="row">
-                                <input type="hidden" name="product-id" value="<?php echo $row["product_id"]; ?>" />
-                                <div class="col-md-4 border p-2">
-                                    <img class="category-img d-block w-50 m-auto" src="http://localhost/php/medicine_website/user_panel/shop/category_img/<?php echo $row["cat_img"]; ?>" />
+                                <input type="hidden" name="product-id" value="<?php echo isset($_SESSION["new_product_id"]) ? $row["product_id"] : ""; ?>" />
+                                <div class="col-md-3 border p-2">
+                                    <img class="d-block w-50 m-auto" src="http://localhost/php/medicine_website/user_panel/shop/category_img/<?php echo isset($_SESSION["new_product_id"]) ? $row["cat_img"] : ""; ?>" />
                                 </div>
-                                <div class="col-md-8">
-                                    <div class="row">
-                                        <div class="col-md-6 border p-3 pb-5">
-                                            <input type="hidden" class="old-cat" value="<?php echo $row["category"]; ?>">
-                                            <input type="text" class="new-cat form-control" name="category" value="<?php echo $row["category"]; ?>">
-                                        </div>
-                                        <div class="col-md-6 border p-3 pb-5">
-                                            <input type="checkbox" class="mb-4" />&ensp;Are you want to change category image?
-                                            <input type="hidden" class="form-control old-cat-img" value="<?php echo $row["cat_img"]; ?>" />
-                                            <input type="file" name="cat-img" class="form-control cat-img" value="<?php echo $row["cat_img"]; ?>" disabled="true" accept="image/png, image/jpeg, image/jpg" />
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12 border p-4" style="color: red;">
-                                            <p>Note:</p>
-                                            ** If you update Category name, must to change category image **
-                                        </div>
-                                    </div>
+
+                                <div class="col-md-3 border p-3 pb-5">
+                                    <input type="file" name="cat_img" class="form-control" accept="image/png, image/jpeg, image/jpg" />
+                                </div>
+
+                                <div class="col-md-3 border p-3 pb-5">
+                                    <p class="text-danger mb-1">Existing Categories</p>
+                                    <?php
+                                    $category = $conn->prepare("SELECT * FROM `products` WHERE `status`='" . $_SESSION["status"] . "' GROUP BY `category`");
+                                    $category->execute();
+                                    $category = $category->fetchAll();
+
+                                    if (!isset($_SESSION["new_product_id"])) { ?>
+                                        <select class="form-control old-cat" name="category" disabled="true">
+                                            <?php foreach ($category as $cat) { ?>
+                                                <option value="<?php echo $cat["category"]; ?>"><?php echo $cat["category"]; ?></option>
+                                            <?php } ?>
+                                        </select>
+                                    <?php } ?>
+                                    <input type="text" class="form-control my-3 new-cat" name="category" value="<?php echo isset($_SESSION["new_product_id"]) ? $row["category"] : ""; ?>" placeholder="Enter Category" />
+                                    
+                                    <input type="checkbox" class="select-cat" />&ensp;Are you want to select existing category?
+                                </div>
+                                
+                                <div class="col-md-3">
+                                    <input type="text" class="form-control my-3" name="product_id" value="<?php echo isset($_SESSION["new_product_id"]) ? $row["product_id"] : ""; ?>" placeholder="Enter Product ID" />
                                 </div>
                             </div>
-                            <button class="update-category btn btn-danger m-0 mt-3 w-100" name="update-category">Update Category Details</button>
+                            <button class="btn btn-danger w-100 mt-4" name="add_category">Add Category & product ID</button>
                         </form>
                     </div>
 
@@ -146,12 +153,11 @@ if (isset($_GET["product_id"])) {
                                     <button class="carousel-control-next border-0 bg-transparent" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
                                         <span class="carousel-control-next-icon bg-dark rounded" aria-hidden="true"></span>
                                     </button>
-
                                 </div>
                             </div>
 
                             <div class="col-md-6">
-                                <form action="http://localhost/php/medicine_website/admin_panel/products/edit_device/update_data.php" method="post" enctype="multipart/form-data">
+                                <form action="http://localhost/php/medicine_website/admin_panel/products/edit_medicine/update_data.php" method="post" enctype="multipart/form-data">
                                     <div class="row">
                                         <p class="text-danger fs-3 my-2">Product Name</p>
                                         <input type="text" name="name" class="form-control" value="<?php echo $row["name"]; ?>" />
@@ -187,6 +193,10 @@ if (isset($_GET["product_id"])) {
                                         </div>
                                     </div>
                                     <div class="row mt-4">
+                                        <div class="col-md-5">
+                                            <p class="text-danger fs-3 m-0">Expiry Date</p>
+                                            <input type="text" name="expiry" class="form-control" value="<?php echo $row["expiry"]; ?>">
+                                        </div>
                                         <div class="col-md-5">
                                             <p class="text-danger fs-3 m-0">Delivery Date</p>
                                             <input type="text" name="delivery-date" class="form-control" value="<?php echo $row["delivery_date"]; ?>">
@@ -229,7 +239,8 @@ if (isset($_GET["product_id"])) {
                             </div>
                             <?php if ($row["desc_img"] != null) { ?>
                                 <div class="col-md-4 border py-2"><a href="http://localhost/php/medicine_website/admin_panel/products/additional_info/desc_imgs/edit_desc_imgs.php" class="btn btn-light">Change</a></div>
-                            <?php } else { ?>
+                            <?php } //
+                            else { ?>
                                 <div class="col-md-4 border py-2"><a href="http://localhost/php/medicine_website/admin_panel/products/additional_info/desc_imgs/edit_desc_imgs.php" class="btn btn-danger">Add</a></div>
                             <?php } ?>
                         </div>
@@ -239,7 +250,6 @@ if (isset($_GET["product_id"])) {
                             <div class="col-md-2 border py-2"><?php echo $i;
                                                                 $i++; ?>)</div>
                             <div class="col-md-5 border py-2">Description of the Product</div>
-
                             <?php if ($row["description"] != null) { ?>
                                 <div class="col-md-4 border py-2"><a href="http://localhost/php/medicine_website/admin_panel/products/additional_info/description/description.php" class="btn btn-light">Change</a></div>
                             <?php } else { ?>
@@ -247,27 +257,51 @@ if (isset($_GET["product_id"])) {
                             <?php } ?>
                         </div>
 
-                        <!-- //! Features -->
+                        <!-- //! Benefits -->
                         <div class="row">
                             <div class="col-md-2 border py-2"><?php echo $i;
                                                                 $i++; ?>)</div>
-                            <div class="col-md-5 border py-2">Features of the Product</div>
-                            <?php if ($row["features"] != null) { ?>
-                                <div class="col-md-4 border py-2"><a href="http://localhost/php/medicine_website/admin_panel/products/additional_info/features/features.php" class="btn btn-light">Change</a></div>
+                            <div class="col-md-5 border py-2">Benefits of the Product</div>
+                            <?php if ($row["benefits"] != null) { ?>
+                                <div class="col-md-4 border py-2"><a href="http://localhost/php/medicine_website/admin_panel/products/additional_info/benefits/benefits.php" class="btn btn-light">Change</a></div>
                             <?php } else { ?>
-                                <div class="col-md-4 border py-2"><a href="http://localhost/php/medicine_website/admin_panel/products/additional_info/features/features.php" class="btn btn-danger">Add</a></div>
+                                <div class="col-md-4 border py-2"><a href="http://localhost/php/medicine_website/admin_panel/products/additional_info/benefits/benefits.php" class="btn btn-danger">Add</a></div>
                             <?php } ?>
                         </div>
 
-                        <!-- //! Specification -->
+                        <!-- //! How to Use -->
                         <div class="row">
                             <div class="col-md-2 border py-2"><?php echo $i;
                                                                 $i++; ?>)</div>
-                            <div class="col-md-5 border py-2">Specification of the Product</div>
-                            <?php if ($row["specification"] != null) { ?>
-                                <div class="col-md-4 border py-2"><a href="http://localhost/php/medicine_website/admin_panel/products/additional_info/specification/specification.php" class="btn btn-light">Change</a></div>
+                            <div class="col-md-5 border py-2">How to use the Product</div>
+                            <?php if ($row["how_use"] != null) { ?>
+                                <div class="col-md-4 border py-2"><a href="http://localhost/php/medicine_website/admin_panel/products/additional_info/how_use/how_use.php" class="btn btn-light">Change</a></div>
                             <?php } else { ?>
-                                <div class="col-md-4 border py-2"><a href="http://localhost/php/medicine_website/admin_panel/products/additional_info/specification/specification.php" class="btn btn-danger">Add</a></div>
+                                <div class="col-md-4 border py-2"><a href="http://localhost/php/medicine_website/admin_panel/products/additional_info/how_use/how_use.php" class="btn btn-danger">Add</a></div>
+                            <?php } ?>
+                        </div>
+
+                        <!-- //! Safety -->
+                        <div class="row">
+                            <div class="col-md-2 border py-2"><?php echo $i;
+                                                                $i++; ?>)</div>
+                            <div class="col-md-5 border py-2">Safety Information for the Product</div>
+                            <?php if ($row["safety"] != null) { ?>
+                                <div class="col-md-4 border py-2"><a href="http://localhost/php/medicine_website/admin_panel/products/additional_info/safety/safety.php" class="btn btn-light">Change</a></div>
+                            <?php } else { ?>
+                                <div class="col-md-4 border py-2"><a href="http://localhost/php/medicine_website/admin_panel/products/additional_info/safety/safety.php" class="btn btn-danger">Add</a></div>
+                            <?php } ?>
+                        </div>
+
+                        <!-- //! Other Information -->
+                        <div class="row">
+                            <div class="col-md-2 border py-2"><?php echo $i;
+                                                                $i++; ?>)</div>
+                            <div class="col-md-5 border py-2">Other Information of the Product</div>
+                            <?php if ($row["other_info"] != null) { ?>
+                                <div class="col-md-4 border py-2"><a href="http://localhost/php/medicine_website/admin_panel/products/additional_info/other_info/other_info.php" class="btn btn-light">Change</a></div>
+                            <?php } else { ?>
+                                <div class="col-md-4 border py-2"><a href="http://localhost/php/medicine_website/admin_panel/products/additional_info/other_info/other_info.php" class="btn btn-danger">Add</a></div>
                             <?php } ?>
                         </div>
 
