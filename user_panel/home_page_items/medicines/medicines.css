@@ -12,18 +12,20 @@
     background: linear-gradient(white, #76bdd5);
 }
 
+#medicine_shop_category>div {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
+    grid-gap: 1em;
+}
+
 #medicine_shop_category>p {
     color: black;
     font-weight: 500;
     margin: 1% 0;
 }
 
-#medicine_shop_category>a {
-    margin: 0 1%;
-}
-
 #medicine_shop_category img {
-    width: 17.5%;
+    width: 100%;
     background-color: white;
     border-radius: 10px;
     box-shadow: 1px 1px 3px 0.5px #f2f2f2;
@@ -34,16 +36,9 @@
 /* //! Popular in picks */
 #popular_picks {
     width: 100%;
-    height: 500px;
+    padding: 2% 0;
     margin-bottom: 2.5%;
-    background-color: rgba(242, 242, 242, 0.5);
-}
-
-#popular_picks>div {
-    position: relative;
-    padding-bottom: 10%;
-    background-color: rgba(0, 128, 0, 0.65);
-    background-color: #d6d6c2;
+    background: linear-gradient(#d6d6c2, rgba(242, 242, 242, 0.5));
 }
 
 #popular_picks p {
@@ -54,21 +49,17 @@
 
 #popular_picks #picks {
     width: 100%;
-    display: flex;
-    position: absolute;
-    top: 18%;
-    margin-top: 2%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
+    grid-gap: 1em;
     padding: 0 2%;
 }
 
 
 /* Product Box */
 #picks #box {
-    position: relative;
-    width: 300px;
     text-align: center;
-    padding: 1%;
-    margin: 0 1%;
+    padding: 2% 1% 4% 1%;
     border-radius: 8px;
     background-color: white !important;
 }
@@ -82,17 +73,17 @@
 }
 
 #popular_picks img {
-    width: 85%;
+    width: 75%;
+    padding: 3%;
 }
 
 /* Like btn */
 #product_img .fa-heart {
     color: gray;
     position: absolute;
-    right: 3%;
-    bottom: 1%;
+    right: 1.25rem;
+    bottom: 1rem;
     font-size: 0.8em;
-    /* z-index: 1; */
 }
 
 #product_img .fa-heart:hover {
@@ -102,30 +93,32 @@
 /* Product Details */
 #details {
     color: black;
-    width: 92%;
-    height: 120px;
+    width: 90%;
+    height: 125px;
     margin: 0 auto;
-    margin-bottom: 7%;
     text-align: left;
 }
 
 #details #name {
-    display: block;
     font-size: 0.65em;
-    line-height: 1.25;
+    font-weight: 500;
+    line-height: 1.3;
     margin-bottom: 3%;
     text-transform: capitalize;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 
 #details #offer_price {
     font-size: 0.62em;
-    line-height: 0.5;
 }
 
 #details #price {
     color: gray;
     font-size: 0.6em;
-    line-height: 0.5;
     text-decoration: line-through;
 }
 
@@ -140,11 +133,12 @@
 /* Add to Cart btn */
 #popular_picks #add_cart {
     display: block;
-    width: 95%;
+    width: 90%;
     margin: 0 auto;
     color: white;
-    font-size: 0.75em;
-    padding: 0.5% 2%;
+    font-size: 0.65em;
+    font-weight: 500;
+    padding: 0.4% 0;
     border-radius: 3px;
     background-color: #30819c;
 }
@@ -158,4 +152,77 @@
 #order_description {
     padding: 3px 10px 10px 15px;
     background-color: rgba(242, 242, 242, 0.4);
+}
+
+
+/* //! Media Queries */
+@media (max-width: 1000px) {
+    #medicine_shop_category>div {
+        grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+    }
+    #popular_picks #picks {
+        grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+    }
+}
+@media (max-width: 890px) {
+    #medicine_shop_category>div {
+        grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+    }
+    #popular_picks #picks {
+        grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+    }
+}
+@media (max-width: 630px) {
+    #medicine_shop_category {
+        margin-bottom: 5%;
+    }
+    #medicine_shop_category>div {
+        grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+    }
+    #popular_picks #picks {
+        grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+    }
+    #popular_picks #details {
+        height: 105px;
+    }
+    #add_cart {
+        padding: 0.5% 0;
+    }
+}
+@media (max-width: 400px) {
+    #medicine_shop_category>div {
+        gap: 1rem;
+    }
+    #popular_picks #picks {
+        gap: 1rem;
+    }
+    #popular_picks #details {
+        height: 85px;
+    }
+}
+@media (max-width: 370px) {
+    #medicine_shop_category {
+        padding: 4% 0;
+    }
+    #medicine_shop_category>p {
+        margin-bottom: 3%;
+    }
+    #medicine_shop_category>div {
+        grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+    }
+    #popular_picks {
+        padding: 5% 0;
+        margin-bottom: 4%;
+    }
+    #popular_picks #picks {
+        grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+    }
+}
+@media (max-width: 300px) {
+    #medicine_shop_category>div {
+        grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+    }
+    #popular_picks #picks {
+        grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+    }
 }

@@ -25,7 +25,6 @@
         } ?>
     </div>
 
-    <a href="">Mobile X-Ray Machine</a>
     <a href="http://localhost/php/medicine_website/user_panel/shop/pr_main_page/pr_main_page.php?status=device" style="color: #0000b3;">Explore More%</a>
 </div>
 

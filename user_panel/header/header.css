@@ -26,7 +26,7 @@
 }
 
 .header-hidden {
-    transform: translateY(-53%);
+    transform: translateY(-53.5%);
     transition: transform 0.3s ease;
 }
 
@@ -60,7 +60,7 @@
 
 
 #nav1 #logo {
-    width: 13%;
+    width: 20rem;
     font-size: 0.95em;
     font-weight: 600;
     margin-left: 2%;
@@ -77,7 +77,7 @@
 
 #login_btns {
     color: white;
-    width: 18%;
+    width: 28rem;
 }
 
 #login_btns i {
@@ -132,7 +132,6 @@
 #nav2 {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
     height: 70px;
     font-size: 25px;
     background-color: white;
@@ -148,10 +147,12 @@
     margin-left: 1%;
     cursor: pointer;
 }
+
 #menu i {
-    padding: 5%;
-    border-radius: 10px;
+    padding: 0.7rem;
+    border-radius: 0.65rem;
 }
+
 #menu i:hover {
     background-color: #e6e6e6;
 }
@@ -161,8 +162,8 @@
 #nav2_btns {
     display: flex;
     justify-content: flex-end;
-    width: 45%;
-    margin-right: 3%;
+    width: 70rem;
+    margin-right: 6rem;
 }
 
 .btn {
@@ -208,10 +209,11 @@
     font-size: 0.85em;
 }
 
-/* Nav2 search box */
+/** Nav2 search box */
 #search_box {
     position: relative;
-    width: 35%;
+    display: block;
+    width: 50rem;
     margin-right: 3%;
 }
 
@@ -246,8 +248,8 @@
 
 /* Searched Items */
 #searched_items {
-    display: none;
     position: absolute;
+    top: 5rem;
     width: 100%;
     max-height: 300px;
     background-color: white;
@@ -283,7 +285,7 @@
     top: 0;
     left: -100%;
     width: 270px;
-    padding-bottom: 5%;
+    padding-bottom: 1rem;
     background-color: white;
     font-size: 20px;
     border-right: 3px solid #f2f2f2;
@@ -305,8 +307,10 @@
 }
 
 #side_nav div:first-of-type {
+    display: flex;
+    align-items: end;
     width: 100%;
-    height: 30%;
+    height: 25%;
     background-color: #76bdd5;
 }
 
@@ -326,10 +330,16 @@
     border: none;
     background-color: white;
     border-radius: 20px 5px 20px 5px;
-    box-shadow: 0px 0px 8px 3px #b3b3b3;
+    box-shadow: 0px 0px 6px 3px #b3b3b3;
     z-index: 10000;
     font-family: "Rubik", sans-serif;
 }
+
+.meta-ai-btn:hover {
+    scale: 1.02;
+    box-shadow: 0px 0px 8px 3px #b3b3b3;
+}
+
 .meta-ai-btn img {
     filter: contrast(150%);
     width: 35px;
@@ -341,7 +351,106 @@
     0% {
         transform: rotate(0);
     }
+
     100% {
         transform: rotate(360deg);
+    }
+}
+
+
+/* //! Media Queries */
+@media (max-width: 950px) {
+    #nav2 {
+        justify-content: space-between;
+    }
+
+    #nav2_btns {
+        display: none;
+    }
+
+    #menu {
+        margin-left: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    #nav1 {
+        font-size: 28px;
+    }
+
+    #nav1 #logo {
+        width: 18rem;
+    }
+
+    #nav2 {
+        font-size: 23px;
+    }
+}
+
+@media (max-width: 580px) {
+    #nav1 {
+        font-size: 26px;
+    }
+
+    #login_btns {
+        width: 22rem;
+    }
+
+    #nav1 #logo {
+        width: 16rem;
+    }
+
+    #nav2 {
+        font-size: 21px;
+    }
+}
+
+
+@media (max-width: 450px) {
+    #nav1 {
+        font-size: 24px;
+        height: 60px;
+    }
+
+    #login_btns {
+        width: 20rem;
+    }
+
+    #search_box {
+        width: 30rem;
+    }
+
+    #nav1 #logo {
+        width: 14rem;
+    }
+
+    #nav2 {
+        font-size: 19px;
+        height: 50px;
+    }
+}
+
+@media (max-width: 420px) {
+    #side_nav {
+        width: 70%;
+        font-size: 17px;
+    }
+}
+
+@media (max-width: 370px) {
+    #nav1 {
+        font-size: 22px;
+    }
+
+    #login_btns {
+        width: 18rem;
+    }
+
+    #search_box {
+        width: 27rem;
+    }
+
+    #nav1 #logo {
+        width: 11rem;
     }
 }

@@ -107,6 +107,9 @@ if (!isset($_SESSION["email"])) { ?>
     if (isset($_SESSION["form_succ"])) {
         unset($_SESSION["form_succ"]);
     }
+    if (isset($_SESSION["admin_email"])) {
+        unset($_SESSION["admin_email"]);
+    }
 } else { ?>
     <script>
         window.history.go(-2);

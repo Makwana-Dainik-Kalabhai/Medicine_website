@@ -19,7 +19,6 @@ if (isset($_SESSION["email"])) { ?>
 ?>
 <a href="http://localhost/php/medicine_website/user_panel/shop/pr_main_page/pr_main_page.php?status=medicine"><i class="fa-solid fa-tablets"></i>&ensp;Medicines</a>
 <a href="http://localhost/php/medicine_website/user_panel/shop/pr_main_page/pr_main_page.php?status=device"><i class="fa-solid fa-list"></i>&ensp;Medical Devices</a>
-<a href="http://localhost/php/medicine_website/user_panel/shop/cleaning/cleaning_cat.php"><i class="fa-solid fa-pump-medical"></i>&ensp;Cleaning Products</a>
 
 
 

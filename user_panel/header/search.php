@@ -16,7 +16,7 @@ if ($_POST["search_val"] != null) {
     $select = $select->fetchAll();
 
     foreach ($select as $row) { ?>
-        <div><a href='http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php?product_id=<?php echo $row["product_id"]; ?>'><i class='fa-solid fa-magnifying-glass'></i>&emsp;<?php echo $row["name"]; ?></a></div>
+        <div><a href='http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php?product_id=<?php echo $row["product_id"]; ?>&status=<?php echo $row["status"]; ?>'><i class='fa-solid fa-magnifying-glass'></i>&emsp;<?php echo $row["name"]; ?></a></div>
 <?php
     }
 }

@@ -1,3 +1,6 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <style>
     #home_categories>a {
         width: 35%;
@@ -19,13 +22,9 @@
         width: 21%;
     }
 
-    #home_categories #cleaning img {
-        width: 16%;
-    }
-
     @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
-    
-    #home_categories .details{
+
+    #home_categories .details {
         width: 100%;
         padding-left: 5%;
         display: flex;
@@ -38,6 +37,7 @@
         font-size: 1em;
         font-weight: 500;
     }
+
     #home_categories .details span:last-of-type {
         color: green;
         font-size: 0.85em;
@@ -47,6 +47,64 @@
     #home_categories i {
         color: gray;
         font-size: 0.85em;
+    }
+
+    @media (max-width: 800px) {
+        #home_categories>a {
+            font-size: 21px;
+            width: 40%;
+        }
+
+        #home_categories .details span:last-of-type {
+            margin-top: 0;
+        }
+    }
+
+    @media (max-width: 650px) {
+        #home_categories>a {
+            font-size: 19px;
+        }
+    }
+
+    @media (max-width: 575px) {
+        #home_categories>a {
+            font-size: 18px;
+            width: 45%;
+        }
+    }
+
+    @media (max-width: 490px) {
+        #home_categories>a {
+            font-size: 15px;
+        }
+    }
+
+    @media (max-width: 405px) {
+        #home_categories>a {
+            font-size: 13px;
+        }
+    }
+
+    @media (max-width: 370px) {
+        #home_categories>a {
+            width: 80%;
+            height: 50px;
+            margin: 1rem 0;
+        }
+
+        #home_categories #medicines img {
+            width: 17%;
+            padding: 1.5%;
+        }
+
+        #home_categories #products img {
+            width: 17%;
+            padding: 1.5%;
+        }
+
+        #home_categories .details {
+            padding-left: 10%;
+        }
     }
 </style>
 
@@ -59,8 +117,8 @@ $sel->execute();
 $sel = $sel->fetchAll();
 $max_pr_dis = 0;
 
-foreach($sel as $row) {
-    if($row["discount"] > $max_pr_dis) {
+foreach ($sel as $row) {
+    if ($row["discount"] > $max_pr_dis) {
         $max_pr_dis = $row["discount"];
     }
 }
@@ -70,8 +128,8 @@ $sel->execute();
 $sel = $sel->fetchAll();
 $max_me_dis = 0;
 
-foreach($sel as $row) {
-    if($row["discount"] > $max_me_dis) {
+foreach ($sel as $row) {
+    if ($row["discount"] > $max_me_dis) {
         $max_me_dis = $row["discount"];
     }
 }

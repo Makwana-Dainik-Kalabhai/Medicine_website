@@ -5,7 +5,7 @@
     <?php include("C:/xampp/htdocs/php/medicine_website/user_panel/home_page_items/products/products.css"); ?>
 </style>
 
-<h1 id="heading">Order Products Online</h1>
+<h1 id="heading">Order Medical Devices</h1>
 <hr>
 
 <!-- //! Product shop category -->

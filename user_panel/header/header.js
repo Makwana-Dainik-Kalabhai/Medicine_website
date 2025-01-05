@@ -10,16 +10,12 @@ $(document).ready(() => {
     if (prevScrollPos < currentScrollPos) {
       $("#main_nav").addClass("header-hidden");
       $("#main_nav").removeClass("header-visible");
-      $("#side_nav").css({ transform: "translateY(-15%)" });
-      $("#side_nav #menus").css("height", "100%");
       $("#bill").css("top", "80px");
     }
     // Scroll up
     else {
       $("#main_nav").addClass("header-visible");
       $("#main_nav").removeClass("header-hidden");
-      $("#side_nav").css({ transform: "translateY(0)" });
-      $("#side_nav #menus").css("height", "460px");
       $("#bill").css("top", "150px");
     }
 
@@ -66,6 +62,8 @@ $(document).ready(() => {
     $("#searched_items").show();
   });
 
+
+  
   $(".brightness").click(() => {
     $("#side_nav").css("left", "-100%");
     $(".brightness").css("display", "none");

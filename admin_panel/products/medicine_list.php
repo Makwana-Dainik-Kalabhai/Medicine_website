@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,6 +10,18 @@
     <title>Medicines List</title>
     <?php include("C:/xampp/htdocs/php/medicine_website/admin_panel/links.php"); ?>
 </head>
+
+<?php
+if (isset($_SESSION["product_id"])) {
+    unset($_SESSION["product_id"]);
+}
+if (isset($_SESSION["cat_success"])) {
+    unset($_SESSION["cat_success"]);
+}
+if (isset($_SESSION["product_success"])) {
+    unset($_SESSION["product_success"]);
+}
+?>
 
 <script>
     $(document).ready(() => {

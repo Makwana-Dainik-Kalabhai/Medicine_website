@@ -1,8 +1,54 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <style>
     #carouselExampleAutoplaying img {
         height: 550px;
     }
+
+    /* //! Media Queries */
+    @media (max-width: 1100px) {
+        #carouselExampleAutoplaying img {
+            height: 520px;
+        }
+    }
+    @media (max-width: 950px) {
+        #carouselExampleAutoplaying img {
+            height: 500px;
+        }
+    }
+    @media (max-width: 850px) {
+        #carouselExampleAutoplaying img {
+            height: 450px;
+        }
+    }
+    @media (max-width: 750px) {
+        #carouselExampleAutoplaying img {
+            height: 400px;
+        }
+    }
+    @media (max-width: 650px) {
+        #carouselExampleAutoplaying img {
+            height: 350px;
+        }
+    }
+    @media (max-width: 550px) {
+        #carouselExampleAutoplaying img {
+            height: 300px;
+        }
+    }
+    @media (max-width: 450px) {
+        #carouselExampleAutoplaying img {
+            height: 250;
+        }
+    }
+    @media (max-width: 370px) {
+        #carouselExampleAutoplaying img {
+            height: 200px;
+        }
+    }
 </style>
+
 <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-indicators">
         <button type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>

@@ -90,3 +90,15 @@
 </body>
 
 </html>
+
+<?php
+if (isset($_SESSION["product_id"])) {
+    unset($_SESSION["product_id"]);
+}
+if (isset($_SESSION["cat_success"])) {
+    unset($_SESSION["cat_success"]);
+}
+if (isset($_SESSION["product_success"])) {
+    unset($_SESSION["product_success"]);
+}
+?>

@@ -2,7 +2,7 @@
 session_start();
 include("C:/xampp/htdocs/php/medicine_website/database.php");
 
-//! Change Description Images
+//* Change Product Images
 if (isset($_POST["change"])) {
     if ($_FILES["item-img"]["name"] == null) {
         $_SESSION["error"] = "Please! Select the File";
@@ -62,7 +62,7 @@ if (isset($_POST["change"])) {
 
 
 
-//! Add Description Image
+//! Add Product Image
 if (isset($_POST["add"])) {
     if ($_FILES["new-img"]["name"] == null) {
         $_SESSION["error"] = "Please! Select the File";
@@ -119,7 +119,7 @@ if (isset($_POST["add"])) {
 
 
 
-// ! Delete Description Image
+// ! Delete Product Image
 if (isset($_POST["delete"])) {
     $i = 1;
     $item_img = array();
@@ -135,7 +135,7 @@ if (isset($_POST["delete"])) {
                     array_push($item_img, $img);
                 } //
                 else if ($i == $_POST["delete"]) {
-                    unlink("C:/xampp/htdocs/php/medicine_website/user_panel/shop/item_imgs/$img");
+                    unlink("C:/xampp/htdocs/php/medicine_website/user_panel/shop/imgs/$img");
                 }
                 $i++;
             }

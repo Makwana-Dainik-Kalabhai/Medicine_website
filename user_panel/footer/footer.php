@@ -39,8 +39,6 @@
                 <span>Order Now</span>
                 <a href="http://localhost/php/medicine_website/user_panel/shop/pr_main_page/pr_main_page.php?status=medicine">All Medicines</a>
                 <a href="http://localhost/php/medicine_website/user_panel/shop/pr_main_page/pr_main_page.php?status=device">Medical Devices</a>
-                <a href="">Cleaning Products</a>
-                <a href="">FAQs</a>
             </div>
             <div>
                 <div id="office_address">
@@ -49,7 +47,7 @@
                 </div>
                 <div id="cus_care">
                     <span>Customer Care</span>
-                    <p>022-9876-3456</p>
+                    <p>+91 9010203040</p>
                 </div>
             </div>
         </div>

@@ -18,6 +18,7 @@
 <nav id="fake_main_nav"></nav>
 
 <div id="top_load"></div>
+
 <nav id="main_nav" class="header-visible">
     <nav id="nav1">
         <div id="logo">
@@ -65,27 +66,22 @@
             </div>
         </div>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-
         <div id="search_box">
+            <div id="searched_items">
+                <div id="new_items"></div>
+            </div>
+
             <form action="http://localhost/php/medicine_website/user_panel/shop/pr_main_page/pr_main_page.php" method="post">
                 <input type="text" id="search_input" name="search_input" placeholder="Search Here..." />
                 <button name="search-btn"><i class="fa-solid fa-magnifying-glass"></i></buttonn>
             </form>
 
-            <?php include("C:/xampp/htdocs/php/medicine_website/database.php"); ?>
-
-            <div id="searched_items">
-                <div id="new_items">
-                </div>
-            </div>
         </div>
     </nav>
 </nav>
 
 <nav id="side_nav">
-    <div>
-    </div>
+    <div></div>
 
     <div id="menus">
         <?php include("C:/xampp/htdocs/php/medicine_website/user_panel/sidenav/sidenav.php"); ?>

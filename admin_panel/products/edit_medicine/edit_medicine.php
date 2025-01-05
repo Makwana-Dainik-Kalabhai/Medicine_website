@@ -190,13 +190,13 @@ if (isset($_GET["product_id"])) {
                                         </div>
                                         <div class="col-md-5">
                                             <p class="text-danger fs-3 m-0">Delivery Date</p>
-                                            <input type="text" name="delivery-date" class="form-control" value="<?php echo $row["delivery_date"]; ?>">
+                                            <input type="text" name="delivery-date" class="form-control" value="<?php $date = strtotime($row["delivery_date"]); echo date("Y-m-d",$date); ?>">
                                         </div>
                                     </div>
                                     <div class="row mt-4">
                                         <div class="col-md-12">
                                             <p class="text-danger fs-3 m-0">External link(video) that describes the Product:</p>
-                                            <a href="<?php echo $row["link"]; ?>"><?php echo $row["link"]; ?></a>
+                                            <a href="<?php echo $row["link"]; ?>" style="color: blue;"><?php echo $row["link"]; ?></a>
                                             <input type="text" name="link" class="form-control mt-2" value="<?php echo $row["link"]; ?>">
                                         </div>
                                     </div>

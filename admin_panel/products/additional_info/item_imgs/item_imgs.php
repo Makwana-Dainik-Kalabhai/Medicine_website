@@ -57,7 +57,7 @@
                             $count_img++;
                         } ?>
 
-                        <!-- //! Description Images -->
+                        <!-- //! Product Images -->
                         <h5 class="text-danger">Product Images</h5>
                         <div class="row border-bottom py-3">
                             <div class="col-md-1">Sr. no.</div>
@@ -78,7 +78,7 @@
                                         <div class="col-md-4">
                                             <p class="text-danger mb-1">File Name:</p>
                                             <?php echo $item_img; ?>
-                                            <input type="file" name="item-img" class="form-control mt-4" disabled="true" value="<?php echo $item_img; ?>" />
+                                            <input type="file" name="item-img" class="form-control mt-4" disabled="true" />
                                             <input type="checkbox" class="mt-3 mx-2" /> Are you want to change the image?
                                         </div>
                                         <div class="col-md-2">

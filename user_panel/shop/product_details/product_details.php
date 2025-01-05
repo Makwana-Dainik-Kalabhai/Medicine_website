@@ -161,18 +161,18 @@ if (isset($_GET["status"])) {
         <div id="advance_details">
             <div>
                 <div id="btns">
+                    <button value="description" class="clicked_btn">Description</button>
                     <?php if ($_SESSION["status"] == "device") { ?>
-                        <button value="description" class="clicked_btn">Description</button>
                         <button value="features">Features</button>
                         <button value="specification">Specification</button>
-                    <?php } else { ?>
-                        <button value="description" class="clicked_btn">Description</button>
+                    <?php } //
+                    else { ?>
                         <button value="benefits">Benefits</button>
                         <button value="how_use">How to Use</button>
                         <button value="safety">Safety</button>
                         <button value="other_info">Other Info.</button>
-                        <button value="faqs">FAQs</button>
                     <?php } ?>
+                    <button value="faqs">FAQs</button>
                 </div>
 
 
@@ -289,6 +289,20 @@ function disProductDetalis()
                     ?>
                 </table>
             </div>
+
+            <div id="faqs">
+                <?php if ($row["faqs"] != null) {
+                    foreach (unserialize($row["faqs"]) as $faqs) { ?>
+                        <?php if (isset($faqs[0]) && isset($faqs[1])) { ?>
+                            <p style="margin-bottom:3%;">
+                                <li style="display:inline;font-weight: 700;">Que.&ensp;<?php echo $faqs[0]; ?></li>
+                                <hr />
+                                <span>Ans.&ensp;<?php echo $faqs[1]; ?></span>
+                            </p>
+                        <?php } ?>
+                <?php }
+                } ?>
+            </div>
         </div>
     <?php } ?>
     <?php
@@ -387,7 +401,7 @@ function disMedicineDetalis()
                     foreach (unserialize($row["faqs"]) as $faqs) { ?>
                         <?php if (isset($faqs[0]) && isset($faqs[1])) { ?>
                             <p style="margin-bottom:3%;">
-                                <li style="display:inline;font-weight: 700;">Q.&ensp;<?php echo $faqs[0]; ?></li>
+                                <li style="display:inline;font-weight: 700;">Que.&ensp;<?php echo $faqs[0]; ?></li>
                                 <hr />
                                 <span>Ans.&ensp;<?php echo $faqs[1]; ?></span>
                             </p>
