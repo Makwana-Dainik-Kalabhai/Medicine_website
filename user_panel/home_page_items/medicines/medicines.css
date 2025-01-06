@@ -44,7 +44,7 @@
 #popular_picks p {
     color: black;
     font-weight: 500;
-    padding: 1.5% 2%;
+    padding: 0 2%;
 }
 
 #popular_picks #picks {
@@ -224,5 +224,13 @@
     }
     #popular_picks #picks {
         grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+    }
+}
+@media (max-width: 265px) {
+    #medicine_shop_category>div {
+        grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+    }
+    #popular_picks #picks {
+        grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
     }
 }

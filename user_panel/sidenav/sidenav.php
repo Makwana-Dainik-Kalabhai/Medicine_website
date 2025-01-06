@@ -21,6 +21,8 @@ if (isset($_SESSION["email"])) { ?>
 <a href="http://localhost/php/medicine_website/user_panel/shop/pr_main_page/pr_main_page.php?status=device"><i class="fa-solid fa-list"></i>&ensp;Medical Devices</a>
 
 
+<!-- //! Health News -->
+<a href="http://localhost/php/medicine_website/user_panel/header/all_menus/health_news.php"><i class="fa-solid fa-newspaper"></i>&ensp;Health News</a>
 
 <!-- Counting likes and cart items -->
 <?php
@@ -34,11 +36,11 @@ if (isset($_SESSION["email"])) {
     $sel_like = $conn->prepare("SELECT * FROM `wishlist` WHERE `email`='" . $_SESSION["email"] . "'");
     $sel_like->execute();
     $sel_like = $sel_like->fetchAll();
-    
+
     foreach ($sel_like as $row) {
         $like_count++;
     }
-    
+
     $sel_cart = $conn->prepare("SELECT * FROM `cart` WHERE `email`='" . $_SESSION["email"] . "'");
     $sel_cart->execute();
     $sel_cart = $sel_cart->fetchAll();
@@ -53,7 +55,7 @@ if (isset($_SESSION["email"])) {
     $order_exist = false;
 
     foreach ($sel_order as $row) {
-        if($row["status"]=="Processing")
+        if ($row["status"] == "Processing")
             $order_count++;
         $order_exist = true;
     }

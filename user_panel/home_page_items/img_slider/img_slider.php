@@ -47,6 +47,11 @@
             height: 200px;
         }
     }
+    @media (max-width: 265px) {
+        #carouselExampleAutoplaying img {
+            height: 150px;
+        }
+    }
 </style>
 
 <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">

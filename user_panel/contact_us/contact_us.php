@@ -33,16 +33,16 @@
                     <img src="contact_us.jpg" alt="">
                     <div id="details">
                         <p>
-                            <b>Company: </b>healthGroup pvt. ltd.
+                            <b>Company:</b>&ensp;healthGroup pvt. ltd.
                         </p>
                         <p>
-                            <b>Email: </b>healthgroup001@gmail.com
+                            <b>Email:</b>&ensp;healthgroup001@gmail.com
                         </p>
                         <p>
-                            <b>Phone: </b>9010203040
+                            <b>Phone:</b>&ensp;9010203040
                         </p>
                         <p>
-                            <b>Address: </b>34, Kameshwar park, opp. Swaminarayan Mandir, Hirawadi road, Saidpur bogha, Ahmedabad, Gujarat India-382 345
+                            <b>Address:</b>&ensp;34, Kameshwar park, opp. Swaminarayan Mandir, Hirawadi road, Saidpur bogha, Ahmedabad, Gujarat India-382 345
                         </p>
                     </div>
                 </div>
@@ -63,31 +63,31 @@
                     <!-- //! Main Form -->
                     <h1>Place Your query here...</h1>
                     <form action="place_query.php" method="post" enctype="multipart/form-data">
-                        <div class="row mb-4">
+                        <div class="row">
                             <div class="col-md-12">
                                 <label class="form-label">Name:</label>
                                 <input type="text" name="name" class="form-control" placeholder="User Name" />
                             </div>
                         </div>
-                        <div class="row mb-4">
+                        <div class="row">
                             <div class="col-md-12">
                                 <label class="form-label">Email ID:</label>
                                 <input type="email" name="email" class="form-control" placeholder="Email ID" />
                             </div>
                         </div>
-                        <div class="row mb-4">
+                        <div class="row">
                             <div class="col-md-12">
                                 <label class="form-label">Phone:</label>
                                 <input type="text" name="phone" class="form-control" maxlength="10" placeholder="Phone no." />
                             </div>
                         </div>
-                        <div class="row mb-4">
+                        <div class="row">
                             <div class="col-md-12">
                                 <label class="form-label">Query:</label>
                                 <textarea type="text" name="query" class="form-control" placeholder="Place your query here..." rows="4"></textarea>
                             </div>
                         </div>
-                        <div class="btns mt-5">
+                        <div class="btns">
                             <input type="submit" value="Send" id="send_btn" name="send" />
                         </div>
                     </form>

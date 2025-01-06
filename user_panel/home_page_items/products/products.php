@@ -23,11 +23,11 @@
             $sel = $sel->fetchAll();
 
             foreach ($sel as $row) { ?>
-                    <a href="http://localhost/php/medicine_website/user_panel/shop/pr_main_page/pr_main_page.php?status=device&category=<?php echo $row["category"]; ?>" class="box">
-                        <img src="http://localhost/php/medicine_website/user_panel/shop/category_img/<?php echo $row["cat_img"]; ?>" alt="Img not Found"/>
-                        <span class="category"><?php echo $row["category"]; ?></span>
-                    </a>
-            <?php } ?>  
+                <a href="http://localhost/php/medicine_website/user_panel/shop/pr_main_page/pr_main_page.php?status=device&category=<?php echo $row["category"]; ?>" class="box">
+                    <img src="http://localhost/php/medicine_website/user_panel/shop/category_img/<?php echo $row["cat_img"]; ?>" alt="Img not Found" />
+                    <span class="category"><?php echo $row["category"]; ?></span>
+                </a>
+            <?php } ?>
         </div>
     </div>
 </div>
@@ -41,20 +41,23 @@
     <div>
         <div id="products">
             <?php
-            $sel = $conn->prepare("SELECT * FROM `products` WHERE `status`='device' ORDER BY `time` DESC LIMIT 10");
+            $sel = $conn->prepare("SELECT * FROM `products` WHERE `status`='device' ORDER BY `time` DESC LIMIT 8");
             $sel->execute();
             $sel = $sel->fetchAll();
-            
+
             foreach ($sel as $row) { ?>
                 <div class="box">
+                    <?php if ($row["discount"] != 0) { ?>
+                        <span id="discount">-<?php echo $row["discount"]; ?>%</span>
+                    <?php } ?>
                     <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php?product_id=<?php echo $row["product_id"]; ?>&status=device">
                         <img src="http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo unserialize($row["item_img"])[0]; ?>" />
-                        <span id="name"><?php echo $row["name"]; ?></span>
                         <div>
+                            <span id="name"><?php echo $row["name"]; ?></span>
+                            <span id="off_price">&#8377;<?php echo $row["offer_price"]; ?></span>
                             <?php if ($row["discount"] != 0) { ?>
                                 <span id="price">&#8377;<?php echo $row["price"]; ?></span>
                             <?php } ?>
-                            <span id="off_price">&#8377;<?php echo $row["offer_price"]; ?></span>
                         </div>
                     </a>
                     <!-- //! Add to Cart button -->

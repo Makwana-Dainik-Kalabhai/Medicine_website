@@ -68,11 +68,6 @@
             <div id="copy_right">
                 <span>Copyright&#169; 2024. All rights are Reserved.</span>
             </div>
-            <div id="social_media">
-                <a href=""><i class="fa-brands fa-youtube"></i></a>
-                <a href=""><i class="fa-brands fa-instagram"></i></a>
-                <a href=""><i class="fa-brands fa-facebook-f"></i></a>
-            </div>
         </div>
     </div>
 </div>

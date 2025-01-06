@@ -37,19 +37,14 @@
             <?php include("C:/xampp/htdocs/php/medicine_website/user_panel/home_page_items/category/categories.php"); ?>
         </div>
 
-        <!-- Order Medicines Online -->
+        <!-- //! Order Medicines Online -->
         <div id="medicines">
             <?php include("C:/xampp/htdocs/php/medicine_website/user_panel/home_page_items/medicines/medicines.php"); ?>
         </div>
 
-        <!-- Order Products Online -->
+        <!-- //! Order Products Online -->
         <div id="products">
             <?php include("C:/xampp/htdocs/php/medicine_website/user_panel/home_page_items/products/products.php"); ?>
-        </div>
-
-        <div id="health_tips">
-            <?php //include("C:/xampp/htdocs/php/medicine_website/user_panel/home_page_items/health_tips/health_tips.php"); 
-            ?>
         </div>
     </main>
 

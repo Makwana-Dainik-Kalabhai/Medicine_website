@@ -56,8 +56,7 @@
             </div>
 
             <div class="btn">
-                <a href="">Lab Test <i class="fa-solid fa-caret-down"></i></a>
-                <div><?php include("C:/xampp/htdocs/php/medicine_website/user_panel/header/all_menus/appoitment.php"); ?></div>
+                <a href="http://localhost/php/medicine_website/user_panel/header/all_menus/health_news.php">Health News <i class="fa-solid fa-caret-down"></i></a>
             </div>
 
             <div class="btn">
