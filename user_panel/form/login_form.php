@@ -18,13 +18,6 @@ if (!isset($_SESSION["email"])) { ?>
         <?php include("C:/xampp/htdocs/php/medicine_website/user_panel/form/form.js"); ?>
     </script>
 
-    <?php if (!isset($_SESSION["max_try"])) {
-        $_SESSION["max_try"] = 0;
-    }
-    if ($_SESSION["time"] <= time()) {
-        unset($_SESSION["time"]);
-    } ?>
-
     <body>
         <header>
             <?php include("C:/xampp/htdocs/php/medicine_website/user_panel/header/header.php"); ?>

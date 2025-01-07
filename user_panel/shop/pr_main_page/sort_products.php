@@ -71,11 +71,11 @@ foreach ($sel as $row) {
             <div id="product_details">
                 <span id="name"><?php echo $row["name"]; ?></span>
 
+                <span id="off_price">&#8377;<?php echo $row["offer_price"]; ?></span>
                 <?php
                 if ($row["discount"] != 0) { ?>
                     <span id="price">&#8377;<?php echo $row["price"]; ?></span>
                 <?php } ?>
-                <span id="off_price">&#8377;<?php echo $row["offer_price"]; ?></span>
             </div>
         </a>
         <!-- //! Add to Cart btn -->

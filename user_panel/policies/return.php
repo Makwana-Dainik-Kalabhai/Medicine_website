@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="wclassth=device-wclassth, initial-scale=1.0">
     <title>Return Policy</title>
     <link rel="shortcut icon" href="http://localhost/php/medicine_website/logo.ico" type="image/x-icon" />
 </head>
@@ -19,13 +19,13 @@
 
     <main>
         <div>
-            <div id="welcome_intro">
-                <p>Welcome to www.healthGroup.com ("healthGroup.com", "healthGroup pvt. ltd.", "Website", "Pharmacy", or "We").<br /><br />This Website is managed and operated by healthGroup pvt. ltd. Whose main store is located in 34, Kameshwar park, opp. Swaminarayan Mandir, Hirawadi road, Saidpur bogha, Ahmedabad, Gujarat India-382 345.</p>
+            <div class="welcome_intro">
+                <p>Welcome to www.healthGroup.com ("healthGroup.com", "healthGroup pvt. ltd.", "Website", "Pharmacy", or "We").<br /><br />This Website is managed and operated by healthGroup pvt. ltd. Whose main store is located in 34, Kameshwar park, opp. Swaminarayan Mandir, Hirawadi road, Saclasspur bogha, Ahmedabad, Gujarat India-382 345.</p>
             </div>
-            <div id="policy">
-                <h1 id="heading">Return & Refund Policy...</h1>
+            <div class="policy">
+                <h1 class="heading">Return & Refund Policy...</h1>
                 <hr>
-                <p>healthGroup pvt. ltd. is one of the best pharma company. Our main store is situated in 34, Kameshwar park, opp. Swaminarayan Mandir, Hirawadi road, Saidpur bogha, Ahmedabad, Gujarat India-382 345.<br />
+                <p>healthGroup pvt. ltd. is one of the best pharma company. Our main store is situated in 34, Kameshwar park, opp. Swaminarayan Mandir, Hirawadi road, Saclasspur bogha, Ahmedabad, Gujarat India-382 345.<br />
                 <table>
                     <tr>
                         <th>Customer Care no.:</th>
@@ -38,9 +38,9 @@
                 </table>
                 </p>
 
-                <p>We prioritize your satisfaction and aim to provide you with the highest quality products and service. <br /><hr/></p>
+                <p>We prioritize your satisfaction and aim to provclasse you with the highest quality products and service. <br /><hr/></p>
                 <p style="color:red;font-weight:600;">***Return & Refunds are not Allowed***</p>
-                <p class="mt-5" style="color:#04aa6d;">Thank you for shopping with healthGroup pvt. ltd. We are committed to ensuring your satisfaction and appreciate your understanding of our return policy.</p>
+                <p style="color:#04aa6d;">Thank you for shopping with healthGroup pvt. ltd. We are committed to ensuring your satisfaction and appreciate your understanding of our return policy.</p>
             </div>
         </div>
     </main>

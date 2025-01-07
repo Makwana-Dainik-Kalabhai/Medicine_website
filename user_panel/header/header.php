@@ -6,6 +6,8 @@
     <?php include("C:/xampp/htdocs/php/medicine_website/user_panel/header/header.css"); ?>
 </style>
 
+
+<!-- //! Meta AI CDNS -->
 <script src="https://cdn.botpress.cloud/webchat/v2.2/inject.js"></script>
 <script src="https://files.bpcontent.cloud/2025/01/04/05/20250104054556-PQU4AGVO.js"></script>
 
@@ -56,7 +58,7 @@
             </div>
 
             <div class="btn">
-                <a href="http://localhost/php/medicine_website/user_panel/header/all_menus/health_news.php">Health News <i class="fa-solid fa-caret-down"></i></a>
+                <a href="http://localhost/php/medicine_website/user_panel/health_news/health_news.php">Health News <i class="fa-solid fa-caret-down"></i></a>
             </div>
 
             <div class="btn">

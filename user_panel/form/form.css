@@ -8,27 +8,28 @@ body {
 }
 
 main {
+    font-size: 28px;
     width: 100%;
-    padding: 4% 0 7% 0;
+    padding: 6% 0;
     background-color: #f2f2f2;
 }
 
 /* signUp and Login Forms */
 .regi_form {
     display: flex;
-    margin: 3% auto;
+    margin: auto;
     width: 75%;
     background-color: white;
-    overflow: hidden !important;
     border-radius: 5px;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+.regi_form span {
+    display: block;
 }
 
 .regi_form>div {
+    padding: 2%;
     width: 100%;
     position: relative;
-    padding: 2%;
-    font-size: 30px;
     font-family: "Mukta", sans-serif;
 }
 
@@ -85,24 +86,16 @@ main {
     margin: 0 2%;
 }
 
-.regi_form span {
-    display: block;
-}
-
-.regi_form .max_try {
-    color: red;
-}
-
 .regi_form .heading {
     color: #30819c;
     font-size: 1em;
     font-weight: 600;
 }
 
-.regi_form  .description {
+.regi_form .description {
     color: gray;
     font-size: 0.6em;
-    margin-top: 3%;
+    margin-top: 2%;
 }
 
 .regi_form form {
@@ -110,10 +103,11 @@ main {
 }
 
 .regi_form #sign_form form {
-    height: 625px;
+    margin-bottom: 13%;
 }
+
 .regi_form #login_form form {
-    height: 300px;
+    margin-bottom: 10%;
 }
 
 /* //! Input types */
@@ -125,20 +119,24 @@ main {
     margin-top: 3%;
 }
 
-.regi_form input, .regi_form .row {
+.regi_form input,
+.regi_form .row {
     width: 90%;
     padding: 1% 0;
 }
+
 .regi_form .row input {
     width: 100%;
     padding: 0;
 }
+
 .regi_form input {
     font-size: 0.65em;
     outline: none;
     border: none;
     border-bottom: 1px solid gray;
 }
+
 .pass_div {
     position: relative;
 }
@@ -164,7 +162,8 @@ main {
     font-size: 0.55em;
 }
 
-.regi_form input::placeholder, .regi_form textarea::placeholder {
+.regi_form input::placeholder,
+.regi_form textarea::placeholder {
     font-size: 0.9em;
 }
 
@@ -197,25 +196,117 @@ main {
 }
 
 
-/* //! If email id is exist in admin & user both */
-#admin_user {
-    width: 100%;
-    margin: 0;
-    background-color: #f2f2f2;
+
+/* //! Media Queries */
+@media (max-width: 1100px) {
+    main {
+        padding: 8% 0;
+        font-size: 26px;
+    }
+
+    .regi_form {
+        width: 85%;
+    }
 }
 
-#admin_user span:first-of-type {
-    font-size: 0.85em;
-    margin-top: 5%;
-    color: #30819c;
+@media (max-width: 950px) {
+    .regi_form {
+        width: 95%;
+    }
 }
 
-#admin_user span:last-of-type {
-    font-size: 0.75em;
-    margin-top: 10%;
+@media (max-width: 850px) {
+    .regi_form {
+        box-shadow: 0px 0px 3px 2px #f2f2f2;
+        border-radius: 6px;
+    }
 }
 
-#admin_user a {
-    font-size: 0.7em;
-    margin-right: 5%;
+@media (max-width: 730px) {
+    main {
+        margin: 0;
+    }
+
+    .regi_form {
+        width: 100%;
+    }
+
+    .regi_form>div {
+        width: 100%;
+        padding: 2% 0;
+    }
+}
+
+@media (max-width: 650px) {
+    .regi_form {
+        display: block;
+        width: 85%;
+        margin: auto;
+        padding: 3% 5%;
+    }
+
+    .regi_form input,
+    .regi_form .row {
+        width: 100%;
+    }
+    .pass_div i {
+        right: 0;
+    }
+    #pass_des {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 550px) {
+    .regi_form {
+        width: 90%;
+    }
+}
+
+@media (max-width: 450px) {
+    main {
+        font-size: 24px;
+        background-color: white;
+    }
+
+    .regi_form {
+        width: 100%;
+        padding: 3% 7%;
+        box-shadow: none;
+        border: none;
+    }
+
+    .regi_form form {
+        padding-bottom: 5%;
+    }
+
+    .regi_form .btns input {
+        border-radius: 1.5px;
+    }
+}
+
+@media (max-width: 350px) {
+    main {
+        font-size: 22px;
+    }
+
+    .regi_form .col-md-6 {
+        width: 100%;
+        padding-right: 0;
+    }
+
+    .regi_form .btns {
+        position: relative;
+        margin-top: 5%;
+    }
+
+    .regi_form .btns input {
+        margin: 5% 3% 0 0;
+    }
+
+    .regi_form a {
+        display: block;
+        margin-top: 2%;
+    }
 }

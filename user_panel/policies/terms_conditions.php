@@ -4,7 +4,7 @@
 
 <head>
      <meta charset="UTF-8">
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <meta name="viewport" content="wclassth=device-wclassth, initial-scale=1.0">
      <title>Terms & Conditions</title>
      <link rel="shortcut icon" href="http://localhost/php/medicine_website/logo.ico" type="image/x-icon" />
 </head>
@@ -19,16 +19,16 @@
 
      <main>
           <div>
-               <div id="welcome_intro">
-                    <p>Welcome to www.healthGroup.com ("healthGroup.com", "healthGroup pvt. ltd.", "Website", "Pharmacy", or "We").<br /><br />This Website is managed and operated by healthGroup pvt. ltd. Whose main store is located in 34, Kameshwar park, opp. Swaminarayan Mandir, Hirawadi road, Saidpur bogha, Ahmedabad, Gujarat India-382 345.</p>
+               <div class="welcome_intro">
+                    <p>Welcome to www.healthGroup.com ("healthGroup.com", "healthGroup pvt. ltd.", "Website", "Pharmacy", or "We").<br /><br />This Website is managed and operated by healthGroup pvt. ltd. Whose main store is located in 34, Kameshwar park, opp. Swaminarayan Mandir, Hirawadi road, Saclasspur bogha, Ahmedabad, Gujarat India-382 345.</p>
                </div>
-               <div id="policy">
-                    <h1 id="heading">Terms & Conditions...</h1>
+               <div class="policy">
+                    <h1 class="heading">Terms & Conditions...</h1>
                     <hr>
-                    <p>healthGroup pvt. ltd. is one of the best pharma company. Our main store is situated in 34, Kameshwar park, opp. Swaminarayan Mandir, Hirawadi road, Saidpur bogha, Ahmedabad, Gujarat India-382 345.<br />
+                    <p>healthGroup pvt. ltd. is one of the best pharma company. Our main store is situated in 34, Kameshwar park, opp. Swaminarayan Mandir, Hirawadi road, Saclasspur bogha, Ahmedabad, Gujarat India-382 345.<br />
                     <table>
                          <tr>
-                              <th>Customer Care no.:</th>
+                              <th>Customer Care no.:&ensp;</th>
                               <td>9010203040</td>
                          </tr>
                          <tr>
@@ -38,18 +38,18 @@
                     </table>
                     </p>
 
-                    <p>We prioritize your satisfaction and aim to provide you with the highest quality products and service. <br />
+                    <p>We prioritize your satisfaction and aim to provclasse you with the highest quality products and service. <br />
                          <hr /><br />By accessing or using our website, you agree to comply with and be bound by the following terms and conditions. Please read them carefully.: -
                     </p>
                     <ol>
-                         <p class="mt-5">
+                         <p>
                               <li>Acceptance of Terms: -</li>
                               <p>
-                                   By using our website, placing an order, or accessing any services provided by healthGroup pvt. ltd, You agree to these Terms and Conditions. If you do not agree with any part of these terms, please do not use our website.
+                                   By using our website, placing an order, or accessing any services provclassed by healthGroup pvt. ltd, You agree to these Terms and Conditions. If you do not agree with any part of these terms, please do not use our website.
                               </p>
                          </p>
                          
-                         <p class="mt-5">
+                         <p>
                               <li>Use of Website: -</li>
                               <p>
                                    &#9755;&ensp;<u>Eligibility</u>: -
@@ -57,7 +57,7 @@
                               </p>
                               <p>
                                    &#9755;&ensp;<u>Account Responsibility</u>: -
-                                   You are responsible for maintaining the confidentiality of your account and password, and for restricting access to your computer. You agree to accept responsibility for all activities that occur under your account.
+                                   You are responsible for maintaining the confclassentiality of your account and password, and for restricting access to your computer. You agree to accept responsibility for all activities that occur under your account.
                               </p>
                               <p>
                                    &#9755;&ensp;<u>Prohibited Activities</u>: -
@@ -65,7 +65,7 @@
                               </p>
                          </p>
 
-                         <p class="mt-5">
+                         <p>
                               <li>Product Information: -</li>
                               <p>
                                    &#9755;&ensp;<u>Accuracy</u>: -
@@ -73,11 +73,11 @@
                               </p>
                               <p>
                                    &#9755;&ensp;<u>Medical Advice</u>: -
-                                   The content on our website is for informational purposes only and is not a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition.
+                                   The content on our website is for informational purposes only and is not a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provclasser with any questions you may have regarding a medical condition.
                               </p>
                          </p>
 
-                         <p class="mt-5">
+                         <p>
                               <li>Ordering and Payment: -</li>
                               <p>
                                    &#9755;&ensp;<u>Order Acceptance</u>: -
@@ -85,11 +85,11 @@
                               </p>
                               <p>
                                    &#9755;&ensp;<u>Payment</u>: -
-                                   All payments are processed through secure payment gateways. By providing payment information, you represent and warrant that you have the right to use the payment method provided.
+                                   All payments are processed through secure payment gateways. By provclassing payment information, you represent and warrant that you have the right to use the payment method provclassed.
                               </p>
                          </p>
 
-                         <p class="mt-5">
+                         <p>
                               <li>Shipping and Delivery: -</li>
                               <p>
                                    &#9755;&ensp;<u>Shipping</u>: -
@@ -101,12 +101,12 @@
                               </p>
                          </p>
 
-                         <p class="mt-5">
+                         <p>
                               <li>Returns and Refunds: -</li>
                               <p>No Returns are Allowed</p>
                          </p>
 
-                         <p class="mt-5">
+                         <p>
                               <li>Intellectual Property: -</li>
                               <p>
                                    &#9755;&ensp;<u>Ownership</u>: -
@@ -118,35 +118,35 @@
                               </p>
                          </p>
 
-                         <p class="mt-5">
+                         <p>
                               <li>Limitation of Liability: -</li>
-                              <p>To the fullest extent permitted by law, Health Group Ltd shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising out of or related to your use of our website or products. Our total liability for any claim arising out of or related to your use of the website or products shall not exceed the amount you paid for the product in question.</p>
+                              <p>To the fullest extent permitted by law, Health Group Ltd shall not be liable for any indirect, incclassental, special, consequential, or punitive damages arising out of or related to your use of our website or products. Our total liability for any claim arising out of or related to your use of the website or products shall not exceed the amount you paclass for the product in question.</p>
                          </p>
 
-                         <p class="mt-5">
+                         <p>
                               <li>Indemnification: -</li>
                               <p>You agree to indemnify, defend, and hold harmless Health Group Ltd, its officers, directors, employees, and affiliates from and against any claims, liabilities, damages, losses, or expenses, including reasonable attorneys' fees, arising out of or related to your use of the website or any violation of these Terms and Conditions.</p>
                          </p>
 
-                         <p class="mt-5">
+                         <p>
                               <li>Changes to Terms: -</li>
                               <p>We reserve the right to update or modify these Terms and Conditions at any time. Any changes will be effective immediately upon posting on our website. Your continued use of the website following the posting of changes constitutes your acceptance of such changes.</p>
                          </p>
 
-                         <p class="mt-5">
+                         <p>
                               <li>Governing Law: -</li>
                               <p>These Terms and Conditions shall be governed by and construed in accordance with the laws of gujarat/india, without regard to its conflict of law principles. Any disputes arising under or in connection with these Terms and Conditions shall be resolved in the courts located in [gujarat/ahmedabad]</p>
                          </p>
 
-                         <p class="mt-5">
+                         <p>
                               <li>Contact Us: -</li>
                               <p>For any questions or concerns about our return policy, please contact our customer service team: -</p>
                               <b>Email:</b>&ensp;healthgroup001@gmail.com<br/>
                               <b>Phone:</b>&ensp;9010203040<br/>
-                              <b>Address:</b>&ensp;34, Kameshwar park, opp. Swaminarayan Mandir, Hirawadi road, Saidpur bogha, Ahmedabad, Gujarat India-382 345<br/>
+                              <b>Address:</b>&ensp;34, Kameshwar park, opp. Swaminarayan Mandir, Hirawadi road, Saclasspur bogha, Ahmedabad, Gujarat India-382 345<br/>
                          </p>
                     </ol>
-                    <p class="mt-5" style="color:#04aa6d;">Thank you for choosing healthGroup pvt. ltd. We appreciate your business and look forward to serving you.</p>
+                    <p style="color:#04aa6d;">Thank you for choosing healthGroup pvt. ltd. We appreciate your business and look forward to serving you.</p>
                </div>
           </div>
      </main>

@@ -22,7 +22,7 @@ if (isset($_SESSION["email"])) { ?>
 
 
 <!-- //! Health News -->
-<a href="http://localhost/php/medicine_website/user_panel/header/all_menus/health_news.php"><i class="fa-solid fa-newspaper"></i>&ensp;Health News</a>
+<a href="http://localhost/php/medicine_website/user_panel/health_news/health_news.php"><i class="fa-solid fa-newspaper"></i>&ensp;Health News</a>
 
 <!-- Counting likes and cart items -->
 <?php

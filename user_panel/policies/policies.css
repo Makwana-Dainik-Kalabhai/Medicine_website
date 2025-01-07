@@ -19,7 +19,7 @@ table {
     width: 80%;
 }
 
-#welcome_intro {
+.welcome_intro {
     font-size: 0.55em;
     width: 70%;
     padding: 2.5%;
@@ -27,16 +27,20 @@ table {
     border-right: 1px solid black;
 }
 
-#policy {
+.policy {
     font-size: 0.58em;
     padding: 2.5%;
     padding-top: 0;
 }
 
-#policy #heading {
+.policy .heading {
     color: red;
     font-size: 1.3em;
     margin-bottom: 3%;
+}
+
+.policy p {
+    margin-top: 5%;
 }
 
 ol li {
@@ -49,13 +53,58 @@ ul li {
     font-size: 1em;
     font-weight: 400;
 }
-.mt-5 {
-    margin-top: 5%;
-}
 .note {
     color: red;
     font-size: 0.9em;
     font-weight: 500;
     line-height: 1.2;
     margin: 0;
+}
+
+
+/* //! Media Queries */
+@media (max-width: 1100px) {
+    main {
+        font-size: 26px;
+    }
+}
+@media (max-width: 850px) {
+    main {
+        width: 85%;
+    }
+}
+@media (max-width: 800px) {
+    main {
+        font-size: 24px;
+    }
+}
+@media (max-width: 550px) {
+    main {
+        padding: 10% 0;
+        font-size: 20px;
+    }
+}
+@media (max-width: 400px) {
+    main>div {
+        display: block;
+    }
+    main>div .welcome_intro {
+        width: 100%;
+        border: none;
+    }
+}
+@media (max-width: 350px) {
+    main {
+        font-size: 16px;
+    }
+}
+@media (max-width: 300px) {
+    main {
+        font-size: 14px;
+    }
+}
+@media (max-width: 250px) {
+    main {
+        font-size: 12px;
+    }
 }
