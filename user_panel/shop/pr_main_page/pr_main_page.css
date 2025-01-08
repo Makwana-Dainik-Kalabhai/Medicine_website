@@ -11,11 +11,13 @@ main {
 
 /* //! Top Image slider */
 #top_img {
-    display: flex;
     width: 90%;
+    height: 25vw;
+    display: flex;
     margin: 1.5% auto;
     border: 1px solid gray;
     border-radius: 3px;
+    background-color: #f2f2f2;
 }
 
 #top_img>div {
@@ -23,9 +25,13 @@ main {
     height: 100%;
 }
 
+#top_img>div:first-child {
+    background-color: white;
+}
+
 #top_img>div img {
+    height: 100%;
     display: block;
-    width: 80%;
     margin: auto;
 }
 
@@ -34,8 +40,8 @@ main {
 /* //! Imgslider right text */
 #top_img #right_text {
     padding: 5%;
+    height: 100%;
     font-weight: 600;
-    background-color: #f2f2f2;
 }
 
 #top_img #right_text p {
@@ -108,9 +114,23 @@ main {
 
 /* //! Main Products Div */
 #main_products {
+    position: relative;
     width: 90%;
     margin: 2% auto;
     margin-top: 5%;
+}
+
+#main_products .responsive-opacity {
+    display: none;
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 600px;
+    z-index: 1;
+    opacity: 0.5;
+    background-color: black;
 }
 
 #main_products #heading {
@@ -130,6 +150,7 @@ main {
 
 /* //* Sort Products */
 #main_products #sort_products {
+    position: relative;
     display: flex;
     flex-direction: row-reverse;
     margin-top: 2%;
@@ -147,7 +168,7 @@ main {
     font-size: 0.75em;
 }
 
-#sort_products button {
+#sort_products div button {
     color: #ff0000;
     height: fit-content;
     font-size: 0.55em;
@@ -157,8 +178,21 @@ main {
     border-radius: 3px;
 }
 
+.select-category {
+    display: none;
+    position: absolute;
+    right: 1.5%;
+    bottom: 0;
+    padding: 0.3rem 0 0.3rem 3rem;
+    font-size: 0.6em;
+    font-weight: 700;
+    border: 2px solid #dddcdc;
+    border-radius: 5px;
+}
+
 /* //! Categories & Products */
 #main_products #cat_products {
+    position: relative;
     width: 100%;
     height: 650px;
     display: flex;
@@ -198,7 +232,7 @@ main {
     overflow: auto;
 }
 
-#category_main button {
+#category_main #categories button {
     width: 100%;
     color: black;
     display: block;
@@ -251,18 +285,18 @@ output {
 #products {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr));
-    grid-template-rows: repeat(auto-fill, minmax(21.5rem, 1fr));
-    gap: 1rem;
+    gap: 1.5rem;
     width: 78%;
+    height: fit-content;
     padding: 1% 2% 1% 5%;
     overflow: auto;
 }
 
 #products #box {
+    height: 30rem;
     position: relative;
     border: 1px solid gray;
     border-radius: 5px;
-    margin: 1%;
 }
 
 #products #box:hover {
@@ -281,6 +315,7 @@ output {
 #products #product_img {
     position: relative;
     width: 100%;
+    min-height: 12rem;
 }
 
 #products #product_img span {
@@ -290,7 +325,7 @@ output {
     color: red;
     font-size: 0.6em;
     font-weight: 600;
-    z-index: 2;
+    z-index: 1;
 }
 
 #products #product_img img {
@@ -357,13 +392,24 @@ output {
 
 
 /* //! Media Queries */
-@media (max-width: 1250px) {
+@media (max-width: 1300px) {
+    #sort_products div {
+        width: 50%;
+    }
+
     #products {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr));
-        grid-template-rows: repeat(auto-fill, minmax(30rem, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+    }
+
+    #products #box {
+        height: 27rem;
+    }
+
+    #products #add_cart {
+        font-size: 0.55em;
     }
 }
+
 @media (max-width: 1120px) {
     main {
         font-size: 28px;
@@ -372,11 +418,115 @@ output {
     #define_policies {
         width: 90%;
     }
+
+    #products {
+        height: 100%;
+    }
+
+    #products #box {
+        height: 26rem;
+    }
+
+    #category_main {
+        width: 40%;
+        z-index: 2;
+    }
+
+    #category_main #categories {
+        background-color: #f2f2f2;
+    }
+
+    #products {
+        width: 95%;
+    }
 }
 
 @media (max-width: 1020px) {
     main {
         font-size: 26px;
+    }
+
+    #top_img {
+        width: 95%;
+        height: 27vw;
+    }
+
+    #top_img #right_text {
+        padding: 3%;
+    }
+
+    #top_img #right_text a {
+        font-size: 0.7em;
+    }
+
+    #sort_products div {
+        width: 60%;
+    }
+
+    #products {
+        width: 100%;
+        padding: 1rem 2rem;
+        grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr));
+    }
+
+    #products #box {
+        height: 32rem;
+    }
+
+    #products #product_img {
+        min-height: 18rem;
+    }
+
+    #products #box #name {
+        font-size: 0.65em;
+        font-weight: 500;
+    }
+
+    #products #box #price {
+        font-size: 0.6em;
+        font-weight: 500;
+        line-height: 1.7;
+    }
+
+    #products #box #off_price {
+        font-size: 0.7em;
+        font-weight: 500;
+        line-height: 1.7;
+    }
+
+    #products #box #add_cart {
+        font-size: 0.6em;
+        font-weight: 500;
+    }
+}
+
+@media (max-width: 920px) {
+    #main_products #category_main {
+        display: none;
+    }
+
+    #main_products #sort_products {
+        height: 120px;
+    }
+
+    .select-category {
+        display: inline-block;
+    }
+
+    #sort_products div {
+        width: 70%;
+    }
+
+    #main_products {
+        height: fit-content;
+    }
+
+    #main_products #cat_products {
+        height: fit-content;
+    }
+
+    #products {
+        height: fit-content;
     }
 }
 
@@ -386,7 +536,11 @@ output {
     }
 
     #top_img {
-        width: 95%;
+        height: 35vw;
+    }
+
+    #top_img>div {
+        padding: 0;
     }
 
     #define_policies {
@@ -397,15 +551,91 @@ output {
     #define_policies>div {
         padding: 1% 1.5%;
     }
+
+    #products {
+        grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+    }
+
+    #products #box {
+        height: 27rem;
+    }
+
+    #products #product_img {
+        min-height: 14rem;
+    }
+}
+
+@media (max-width: 650px) {
+    #products {
+        grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+    }
+
+    #sort_products div {
+        width: 75%;
+    }
+
+    #products #box {
+        height: 26rem;
+    }
+
+    #products #product_img {
+        min-height: 12rem;
+    }
 }
 
 @media (max-width: 570px) {
     main {
+        padding: 9% 0;
         font-size: 21px;
     }
-    
+
+    #top_img {
+        height: 42vw;
+    }
+
+    #top_img #left_img {
+        display: grid;
+        place-items: center;
+        background-color: white;
+    }
+
+    #top_img #left_img img {
+        width: 100%;
+        height: auto;
+    }
+
+    #sort_products div {
+        width: 80%;
+    }
+
+    #define_policies {
+        margin-top: 5%;
+    }
+
     #define_policies>div {
         padding: 1% 0.2%;
+    }
+
+    #main_products {
+        width: 95%;
+    }
+
+    #main_products #category_main {
+        width: 50%;
+    }
+
+    #products {
+        padding: 1rem;
+        grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
+        gap: 0.9rem;
+    }
+
+    #products #box {
+        height: 23rem;
+    }
+
+    #products #product_img {
+        min-height: 10rem;
     }
 }
 
@@ -413,21 +643,88 @@ output {
     main {
         font-size: 18px;
     }
+
     #top_img {
-        display: block;
-        margin: auto;
-    }
-    #top_img>div {
+        display: flex;
+        flex-direction: column;
         height: fit-content;
     }
+
+    #top_img img {
+        display: block;
+        width: 30%;
+        margin: auto;
+    }
+
+    #main_products #sort_products {
+        height: 100px;
+    }
+
+    #sort_products div {
+        width: 95%;
+    }
+
+    #products {
+        grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+    }
+
+    #products #box {
+        height: 22rem;
+    }
+
+    #products #product_img {
+        min-height: 8rem;
+    }
+
+    #products #box #add_cart {
+        font-size: 0.7em;
+    }
 }
+
 @media (max-width: 370px) {
     main {
         font-size: 16px;
     }
+
+    #main_products #sort_products {
+        height: 80px;
+    }
+
+    #sort_products div {
+        width: 98.5%;
+    }
+
+    #define_policies>div {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+        padding: 0.5rem 0;
+    }
+
+    #products #box {
+        height: 20rem;
+    }
+
+    #products #product_img {
+        min-height: 11rem;
+    }
 }
+
 @media (max-width: 300px) {
     main {
         font-size: 13px;
+    }
+    #products #box {
+        height: 17rem;
+    }
+    #products #product_img {
+        min-height: 9rem;
+    }
+}
+
+@media (max-width: 265px) {
+    #products {
+        grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
     }
 }

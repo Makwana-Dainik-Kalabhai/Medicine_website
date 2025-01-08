@@ -436,6 +436,10 @@
 }
 
 @media (max-width: 420px) {
+    #top_load {
+        height: 3px;
+    }
+
     #search_box input {
         border-bottom: 1.5px solid;
     }

@@ -53,6 +53,8 @@ if (isset($_POST["search_input"]) || isset($_POST["search-btn"]) || isset($_SESS
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Choose One Now</title>
+
+<head></head>
 <?php include("C:/xampp/htdocs/php/medicine_website/user_panel/links.php"); ?>
 
 <style>
@@ -116,11 +118,21 @@ if (isset($_POST["search_input"]) || isset($_POST["search-btn"]) || isset($_SESS
             </div>
         </div>
 
+
         <div id="main_products">
             <div id="heading">
                 <h1>Our Products</h1>
                 <p>Try out the Products to Fulfill your Requirements</p>
             </div>
+            <?php
+            $sel_cat = $conn->prepare("SELECT * FROM `products` GROUP BY `category`");
+
+            if (isset($_SESSION["status"])) {
+                $sel_cat = $conn->prepare("SELECT * FROM `products` WHERE `status`='" . $_SESSION["status"] . "' GROUP BY `category`");
+            }
+            $sel_cat->execute();
+            $sel_cat = $sel_cat->fetchAll(); ?>
+
             <div id="sort_products">
                 <div>
                     <span>Sort By: </span>
@@ -129,7 +141,16 @@ if (isset($_POST["search_input"]) || isset($_POST["search-btn"]) || isset($_SESS
                     <button value="low to high">Low to High</button>
                     <button value="discount">Discount</button>
                 </div>
+                <select name="" class="select-category">
+                    <option value=""><-- Select Category --></option>
+                    <option value="All">All</option>
+                    <?php
+                    foreach ($sel_cat as $row_cat) { ?>
+                        <option value="<?php echo $row_cat["category"]; ?>"><?php echo $row_cat["category"]; ?></option>
+                    <?php } ?>
+                </select>
             </div>
+
             <hr>
 
             <div id="cat_products">
@@ -138,14 +159,6 @@ if (isset($_POST["search_input"]) || isset($_POST["search-btn"]) || isset($_SESS
                         <h1>Categories</h1>
                     </div>
                     <div id="categories">
-                        <?php
-                        $sel_cat = $conn->prepare("SELECT * FROM `products` GROUP BY `category`");
-
-                        if (isset($_SESSION["status"])) {
-                            $sel_cat = $conn->prepare("SELECT * FROM `products` WHERE `status`='" . $_SESSION["status"] . "' GROUP BY `category`");
-                        }
-                        $sel_cat->execute();
-                        $sel_cat = $sel_cat->fetchAll(); ?>
                         <div>
                             <?php
                             foreach ($sel_cat as $row_cat) {
@@ -195,12 +208,14 @@ if (isset($_POST["search_input"]) || isset($_POST["search-btn"]) || isset($_SESS
                         } ?>
 
                         <div id="price_range">
+                            <input type="hidden" value="<?php echo $max_price; ?>" class="max-price"/>
                             <span>Price range</span>
                             <input type="range" min="<?php echo $min_price; ?>" value="<?php echo $max_price; ?>" max="<?php echo $max_price; ?>" oninput="document.getElementById('max_price').value = '&#8377;'+this.value" />
                             <output id="min_price">&#8377;<?php echo $min_price; ?></output>
                             <output id="max_price">&#8377;<?php echo $max_price; ?></output>
                         </div>
                         <div id="discount_range">
+                            <input type="hidden" value="<?php echo $max_discount; ?>" class="max-discount"/>
                             <span>Discount</span>
                             <input type="range" min="<?php echo $min_discount; ?>" value="0" max="<?php echo $max_discount; ?>" oninput="document.getElementById('max_discount').value = this.value+'%'" />
                             <output id="min_discount"><?php echo $min_discount; ?></output>
