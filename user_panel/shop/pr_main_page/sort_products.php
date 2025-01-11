@@ -1,7 +1,15 @@
 <?php
 session_start();
-
 include("C:/xampp/htdocs/php/medicine_website/database.php");
+?>
+
+<script>
+    <?php include("pr_main_page.js"); ?>
+</script>
+
+<?php if (isset($_SESSION["category"])) {
+    unset($_SESSION["category"]);
+}
 
 $query = "";
 //!Sort using filtering methods giving on top-right(products main page) in website
@@ -59,7 +67,7 @@ $sel = $sel->fetchAll();
 
 foreach ($sel as $row) {
     $product_count++; ?>
-    <div id="box">
+    <div class="box">
         <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php?product_id=<?php echo $row["product_id"]; ?>">
             <div id="product_img">
                 <?php

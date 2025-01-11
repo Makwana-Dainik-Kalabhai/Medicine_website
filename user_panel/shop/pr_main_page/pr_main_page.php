@@ -9,6 +9,9 @@ if (isset($_SESSION["category"])) {
 if (isset($_SESSION["status"])) {
     unset($_SESSION["status"]);
 }
+if (isset($_SESSION["filter"])) {
+    unset($_SESSION["filter"]);
+}
 
 
 // ! If User send GET request
@@ -141,7 +144,7 @@ if (isset($_POST["search_input"]) || isset($_POST["search-btn"]) || isset($_SESS
                     <button value="low to high">Low to High</button>
                     <button value="discount">Discount</button>
                 </div>
-                <select name="" class="select-category">
+                <select class="select-category">
                     <option value=""><-- Select Category --></option>
                     <option value="All">All</option>
                     <?php
@@ -208,14 +211,14 @@ if (isset($_POST["search_input"]) || isset($_POST["search-btn"]) || isset($_SESS
                         } ?>
 
                         <div id="price_range">
-                            <input type="hidden" value="<?php echo $max_price; ?>" class="max-price"/>
-                            <span>Price range</span>
+                            <input type="hidden" value="<?php echo $max_price; ?>" class="max-price" />
+                            <span>Price Range</span>
                             <input type="range" min="<?php echo $min_price; ?>" value="<?php echo $max_price; ?>" max="<?php echo $max_price; ?>" oninput="document.getElementById('max_price').value = '&#8377;'+this.value" />
                             <output id="min_price">&#8377;<?php echo $min_price; ?></output>
                             <output id="max_price">&#8377;<?php echo $max_price; ?></output>
                         </div>
                         <div id="discount_range">
-                            <input type="hidden" value="<?php echo $max_discount; ?>" class="max-discount"/>
+                            <input type="hidden" value="<?php echo $max_discount; ?>" class="max-discount" />
                             <span>Discount</span>
                             <input type="range" min="<?php echo $min_discount; ?>" value="0" max="<?php echo $max_discount; ?>" oninput="document.getElementById('max_discount').value = this.value+'%'" />
                             <output id="min_discount"><?php echo $min_discount; ?></output>
@@ -249,11 +252,10 @@ if (isset($_POST["search_input"]) || isset($_POST["search-btn"]) || isset($_SESS
                         $contain_data = true;
                         unset($pr_not_found); ?>
 
-                        <div id="box">
+                        <div class="box">
                             <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php?product_id=<?php echo $row["product_id"]; ?>">
                                 <div id="product_img">
-                                    <?php
-                                    if ($row["discount"] != 0) { ?>
+                                    <?php if ($row["discount"] != 0) { ?>
                                         <span>&ensp;-<?php echo $row["discount"]; ?>%</span>
                                     <?php } ?>
                                     <img src="http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo unserialize($row["item_img"])[0]; ?>" alt="" />

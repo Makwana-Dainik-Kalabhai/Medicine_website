@@ -287,24 +287,24 @@ output {
     grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr));
     gap: 1.5rem;
     width: 78%;
-    height: fit-content;
+    /* height: fit-content; */
     padding: 1% 2% 1% 5%;
     overflow: auto;
 }
 
-#products #box {
-    height: 30rem;
+#products .box {
+    height: 31rem;
     position: relative;
     border: 1px solid gray;
     border-radius: 5px;
 }
 
-#products #box:hover {
+#products .box:hover {
     scale: 1.02;
-    box-shadow: 0px 0px 5px 1px gray;
+    box-shadow: 0px 0px 5px 1px rgb(165, 164, 164);
 }
 
-#box a {
+#products .box a {
     display: block;
     width: 100%;
     color: black;
@@ -343,15 +343,16 @@ output {
 #products #product_details span {
     display: block;
     line-height: 1.3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
 }
 
 #product_details #name {
     font-size: 0.55em;
     font-weight: 500;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
 }
 
 #product_details #price {
@@ -401,7 +402,7 @@ output {
         grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
     }
 
-    #products #box {
+    #products .box {
         height: 27rem;
     }
 
@@ -423,7 +424,7 @@ output {
         height: 100%;
     }
 
-    #products #box {
+    #products .box {
         height: 26rem;
     }
 
@@ -469,7 +470,7 @@ output {
         grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr));
     }
 
-    #products #box {
+    #products .box {
         height: 32rem;
     }
 
@@ -477,24 +478,24 @@ output {
         min-height: 18rem;
     }
 
-    #products #box #name {
+    #products .box #name {
         font-size: 0.65em;
         font-weight: 500;
     }
 
-    #products #box #price {
+    #products .box #price {
         font-size: 0.6em;
         font-weight: 500;
         line-height: 1.7;
     }
 
-    #products #box #off_price {
+    #products .box #off_price {
         font-size: 0.7em;
         font-weight: 500;
         line-height: 1.7;
     }
 
-    #products #box #add_cart {
+    #products .box #add_cart {
         font-size: 0.6em;
         font-weight: 500;
     }
@@ -556,7 +557,7 @@ output {
         grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
     }
 
-    #products #box {
+    #products .box {
         height: 27rem;
     }
 
@@ -574,7 +575,7 @@ output {
         width: 75%;
     }
 
-    #products #box {
+    #products .box {
         height: 26rem;
     }
 
@@ -630,7 +631,7 @@ output {
         gap: 0.9rem;
     }
 
-    #products #box {
+    #products .box {
         height: 23rem;
     }
 
@@ -665,10 +666,11 @@ output {
     }
 
     #products {
+        min-height: 200px;
         grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
     }
 
-    #products #box {
+    #products .box {
         height: 22rem;
     }
 
@@ -676,8 +678,17 @@ output {
         min-height: 8rem;
     }
 
-    #products #box #add_cart {
+    #products .box #add_cart {
         font-size: 0.7em;
+    }
+
+    #pr_not_found {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: auto;
+        margin: auto;
     }
 }
 
@@ -702,7 +713,7 @@ output {
         padding: 0.5rem 0;
     }
 
-    #products #box {
+    #products .box {
         height: 20rem;
     }
 
@@ -715,9 +726,11 @@ output {
     main {
         font-size: 13px;
     }
-    #products #box {
-        height: 17rem;
+
+    #products .box {
+        height: 17.5rem;
     }
+
     #products #product_img {
         min-height: 9rem;
     }

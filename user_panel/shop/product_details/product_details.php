@@ -46,7 +46,7 @@ if (isset($_GET["status"])) {
                     <div id="imgs">
                         <figure class="fig">
                             <?php foreach (unserialize($row["item_img"]) as $img) { ?>
-                                <div id="img">
+                                <div id="img" class="<?php echo ($count_img == 0) ? "active-sub-img" : ""; ?>">
                                     <img src="http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo $img; ?>" />
                                 </div>
                             <?php $count_img++;
@@ -80,7 +80,7 @@ if (isset($_GET["status"])) {
 
                 <div id="main_imgs">
                     <?php foreach (unserialize($row["item_img"]) as $img) { ?>
-                        <img id="full" src="http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo $img; ?>" />
+                        <a id="full" href="http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo $img; ?>"><img src="http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo $img; ?>" /></a>
                     <?php } ?>
 
                     <!-- //! Discount btn -->
@@ -121,7 +121,11 @@ if (isset($_GET["status"])) {
             <div id="product_details">
                 <span id="name"><?php echo $row["name"]; ?></span>
                 <hr>
-                <span id="definition"><?php echo $row["definition"]; ?></span>
+                <span id="definition"><?php echo $row["definition"]; ?>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sapiente eligendi illum autem recusandae commodi ipsa hic expedita magnam consequatur quasi modi blanditiis tenetur error, tempore distinctio, ea tempora quas debitis.
+                    Velit quos dolorum error facilis accusantium voluptates, qui illum perspiciatis voluptatibus eveniet impedit amet blanditiis neque obcaecati? Alias facere, voluptatibus ad natus possimus velit eaque ipsam eius. Ex, officia autem.
+                    Odit, iusto dicta sunt praesentium dolor fugiat molestias iste, laboriosam explicabo, ipsam quasi quam! Error deleniti dolorem, libero laborum debitis exercitationem corrupti doloremque, quasi nobis eligendi facere. Omnis, dolorem tempora.
+                    Dignissimos, perspiciatis! Rem minima cumque et quo dolores molestias, natus iusto ea labore reiciendis nisi debitis architecto id delectus explicabo ipsam laudantium animi voluptate obcaecati. Corporis tempora non sunt in.
+                    Iure ducimus, vel exercitationem, dolorum porro, eveniet recusandae ratione autem aperiam harum sequi rerum molestias perspiciatis dolore esse optio. Quasi corporis, ad mollitia adipisci suscipit earum dolorum perspiciatis omnis quia.</span>
                 <?php if ($row["discount"] != 0) { ?>
                     <span id="price">&#8377;<?php echo $row["price"]; ?></span>
                 <?php } ?>
@@ -231,9 +235,11 @@ function disProductDetalis()
     foreach ($sel as $row) {
         $_GET["des"] = true; ?>
         <div id="details">
-            <div id="description">
-                <?php if ($row["description"] != null) {
-                    foreach (unserialize($row["description"]) as $des) {
+            <?php if ($row["description"] != null) { ?>
+                <p class="responsive-head">Description</p>
+                <hr>
+                <div id="description">
+                    <?php foreach (unserialize($row["description"]) as $des) {
                         if (isset($des[0]) && isset($des[1])) { ?>
                             <p>
                                 <li style="display: inline;font-weight: 700;"><?php echo $des[0]; ?></li>
@@ -243,18 +249,20 @@ function disProductDetalis()
                         //
                         else if (isset($des[0])) { ?>
                             <li><?php echo $des[0]; ?></li>
-                    <?php }
+                        <?php }
                     }
-                }
-                if ($row["link"] != null) { ?>
-                    <iframe width="560" height="315" src="<?php echo $row["link"]; ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                <?php } ?>
-            </div>
+                    if ($row["link"] != null) { ?>
+                        <iframe width="560" height="315" src="<?php echo $row["link"]; ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <?php } ?>
+                </div>
+            <?php } ?>
 
-            <div id="features">
-                <ol>
-                    <?php if ($row["features"] != null) {
-                        foreach (unserialize($row["features"]) as $fea) {
+            <?php if ($row["features"] != null) { ?>
+                <p class="responsive-head">Features</p>
+                <hr>
+                <div id="features">
+                    <ol>
+                        <?php foreach (unserialize($row["features"]) as $fea) {
                             if (isset($fea[0]) && isset($fea[1])) { ?>
                                 <p>
                                     <li style="display: inline;font-weight: 700;"><?php echo $fea[0]; ?></li>
@@ -264,35 +272,38 @@ function disProductDetalis()
                             //
                             else if (isset($fea[0])) { ?>
                                 <li><?php echo $fea[0]; ?></li>
-                    <?php }
-                        }
-                    } ?>
-                </ol>
-            </div>
+                        <?php }
+                        } ?>
+                    </ol>
+                </div>
+            <?php } ?>
 
-            <div id="specification">
-                <table>
-                    <tr>
-                        <th>Weight</th>
-                        <td><?php echo $row["weight"]; ?></td>
-                    </tr>
-                    <?php if ($row["specification"] != null) {
-                        foreach (unserialize($row["specification"]) as $spe) {
+            <?php if ($row["specification"] != null) { ?>
+                <p class="responsive-head">Specification</p>
+                <hr>
+                <div id="specification">
+                    <table>
+                        <tr>
+                            <th>Weight</th>
+                            <td><?php echo $row["weight"]; ?></td>
+                        </tr>
+                        <?php foreach (unserialize($row["specification"]) as $spe) {
                             if (isset($spe[0]) && isset($spe[1])) { ?>
                                 <tr>
                                     <th><?php echo $spe[0]; ?></th>
                                     <td><?php echo $spe[1]; ?></td>
                                 </tr>
                             <?php } ?>
-                    <?php }
-                    }
-                    ?>
-                </table>
-            </div>
+                        <?php } ?>
+                    </table>
+                </div>
+            <?php } ?>
 
-            <div id="faqs">
-                <?php if ($row["faqs"] != null) {
-                    foreach (unserialize($row["faqs"]) as $faqs) { ?>
+            <?php if ($row["faqs"] != null) { ?>
+                <p class="responsive-head">FAQS</p>
+                <hr>
+                <div id="faqs">
+                    <?php foreach (unserialize($row["faqs"]) as $faqs) { ?>
                         <?php if (isset($faqs[0]) && isset($faqs[1])) { ?>
                             <p style="margin-bottom:3%;">
                                 <li style="display:inline;font-weight: 700;">Que.&ensp;<?php echo $faqs[0]; ?></li>
@@ -300,9 +311,9 @@ function disProductDetalis()
                                 <span>Ans.&ensp;<?php echo $faqs[1]; ?></span>
                             </p>
                         <?php } ?>
-                <?php }
-                } ?>
-            </div>
+                    <?php } ?>
+                </div>
+            <?php } ?>
         </div>
     <?php } ?>
     <?php
@@ -316,9 +327,11 @@ function disMedicineDetalis()
     foreach ($sel as $row) {
         $_GET["des"] = true; ?>
         <div id="details">
-            <div id="description">
-                <?php if ($row["description"] != null) {
-                    foreach (unserialize($row["description"]) as $des) {
+            <?php if ($row["description"] != null) { ?>
+                <p class="responsive-head">Description</p>
+                <hr>
+                <div id="description">
+                    <?php foreach (unserialize($row["description"]) as $des) {
                         if (isset($des[0]) && isset($des[1])) { ?>
                             <p>
                                 <li style="display: inline;font-weight: 700;"><?php echo $des[0]; ?></li>
@@ -328,13 +341,16 @@ function disMedicineDetalis()
                         //
                         else if (isset($des[0])) { ?>
                             <li><?php echo $des[0]; ?></li>
-                <?php }
-                    }
-                } ?>
-            </div>
-            <div id="benefits">
-                <?php if ($row["benefits"] != null) {
-                    foreach (unserialize($row["benefits"]) as $ben) {
+                    <?php }
+                    } ?>
+                </div>
+            <?php } ?>
+
+            <?php if ($row["benefits"] != null) { ?>
+                <p class="responsive-head">Benefits</p>
+                <hr>
+                <div id="benefits">
+                    <?php foreach (unserialize($row["benefits"]) as $ben) {
                         if (isset($ben[0]) && isset($ben[1])) { ?>
                             <p>
                                 <li style="display: inline;font-weight: 700;"><?php echo $ben[0]; ?></li>
@@ -344,13 +360,17 @@ function disMedicineDetalis()
                         //
                         else if (isset($ben[0])) { ?>
                             <li><?php echo $ben[0]; ?></li>
-                <?php }
-                    }
-                } ?>
-            </div>
-            <div id="how_use">
-                <?php if ($row["how_use"] != null) {
-                    foreach (unserialize($row["how_use"]) as $how) {
+                    <?php }
+                    } ?>
+                </div>
+            <?php } ?>
+
+
+            <?php if ($row["how_use"] != null) { ?>
+                <p class="responsive-head">How to Use</p>
+                <hr>
+                <div id="how_use">
+                    <?php foreach (unserialize($row["how_use"]) as $how) {
                         if (isset($how[0]) && isset($how[1])) { ?>
                             <p>
                                 <li style="display: inline;font-weight: 700;"><?php echo $how[0]; ?></li>
@@ -360,13 +380,17 @@ function disMedicineDetalis()
                         //
                         else if (isset($how[0])) { ?>
                             <li><?php echo $how[0]; ?></li>
-                <?php }
-                    }
-                } ?>
-            </div>
-            <div id="safety">
-                <?php if ($row["safety"] != null) {
-                    foreach (unserialize($row["safety"]) as $saf) {
+                    <?php }
+                    } ?>
+                </div>
+            <?php } ?>
+
+
+            <?php if ($row["safety"] != null) { ?>
+                <p class="responsive-head">Safety</p>
+                <hr>
+                <div id="safety">
+                    <?php foreach (unserialize($row["safety"]) as $saf) {
                         if (isset($saf[0]) && isset($saf[1])) { ?>
                             <p>
                                 <li style="display: inline;font-weight: 700;"><?php echo $saf[0]; ?></li>
@@ -376,13 +400,17 @@ function disMedicineDetalis()
                         //
                         else if (isset($saf[0])) { ?>
                             <li><?php echo $saf[0]; ?></li>
-                <?php }
-                    }
-                } ?>
-            </div>
-            <div id="other_info">
-                <?php if ($row["other_info"] != null) {
-                    foreach (unserialize($row["other_info"]) as $inf) {
+                    <?php }
+                    } ?>
+                </div>
+            <?php } ?>
+
+
+            <?php if ($row["other_info"] != null) { ?>
+                <p class="responsive-head">Other Information</p>
+                <hr>
+                <div id="other_info">
+                    <?php foreach (unserialize($row["other_info"]) as $inf) {
                         if (isset($inf[0]) && isset($inf[1])) { ?>
                             <p>
                                 <li style="display: inline;font-weight: 700;"><?php echo $inf[0]; ?></li>
@@ -392,13 +420,17 @@ function disMedicineDetalis()
                         //
                         else if (isset($inf[0])) { ?>
                             <li><?php echo $inf[0]; ?></li>
-                <?php }
-                    }
-                } ?>
-            </div>
-            <div id="faqs">
-                <?php if ($row["faqs"] != null) {
-                    foreach (unserialize($row["faqs"]) as $faqs) { ?>
+                    <?php }
+                    } ?>
+                </div>
+            <?php } ?>
+
+
+            <?php if ($row["faqs"] != null) { ?>
+                <p class="responsive-head">FAQS</p>
+                <hr>
+                <div id="faqs">
+                    <?php foreach (unserialize($row["faqs"]) as $faqs) { ?>
                         <?php if (isset($faqs[0]) && isset($faqs[1])) { ?>
                             <p style="margin-bottom:3%;">
                                 <li style="display:inline;font-weight: 700;">Que.&ensp;<?php echo $faqs[0]; ?></li>
@@ -406,9 +438,9 @@ function disMedicineDetalis()
                                 <span>Ans.&ensp;<?php echo $faqs[1]; ?></span>
                             </p>
                         <?php } ?>
-                <?php }
-                } ?>
-            </div>
+                    <?php } ?>
+                </div>
+            <?php } ?>
         </div>
     <?php } ?>
 <?php } ?>

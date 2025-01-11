@@ -50,7 +50,7 @@ $(document).ready(function () {
     }, 700);
   });
 
-  //! Select Category
+  //* Select Category
   $(".select-category").change(function () {
     $("#top_load").css("display", "block");
     $("#top_load").css("width", "20%");
