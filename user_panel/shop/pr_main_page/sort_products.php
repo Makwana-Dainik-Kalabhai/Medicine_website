@@ -6,11 +6,7 @@ include("C:/xampp/htdocs/php/medicine_website/database.php");
 <script>
     <?php include("pr_main_page.js"); ?>
 </script>
-
-<?php if (isset($_SESSION["category"])) {
-    unset($_SESSION["category"]);
-}
-
+<?php
 $query = "";
 //!Sort using filtering methods giving on top-right(products main page) in website
 

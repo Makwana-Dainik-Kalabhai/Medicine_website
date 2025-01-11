@@ -41,11 +41,9 @@ if (isset($_POST["update-benefits"])) {
     $up->execute();
 
     $_SESSION["success"] = "Key \"" . $key . "\" updated successfully";
-?>
-    <script>
-        window.history.back();
-    </script>
-<?php }
+
+    header("Location: http://localhost/php/medicine_website/admin_panel/products/additional_info/benefits.php");
+}
 
 
 
@@ -79,11 +77,9 @@ if (isset($_POST["add-benefits"])) {
     $up->execute();
 
     $_SESSION["success"] = "Data no. " . $_POST["add-benefits"] . " added successfully";
-?>
-    <script>
-        window.history.back();
-    </script>
-<?php }
+
+    header("Location: http://localhost/php/medicine_website/admin_panel/products/additional_info/benefits.php");
+}
 
 
 
@@ -118,9 +114,7 @@ if (isset($_POST["delete-benefits"])) {
     $up->execute();
 
     $_SESSION["success"] = "Key \"" . $key . "\" deleted successfully";
-?>
-    <script>
-        window.history.back();
-    </script>
-<?php }
+
+    header("Location: http://localhost/php/medicine_website/admin_panel/products/additional_info/benefits.php");
+}
 ?>

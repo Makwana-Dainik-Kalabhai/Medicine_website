@@ -39,11 +39,9 @@ if (isset($_POST["update-faqs"])) {
     $up->execute();
 
     $_SESSION["success"] = "Key \"" . $key . "\" updated successfully";
-?>
-    <script>
-        window.history.back();
-    </script>
-<?php }
+
+    header("Location: http://localhost/php/medicine_website/admin_panel/products/additional_info/faqs/faqs.php");
+}
 
 
 
@@ -73,11 +71,9 @@ if (isset($_POST["add-faqs"])) {
     $up->execute();
 
     $_SESSION["success"] = "Data no. " . $_POST["add-faqs"] . " added successfully";
-?>
-    <script>
-        window.history.back();
-    </script>
-<?php }
+
+    header("Location: http://localhost/php/medicine_website/admin_panel/products/additional_info/faqs/faqs.php");
+}
 
 
 
@@ -112,9 +108,7 @@ if (isset($_POST["delete-faqs"])) {
     $up->execute();
 
     $_SESSION["success"] = "Key \"" . $key . "\" deleted successfully";
-?>
-    <script>
-        window.history.back();
-    </script>
-<?php }
+
+    header("Location: http://localhost/php/medicine_website/admin_panel/products/additional_info/faqs/faqs.php");
+}
 ?>

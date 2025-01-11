@@ -283,11 +283,11 @@ output {
 
 /* //! Products */
 #products {
+    position: relative;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr));
     gap: 1.5rem;
     width: 78%;
-    /* height: fit-content; */
     padding: 1% 2% 1% 5%;
     overflow: auto;
 }
@@ -385,10 +385,11 @@ output {
 
 /* //! Person search pr & if pr not found*/
 #pr_not_found {
-    display: block;
-    width: 60%;
-    height: 55%;
-    margin: 1% auto;
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 70%;
 }
 
 

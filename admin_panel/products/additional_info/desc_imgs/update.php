@@ -54,11 +54,8 @@ if (isset($_POST["change"])) {
             $_SESSION["error"] = "Please! Change name of the Image";
         }
     }
-    ?>
-    <script>
-        window.history.back();
-    </script>
-    <?php }
+    header("Location: http://localhost/php/medicine_website/admin_panel/products/additional_info/desc_imgs/edit_desc_imgs.php");
+}
 
 
 
@@ -111,11 +108,8 @@ if (isset($_POST["add"])) {
             $_SESSION["error"] = "Please! Change name of the Image";
         }
     }
-    ?>
-    <script>
-        window.history.back();
-    </script>
-<?php }
+    header("Location: http://localhost/php/medicine_website/admin_panel/products/additional_info/desc_imgs/edit_desc_imgs.php");
+}
 
 
 
@@ -133,9 +127,6 @@ if (isset($_POST["delete"])) {
             foreach (unserialize($r["desc_img"]) as $des) {
                 if ($i != $_POST["delete"]) {
                     array_push($desc_img, $des);
-                } //
-                else if ($i == $_POST["delete"]) {
-                    unlink("C:/xampp/htdocs/php/medicine_website/user_panel/shop/desc_imgs/$des");
                 }
                 $i++;
             }
@@ -144,8 +135,6 @@ if (isset($_POST["delete"])) {
 
     $up = $conn->prepare("UPDATE `products` SET `desc_img`='" . serialize($desc_img) . "' WHERE `product_id`='" . $_SESSION["product_id"] . "'");
     $up->execute();
-?>
-    <script>
-        window.history.back();
-    </script>
-<?php }
+
+    header("Location: http://localhost/php/medicine_website/admin_panel/products/additional_info/desc_imgs/edit_desc_imgs.php");
+}

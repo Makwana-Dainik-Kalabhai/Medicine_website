@@ -38,16 +38,28 @@ if (isset($_POST["search_input"]) || isset($_POST["search-btn"]) || isset($_SESS
     $sel = $conn->prepare("SELECT * FROM `products` GROUP BY `category`");
     $sel->execute();
     $sel = $sel->fetchAll();
+    $str = " ";
+    $category = false;
+
+    $_SESSION["search_input"] = strtolower($_SESSION["search_input"]);
+
+    if (isset($_SESSION["search_input"][0]) && isset($_SESSION["search_input"][1]) && isset($_SESSION["search_input"][2])) {
+        $str = $_SESSION["search_input"][0] . $_SESSION["search_input"][1] . $_SESSION["search_input"][2];
+    }
 
     foreach ($sel as $row) {
-        $_SESSION["search_input"] = ucfirst($_SESSION["search_input"]);
-
-        if (isset($_SESSION["search_input"][0]) && isset($_SESSION["search_input"][1]) && isset($_SESSION["search_input"][2])) {
-
-            if (($_SESSION["search_input"][0] == $row["category"][0]) && ($_SESSION["search_input"][1] == $row["category"][1]) && ($_SESSION["search_input"][2] == $row["category"][2])) {
-                $_SESSION["category"] = $row["category"];
-                $_SESSION["status"] = $row["status"];
-            }
+        if (str_contains(strtolower($row["category"]), $str)) {
+            $_SESSION["category"] = $row["category"];
+            $_SESSION["status"] = $row["status"];
+            $category = true;
+            break;
+        }
+    }
+    foreach ($sel as $row) {
+        if (str_contains(strtolower($row["name"]), $str) && !$category) {
+            $_SESSION["product_id"] = $row["product_id"];
+            header("Location: http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php");
+            break;
         }
     }
 }

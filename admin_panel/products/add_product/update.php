@@ -93,11 +93,8 @@ if (isset($_POST["add_category"])) {
         $_SESSION["cat_success"] = "Product Category details added successfully";
         $_SESSION["product_id"] = $product_id;
     }
-    ?>
-    <script>
-        window.history.back();
-    </script>
-<?php }
+    header("Location: http://localhost/php/medicine_website/admin_panel/products/add_product/add_product.php");
+}
 
 
 
@@ -155,8 +152,6 @@ if (isset($_POST["add-product-details"])) {
     $p->update();
 
     $_SESSION["product_success"] = "Product details Added Successfully";
-?>
-    <script>
-        window.history.back();
-    </script>
-<?php }
+
+    header("Location: http://localhost/php/medicine_website/admin_panel/products/add_product/add_product.php");
+}

@@ -62,8 +62,6 @@ $(document).ready(() => {
     $("#searched_items").show();
   });
 
-
-  
   $(".brightness").click(() => {
     $("#side_nav").css("left", "-100%");
     $(".brightness").css("display", "none");

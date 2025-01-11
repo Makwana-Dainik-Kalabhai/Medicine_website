@@ -7,8 +7,8 @@ $(document).ready(function () {
     $("#give_ratings #error").css("display", "block");
     $("#give_ratings #error").fadeOut(7000);
   });
-  $("#give_ratings #form_err").fadeOut(7000);
-  $("#give_ratings #success").fadeOut(10000);
+  $("#give_ratings #form_err").fadeOut(15000);
+  $("#give_ratings #success").fadeOut(15000);
 
 
   // ! Display more reviews using more button

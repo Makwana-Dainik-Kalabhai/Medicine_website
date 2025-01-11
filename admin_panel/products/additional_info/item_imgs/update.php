@@ -54,11 +54,8 @@ if (isset($_POST["change"])) {
             $_SESSION["error"] = "Please! Change name of the Image";
         }
     }
-    ?>
-    <script>
-        window.history.back();
-    </script>
-    <?php }
+    header("Location: http://localhost/php/medicine_website/admin_panel/products/additional_info/item_imgs/item_imgs.php");
+}
 
 
 
@@ -111,11 +108,8 @@ if (isset($_POST["add"])) {
             $_SESSION["error"] = "Please! Change name of the Image";
         }
     }
-    ?>
-    <script>
-        window.history.back();
-    </script>
-<?php }
+    header("Location: http://localhost/php/medicine_website/admin_panel/products/additional_info/item_imgs/item_imgs.php");
+}
 
 
 
@@ -144,8 +138,5 @@ if (isset($_POST["delete"])) {
 
     $up = $conn->prepare("UPDATE `products` SET `item_img`='" . serialize($item_img) . "' WHERE `product_id`='" . $_SESSION["product_id"] . "'");
     $up->execute();
-?>
-    <script>
-        window.history.back();
-    </script>
-<?php }
+    header("Location: http://localhost/php/medicine_website/admin_panel/products/additional_info/item_imgs/item_imgs.php");
+}

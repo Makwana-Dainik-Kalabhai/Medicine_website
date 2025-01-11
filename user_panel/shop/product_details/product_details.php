@@ -121,11 +121,7 @@ if (isset($_GET["status"])) {
             <div id="product_details">
                 <span id="name"><?php echo $row["name"]; ?></span>
                 <hr>
-                <span id="definition"><?php echo $row["definition"]; ?>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sapiente eligendi illum autem recusandae commodi ipsa hic expedita magnam consequatur quasi modi blanditiis tenetur error, tempore distinctio, ea tempora quas debitis.
-                    Velit quos dolorum error facilis accusantium voluptates, qui illum perspiciatis voluptatibus eveniet impedit amet blanditiis neque obcaecati? Alias facere, voluptatibus ad natus possimus velit eaque ipsam eius. Ex, officia autem.
-                    Odit, iusto dicta sunt praesentium dolor fugiat molestias iste, laboriosam explicabo, ipsam quasi quam! Error deleniti dolorem, libero laborum debitis exercitationem corrupti doloremque, quasi nobis eligendi facere. Omnis, dolorem tempora.
-                    Dignissimos, perspiciatis! Rem minima cumque et quo dolores molestias, natus iusto ea labore reiciendis nisi debitis architecto id delectus explicabo ipsam laudantium animi voluptate obcaecati. Corporis tempora non sunt in.
-                    Iure ducimus, vel exercitationem, dolorum porro, eveniet recusandae ratione autem aperiam harum sequi rerum molestias perspiciatis dolore esse optio. Quasi corporis, ad mollitia adipisci suscipit earum dolorum perspiciatis omnis quia.</span>
+                <span id="definition"><?php echo $row["definition"]; ?></span>
                 <?php if ($row["discount"] != 0) { ?>
                     <span id="price">&#8377;<?php echo $row["price"]; ?></span>
                 <?php } ?>

@@ -23,11 +23,9 @@ if (isset($_POST["update-category"])) {
     $update->execute();
 
     $_SESSION["success"] = "Product Category details updated successfully";
-    ?>
-    <script>
-        window.history.back();
-    </script>
-<?php }
+
+    header("Location: http://localhost/php/medicine_website/admin_panel/products/edit_medicine/edit_medicine.php");
+}
 
 
 if (isset($_POST["update-product"])) {
@@ -73,8 +71,5 @@ if (isset($_POST["update-product"])) {
     $p->update();
 
     $_SESSION["success"] = "Product details updated successfully";
-?>
-    <script>
-        window.history.back();
-    </script>
-<?php }
+    header("Location: http://localhost/php/medicine_website/admin_panel/products/edit_medicine/edit_medicine.php");
+}

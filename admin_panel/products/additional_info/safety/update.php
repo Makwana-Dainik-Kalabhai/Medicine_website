@@ -40,11 +40,8 @@ if (isset($_POST["update-safety"])) {
     $up->execute();
 
     $_SESSION["success"] = "Key \"" . $key . "\" updated successfully";
-?>
-    <script>
-        window.history.back();
-    </script>
-<?php }
+    header("Location: http://localhost/php/medicine_website/admin_panel/products/additional_info/safety/safety.php");
+}
 
 
 
@@ -79,11 +76,8 @@ if (isset($_POST["add-safety"])) {
     $up->execute();
 
     $_SESSION["success"] = "Data no. " . $_POST["add-safety"] . " added successfully";
-?>
-    <script>
-        window.history.back();
-    </script>
-<?php }
+    header("Location: http://localhost/php/medicine_website/admin_panel/products/additional_info/safety/safety.php");
+}
 
 
 // ! Delete safety
@@ -117,8 +111,6 @@ if (isset($_POST["delete-safety"])) {
     $up->execute();
 
     $_SESSION["success"] = "Key \"" . $key . "\" deleted successfully";
-?>
-    <script>
-        window.history.back();
-    </script>
-<?php } ?>
+    header("Location: http://localhost/php/medicine_website/admin_panel/products/additional_info/safety/safety.php");
+
+} ?>

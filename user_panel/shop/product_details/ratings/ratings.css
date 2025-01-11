@@ -4,7 +4,6 @@
 }
 
 #ratings {
-    font-size: 30px;
     width: 60%;
     padding: 2%;
     margin-left: 3%;
@@ -23,8 +22,11 @@
 }
 
 /* //! Show Ratings */
+#show_ratings {
+    width: 100%;
+}
 #show_ratings h1 {
-    font-size: 1.25em;
+    font-size: 1.2em;
 }
 
 #show_ratings h1 i {
@@ -102,6 +104,7 @@ progress::before {
 }
 
 #give_ratings h2 {
+    font-size: 0.7em;
     white-space: nowrap;
     position: absolute;
     top: 2%;
@@ -111,6 +114,9 @@ progress::before {
 
 #give_ratings #error {
     display: none;
+    color: red;
+}
+#give_ratings #form_err {
     color: red;
 }
 
@@ -126,7 +132,7 @@ progress::before {
 }
 
 #give_ratings span {
-    font-size: 0.95em;
+    font-size: 0.9em;
     font-weight: 500;
 }
 
@@ -165,7 +171,7 @@ progress::before {
 #review_form {
     display: none;
     width: 60%;
-    padding: 1% 2%;
+    padding: 2%;
     margin: 3% 0 0 3%;
     background-color: white;
     box-shadow: 0px 0px 3px 1px #f2f2f2;
@@ -275,4 +281,107 @@ progress::before {
     text-align: center;
     border: none;
     background-color: transparent;
+}
+
+
+@media (max-width: 1300px) {
+    #ratings {
+        width: 70%;
+    }
+    #review_form {
+        width: 70%;
+    }
+    #show_review {
+        width: 70%;
+    }
+}
+@media (max-width: 900px) {
+    #ratings {
+        width: 80%;
+    }
+    #review_form {
+        width: 80%;
+    }
+    #show_review {
+        width: 80%;
+    }
+}
+@media (max-width: 700px) {
+    #ratings {
+        width: 90%;
+    }
+    #review_form {
+        width: 90%;
+    }
+    #show_review {
+        width: 90%;
+    }
+}
+@media (max-width: 600px) {
+    #ratings {
+        width: 95%;
+    }
+    #review_form {
+        width: 95%;
+    }
+    .progress_bar {
+        justify-content: flex-start;
+    }
+    progress {
+        margin: 0 3%;
+        width: 70%;
+        height: 10px;
+    }
+    progress::before {
+        right: -15%;
+    }
+    #show_review {
+        width: 95%;
+    }
+}
+@media (max-width: 400px) {
+    progress::before {
+        right: -22%;
+    }
+}
+@media (max-width: 350px) {
+    #ratings {
+        width: 80%;
+    }
+    #review_form {
+        width: 80%;
+    }
+    #ratings .d-flex {
+        flex-direction: column-reverse;
+    }
+    #ratings>div {
+        padding: 2% 5%;
+    }
+    #review_form input[type="submit"] {
+        border-radius: 1.5px;
+    }
+    #review #user img {
+        width: 25px;
+        height: 25px;
+    }
+    #review {
+        padding: 3%;
+    }
+}
+@media (max-width: 270px) {
+    #ratings {
+        width: 90%;
+    }
+    #review_form {
+        width: 90%;
+    }
+    progress {
+        width: 70%;
+        height: 7px;
+    }
+    #review #user img {
+        width: 20px;
+        height: 20px;
+        margin-right: 1.5%;
+    }
 }

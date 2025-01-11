@@ -41,11 +41,8 @@ if (isset($_POST["update-specification"])) {
     $up->execute();
 
     $_SESSION["success"] = "Key \"" . $key . "\" updated successfully";
-?>
-    <script>
-        window.history.back();
-    </script>
-<?php }
+    header("Location: http://localhost/php/medicine_website/admin_panel/products/additional_info/specification/specification.php");
+ }
 
 
 
@@ -79,11 +76,8 @@ if (isset($_POST["add-specification"])) {
     $up->execute();
 
     $_SESSION["success"] = "Data no. " . $_POST["add-specification"] . " added successfully";
-?>
-    <script>
-        window.history.back();
-    </script>
-<?php }
+    header("Location: http://localhost/php/medicine_website/admin_panel/products/additional_info/specification/specification.php");
+}
 
 
 
@@ -118,9 +112,6 @@ if (isset($_POST["delete-specification"])) {
     $up->execute();
 
     $_SESSION["success"] = "Key \"" . $key . "\" deleted successfully";
-?>
-    <script>
-        window.history.back();
-    </script>
-<?php }
+    header("Location: http://localhost/php/medicine_website/admin_panel/products/additional_info/specification/specification.php");
+}
 ?>

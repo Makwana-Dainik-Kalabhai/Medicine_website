@@ -40,11 +40,8 @@ if (isset($_POST["update-other-info"])) {
     $up->execute();
 
     $_SESSION["success"] = "Key \"" . $key . "\" updated successfully";
-?>
-    <script>
-        window.history.back();
-    </script>
-<?php }
+    header("Location: http://localhost/php/medicine_website/admin_panel/products/additional_info/other_info/other_info.php");
+}
 
 
 
@@ -79,11 +76,8 @@ if (isset($_POST["add-other-info"])) {
     $up->execute();
 
     $_SESSION["success"] = "Data no. " . $_POST["add-other-info"] . " added successfully";
-?>
-    <script>
-        window.history.back();
-    </script>
-<?php }
+    header("Location: http://localhost/php/medicine_website/admin_panel/products/additional_info/other_info/other_info.php");
+}
 
 
 // ! Delete other_info
@@ -117,8 +111,5 @@ if (isset($_POST["delete-other-info"])) {
     $up->execute();
 
     $_SESSION["success"] = "Key \"" . $key . "\" deleted successfully";
-?>
-    <script>
-        window.history.back();
-    </script>
-<?php } ?>
+    header("Location: http://localhost/php/medicine_website/admin_panel/products/additional_info/other_info/other_info.php");
+    } ?>

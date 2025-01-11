@@ -21,6 +21,7 @@ main {
     width: 75%;
     background-color: white;
     border-radius: 5px;
+    overflow: hidden;
 }
 .regi_form span {
     display: block;

@@ -49,7 +49,7 @@ if (isset($_SESSION["email"])) {
             </div>
             <div class="progress_bar progress_bar1">
                 <span>1 <i class="fa-solid fa-star"></i></span>
-                <progress value="<?php echo $avg_one_star; ?>" max="100" data-label="50% Complete"></progress>
+                <progress value="<?php echo $avg_one_star; ?>" max="100"></progress>
             </div>
         </div>
         <hr>
@@ -58,7 +58,7 @@ if (isset($_SESSION["email"])) {
         <div id="give_ratings">
             <h2 id="error">You already rate this product</h2>
             <?php if (isset($_SESSION["form_err"])) { ?>
-                <h2 style="color:red;font-size:0.7em;" id="form_err"><?php echo $_SESSION["form_err"]; ?></h2>
+                <h2 id="form_err"><?php echo $_SESSION["form_err"]; ?></h2>
             <?php } ?>
             <?php if (isset($_SESSION["success"])) { ?>
                 <h2 id="success"><?php echo $_SESSION["success"]; ?></h2>
