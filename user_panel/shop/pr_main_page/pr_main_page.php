@@ -31,6 +31,10 @@ if (isset($_GET["category"]) && isset($_GET["status"])) {
 
 //! If user Search the value
 if (isset($_POST["search_input"]) || isset($_POST["search-btn"]) || isset($_SESSION["search_input"])) {
+    if($_POST["search_input"] == null) { ?>
+    <script>history.back();</script>
+        <?php return;
+    }
     if (isset($_POST["search_input"])) {
         $_SESSION["search_input"] = $_POST["search_input"];
     }

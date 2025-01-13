@@ -1,5 +1,5 @@
 <style>
-    <?php include("C:/xampp/htdocs/php/medicine_website/user_panel/home_page_items/medicines/medicines.css"); ?>
+    <?php include("medicines.css"); ?>
 </style>
 
 <h1 id="heading">Order Medicines</h1>
@@ -40,7 +40,7 @@
                         <?php } ?>
 
                         <?php if (isset($_SESSION["email"])) {
-                            $sel_item = $conn->prepare("SELECT * FROM `wishlist`");
+                            $sel_item = $conn->prepare("SELECT * FROM `wishlist` WHERE `email`='".$_SESSION["email"]."'");
                             $sel_item->execute();
                             $sel_item = $sel_item->fetchAll();
 
