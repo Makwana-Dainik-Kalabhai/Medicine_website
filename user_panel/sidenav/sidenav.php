@@ -30,7 +30,6 @@ include("C:/xampp/htdocs/php/medicine_website/database.php");
 
 if (isset($_SESSION["email"])) {
     $like_count = 0;
-    $cart_count = 0;
     $order_count = 0;
 
     $sel_like = $conn->prepare("SELECT * FROM `wishlist` WHERE `email`='" . $_SESSION["email"] . "'");
@@ -39,14 +38,6 @@ if (isset($_SESSION["email"])) {
 
     foreach ($sel_like as $row) {
         $like_count++;
-    }
-
-    $sel_cart = $conn->prepare("SELECT * FROM `cart` WHERE `email`='" . $_SESSION["email"] . "'");
-    $sel_cart->execute();
-    $sel_cart = $sel_cart->fetchAll();
-
-    foreach ($sel_cart as $row) {
-        $cart_count++;
     }
 
     $sel_order = $conn->prepare("SELECT * FROM `orders` WHERE `email`='" . $_SESSION["email"] . "'");

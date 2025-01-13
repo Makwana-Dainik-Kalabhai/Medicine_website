@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Wishlist</title>
+    <title>My Cart</title>
     <?php include("C:/xampp/htdocs/php/medicine_website/user_panel/links.php"); ?>
 </head>
 
@@ -61,15 +61,10 @@
                         $sel_qua = $conn->prepare("SELECT * FROM `products` WHERE product_id='" . $row["product_id"] . "'");
                         $sel_qua->execute();
                         $sel_qua = $sel_qua->fetchAll();
-
                         $prod_qua = $sel_qua[0]["quantity"];
-                        if ($prod_qua == 0) {
-                            $up = $conn->prepare("UPDATE `cart` SET `quantity`=0 WHERE product_id='" . $row["product_id"] . "' AND email='" . $_SESSION["email"] . "'");
-                            $up->execute();
-                        }
                     ?>
 
-                        <div id="products" class="<?php if ($row["quantity"] <= 0) {
+                        <div id="products" class="<?php if ($prod_qua <= 0) {
                                                         echo "disable";
                                                     } ?>">
                             <div id='product_img'>
@@ -78,15 +73,11 @@
                                 <?php if ($prod_qua != 0) { ?>
                                     <form action='update_qua.php' method='post'>
                                         <input type="hidden" name="product_id" value="<?php echo $row["product_id"]; ?>" />
-                                        <button id="minus" name="minus" <?php if (!($row["quantity"] > 1)) {
-                                                                            echo "disabled";
-                                                                        } ?>>-</button>
+                                        <button id="minus" name="minus" <?php echo (!($row["quantity"] > 1)) ? "disabled" : ""; ?>>-</button>
 
-                                        <input type="number" value="<?php echo $row["quantity"]; ?>" name="quantity" id="quantity" readonly />
+                                        <input type="number" value="<?php echo ($row["quantity"] < $prod_qua) ? $row["quantity"] : $prod_qua; ?>" name="quantity" id="quantity" readonly />
 
-                                        <button id="plus" name="plus" <?php if (!($row["quantity"] < $prod_qua && $row["quantity"] < 5)) {
-                                                                            echo "disabled";
-                                                                        } ?>>+</button>
+                                        <button id="plus" name="plus" <?php echo (!($row["quantity"] < $prod_qua && $row["quantity"] < 5)) ? "disabled" : ""; ?>>+</button>
                                     </form>
                                 <?php }
 
@@ -125,7 +116,7 @@
                                     <a href="http://localhost/php/medicine_website/user_panel/cart/remove.php?product_id=<?php echo $row["product_id"]; ?>" id="remove_btn"><i class='fa-solid fa-trash'></i></a>
 
                                     <!-- //Buy Btn -->
-                                    <?php if ($row["quantity"] <= 0) {
+                                    <?php if ($prod_qua <= 0) {
                                         $notAv = $row["product_id"];
                                     } else { ?>
                                         <a href="http://localhost/php/medicine_website/user_panel/shop/buy_now/buy_now.php?product_id=<?php echo $row["product_id"]; ?>&product=one" id="buy_btn"><i class='fa-solid fa-bag-shopping'></i> Buy Now</a>
@@ -190,7 +181,11 @@
                         <table>
                             <tr>
                                 <th>Total Payble Value</th>
-                                <td>&#8377;<?php if ($total_val < 1000) { echo $total_val+50; } else { echo $total_val; }; ?></td>
+                                <td>&#8377;<?php if ($total_val < 1000) {
+                                                echo $total_val + 50;
+                                            } else {
+                                                echo $total_val;
+                                            }; ?></td>
                             </tr>
                         </table>
                     </div>
@@ -200,7 +195,7 @@
                         <?php } else { ?>
                             <a href="http://localhost/php/medicine_website/user_panel/shop/buy_now/buy_now.php?product=multiple"><i class='fa-solid fa-bag-shopping'></i> Buy Now</a>
                         <?php } ?>
-                        <a href='empty_cart.php'>Empty Cart</a>
+                        <a href='empty_cart.php'><i class="fa-solid fa-trash"></i> Empty Cart</a>
                     </div>
                     <hr>
                     <span id="total_save">You Total save &#8377;<?php echo $total_save; ?></span>
@@ -220,16 +215,14 @@
         <?php } ?>
     </main>
 
-
-
-
     <footer>
         <?php include("C:/xampp/htdocs/php/medicine_website/user_panel/footer/footer.php"); ?>
     </footer>
 </body>
+
 </html>
 
-<?php if(!isset($_SESSION["email"])) { ?>
+<?php if (!isset($_SESSION["email"])) { ?>
     <script>
         window.history.go(-2);
     </script>

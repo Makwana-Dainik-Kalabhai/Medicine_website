@@ -33,7 +33,7 @@ if ($_POST["timePeriod"] == "past year") {
     $before = strtotime("-12 month");
 }
 
-$sel = $conn->prepare("SELECT * FROM `orders` WHERE `email`='" . $_SESSION["email"] . "' ORDER BY `time`");
+$sel = $conn->prepare("SELECT * FROM `orders` WHERE `email`='" . $_SESSION["email"] . "' ORDER BY `time` DESC");
 $sel->execute();
 $sel = $sel->fetchAll();
 $i = 1;
@@ -63,15 +63,23 @@ foreach ($sel as $row) {
                     <div class="col-md-3">
                         <label>Ship To</label>
                     </div>
+                    <div class="col-md-2">
+                        <label>Order ID:</label>
+                    </div>
                     <div class="col-md-3">
-                        <label>Order ID:&emsp;<span style="font-size: 1.05em;color:black;"><?php echo $row["order_id"]; ?></span></label>
+                        <?php if ($row["status"] != "Cancelled") { ?>
+                            <label>Payment:</label>
+                        <?php } ?>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-2">
                         <span><?php
+                                date_default_timezone_set("Asia/Kolkata");
                                 $date = strtotime($row["time"]);
-                                echo date("M d, Y", $date); ?></span>
+                                echo date("M d, Y", $date); ?><br />
+                            (<?php echo date("h:i a", $date); ?>)
+                        </span>
                     </div>
                     <div class="col-md-2">
                         <span>₹<?php echo $row["total_price"]; ?></span>
@@ -79,11 +87,18 @@ foreach ($sel as $row) {
                     <div class="col-md-3">
                         <span><?php echo $row["name"]; ?></span>
                     </div>
-                    <?php if ($_SESSION["filterBtn"] != "Cancelled") { ?>
-                        <div class="col-md-3">
+                    <div class="col-md-2">
+                        <span><?php echo $row["order_id"]; ?></span>
+                        <?php if ($row["status"] != "Cancelled") { ?><br />
                             <a href="http://localhost/php/medicine_website/user_panel/orders/PDF/genInvoice.php?order_id=<?php echo $row["order_id"]; ?>" id="invoice">View Invoice</a>
-                        </div>
-                    <?php } ?>
+                        <?php } ?>
+                    </div>
+                    <div class="col-md-3">
+                        <?php if ($row["status"] != "Cancelled") { ?>
+                            <span><?php echo $row["payment_type"]; ?></span><br />
+                            <span style="font-weight: 600;color: <?php echo ($row["payment_status"] == "Paid") ? "green" : "red"; ?>;"><?php echo $row["payment_status"]; ?></span>
+                        <?php } ?>
+                    </div>
                 </div>
                 <div class="row mt-5">
                     <?php if ($_SESSION["filterBtn"] == "Processing") { ?>

@@ -7,6 +7,7 @@ $(document).ready(() => {
     $("#sub_imgs #img").removeClass("active-sub-img");
     $(this).addClass("active-sub-img");
     $("#full img").attr("src", $(this).children().attr("src"));
+    $("#full").attr("href", $(this).children().attr("src"));
   });
 
   $("#advance_details button").click(function () {

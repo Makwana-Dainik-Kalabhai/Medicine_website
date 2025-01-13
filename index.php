@@ -56,6 +56,28 @@
 </html>
 
 <?php
+if (isset($_SESSION["email"])) {
+    $sel = $conn->prepare("SELECT *,cart.quantity FROM `cart` INNER JOIN `products` ON products.product_id=cart.product_id WHERE email='" . $_SESSION["email"] . "'");
+    $sel->execute();
+    $sel = $sel->fetchAll();
+
+    foreach ($sel as $row) {
+        $sel_qua = $conn->prepare("SELECT * FROM `products` WHERE product_id='" . $row["product_id"] . "'");
+        $sel_qua->execute();
+        $sel_qua = $sel_qua->fetchAll();
+        $prod_qua = $sel_qua[0]["quantity"];
+
+        if ($row["quantity"] > $prod_qua) {
+            $up = $conn->prepare("UPDATE `cart` SET `quantity`=$prod_qua WHERE product_id='" . $row["product_id"] . "' AND email='" . $_SESSION["email"] . "'");
+            $up->execute();
+        }
+        if ($prod_qua == 0) {
+            $up = $conn->prepare("UPDATE `cart` SET `quantity`=0 WHERE product_id='" . $row["product_id"] . "' AND email='" . $_SESSION["email"] . "'");
+            $up->execute();
+        }
+    }
+}
+
 if (isset($_SESSION["filter"])) {
     unset($_SESSION["filter"]);
 }

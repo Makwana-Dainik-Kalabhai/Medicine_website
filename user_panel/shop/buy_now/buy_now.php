@@ -1,5 +1,14 @@
 <?php
 session_start();
+if (isset($_GET["product"]) && $_GET["product"] == "multiple") {
+    $_SESSION["cart"] = true;
+}
+if (isset($_GET["product"]) && $_GET["product"] != "multiple") {
+    if (isset($_SESSION["cart"])) {
+        unset($_SESSION["cart"]);
+    }
+}
+
 include("C:/xampp/htdocs/php/medicine_website/database.php");
 ?>
 
@@ -52,7 +61,12 @@ include("C:/xampp/htdocs/php/medicine_website/database.php");
                     }
 
                     include("gen_order_id.php");
+                    $total_pr = 0;
                     $count = 0;
+
+                    foreach ($select as $row) {
+                        $total_pr++;
+                    }
                     foreach ($select as $row) {
                         $prod_qua = $row["quantity"];
                         $date = strtotime($row["delivery_date"]);
@@ -67,7 +81,7 @@ include("C:/xampp/htdocs/php/medicine_website/database.php");
                         <input type="hidden" name="total" />
 
                         <div class="card">
-                            <?php if (isset($_GET["product"]) && $_GET["product"] == "multiple") { ?>
+                            <?php if (isset($_GET["product"]) && $_GET["product"] == "multiple" && $total_pr > 1) { ?>
                                 <button value="<?php echo $row["product_id"]; ?>" class="remove_btn"><i class='fa-solid fa-trash'></i></button>
                             <?php } ?>
 
@@ -82,17 +96,9 @@ include("C:/xampp/htdocs/php/medicine_website/database.php");
                             <!-- //! Quantity -->
                             <label class="form-label mx-2 mt-3">Quantity:</label>
                             <?php if (isset($_GET["product"]) && $_GET["product"] == "multiple") { ?>
-                                <input type="number" id="<?php echo $count; ?>" name="quantity_arr[]" value="<?php echo $row["quantity"]; ?>" min="1" max="<?php if ($row["quantity"] < 5) {
-                                                                                                                                                                echo $row["quantity"];
-                                                                                                                                                            } else {
-                                                                                                                                                                echo 5;
-                                                                                                                                                            } ?>" class="form-control mx-2 mb-3" />
+                                <input type="number" id="<?php echo $count - 1; ?>" class="form-control mx-2 mb-3 user-quantity" value="<?php echo $row["quantity"]; ?>" min="1" max="<?php echo ($row["quantity"] < 5) ? $row["quantity"] : 5; ?>" />
                             <?php } else { ?>
-                                <input type="number" id="<?php echo $count; ?>" value="1" name="quantity_arr[]" min="1" max="<?php if ($row["quantity"] < 5) {
-                                                                                                                                    echo $row["quantity"];
-                                                                                                                                } else {
-                                                                                                                                    echo 5;
-                                                                                                                                } ?>" class="form-control mx-2 mb-3" />
+                                <input type="number" id="<?php echo $count - 1; ?>" value="1" class="form-control mx-2 mb-3 user-quantity" min="1" max="<?php echo ($row["quantity"] < 5) ? $row["quantity"] : 5; ?>" />
                             <?php }
 
 
@@ -137,22 +143,21 @@ include("C:/xampp/htdocs/php/medicine_website/database.php");
                             <input type="hidden" id="<?php echo "form_quantity$i"; ?>" name="form_quantity[]" />
                         <?php } ?>
                         <input type="hidden" name="form_total" />
-                        <!-- <input type="hidden" name="form_pay_type" /> -->
                         <input type="hidden" name="form_pay_status" />
                         <input type="hidden" name="form_del_date" value="<?php echo $date; ?>" />
 
                         <div class="user-details">
                             <h4 class="text-danger mt-5">All Fields are required*</h4>
-                            <p class="sub-head">Personal Details:</p>
+                            <p class="sub-head">Personal Details</p>
                             <hr />
                             <div class="row mb-4">
                                 <div class="col-md-6">
-                                    <label class="form-label">Name:</label>
+                                    <label class="form-label">Name<i style="color: red;">*</i></label>
                                     <input type="text" name="form_name" pattern="[a-zA-Z ]*" title="Please! ENter name" id="name" value="<?php echo $row["name"]; ?>" class="form-control py-4" placeholder="User Name" required />
                                     <b></b>
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="form-label">Phone:</label>
+                                    <label class="form-label">Phone<i style="color: red;">*</i></label>
                                     <input type="number" name="form_phone" minlength="10" maxlength="10" title="Please! Enter 10 digits Phone" value="<?php if ($row["phone"] != 0) {
                                                                                                                                                             echo $row["phone"];
                                                                                                                                                         } ?>" class="form-control py-4" maxlength="14" placeholder="0123456789" required />
@@ -161,53 +166,53 @@ include("C:/xampp/htdocs/php/medicine_website/database.php");
                             </div>
                             <div class="row mb-5">
                                 <div class="col-md-12">
-                                    <label class="form-label">Email ID:</label>
+                                    <label class="form-label">Email ID<i style="color: red;">*</i></label>
                                     <input type="email" name="form_email" value="<?php echo $row["email"]; ?>" title="Enter valid Email" class="form-control py-4" placeholder="Email ID" required />
                                     <b></b>
                                 </div>
                             </div>
 
-                            <p class="sub-head">Address:</p>
+                            <p class="sub-head">Address</p>
                             <hr />
                             <div class="row mb-4">
                                 <div class="col-md-8">
-                                    <label class="form-label">Street:</label>
+                                    <label class="form-label">Street<i style="color: red;">*</i></label>
                                     <input type="text" name="form_street" value="<?php echo unserialize($row["address"])["street"]; ?>" class="form-control py-4" placeholder="Apartment Name" required />
                                     <b></b>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="form-label">House no.:</label>
+                                    <label class="form-label">House no.<i style="color: red;">*</i></label>
                                     <input type="text" name="form_house_no" value="<?php echo unserialize($row["address"])["house_no"]; ?>" class="form-control py-4" placeholder="D/302" required />
                                     <b></b>
                                 </div>
                             </div>
                             <div class="row mb-4">
                                 <div class="col-md-8">
-                                    <label class="form-label">Apartment suite:</label>
+                                    <label class="form-label">Apartment suite<i style="color: red;">*</i></label>
                                     <input type="text" name="form_suite" value="<?php echo unserialize($row["address"])["suite"]; ?>" class="form-control py-4" placeholder="near by Apartment Name" required />
                                     <b></b>
                                 </div>
                                 <div class="col-md-4">
-                                    <label class="form-label">Pincode:</label>
+                                    <label class="form-label">Pincode<i style="color: red;">*</i></label>
                                     <input type="number" name="form_pincode" pattern="[0-9]{6}" value="<?php echo unserialize($row["address"])["pincode"]; ?>" class="form-control py-4" placeholder="382480" required />
                                     <b></b>
                                 </div>
                             </div>
                             <div class="row mb-5">
                                 <div class="col-md-6">
-                                    <label class="form-label">City:</label>
-                                    <input type="text" name="form_city" pattern="[a-zA-Z ]*" value="<?php echo unserialize($row["address"])["city"]; ?>" class="form-control py-4" placeholder="Ahmedabad" required />
+                                    <label class="form-label">City<i style="color: red;">*</i></label>
+                                    <input type="text" name="form_city" pattern="[a-zA-Z ]*" value="<?php echo unserialize($row["address"])["city"]; ?>" class="form-control py-4" placeholder="Ahmedabad" readonly />
                                     <b></b>
                                 </div>
                                 <div class="col-md-6">
-                                    <label class="form-label">State:</label>
-                                    <input type="text" name="form_state" pattern="[a-zA-Z ]*" value="<?php echo unserialize($row["address"])["state"]; ?>" class="form-control py-4" placeholder="Gujarat" required />
+                                    <label class="form-label">State<i style="color: red;">*</i></label>
+                                    <input type="text" name="form_state" pattern="[a-zA-Z ]*" value="<?php echo unserialize($row["address"])["state"]; ?>" class="form-control py-4" placeholder="Gujarat" readonly />
                                     <b></b>
                                 </div>
                             </div>
                         </div>
 
-                        <p class="sub-head">Payment:</p>
+                        <p class="sub-head">Payment</p>
                         <hr />
                         <div class="row mb-4">
                             <div class="col-md-12">
@@ -218,6 +223,10 @@ include("C:/xampp/htdocs/php/medicine_website/database.php");
                                     <option value="Cash On Delivery">Cash On Delivery</option>
                                 </select>
                             </div>
+                        </div>
+                        
+                        <div class="row">
+                            <p id="del_charge" style="color: red;font-size: 0.6em;font-weight: 600;">Delivery Charge:&emsp;+&#8377;50</p>
                         </div>
                         <button id="rzp-button1" name="pay_now" value="razorpay" class="pay_btn px-5 py-3">Pay Now<br />₹</button>
                         <button name="pay_now" value="purchase" class="purchase px-5 py-3 mt-5"><i class="fa-solid fa-shopping-bag"></i>&ensp;Purchase</button>
@@ -232,9 +241,13 @@ include("C:/xampp/htdocs/php/medicine_website/database.php");
     </body>
 
     </html>
+<?php } else { ?>
+    <script>
+        alert("Please! Login First");
+        window.history.go(-2);
+    </script>
 <?php }
-else { ?>
-<script>alert("Please! Login First");
-    window.history.go(-2);
-</script>
-<?php } ?>
+
+if ($count <= 0) {
+    header("Location: http://localhost/php/medicine_website/index.php");
+} ?>

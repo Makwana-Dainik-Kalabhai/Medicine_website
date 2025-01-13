@@ -166,8 +166,10 @@ if (isset($_POST["login_submit"])) {
             if (isset($_SESSION["form_error"])) {
                 unset($_SESSION["form_error"]);
             }
-
-            header("Refresh:0; url=http://localhost/php/medicine_website/user_panel/form/login_form.php");
+            if (isset($_SERVER["HTTP_REFERER"])) {
+                header("Location: " . $_SERVER["HTTP_REFERER"]);
+            }
+            // header("Refresh:0; url=http://localhost/php/medicine_website/user_panel/form/login_form.php");
             return;
         }
         //

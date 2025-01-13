@@ -137,13 +137,21 @@ class Data
             }
         }
     }
+    function deleteValues()
+    {
+        global $conn;
+        $del = $conn->prepare("DELETE FROM `cart` WHERE `email`='" . $_SESSION["email"] . "'");
+        $del->execute();
+    }
 }
 
 if (isset($_POST["pay_now"]) && $_POST["pay_now"] == "purchase") {
     $data = new Data();
     $data->setValues();
     $data->insertValues();
-    $data->updateValues(); ?>
+    $data->updateValues();
+    if (isset($_SESSION["cart"])) $data->deleteValues();
+?>
     <script>
         window.location.href = "http://localhost/php/medicine_website/user_panel/orders/orders.php";
         alert("Order Placed Successfully");
@@ -164,10 +172,6 @@ if (isset($_POST["pay_now"]) && $_POST["pay_now"] == "razorpay") {
         'currency' => 'INR'
     ));
     if (!empty($res["id"])) { ?>
-        <div id="pay_now">
-            <h1>Confirm Payment?</h1>
-            <button id="rzp-button1">Pay Now<br />₹<?php echo $data->total; ?></button>
-        </div>
         <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
         <script>
@@ -181,7 +185,9 @@ if (isset($_POST["pay_now"]) && $_POST["pay_now"] == "razorpay") {
                 "order_id": "<?php echo $res["id"]; ?>",
                 "handler": function(response) {
                     <?php $data->insertValues();
-                    $data->updateValues(); ?>
+                    $data->updateValues();
+                    if (isset($_SESSION["cart"])) $data->deleteValues(); ?>
+
                     window.location.href = "http://localhost/php/medicine_website/user_panel/orders/orders.php";
                     alert("Order Placed Successfully");
                 },
@@ -198,14 +204,10 @@ if (isset($_POST["pay_now"]) && $_POST["pay_now"] == "razorpay") {
                 }
             };
             var rzp1 = new Razorpay(options);
+            rzp1.open();
             rzp1.on('payment.failed', function(response) {
                 alert("Transaction Failed");
             });
-
-            document.getElementById('rzp-button1').onclick = function(e) {
-                rzp1.open();
-                e.preventDefault();
-            }
         </script>
 <?php
     }

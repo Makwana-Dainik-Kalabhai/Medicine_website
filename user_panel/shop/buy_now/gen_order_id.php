@@ -1,7 +1,7 @@
 <?php
 include("C:/xampp/htdocs/php/medicine_website/database.php");
 
-$order_id = "";
+$order_id = "#";
 function genOrderId()
 {
     global $order_id;

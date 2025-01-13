@@ -1,4 +1,12 @@
-<?php session_start(); ?>
+<?php
+session_start();
+if (isset($_SESSION["form_succ"])) {
+    header("Refresh:3, url=http://localhost/php/medicine_website/index.php");
+}
+if (isset($_SESSION["email"]) && !isset($_SESSION["form_succ"]) && isset($_SERVER["HTTP_REFERER"])) {
+    header("Location: " . $_SERVER["HTTP_REFERER"]);
+} ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,15 +48,7 @@
                 <?php if (isset($_SESSION["form_succ"])) {
                 ?>
                     <div id='form_succ'>
-                        <?php echo $_SESSION["form_succ"];
-                        ?>
-                        <script>
-                            setTimeout(() => {
-                                history.go(-2);
-                                return;
-
-                            }, 2000);
-                        </script>
+                        <?php echo $_SESSION["form_succ"]; ?>
                     </div>
                 <?php }
                 ?>

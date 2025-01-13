@@ -1,9 +1,11 @@
 $(document).ready(function () {
+  $("#del_charge").hide();
+
   var items = [];
   var off_price = [];
   var price = [];
   var quantity = [];
-  let total = 0;
+  var total = 0;
 
   $("input[name='item_arr[]']").map(function () {
     items.push($(this).val());
@@ -14,25 +16,27 @@ $(document).ready(function () {
   $("input[name='price_arr[]']").map(function () {
     price.push($(this).val());
   });
-  $("input[name='quantity_arr[]']").map(function () {
+  $(".user-quantity").map(function () {
     quantity.push($(this).val());
   });
-  
+
   for (let i = 0; i < off_price.length; i++) {
     total += off_price[i] * quantity[i];
   }
-  if(total < 1000)
+  if (total < 1000) {
     total += 50;
+    $("#del_charge").show();
+  }
   $("#rzp-button1").html(`Pay Now<br />₹${total}`);
 
-  for(let i=0; i<items.length; i++) {
+  for (let i = 0; i < items.length; i++) {
     $(`#form_items${i}`).val(items[i]);
     $(`#form_off_price${i}`).val(off_price[i]);
     $(`#form_price${i}`).val(price[i]);
     $(`#form_quantity${i}`).val(quantity[i]);
   }
   $("input[name='form_total']").val(total);
-  
+
   // ! Display Different btns when payment_type is changed
   $("#payment_type").change(function () {
     if ($("#payment_type").val() == "Razorpay") {
@@ -40,7 +44,7 @@ $(document).ready(function () {
       $(".buy_now_main .purchase").css("display", "none");
       $("input[name='form_pay_status']").val("Paid");
     }
-    
+
     if ($("#payment_type").val() == "Cash On Delivery") {
       $(".buy_now_main .purchase").css("display", "block");
       $("#rzp-button1").css("display", "none");
@@ -54,7 +58,7 @@ $(document).ready(function () {
   });
 
   //! Update Quantity onchange quantity input
-  $("input[name='quantity_arr[]']").change(function () {
+  $(".user-quantity").change(function () {
     let total = 0;
 
     quantity[$(this).attr("id")] = $(this).val();
@@ -62,14 +66,16 @@ $(document).ready(function () {
     for (let i = 0; i < off_price.length; i++) {
       total += off_price[i] * quantity[i];
     }
-    for(let i=0; i<items.length; i++) {
+    for (let i = 0; i < items.length; i++) {
       $(`#form_quantity${i}`).val(quantity[i]);
     }
 
-    if(total < 1000)
-      total += 50;
+    if (total < 1000) total += 50;
 
     $("input[name='form_total']").val(total);
+
+    if (total < 1000) $("#del_charge").show();
+    else $("#del_charge").hide();
 
     $("#rzp-button1").html(`Pay Now<br />₹${total}`);
   });
@@ -77,7 +83,7 @@ $(document).ready(function () {
   //! Remove Product
   $(".card .remove_btn").click(function () {
     let product_id = $(this).val();
-    
+
     $.ajax({
       type: "POST",
       url: "buy_now.php",

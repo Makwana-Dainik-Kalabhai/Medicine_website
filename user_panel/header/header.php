@@ -76,8 +76,17 @@
                 <input type="text" id="search_input" name="search_input" placeholder="Search Here..." />
                 <button name="search-btn"><i class="fa-solid fa-magnifying-glass"></i></buttonn>
             </form>
-
         </div>
+
+        <?php $sel_cart = $conn->prepare("SELECT * FROM `cart` WHERE `email`='" . $_SESSION["email"] . "'");
+        $sel_cart->execute();
+        $sel_cart = $sel_cart->fetchAll();
+        $cart_count = 0;
+
+        foreach ($sel_cart as $row) {
+            $cart_count++;
+        } ?>
+        <a href="http://localhost/php/medicine_website/user_panel/cart/cart.php" class="cart-btn"><?php if ($cart_count != 0) { ?><span><?php echo $cart_count; ?></span><?php } ?><i class="fa-solid fa-cart-shopping"></i></a>
     </nav>
 </nav>
 

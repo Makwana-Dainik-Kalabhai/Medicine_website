@@ -12,7 +12,7 @@
     height: 100vh;
     opacity: 0.6;
     filter: brightness(30%);
-    z-index: 1;
+    z-index: 2;
     background-color: white;
 }
 
@@ -76,7 +76,6 @@
 /* //! Login Btns */
 
 #login_btns {
-    color: white;
     width: 28rem;
 }
 
@@ -90,6 +89,10 @@
     font-family: "Rubik", sans-serif;
     margin: 0 4%;
     text-decoration: none;
+}
+
+#login_btns a:hover {
+    color: #bfbfbf;
 }
 
 #logout_btns {
@@ -209,6 +212,46 @@
     font-size: 0.85em;
 }
 
+#nav2 .cart-btn {
+    display: block;
+    position: relative;
+    color: black;
+    margin-right: 1.5%;
+    padding: 0.5% 0.9%;
+    font-size: 0.8em;
+    background-color: #f2f2f2;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+#nav2 .cart-btn:hover {
+    background-color: #d9d9d9;
+}
+
+#nav2 .cart-btn span {
+    position: absolute;
+    top: -10%;
+    right: -6%;
+    width: 20px;
+    height: 20px;
+    display: grid;
+    place-items: center;
+    font-size: 0.8em;
+    font-weight: 600;
+    color: white;
+    background-color: red;
+    border-radius: 50%;
+    transition: all 1s ease;
+}
+
+#nav2 .cart-btn:hover span {
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    font-size: 1em;
+}
+
 /** Nav2 search box */
 #search_box {
     position: relative;
@@ -289,7 +332,7 @@
     background-color: white;
     font-size: 20px;
     border-right: 3px solid #f2f2f2;
-    z-index: 2;
+    z-index: 4;
     transition: all 0.4s linear;
 }
 
@@ -396,6 +439,11 @@
     #login_btns {
         width: 22rem;
     }
+
+    #nav2 .cart-btn span {
+        width: 15px;
+        height: 15px;
+    }
 }
 
 @media (max-width: 580px) {
@@ -432,6 +480,13 @@
 
     #search_box input {
         border-bottom: 2px solid;
+    }
+
+    #nav2 .cart-btn span {
+        top: -16%;
+        right: -10%;
+        width: 13px;
+        height: 13px;
     }
 }
 
@@ -517,6 +572,13 @@
 
     #search_box {
         width: 23rem;
+    }
+
+    #nav2 .cart-btn span {
+        top: -25%;
+        right: -15%;
+        width: 10px;
+        height: 10px;
     }
 
     #side_nav {
