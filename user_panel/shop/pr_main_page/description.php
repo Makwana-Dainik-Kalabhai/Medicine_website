@@ -2,16 +2,16 @@
     .main_head {
         color: #2a7189;
         font-size: 0.65em;
-        font-weight: 600;
+        font-weight: 700;
         line-height: 1.5;
-        margin-top: 25px;
+        margin-top: 3%;
     }
 
     .inline_head {
         display: inline;
         font-size: 0.55em;
-        font-weight: 600;
-        margin-left: 25px;
+        font-weight: 700;
+        margin-left: 2%;
     }
 
     .line_height {
@@ -21,25 +21,43 @@
     .value {
         font-size: 0.55em;
         line-height: 1.5;
-        margin-left: 10px;
+        margin-left: 2%;
+        text-align: justify;
     }
 
     .inline_value {
         display: inline;
         font-size: 0.55em;
         line-height: 1.5;
+        text-align: justify;
+    }
+
+    @media (max-width: 300px) {
+        .main_head {
+            margin-top: 6%;
+            margin-bottom: 1.5%;
+        }
     }
 </style>
 
+<?php
+if (isset($_SESSION["status"]) && $_SESSION["status"] == "medicine") {
+    $status = "Medicines";
+}
+if (isset($_SESSION["status"]) && $_SESSION["status"] == "device") {
+    $status = "Medical Devices";
+}
+?>
 
-<p class="main_head">Order Medicines Online:-</p>
-<p class="value">Welcome to our online order service.Explore the our services by purchasing medicines online from your.</p>
+
+<p class="main_head">Order Products Online:-</p>
+<p class="value">Welcome to our online order service.Explore the our services by purchasing Products online from your.</p>
 
 
-<p class="main_head">Benefits of Order Medicines Online:-</p>
+<p class="main_head">Benefits of Order Products Online:-</p>
 <div class="line_height">
     <li class="inline_head">Convenience:</li>
-    <p class="inline_value">Order your medicines anytime, anywhere, and receive them at your doorstep.</p>
+    <p class="inline_value">Order your Products anytime, anywhere, and receive them at your doorstep.</p>
 </div>
 
 <div class="line_height">
@@ -56,8 +74,8 @@
 <p class="main_head">How it Works?</p>
 
 <div class="line_height">
-    <p class="inline_head">Browse Medicines:</p>
-    <p class="inline_value">Easily navigate through our user-friendly interface to find the medicines you need.</p>
+    <p class="inline_head">Browse Products:</p>
+    <p class="inline_value">Easily navigate through our user-friendly interface to find the Products you need.</p>
 </div>
 
 <div class="line_height">
@@ -77,14 +95,14 @@
 
 <div class="line_height">
     <p class="inline_head">Doorstep Delivery:</p>
-    <p class="inline_value">Sit back and relax as your medicines are delivered to your doorstep.</p>
+    <p class="inline_value">Sit back and relax as your Products are delivered to your doorstep.</p>
 </div>
 
 
 <p class="main_head">Why Choose healthGroup.com?</p>
 <div class="line_height">
     <p class="inline_head">Wide Product Range:</p>
-    <p class="inline_value">Find an extensive range of medicines, healthcare products, and wellness essentials.</p>
+    <p class="inline_value">Find an extensive range of Products, healthcare products, and wellness essentials.</p>
 </div>
 
 <div class="line_height">
@@ -102,5 +120,5 @@
 </div>
 
 
-<p class="main_head">How to Order Medicine Online?</p>
-<p class="value">At healthGroup.com, we host a comprehensive range of medicines from A to Z. You can effortlessly find the products you need by searching our platform. Also you can find it by using category method. After choosing the medicine/product you can place order. After certain procedures or after some time your selected product will come to your home without doing hardwork.</p>
+<p class="main_head">How to Order Products Online?</p>
+<p class="value">At healthGroup.com, we host a comprehensive range of Products from A to Z. You can effortlessly find the products you need by searching our platform. Also you can find it by using its category. After choosing the product you can place order. After certain procedures or after some time your selected product will come to your home without doing hardwork.</p>

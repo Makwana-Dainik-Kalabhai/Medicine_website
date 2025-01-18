@@ -236,11 +236,6 @@ main #cart {
     overflow: hidden;
 }
 
-::-webkit-scrollbar {
-    width: 5px;
-    height: 2px;
-}
-
 #bill_header {
     color: white;
     background-color: #3ca1c3;
@@ -256,15 +251,23 @@ main #cart {
 
 /* Bill Values */
 #bill_values {
+    width: 96%;
     max-height: 250px;
-    margin: 0 5%;
-    padding: 2% 1%;
+    margin: auto;
+    padding: 2% 5%;
     border-bottom: 2px solid gray;
     overflow: auto;
 }
 
-::-webkit-scrollbar {
-    width: 4px;
+#bill_values::-webkit-scrollbar {
+    width: 3px;
+}
+#bill_values::-webkit-scrollbar-track {
+    background: #f2f2f2;
+}
+#bill_values::-webkit-scrollbar-thumb {
+    background-color: gray;
+    border-radius: 15px;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -282,12 +285,12 @@ main #cart {
 
 #bill th {
     font-weight: 500;
-    padding-bottom: 1.5%;
+    padding-bottom: 2%;
 }
 
 #bill td {
     text-align: right;
-    padding-bottom: 1.5%;
+    padding-bottom: 2%;
 }
 
 
@@ -301,19 +304,20 @@ main #cart {
 #bill_values th span {
     color: gray;
     font-size: 0.95em;
-    font-weight: 600;
 }
 
 #bill_values td {
     vertical-align: bottom;
-    font-size: 0.78em;
+    font-size: 0.75em;
 }
 
 
 /* Total value before add charges */
 #total_value {
-    margin: 0 5%;
-    padding: 0.5% 1%;
+    width: 96%;
+    padding: 0.5% 5%;
+    margin: auto;
+    margin-top: 1%;
 }
 
 #total_value th {
@@ -323,14 +327,15 @@ main #cart {
 
 #total_value td {
     font-size: 0.77em;
-    font-weight: 500;
 }
 
 
 /* Charges */
 #charges {
-    margin: 0 5%;
-    padding: 0 1% 1% 1%;
+    width: 96%;
+    padding: 0.5% 5%;
+    margin: 0 auto;
+    margin-top: 1%;
     border-bottom: 2px solid gray;
 }
 
@@ -343,15 +348,16 @@ main #cart {
 #charges td {
     color: red;
     font-size: 0.69em;
-    font-weight: 500;
     line-height: 1.2;
 }
 
 
-/* Total Value */
+/*? Total Value */
 #total_payble_value {
-    margin: 0 5%;
-    padding: 0 1% 3% 1%;
+    width: 96%;
+    padding: 0.5% 5%;
+    margin: auto;
+    margin-top: 1%;
 }
 
 #total_payble_value th {
@@ -362,7 +368,6 @@ main #cart {
 #total_payble_value td {
     color: #2a7189;
     font-size: 0.8em;
-    font-weight: 600;
 }
 
 
@@ -377,7 +382,7 @@ main #cart {
 
 #bill #btns a {
     width: fit-content;
-    padding: 0.5% 5%;
+    padding: 0.8% 5%;
     font-size: 0.7em;
     font-weight: 500;
     color: white;
@@ -406,7 +411,7 @@ main #cart {
     display: block;
     color: green;
     font-size: 0.82em;
-    font-weight: 600;
+    font-weight: 500;
     text-align: center;
     padding-bottom: 2%;
 }

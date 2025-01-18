@@ -9,6 +9,8 @@ $(document).ready(function () {
 
   // ! Cancel the Order
   $("#orders .cancel_btn").click(function () {
+    $("input[name='order_id']").val($(this).val());
+
     $("#order #cancel_form").css("display", "block");
     $(".brightness").css("display", "block");
   });
@@ -33,6 +35,7 @@ $(document).ready(function () {
       },
     });
   });
+
   $("#time_period").change(function () {
     let time = $(this).val();
 

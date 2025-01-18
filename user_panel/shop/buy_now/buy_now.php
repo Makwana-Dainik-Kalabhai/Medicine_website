@@ -48,7 +48,8 @@ include("C:/xampp/htdocs/php/medicine_website/database.php");
 
                 <h3 style="margin-top: 6%;">My Products</h3>
                 <h4 class="text-danger">You can Order Maximum 5 quantities.</h4>
-                <div class="products">
+
+                <div class="products row">
                     <?php
                     if (isset($_GET["product"]) && $_GET["product"] == "multiple") {
                         $select = $conn->prepare("SELECT *, cart.quantity FROM cart, products WHERE products.product_id=cart.product_id AND email='" . $_SESSION["email"] . "'");
@@ -64,11 +65,16 @@ include("C:/xampp/htdocs/php/medicine_website/database.php");
                     $total_pr = 0;
                     $count = 0;
 
+
                     foreach ($select as $row) {
                         $total_pr++;
                     }
                     foreach ($select as $row) {
-                        $prod_qua = $row["quantity"];
+                        $sel = $conn->prepare("SELECT * FROM `products` WHERE product_id='" . $row["product_id"] . "'");
+                        $sel->execute();
+                        $sel = $sel->fetchAll();
+                        $prod_qua = $sel[0]["quantity"];
+
                         $date = strtotime($row["delivery_date"]);
                         $delivery = date("d M, Y", $date);
                         $count++;
@@ -80,46 +86,44 @@ include("C:/xampp/htdocs/php/medicine_website/database.php");
                         <input type="hidden" name="price_arr[]" value="<?php echo $row["price"]; ?>" />
                         <input type="hidden" name="total" />
 
-                        <div class="card">
-                            <?php if (isset($_GET["product"]) && $_GET["product"] == "multiple" && $total_pr > 1) { ?>
-                                <button value="<?php echo $row["product_id"]; ?>" class="remove_btn"><i class='fa-solid fa-trash'></i></button>
-                            <?php } ?>
+                        <div class="col-md-3">
+                            <div class="card">
+                                <?php if (isset($_GET["product"]) && $_GET["product"] == "multiple" && $total_pr > 1) { ?>
+                                    <button value="<?php echo $row["product_id"]; ?>" class="remove_btn"><i class='fa-solid fa-trash'></i></button>
+                                <?php } ?>
 
-                            <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php?status=<?php echo $row["status"]; ?>&product_id=<?php echo $row['product_id']; ?>">
-                                <img src="http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo unserialize($row["item_img"])[0]; ?>" alt="...">
-                                <div class="card-body p-2">
-                                    <h5 class="card-title m-0"><?php echo $row["name"]; ?></h5>
-                                    <p class="card-text m-0"><span class="off_price">₹<?php echo $row["offer_price"]; ?></span> <span class="price"><?php if ($row["offer_price"] !== $row["price"]) echo "₹" . $row["price"]; ?></span></p>
+                                <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php?status=<?php echo $row["status"]; ?>&product_id=<?php echo $row['product_id']; ?>">
+                                    <img src="http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo unserialize($row["item_img"])[0]; ?>" alt="...">
+
+                                    <div class="card-body p-2">
+                                        <h5 class="card-title m-0"><?php echo $row["name"]; ?></h5>
+                                        <p class="card-text m-0"><span class="off_price">₹<?php echo $row["offer_price"]; ?></span> <span class="price"><?php if ($row["offer_price"] !== $row["price"]) echo "₹" . $row["price"]; ?></span></p>
+                                    </div>
+                                </a>
+                                <div>
+                                    <!-- //! Quantity -->
+                                    <label class="form-label mx-2 mt-3">Quantity:</label>
+                                    <?php if (isset($_GET["product"]) && $_GET["product"] == "multiple") { ?>
+                                        <input type="number" id="<?php echo $count - 1; ?>" class="form-control mx-2 mb-3 user-quantity" value="<?php echo $row["quantity"]; ?>" min="1" max="<?php echo ($prod_qua < 5) ? $prod_qua : 5; ?>" />
+                                    <?php } else { ?>
+                                        <input type="number" id="<?php echo $count - 1; ?>" value="1" class="form-control mx-2 mb-3 user-quantity" min="1" max="<?php echo ($prod_qua < 5) ? $prod_qua : 5; ?>" />
+                                    <?php } ?>
                                 </div>
-                            </a>
-
-                            <!-- //! Quantity -->
-                            <label class="form-label mx-2 mt-3">Quantity:</label>
-                            <?php if (isset($_GET["product"]) && $_GET["product"] == "multiple") { ?>
-                                <input type="number" id="<?php echo $count - 1; ?>" class="form-control mx-2 mb-3 user-quantity" value="<?php echo $row["quantity"]; ?>" min="1" max="<?php echo ($row["quantity"] < 5) ? $row["quantity"] : 5; ?>" />
-                            <?php } else { ?>
-                                <input type="number" id="<?php echo $count - 1; ?>" value="1" class="form-control mx-2 mb-3 user-quantity" min="1" max="<?php echo ($row["quantity"] < 5) ? $row["quantity"] : 5; ?>" />
-                            <?php }
 
 
-                            if (isset($_GET["product"]) && $_GET["product"] == "multiple") {
-                                $sel = $conn->prepare("SELECT * FROM `products` WHERE product_id='" . $row["product_id"] . "'");
-                                $sel->execute();
-                                $sel = $sel->fetchAll();
+                                <?php if (isset($_GET["product"]) && $_GET["product"] == "multiple") {
+                                    //! Delivery Date
+                                    date_default_timezone_set('Asia/Calcutta');
+                                    $date = strtotime("+4 days");
 
-                                $prod_qua = $sel[0]["quantity"];
-
-                                //! Delivery Date
-                                date_default_timezone_set('Asia/Calcutta');
-                                $date = strtotime("+4 days");
-
-                                $delivery = date("d M, Y", $date);
-                            } else {
-                                $delivery = date("d M, Y", strtotime($row["delivery_date"]));
-                            }
-                            if ($prod_qua < 5 && $prod_qua > 0) { ?>
-                                <p class="not-available">Only <?php echo $prod_qua; ?> Quantity Available</p>
-                            <?php } ?>
+                                    $delivery = date("d M, Y", $date);
+                                } else {
+                                    $delivery = date("d M, Y", strtotime($row["delivery_date"]));
+                                }
+                                if ($prod_qua < 5 && $prod_qua > 0) { ?>
+                                    <p class="not-available">Only <?php echo $prod_qua; ?> Quantity Available</p>
+                                <?php } ?>
+                            </div>
                         </div>
                     <?php
                     } ?>
@@ -224,7 +228,7 @@ include("C:/xampp/htdocs/php/medicine_website/database.php");
                                 </select>
                             </div>
                         </div>
-                        
+
                         <div class="row">
                             <p id="del_charge" style="color: red;font-size: 0.6em;font-weight: 600;">Delivery Charge:&emsp;+&#8377;50</p>
                         </div>

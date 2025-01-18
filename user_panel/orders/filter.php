@@ -52,77 +52,71 @@ foreach ($sel as $row) {
 
         <div id="orders">
             <div id="order_details">
+                <?php if ($row["status"] == "Cancelled") { ?>
+                    <h5 class="ps-4 pb-3" style="color: red;">Your Order is cancelled now. If you paid for this, then money will be refund in 2-4 days to your mobile number</h5>
+                <?php } ?>
+
                 <span id="order_no"><?php echo $i; ?></span>
-                <div class="row">
-                    <div class="col-md-2">
-                        <label>Order Placed</label>
-                    </div>
-                    <div class="col-md-2">
-                        <label>Total</label>
-                    </div>
-                    <div class="col-md-3">
-                        <label>Ship To</label>
-                    </div>
-                    <div class="col-md-2">
-                        <label>Order ID:</label>
-                    </div>
-                    <div class="col-md-3">
-                        <?php if ($row["status"] != "Cancelled") { ?>
-                            <label>Payment:</label>
-                        <?php } ?>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-2">
-                        <span><?php
-                                date_default_timezone_set("Asia/Kolkata");
+
+                <table>
+                    <tr>
+                        <td><label>Order Placed</label>
+                            <span>
+                                <?php date_default_timezone_set("Asia/Kolkata");
                                 $date = strtotime($row["time"]);
-                                echo date("M d, Y", $date); ?><br />
-                            (<?php echo date("h:i a", $date); ?>)
-                        </span>
-                    </div>
-                    <div class="col-md-2">
-                        <span>₹<?php echo $row["total_price"]; ?></span>
-                    </div>
-                    <div class="col-md-3">
-                        <span><?php echo $row["name"]; ?></span>
-                    </div>
-                    <div class="col-md-2">
-                        <span><?php echo $row["order_id"]; ?></span>
-                        <?php if ($row["status"] != "Cancelled") { ?><br />
-                            <a href="http://localhost/php/medicine_website/user_panel/orders/PDF/genInvoice.php?order_id=<?php echo $row["order_id"]; ?>" id="invoice">View Invoice</a>
+                                echo date("M d, Y", $date); ?>
+                                (<?php echo date("h:i a", $date); ?>)
+                            </span>
+                        </td>
+
+                        <td><label>Total</label>
+                            <span>₹<?php echo $row["total_price"]; ?></span>
+                        </td>
+                        <td><label>Ship To</label>
+                            <span><?php echo $row["name"]; ?></span>
+                        </td>
+                        <td><label>Order ID</label>
+                            <span><?php echo $row["order_id"]; ?></span>
+                        </td>
+                        <td><label>Payment&ensp;<span style="font-size:1em;font-weight: 600;color: <?php echo ($row["payment_status"] == "Paid") ? "green" : "red"; ?>;">(<?php echo $row["payment_status"]; ?>)</span></label>
+                            <span><?php echo $row["payment_type"]; ?></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><?php if ($row["status"] != "Cancelled") { ?>
+                                <a href="http://localhost/php/medicine_website/user_panel/orders/PDF/genInvoice.php?order_id=<?php echo $row["order_id"]; ?>" id="invoice">View Invoice</a>
+                            <?php } ?>
+                        </td>
+                        <td></td>
+                    </tr>
+                </table>
+
+                <table>
+                    <tr id="mt-4">
+                        <?php if ($_SESSION["filterBtn"] == "Processing") { ?>
+                            <th colspan="+3" class="delivery">Expected Delivery:&ensp;
+                                <?php $date = strtotime($row["delivery_date"]);
+                                echo date("M d, Y", $date); ?>
+                            </th>
+                        <?php }
+
+                        if ($_SESSION["filterBtn"] == "Shipped") { ?>
+                            <th colspan="+3" class="delivery">Delivered:&ensp;
+                                <?php $date = strtotime($row["delivery_date"]);
+                                echo date("M d, Y", $date); ?>
+                            </th>
                         <?php } ?>
-                    </div>
-                    <div class="col-md-3">
-                        <?php if ($row["status"] != "Cancelled") { ?>
-                            <span><?php echo $row["payment_type"]; ?></span><br />
-                            <span style="font-weight: 600;color: <?php echo ($row["payment_status"] == "Paid") ? "green" : "red"; ?>;"><?php echo $row["payment_status"]; ?></span>
-                        <?php } ?>
-                    </div>
-                </div>
-                <div class="row mt-5">
-                    <?php if ($_SESSION["filterBtn"] == "Processing") { ?>
-                        <div class="col-md-9 delivery">
-                            Expected Delivery:&ensp;<?php
-                                                    $date = strtotime($row["delivery_date"]);
-                                                    echo date("M d, Y", $date); ?>
-                        </div>
-                    <?php
-                    }
-                    if ($_SESSION["filterBtn"] == "Shipped") { ?>
-                        <div class="col-md-9 delivery">
-                            Delivered:&ensp;<?php
-                                            $date = strtotime($row["delivery_date"]);
-                                            echo date("M d, Y", $date); ?>
-                        </div>
-                    <?php
-                    } ?>
-                    <div class="col-md-3 cancel">
-                        <?php if ($row["status"] == "Processing") { ?>
-                            Cancel Order?&ensp;<button class="cancel_btn"><i class="fa-solid fa-xmark"></i> Cancel</button>
-                        <?php } ?>
-                    </div>
-                </div>
+
+                        <td colspan="2" class="text-right cancel">
+                            <?php if ($row["status"] == "Processing") { ?>
+                                Cancel Order?&ensp;<button class="cancel_btn"><i class="fa-solid fa-xmark"></i> Cancel</button>
+                            <?php } ?>
+                        </td>
+                    </tr>
+                </table>
             </div>
             <div id="items">
                 <?php displayItems($row); ?>
@@ -136,33 +130,17 @@ function displayItems($row)
 { ?>
     <?php
     global $conn;
-    if (str_contains($row["items"], "{") && str_contains($row["items"], ":") && str_contains($row["items"], '"') && str_contains($row["items"], "}")) { ?>
-        <?php
-        for ($i = 0; $i < count(unserialize($row["items"])); $i++) { ?>
-            <div class="box <?php if ($_SESSION["filterBtn"] == "Cancelled") {
-                                echo "disabled";
-                            } ?>">
-                <?php $sel = $conn->prepare("SELECT * FROM `products` WHERE `product_id`='" . unserialize($row["items"])[$i] . "'");
-                $sel->execute();
-                $sel = $sel->fetchAll();
 
-                foreach ($sel as $r) {
-                    itemDetails($row, $r, unserialize($row["quantity"])[$i]);
-                } ?>
-            </div>
-        <?php
-        }
-    } else { ?>
+    for ($i = 0; $i < count(unserialize($row["items"])); $i++) { ?>
         <div class="box <?php if ($_SESSION["filterBtn"] == "Cancelled") {
                             echo "disabled";
                         } ?>">
-            <?php
-            $sel = $conn->prepare("SELECT * FROM `products` WHERE `product_id`='" . $row["items"] . "'");
+            <?php $sel = $conn->prepare("SELECT * FROM `products` WHERE `product_id`='" . unserialize($row["items"])[$i] . "'");
             $sel->execute();
             $sel = $sel->fetchAll();
 
             foreach ($sel as $r) {
-                itemDetails($row, $r, $row["quantity"]);
+                itemDetails($row, $r, unserialize($row["quantity"])[$i]);
             } ?>
         </div>
     <?php
@@ -205,5 +183,4 @@ function itemDetails($row, $r, $quantity)
             <td class="text-right">₹<?php echo $r["offer_price"] * $quantity; ?></td>
         </tr>
     </table>
-<?php }
-?>
+<?php } ?>

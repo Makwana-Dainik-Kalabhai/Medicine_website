@@ -1,6 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Mukta:wght@200;300;400;500;600;700;800&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
 * {
     margin: 0;
     padding: 0;
+    font-family: "Rubik", sans-serif;
+}
+
+body::-webkit-scrollbar {
+    width: 5px;
+    background-color: gray;
+}
+
+body::-webkit-scrollbar-track {
+    background: #f2f2f2;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: gray;
+    border-radius: 15px;
 }
 
 .brightness {
@@ -40,7 +56,6 @@
     position: fixed;
     top: 0;
     width: 100%;
-    font-family: "Rubik", sans-serif;
     z-index: 5;
     box-shadow: 0px 0px 5px 1.5px gray;
 }
@@ -86,7 +101,6 @@
 #login_btns a {
     color: white;
     font-size: 0.8em;
-    font-family: "Rubik", sans-serif;
     margin: 0 4%;
     text-decoration: none;
 }
@@ -144,6 +158,7 @@
 
 /* Nav2 menu btn */
 #menu {
+    flex: 1;
     display: flex;
     justify-content: flex-start;
     width: 15%;
@@ -165,8 +180,9 @@
 #nav2_btns {
     display: flex;
     justify-content: flex-end;
-    width: 70rem;
-    margin-right: 6rem;
+    width: fit-content;
+    margin: 0 6rem;
+    flex: 4;
 }
 
 .btn {
@@ -175,12 +191,12 @@
 }
 
 .btn>a {
-    padding: 5% 0;
     display: block;
+    margin: 0 1.5rem;
+    padding: 5% 0;
     color: #1e5162;
     font-size: 2em;
     font-weight: 500;
-    font-family: "Rubik", sans-serif;
     text-decoration: none;
 }
 
@@ -212,12 +228,121 @@
     font-size: 0.85em;
 }
 
-#nav2 .cart-btn {
+
+/** Nav2 search box */
+#search_box {
+    position: relative;
+    margin-right: 3%;
+    flex: 6;
+}
+
+#search_box input {
+    outline: none;
+    border: none;
+    border-bottom: 2.5px solid;
+    width: 100%;
+    padding: 0 2% 1.5% 0.5%;
+    font-size: 0.8em;
+    background-color: transparent;
+}
+
+#search_box button {
+    display: grid;
+    place-items: center;
+    width: 35px;
+    height: 35px;
+    position: absolute;
+    top: 50%;
+    right: -1%;
+    font-size: 0.75em;
+    transform: translate(0, -50%);
+    border-radius: 50%;
+    border: none;
+    background-color: transparent;
+}
+
+#search_box button:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Searched Items */
+#searched_items {
+    display: none;
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    max-height: 300px;
+    background-color: white;
+    border-radius: 0 0 7px 7px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    box-shadow: 0px 0px 5px 2px gray;
+}
+#searched_items::-webkit-scrollbar {
+    width: 3.5px;
+    background-color: gray;
+}
+
+#searched_items::-webkit-scrollbar-track {
+    background: #f2f2f2;
+}
+#searched_items::-webkit-scrollbar-thumb {
+    background-color: gray;
+}
+
+#searched_items #new_items {
+    width: 100%;
     display: block;
+    line-height: 2;
+}
+
+#searched_items a {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 60px;
+    padding: 0.5% 3%;
+    color: black;
+    font-size: 0.7em;
+    text-decoration: none;
+    border-bottom: 1px solid #d9d9d9;
+}
+
+#new_items a .search-img {
+    display: block;
+    width: 70px;
+    height: 100%;
+}
+#new_items  a .search-name {
+    display: block;
+    width: 90%;
+    text-transform: capitalize;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+#new_items .search-img img {
+    width: auto;
+    height: 100%;
+    padding: 0.5%;
+    mix-blend-mode: multiply;
+}
+
+
+#searched_items #new_items a:hover {
+    background-color: #f2f2f2;
+}
+
+
+/** Cart Btn */
+#nav2 .cart-btn {
+    line-height: 1;
+    padding: 0.9%;
     position: relative;
     color: black;
     margin-right: 1.5%;
-    padding: 0.5% 0.9%;
     font-size: 0.8em;
     background-color: #f2f2f2;
     border-radius: 50%;
@@ -252,75 +377,6 @@
     font-size: 1em;
 }
 
-/** Nav2 search box */
-#search_box {
-    position: relative;
-    display: block;
-    width: 50rem;
-    margin-right: 3%;
-}
-
-#search_box input {
-    outline: none;
-    border: none;
-    border-bottom: 2.5px solid;
-    width: 100%;
-    padding: 0 2% 1.5% 0.5%;
-    font-size: 0.8em;
-    background-color: transparent;
-}
-
-#search_box button {
-    display: grid;
-    place-items: center;
-    width: 35px;
-    height: 35px;
-    position: absolute;
-    top: 50%;
-    right: -1%;
-    font-size: 0.75em;
-    transform: translate(0, -50%);
-    border-radius: 50%;
-    border: none;
-    background-color: transparent;
-}
-
-#search_box button:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-}
-
-/* Searched Items */
-#searched_items {
-    position: absolute;
-    top: 5rem;
-    width: 100%;
-    max-height: 300px;
-    background-color: white;
-    border-radius: 7px;
-    overflow-x: hidden;
-    overflow-y: auto;
-}
-
-#searched_items #new_items div {
-    width: 100%;
-    display: block;
-    padding: 0 3%;
-    line-height: 2;
-    text-transform: capitalize;
-}
-
-#searched_items a {
-    display: block;
-    width: 100%;
-    color: gray;
-    font-size: 0.7em;
-    text-decoration: none;
-}
-
-#searched_items #new_items div:hover {
-    background-color: #f2f2f2;
-}
-
 
 /* //! Side nav */
 #side_nav {
@@ -336,16 +392,15 @@
     transition: all 0.4s linear;
 }
 
-::-webkit-scrollbar {
+#side_nav ::-webkit-scrollbar {
     width: 3.5px;
     background-color: gray;
 }
 
-::-webkit-scrollbar-track {
+#side_nav ::-webkit-scrollbar-track {
     background: #f2f2f2;
 }
-
-::-webkit-scrollbar-thumb {
+#side_nav ::-webkit-scrollbar-thumb {
     background-color: gray;
 }
 
@@ -375,7 +430,6 @@
     border-radius: 20px 5px 20px 5px;
     box-shadow: 0px 0px 6px 3px #b3b3b3;
     z-index: 9999;
-    font-family: "Rubik", sans-serif;
 }
 
 .meta-ai-btn:hover {
@@ -402,6 +456,14 @@
 
 
 /* //! Media Queries */
+@media (max-width: 1300px) {
+    #nav2_btns {
+        margin: 0 2rem;
+    }
+    .btn>a {
+        margin: 0 1rem;
+    }
+}
 @media (max-width: 950px) {
     #nav1 {
         height: 70px;
@@ -417,9 +479,17 @@
     #nav2_btns {
         display: none;
     }
-
     #menu {
         margin-left: 2rem;
+    }
+    #search_box {
+        flex: 2;
+    }
+    #searched_items a {
+        height: 50px;
+    }
+    #new_items a .search-img {
+        width: 60px;
     }
 }
 
@@ -444,6 +514,15 @@
         width: 15px;
         height: 15px;
     }
+    #searched_items {
+        max-height: 250px;
+    }
+    #searched_items a {
+        height: 40px;
+    }
+    #new_items a .search-img {
+        width: 50px;
+    }
 }
 
 @media (max-width: 580px) {
@@ -453,6 +532,18 @@
 
     #nav2 {
         font-size: 19px;
+    }
+    #searched_items {
+        max-height: 200px;
+    }
+    #searched_items a {
+        height: 30px;
+    }
+    #new_items a .search-img {
+        width: 40px;
+    }
+    #nav2 .cart-btn {
+        padding: 1.5%;
     }
     .meta-ai-btn {
         font-size: 18px;
@@ -475,16 +566,18 @@
         width: 20rem;
     }
 
-    #search_box {
-        width: 30rem;
-    }
-
     #nav1 #logo {
         width: 12rem;
     }
 
     #nav2 {
         height: 50px;
+    }
+    #search_box {
+        flex: 5;
+    }
+    #searched_items {
+        max-height: 150px;
     }
     #search_box button {
         width: 30px;
@@ -521,7 +614,7 @@
 }
 
 @media (max-width: 370px) {
-    ::-webkit-scrollbar {
+    body::-webkit-scrollbar {
         display: none;
     }
     #nav1 {
@@ -544,14 +637,19 @@
     #nav2 #menu {
         margin: 0;
     }
+    #searched_items {
+        max-height: 100px;
+    }
+    #searched_items a {
+        height: 20px;
+    }
+    #new_items a .search-img {
+        width: 30px;
+    }
     #search_box button {
         width: 20px;
         height: 20px;
     }
-    #search_box {
-        width: 25rem;
-    }
-
     #search_box input {
         border-bottom: 1px solid;
     }
@@ -564,7 +662,7 @@
 
     #nav1 {
         font-size: 15px;
-        height: 50px;
+        height: 45px;
     }
 
     #nav1 #logo {
@@ -582,9 +680,6 @@
     #search_box button {
         width: 15px;
         height: 15px;
-    }
-    #search_box {
-        width: 23rem;
     }
 
     #nav2 .cart-btn span {

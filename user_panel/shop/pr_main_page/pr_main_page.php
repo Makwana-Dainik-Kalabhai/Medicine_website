@@ -31,39 +31,24 @@ if (isset($_GET["category"]) && isset($_GET["status"])) {
 
 //! If user Search the value
 if (isset($_POST["search_input"]) || isset($_POST["search-btn"]) || isset($_SESSION["search_input"])) {
-    if($_POST["search_input"] == null) { ?>
-    <script>history.back();</script>
-        <?php return;
-    }
-    if (isset($_POST["search_input"])) {
-        $_SESSION["search_input"] = $_POST["search_input"];
-    }
+    if (isset($_POST["search_input"])) $_SESSION["search_input"] = $_POST["search_input"];
 
     $sel = $conn->prepare("SELECT * FROM `products` GROUP BY `category`");
     $sel->execute();
     $sel = $sel->fetchAll();
-    $str = " ";
     $category = false;
 
     $_SESSION["search_input"] = strtolower($_SESSION["search_input"]);
 
-    if (isset($_SESSION["search_input"][0]) && isset($_SESSION["search_input"][1]) && isset($_SESSION["search_input"][2])) {
-        $str = $_SESSION["search_input"][0] . $_SESSION["search_input"][1] . $_SESSION["search_input"][2];
-    }
+    foreach ($sel as $row) {
+        if (isset($_SESSION["search_input"][0]) && isset($_SESSION["search_input"][1]) && isset($_SESSION["search_input"][2])) {
+            $category = strtolower($row["category"]);
 
-    foreach ($sel as $row) {
-        if (str_contains(strtolower($row["category"]), $str)) {
-            $_SESSION["category"] = $row["category"];
-            $_SESSION["status"] = $row["status"];
-            $category = true;
-            break;
-        }
-    }
-    foreach ($sel as $row) {
-        if (str_contains(strtolower($row["name"]), $str) && !$category) {
-            $_SESSION["product_id"] = $row["product_id"];
-            header("Location: http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php");
-            break;
+            if ($_SESSION["search_input"][0] == $category[0] && $_SESSION["search_input"][1] == $category[1] && $_SESSION["search_input"][2] == $category[2]) {
+                $_SESSION["category"] = $row["category"];
+                $_SESSION["status"] = $row["status"];
+                break;
+            }
         }
     }
 }
@@ -163,10 +148,19 @@ if (isset($_POST["search_input"]) || isset($_POST["search-btn"]) || isset($_SESS
                 <select class="select-category">
                     <option value=""><-- Select Category --></option>
                     <option value="All">All</option>
+                    <option disabled style="background-color: #f2f2f2;">Medicines</option>
                     <?php
-                    foreach ($sel_cat as $row_cat) { ?>
-                        <option value="<?php echo $row_cat["category"]; ?>"><?php echo $row_cat["category"]; ?></option>
-                    <?php } ?>
+                    foreach ($sel_cat as $row_cat) {
+                        if ($row_cat["status"] == "medicine") { ?>
+                            <option value="<?php echo $row_cat["category"]; ?>"><?php echo $row_cat["category"]; ?></option>
+                    <?php }
+                    } ?>
+                    <option disabled style="background-color: #f2f2f2;">Medical Devices</option>
+                    <?php foreach ($sel_cat as $row_cat) {
+                        if ($row_cat["status"] == "device") { ?>
+                            <option value="<?php echo $row_cat["category"]; ?>"><?php echo $row_cat["category"]; ?></option>
+                    <?php }
+                    } ?>
                 </select>
             </div>
 
@@ -254,7 +248,7 @@ if (isset($_POST["search_input"]) || isset($_POST["search-btn"]) || isset($_SESS
                     $query = "SELECT * FROM `products` WHERE `category` = '" . $_SESSION["category"] . "' AND `status`='" . $_SESSION["status"] . "' AND `discount`<=$min_discount";
                 }
                 if (isset($_SESSION["search_input"])) {
-                    $query = "SELECT * FROM `products` WHERE `name` LIKE '%" . $_SESSION["search_input"] . "%' AND `discount`<=$min_discount";
+                    $query = "SELECT * FROM `products` WHERE `name` LIKE '%" . $_SESSION["search_input"] . "%'";
                 }
 
                 $sel = $conn->prepare($query);
@@ -268,11 +262,11 @@ if (isset($_POST["search_input"]) || isset($_POST["search-btn"]) || isset($_SESS
                         $contain_data = true;
                         unset($pr_not_found); ?>
 
-                        <div class="box">
+                        <div class="box" style="background-color: <?php echo ($row["quantity"] <= 0) ? "#f2f2f2" : ""; ?>">
                             <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php?product_id=<?php echo $row["product_id"]; ?>">
                                 <div id="product_img">
                                     <?php if ($row["discount"] != 0) { ?>
-                                        <span>&ensp;-<?php echo $row["discount"]; ?>%</span>
+                                        <span id="discount">&ensp;-<?php echo $row["discount"]; ?>%</span>
                                     <?php } ?>
                                     <img src="http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo unserialize($row["item_img"])[0]; ?>" alt="" />
                                 </div>
@@ -283,20 +277,25 @@ if (isset($_POST["search_input"]) || isset($_POST["search-btn"]) || isset($_SESS
                                     <?php
                                     if ($row["discount"] != 0) { ?>
                                         <span id="price">&#8377;<?php echo $row["price"]; ?></span>
+                                    <?php }
+                                    if ($row["quantity"] <= 0) { ?>
+                                        <h5 id='out_stock'>Out Of Stock</h5>
                                     <?php } ?>
                                 </div>
                             </a>
 
 
                             <!-- //! Add to Cart button -->
-                            <?php if (!isset($_SESSION["email"])) { ?>
-                                <a href="http://localhost/php/medicine_website/user_panel/form/login_form.php" id="add_cart"><i class="fa-solid fa-cart-plus"></i>&ensp;Add to Cart</a>
-                            <?php } ?>
-                            <?php if (isset($_SESSION["email"])) { ?>
-                                <form action="http://localhost/php/medicine_website/user_panel/shop/pr_main_page/add_cart.php" method="post">
-                                    <button name="add_cart" value="<?php echo $row["product_id"]; ?>" id="add_cart"><i class="fa-solid fa-cart-plus"></i>&ensp;Add to Cart</button>
-                                </form>
-                            <?php } ?>
+                            <?php if ($row["quantity"] > 0) {
+                                if (!isset($_SESSION["email"])) { ?>
+                                    <a href="http://localhost/php/medicine_website/user_panel/form/login_form.php" id="add_cart"><i class="fa-solid fa-cart-plus"></i>&ensp;Add to Cart</a>
+                                <?php } ?>
+                                <?php if (isset($_SESSION["email"])) { ?>
+                                    <form action="http://localhost/php/medicine_website/user_panel/shop/pr_main_page/add_cart.php" method="post">
+                                        <button name="add_cart" value="<?php echo $row["product_id"]; ?>" id="add_cart"><i class="fa-solid fa-cart-plus"></i>&ensp;Add to Cart</button>
+                                    </form>
+                            <?php }
+                            } ?>
                         </div>
                     <?php }
                     //
@@ -307,6 +306,11 @@ if (isset($_POST["search_input"]) || isset($_POST["search-btn"]) || isset($_SESS
                 </div>
             </div>
         </div>
+
+        <div class="company-features">
+            <?php include("C:/xampp/htdocs/php/medicine_website/user_panel/shop/pr_main_page/description.php"); ?>
+        </div>
+
     </main>
 
     <footer>
@@ -318,6 +322,8 @@ if (isset($_POST["search_input"]) || isset($_POST["search-btn"]) || isset($_SESS
 
 <?php
 if (isset($_SESSION["price_range"]) && isset($_SESSION["discount_range"])) {
-    unset($_SESSION["price_range"], $_SESSION["discount_range"]);
-}
-?>
+    unset($_SESSION["price_range"], $_SESSION["discount_range"]); ?>
+    <script>
+        location.reload();
+    </script>
+<?php } ?>

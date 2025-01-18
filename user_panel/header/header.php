@@ -38,10 +38,10 @@
                 <i class="fa-solid fa-user"></i><i class="fa-solid fa-caret-down"></i>
                 <a href="http://localhost/php/medicine_website/user_panel/form/logout.php">Logout</a>
             </div>
-            <?php } ?>
-        </nav>
-        
-        
+        <?php } ?>
+    </nav>
+
+
     <nav id="nav2">
         <div id="menu">
             <i class="fa-solid fa-bars"></i>
@@ -51,34 +51,29 @@
                 <a href="http://localhost/php/medicine_website/user_panel/shop/pr_main_page/pr_main_page.php?status=device">Products <i class="fa-solid fa-caret-down"></i></a>
                 <div><?php include("C:/xampp/htdocs/php/medicine_website/user_panel/header/all_menus/products.php"); ?></div>
             </div>
-            
+
             <div class="btn">
                 <a href="http://localhost/php/medicine_website/user_panel/shop/pr_main_page/pr_main_page.php?status=medicine">Medicines <i class="fa-solid fa-caret-down"></i></a>
                 <div><?php include("C:/xampp/htdocs/php/medicine_website/user_panel/header/all_menus/medicines.php"); ?></div>
             </div>
-            
+
             <div class="btn">
                 <a href="http://localhost/php/medicine_website/user_panel/health_news/health_news.php">Health News <i class="fa-solid fa-caret-down"></i></a>
             </div>
-            
-            <div class="btn">
-                <a href="">Health Care <i class="fa-solid fa-caret-down"></i></a>
-                <div><?php include("C:/xampp/htdocs/php/medicine_website/user_panel/header/all_menus/health_care.php"); ?></div>
-            </div>
         </div>
-        
+
         <div id="search_box">
             <div id="searched_items">
                 <div id="new_items"></div>
             </div>
-            
+
             <form action="http://localhost/php/medicine_website/user_panel/shop/pr_main_page/pr_main_page.php" method="post">
-                <input type="text" id="search_input" name="search_input" placeholder="Search Here..." />
+                <input type="text" id="search_input" value="" name="search_input" placeholder="Search Here..." />
                 <button name="search-btn"><i class="fa-solid fa-magnifying-glass"></i></buttonn>
             </form>
         </div>
-        
-        <?php if (isset($_SESSION["email"])) { 
+
+        <?php if (isset($_SESSION["email"])) {
             $sel_cart = $conn->prepare("SELECT * FROM `cart` WHERE `email`='" . $_SESSION["email"] . "'");
             $sel_cart->execute();
             $sel_cart = $sel_cart->fetchAll();
@@ -87,9 +82,8 @@
             foreach ($sel_cart as $row) {
                 $cart_count++;
             } ?>
-            <a href="http://localhost/php/medicine_website/user_panel/cart/cart.php" class="cart-btn"><?php if ($cart_count != 0) { ?><span><?php echo $cart_count; ?></span><?php } ?><i class="fa-solid fa-cart-shopping"></i></a>
-            <?php }
-        else { ?>
+            <a href="http://localhost/php/medicine_website/user_panel/cart/cart.php" class="cart-btn"><i class="fa-solid fa-cart-shopping"></i><?php echo ($cart_count > 0) ? "<span>$cart_count</span>" : ""; ?></a>
+        <?php } else { ?>
             <a href="http://localhost/php/medicine_website/user_panel/form/login_form.php" class="cart-btn"><i class="fa-solid fa-cart-shopping"></i></a>
         <?php } ?>
     </nav>

@@ -40,14 +40,17 @@ if (isset($_SESSION["category"])) {
 if (isset($_SESSION["status"])) {
     $query = "SELECT * FROM `products` WHERE `offer_price`<=" . $_SESSION["price_range"] . " AND `discount`<=" . $_POST["discount_range"] . " AND `status`='" . $_SESSION["status"] . "'";
 }
+if (isset($_SESSION["filter"])) {
+    $query = "SELECT * FROM `products` WHERE `offer_price`<=" . $_SESSION["price_range"] . " AND `discount`<=" . $_POST["discount_range"] . " ORDER BY " . $_SESSION["filter"] . "";
+}
 if (isset($_SESSION["category"]) && isset($_SESSION["status"])) {
     $query = "SELECT * FROM `products` WHERE `offer_price`<=" . $_SESSION["price_range"] . " AND `discount`<=" . $_POST["discount_range"] . " AND `category`='" . $_SESSION["category"] . "' AND `status`='" . $_SESSION["status"] . "'";
 }
-if (isset($_SESSION["filter"]) && isset($_SESSION["status"])) {
-    $query = "SELECT * FROM `products` WHERE `offer_price`<=" . $_SESSION["price_range"] . " AND `discount`<=" . $_POST["discount_range"] . " AND `status`='" . $_SESSION["status"] . "' ORDER BY " . $_SESSION["filter"] . "";
-}
-if (isset($_SESSION["filter"]) && isset($_SESSION["category"])) {
+if (isset($_SESSION["category"]) && isset($_SESSION["filter"])) {
     $query = "SELECT * FROM `products` WHERE `offer_price`<=" . $_SESSION["price_range"] . " AND `discount`<=" . $_POST["discount_range"] . " AND `category`='" . $_SESSION["category"] . "' ORDER BY " . $_SESSION["filter"] . "";
+}
+if (isset($_SESSION["status"]) && isset($_SESSION["filter"])) {
+    $query = "SELECT * FROM `products` WHERE `offer_price`<=" . $_SESSION["price_range"] . " AND `discount`<=" . $_POST["discount_range"] . " AND `status`='" . $_SESSION["status"] . "' ORDER BY " . $_SESSION["filter"] . "";
 }
 if (isset($_SESSION["filter"]) && isset($_SESSION["status"]) && isset($_SESSION["category"])) {
     $query = "SELECT * FROM `products` WHERE `offer_price`<=" . $_SESSION["price_range"] . " AND `discount`<=" . $_POST["discount_range"] . " AND `category`='" . $_SESSION["category"] . "' AND `status`='" . $_SESSION["status"] . "' ORDER BY " . $_SESSION["filter"] . "";
@@ -63,12 +66,12 @@ $sel = $sel->fetchAll();
 
 foreach ($sel as $row) {
     $product_count++; ?>
-    <div class="box">
+    <div class="box" style="background-color: <?php echo ($row["quantity"] <= 0) ? "#f2f2f2" : ""; ?>">
         <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php?product_id=<?php echo $row["product_id"]; ?>">
             <div id="product_img">
                 <?php
                 if ($row["discount"] != 0) { ?>
-                    <span>&ensp;-<?php echo $row["discount"]; ?>%</span>
+                    <span id="discount">&ensp;-<?php echo $row["discount"]; ?>%</span>
                 <?php } ?>
                 <img src="http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo unserialize($row["item_img"])[0]; ?>" alt="" />
             </div>
@@ -79,18 +82,24 @@ foreach ($sel as $row) {
                 <?php
                 if ($row["discount"] != 0) { ?>
                     <span id="price">&#8377;<?php echo $row["price"]; ?></span>
+                <?php }
+
+                if ($row["quantity"] <= 0) { ?>
+                    <h5 id='out_stock'>Out Of Stock</h5>
                 <?php } ?>
             </div>
         </a>
         <!-- //! Add to Cart btn -->
-        <?php if (!isset($_SESSION["email"])) { ?>
-            <a href="http://localhost/php/medicine_website/user_panel/form/login_form.php" id="add_cart"><i class="fa-solid fa-cart-plus"></i>&ensp;Add to Cart</a>
-        <?php } ?>
-        <?php if (isset($_SESSION["email"])) { ?>
-            <form action="http://localhost/php/medicine_website/user_panel/shop/pr_main_page/add_cart.php" method="post">
-                <button name="add_cart" value="<?php echo $row["product_id"]; ?>" id="add_cart"><i class="fa-solid fa-cart-plus"></i>&ensp;Add to Cart</button>
-            </form>
-        <?php } ?>
+        <?php if ($row["quantity"] > 0) {
+            if (!isset($_SESSION["email"])) { ?>
+                <a href="http://localhost/php/medicine_website/user_panel/form/login_form.php" id="add_cart"><i class="fa-solid fa-cart-plus"></i>&ensp;Add to Cart</a>
+            <?php } ?>
+            <?php if (isset($_SESSION["email"])) { ?>
+                <form action="http://localhost/php/medicine_website/user_panel/shop/pr_main_page/add_cart.php" method="post">
+                    <button name="add_cart" value="<?php echo $row["product_id"]; ?>" id="add_cart"><i class="fa-solid fa-cart-plus"></i>&ensp;Add to Cart</button>
+                </form>
+        <?php }
+        } ?>
     </div>
 <?php }
 

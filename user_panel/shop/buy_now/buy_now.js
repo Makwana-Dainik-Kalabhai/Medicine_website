@@ -61,6 +61,15 @@ $(document).ready(function () {
   $(".user-quantity").change(function () {
     let total = 0;
 
+    if ($(this).val() > 5) {
+      alert("You can Order maximum 5 quantites only at a time");
+      $(this).val(5);
+    }
+    if ($(this).val() < 1) {
+      alert("You need to Order minimum 1 quantity");
+      $(this).val(1);
+    }
+
     quantity[$(this).attr("id")] = $(this).val();
 
     for (let i = 0; i < off_price.length; i++) {

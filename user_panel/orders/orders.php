@@ -78,6 +78,7 @@ include("C:/xampp/htdocs/php/medicine_website/database.php");
                 <hr />
 
                 <div id="all_orders">
+
                     <?php
                     $sel = $conn->prepare("SELECT * FROM `orders` WHERE `email`='" . $_SESSION["email"] . "' ORDER BY `time` DESC");
                     $sel->execute();
@@ -89,7 +90,7 @@ include("C:/xampp/htdocs/php/medicine_website/database.php");
                             <!-- //! Cancel Order Form -->
                             <form id="cancel_form" action="http://localhost/php/medicine_website/user_panel/orders/cancel.php" method="post">
                                 <h2 class="mb-5">Are You sure to Cancel the Order?</h2>
-                                <input type="hidden" name="order_id" value="<?php echo $row["order_id"]; ?>" />
+                                <input type="hidden" name="order_id" />
                                 <button name="cancel_yes">Yes</button>
                                 <button name="cancel_no">No</button>
                             </form>
@@ -122,6 +123,7 @@ include("C:/xampp/htdocs/php/medicine_website/database.php");
                                                 <span><?php echo $row["payment_type"]; ?></span>
                                             </td>
                                         </tr>
+
                                         <tr>
                                             <td></td>
                                             <td></td>
@@ -142,67 +144,11 @@ include("C:/xampp/htdocs/php/medicine_website/database.php");
                                             </th>
                                             <td colspan="2" class="text-right cancel">
                                                 <?php if ($row["status"] == "Processing") { ?>
-                                                    Cancel Order?&ensp;<button class="cancel_btn"><i class="fa-solid fa-xmark"></i> Cancel</button>
+                                                    Cancel Order?&ensp;<button class="cancel_btn" value="<?php echo $row["order_id"]; ?>"><i class="fa-solid fa-xmark"></i> Cancel</button>
                                                 <?php } ?>
                                             </td>
                                         </tr>
                                     </table>
-                                    <!-- <div class="row">
-                                        <div class="col-md-2">
-                                            <label>Order Placed</label>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <label>Total</label>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label>Ship To</label>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <label>Order ID:</label>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label>Payment:</label>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-2">
-                                            <span><?php
-                                                    date_default_timezone_set("Asia/Kolkata");
-                                                    $date = strtotime($row["time"]);
-                                                    echo date("M d, Y", $date); ?>
-                                                (<?php echo date("h:i a", $date); ?>)
-                                            </span>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <span>₹<?php echo $row["total_price"]; ?></span>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <span><?php echo $row["name"]; ?></span>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <span><?php echo $row["order_id"]; ?></span>
-                                            <?php if ($row["status"] != "Cancelled") { ?>
-                                                <a href="http://localhost/php/medicine_website/user_panel/orders/PDF/genInvoice.php?order_id=<?php echo $row["order_id"]; ?>" id="invoice">View Invoice</a>
-                                            <?php } ?>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <span><?php echo $row["payment_type"]; ?></span>
-                                            <span style="font-weight: 600;color: <?php echo ($row["payment_status"] == "Paid") ? "green" : "red"; ?>;"><?php echo $row["payment_status"]; ?></span>
-                                        </div>
-                                    </div>
-
-                                    <div class="row mt-5">
-                                        <div class="col-md-8 delivery">
-                                            Expected Delivery:&ensp;<?php
-                                                                    $date = strtotime($row["delivery_date"]);
-                                                                    echo date("M d, Y", $date); ?>
-                                        </div>
-                                        <div class="col-md-4 text-right cancel pe-4">
-                                            <?php if ($row["status"] == "Processing") { ?>
-                                                Cancel Order?&ensp;<button class="cancel_btn"><i class="fa-solid fa-xmark"></i> Cancel</button>
-                                            <?php } ?>
-                                        </div>
-                                    </div> -->
                                 </div>
                                 <div id="items">
                                     <?php displayItems($row); ?>
@@ -228,29 +174,15 @@ function displayItems($row)
 { ?>
     <?php
     global $conn;
-    if (str_contains($row["items"], "{") && str_contains($row["items"], ":") && str_contains($row["items"], '"') && str_contains($row["items"], "}")) { ?>
-        <?php
-        for ($i = 0; $i < count(unserialize($row["items"])); $i++) { ?>
-            <div class="box">
-                <?php $sel = $conn->prepare("SELECT * FROM `products` WHERE `product_id`='" . unserialize($row["items"])[$i] . "'");
-                $sel->execute();
-                $sel = $sel->fetchAll();
 
-                foreach ($sel as $r) {
-                    itemDetails($row, $r, unserialize($row["quantity"])[$i]);
-                } ?>
-            </div>
-        <?php
-        }
-    } else { ?>
+    for ($i = 0; $i < count(unserialize($row["items"])); $i++) { ?>
         <div class="box">
-            <?php
-            $sel = $conn->prepare("SELECT * FROM `products` WHERE `product_id`='" . $row["items"] . "'");
+            <?php $sel = $conn->prepare("SELECT * FROM `products` WHERE `product_id`='" . unserialize($row["items"])[$i] . "'");
             $sel->execute();
             $sel = $sel->fetchAll();
 
             foreach ($sel as $r) {
-                itemDetails($row, $r, $row["quantity"]);
+                itemDetails($row, $r, unserialize($row["quantity"])[$i]);
             } ?>
         </div>
     <?php

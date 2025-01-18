@@ -13,16 +13,8 @@
     <?php include("C:/xampp/htdocs/php/medicine_website/index.css"); ?>
 </style>
 
-<body>
-    <?php if (!isset($_SESSION["intro_loaded"])) { ?>
-        <div class="intro" id="intro">
-            <div id="logo">
-                <img src="http://localhost/php/medicine_website/user_panel/header/logo1.png" alt="img not found">
-            </div>
-        </div>
-    <?php $_SESSION["intro_loaded"] = true;
-    } ?>
 
+<body>
     <header>
         <?php include("C:/xampp/htdocs/php/medicine_website/user_panel/header/header.php"); ?>
     </header>
@@ -38,12 +30,12 @@
         </div>
 
         <!-- //! Order Medicines Online -->
-        <div id="medicines">
+        <div id="home_medicines">
             <?php include("C:/xampp/htdocs/php/medicine_website/user_panel/home_page_items/medicines/medicines.php"); ?>
         </div>
 
         <!-- //! Order Products Online -->
-        <div id="products">
+        <div id="home_products">
             <?php include("C:/xampp/htdocs/php/medicine_website/user_panel/home_page_items/products/products.php"); ?>
         </div>
     </main>
@@ -51,6 +43,15 @@
     <footer>
         <?php include("C:/xampp/htdocs/php/medicine_website/user_panel/footer/footer.php"); ?>
     </footer>
+
+    <?php if (!isset($_SESSION["intro_loaded"])) { ?>
+        <div class="intro" id="intro">
+            <div id="logo">
+                <img src="http://localhost/php/medicine_website/user_panel/header/logo1.png" alt="img not found">
+            </div>
+        </div>
+    <?php $_SESSION["intro_loaded"] = true;
+    } ?>
 </body>
 
 </html>

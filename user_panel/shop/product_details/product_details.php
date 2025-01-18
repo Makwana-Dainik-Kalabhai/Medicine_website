@@ -138,23 +138,25 @@ if (isset($_GET["status"])) {
                 <?php } ?>
 
 
-                <div id="btns">
-                    <!-- //* Buy btns -->
-                    <?php if (!isset($_SESSION["email"])) { ?>
-                        <a href="http://localhost/php/medicine_website/user_panel/form/login_form.php" id="buy_btn"><i class="fa-solid fa-shopping-bag"></i>&ensp;Buy Now</a>
-                    <?php } ?>
-                    <?php if (isset($_SESSION["email"]) && $row["quantity"] > 0) { ?>
-                        <a href="http://localhost/php/medicine_website/user_panel/shop/buy_now/buy_now.php?product_id=<?php echo $row["product_id"]; ?>&product=one" id="buy_btn"><i class="fa-solid fa-shopping-bag"></i>&ensp;Buy Now</a>
-                    <?php } ?>
+                <?php if ($row["quantity"] > 0) { ?>
+                    <div id="btns">
+                        <!-- //* Buy btns -->
+                        <?php if (!isset($_SESSION["email"])) { ?>
+                            <a href="http://localhost/php/medicine_website/user_panel/form/login_form.php" id="buy_btn"><i class="fa-solid fa-shopping-bag"></i>&ensp;Buy Now</a>
+                        <?php } ?>
+                        <?php if (isset($_SESSION["email"])) { ?>
+                            <a href="http://localhost/php/medicine_website/user_panel/shop/buy_now/buy_now.php?product_id=<?php echo $row["product_id"]; ?>&product=one" id="buy_btn"><i class="fa-solid fa-shopping-bag"></i>&ensp;Buy Now</a>
+                        <?php } ?>
 
-                    <!-- //* Add to Cart button -->
-                    <?php if (!isset($_SESSION["email"])) { ?>
-                        <a href="http://localhost/php/medicine_website/user_panel/form/login_form.php" id="add_cart"><i class="fa-solid fa-cart-plus"></i>&ensp;Add to Cart</a>
-                    <?php } ?>
-                    <?php if (isset($_SESSION["email"]) && $row["quantity"] > 0) { ?>
-                        <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/verify_cart.php" id="add_cart"><i class="fa-solid fa-cart-plus"></i>&ensp;Add to Cart</a>
-                    <?php } ?>
-                </div>
+                        <!-- //* Add to Cart button -->
+                        <?php if (!isset($_SESSION["email"])) { ?>
+                            <a href="http://localhost/php/medicine_website/user_panel/form/login_form.php" id="add_cart"><i class="fa-solid fa-cart-plus"></i>&ensp;Add to Cart</a>
+                        <?php } ?>
+                        <?php if (isset($_SESSION["email"])) { ?>
+                            <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/verify_cart.php" id="add_cart"><i class="fa-solid fa-cart-plus"></i>&ensp;Add to Cart</a>
+                        <?php } ?>
+                    </div>
+                <?php } ?>
             </div>
         </div>
 

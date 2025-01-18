@@ -48,18 +48,14 @@
 
 
 /* //! Medicines */
-@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Mukta:wght@200;300;400;500;600;700;800&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
-
-#medicines {
+main #home_medicines {
     font-size: 27px;
     padding: 2% 0;
-    font-family: "Ubuntu", sans-serif;
 }
 
-#products {
+main #home_products {
     font-size: 30px;
     padding: 2% 0;
-    font-family: "Ubuntu", sans-serif;
 }
 
 
@@ -76,9 +72,11 @@
     #medicines {
         font-size: 26px;
     }
+
     #products {
         font-size: 29px;
     }
+
     #health_tips {
         font-size: 29px;
     }
@@ -88,9 +86,11 @@
     #medicines {
         font-size: 25px;
     }
+
     #products {
         font-size: 27px;
     }
+
     #health_tips {
         font-size: 27px;
     }
@@ -100,9 +100,11 @@
     #medicines {
         font-size: 24px;
     }
+
     #products {
         font-size: 26px;
     }
+
     #health_tips {
         font-size: 26px;
     }
@@ -112,9 +114,11 @@
     #medicines {
         font-size: 22px;
     }
+
     #products {
         font-size: 24px;
     }
+
     #health_tips {
         font-size: 24px;
     }
@@ -124,9 +128,11 @@
     #medicines {
         font-size: 20px;
     }
+
     #products {
         font-size: 22px;
     }
+
     #health_tips {
         font-size: 22px;
     }
@@ -136,9 +142,11 @@
     #medicines {
         font-size: 18px;
     }
+
     #products {
         font-size: 20px;
     }
+
     #health_tips {
         font-size: 20px;
     }

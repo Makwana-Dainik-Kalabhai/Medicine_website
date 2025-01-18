@@ -78,7 +78,7 @@
 }
 
 /* Like btn */
-#product_img #like {
+#product_img .fa-heart {
     color: gray;
     position: absolute;
     right: 1.25rem;
@@ -86,8 +86,8 @@
     font-size: 0.8em;
 }
 
-#product_img #like:hover {
-    color: red;
+#product_img .fa-heart:hover {
+    color: red !important;
 }
 
 /* Product Details */
