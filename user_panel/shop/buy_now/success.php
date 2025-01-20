@@ -1,3 +1,11 @@
+<?php
+session_start();
+if (!isset($_SESSION["email"])) { ?>
+    <script>
+        window.history.go(-2);
+    </script>
+<?php } ?>
+
 <style>
     * {
         background-color: #f2f2f2;

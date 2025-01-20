@@ -1,4 +1,10 @@
-<?php session_start(); ?>
+<?php session_start();
+if (!isset($_SESSION["email"])) { ?>
+    <script>
+        window.history.go(-2);
+    </script>
+<?php } ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -221,9 +227,3 @@
 </body>
 
 </html>
-
-<?php if (!isset($_SESSION["email"])) { ?>
-    <script>
-        window.history.go(-2);
-    </script>
-<?php } ?>
