@@ -17,16 +17,35 @@ if (isset($_POST["update-benefits"])) {
 
             foreach (unserialize($row["benefits"]) as $b) {
                 if (($i + 1) == $_POST["update-benefits"]) {
+                    //* Push only Value on particular index
                     if ($_POST["key"][$i] == null && $_POST["value"][$i] != null) {
+
+                        if (str_contains($_POST["value"][$i], "'")) {
+                            $_POST["value"][$i] = explode("'", $_POST["value"][$i]);
+                            $_POST["value"][$i] = $_POST["value"][$i][0] . $_POST["value"][$i][1];
+                        }
                         array_push($ben, array($_POST["value"][$i]));
                     }
+
+                    //* Push Key & Value on particular index
                     if ($_POST["key"][$i] != null && $_POST["value"][$i] != null) {
+                        if (str_contains($_POST["key"][$i], "'")) {
+                            $_POST["key"][$i] = explode("'", $_POST["key"][$i]);
+                            $_POST["key"][$i] = $_POST["key"][$i][0] . $_POST["key"][$i][1];
+                        }
+                        if (str_contains($_POST["value"][$i], "'")) {
+                            $_POST["value"][$i] = explode("'", $_POST["value"][$i]);
+                            $_POST["value"][$i] = $_POST["value"][$i][0] . $_POST["value"][$i][1];
+                        }
                         array_push($ben, array($_POST["key"][$i], $_POST["value"][$i]));
                     }
                     $key = $_POST["key"][$i];
+                }
 
-                    //
-                } else if ($_POST["key"][$i] == null && $_POST["value"][$i] != null) {
+
+
+                //* Push Value from database
+                else if ($_POST["key"][$i] == null && $_POST["value"][$i] != null) {
                     array_push($ben, array($b[0]));
                 } //
                 else if ($_POST["key"][$i] != null && $_POST["value"][$i] != null) {
@@ -42,7 +61,7 @@ if (isset($_POST["update-benefits"])) {
 
     $_SESSION["success"] = "Key \"" . $key . "\" updated successfully";
 
-    header("Location: http://localhost/php/medicine_website/admin_panel/products/additional_info/benefits.php");
+    header("Location: http://localhost/php/medicine_website/admin_panel/products/additional_info/benefits/benefits.php");
 }
 
 
@@ -66,10 +85,22 @@ if (isset($_POST["add-benefits"])) {
     }
 
     if ($_POST["add-key"] != null && $_POST["add-value"] != null) {
+        if (str_contains($_POST["add-key"], "'")) {
+            $_POST["add-key"] = explode("'", $_POST["add-key"]);
+            $_POST["add-key"] = $_POST["add-key"][0] . $_POST["add-key"][1];
+        }
+        if (str_contains($_POST["add-value"], "'")) {
+            $_POST["add-value"] = explode("'", $_POST["add-value"]);
+            $_POST["add-value"] = $_POST["add-value"][0] . $_POST["add-value"][1];
+        }
         array_push($ben, array($_POST["add-key"], $_POST["add-value"]));
-    }
-    //
+    } //
+
     else if ($_POST["add-value"] != null) {
+        if (str_contains($_POST["add-value"], "'")) {
+            $_POST["add-value"] = explode("'", $_POST["add-value"]);
+            $_POST["add-value"] = $_POST["add-value"][0] . $_POST["add-value"][1];
+        }
         array_push($ben, array($_POST["add-value"]));
     }
 
@@ -78,7 +109,7 @@ if (isset($_POST["add-benefits"])) {
 
     $_SESSION["success"] = "Data no. " . $_POST["add-benefits"] . " added successfully";
 
-    header("Location: http://localhost/php/medicine_website/admin_panel/products/additional_info/benefits.php");
+    header("Location: http://localhost/php/medicine_website/admin_panel/products/additional_info/benefits/benefits.php");
 }
 
 
@@ -115,6 +146,5 @@ if (isset($_POST["delete-benefits"])) {
 
     $_SESSION["success"] = "Key \"" . $key . "\" deleted successfully";
 
-    header("Location: http://localhost/php/medicine_website/admin_panel/products/additional_info/benefits.php");
+    header("Location: http://localhost/php/medicine_website/admin_panel/products/additional_info/benefits/benefits.php");
 }
-?>

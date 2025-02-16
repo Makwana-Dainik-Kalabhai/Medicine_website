@@ -3,65 +3,60 @@ session_start();
 include("C:/xampp/htdocs/php/medicine_website/database.php");
 
 
-
-if (isset($_POST["delete-product"])) {
-    $del = $conn->prepare("DELETE FROM `products` WHERE `product_id`=1047");
-    $del->execute(); ?>
-
-    <script>
-        window.history.go(-2);
-    </script>
-
-    <?php return;
-}
-
-
-
 //* Add Category Details
 if (isset($_POST["add_category"])) {
-    if ($_FILES["cat_img"]["name"] == null) {
-        $_SESSION["cat_error"] = "Please! Select the File"; ?>
-
-        <script>
-            window.history.back();
-        </script>
-    <?php
-        return;
-    }
     if ($_POST["category"] == null) {
-        $_SESSION["cat_error"] = "Please! Enter the Category Name"; ?>
+        $_SESSION["cat_error"] = "Please! Enter the Category Name";
 
-        <script>
-            window.history.back();
-        </script>
-    <?php
+        if (isset($_SERVER['HTTP_REFERER'])) {
+            header("Location: " . $_SERVER['HTTP_REFERER'] . "");;
+        }
         return;
     }
     if ($_POST["product_id"] == null) {
-        $_SESSION["cat_error"] = "Please! Enter the Product ID"; ?>
+        $_SESSION["cat_error"] = "Please! Enter the Product ID";
 
-        <script>
-            window.history.back();
-        </script>
-        <?php
+        if (isset($_SERVER['HTTP_REFERER'])) {
+            header("Location: " . $_SERVER['HTTP_REFERER'] . "");;
+        }
         return;
     }
+
+    if ($_FILES["cat-img"]["name"] == null) {
+        $cat_img = $conn->prepare("SELECT `cat_img` FROM `products` WHERE `category`='" . $_POST["category"] . "'");
+        $cat_img->execute();
+        $cat_img = $cat_img->fetchAll();
+        $cat_img = $cat_img[0][0];
+
+        if (isset($_SERVER['HTTP_REFERER'])) {
+            header("Location: " . $_SERVER['HTTP_REFERER'] . "");;
+        }
+    }
+
+    if (str_contains($_FILES["cat-img"]["name"], "'")) {
+        $_FILES["cat-img"]["name"] = explode("'", $_FILES["cat-img"]["name"]);
+        $_FILES["cat-img"]["name"] = $_FILES["cat-img"]["name"][0] . $_FILES["cat-img"]["name"][1];
+    }
+
     $sel = $conn->prepare("SELECT * FROM `products`");
     $sel->execute();
     $sel = $sel->fetchAll();
 
     foreach ($sel as $r) {
         if ($_POST["product_id"] == $r["product_id"]) {
-            $_SESSION["cat_error"] = "Please! Change the Product ID, This Product ID is already exist"; ?>
-            <script>
-                window.history.back();
-            </script>
-    <?php return;
+            $_SESSION["cat_error"] = "Please! Change the Product ID, This Product ID is already exist";
+
+            if (isset($_SERVER['HTTP_REFERER'])) {
+                header("Location: " . $_SERVER['HTTP_REFERER'] . "");;
+            }
+            return;
         }
     }
 
     $cat = $_POST["category"];
-    $cat_img = $_FILES["cat_img"]["name"];
+    if (!isset($cat_img)) {
+        $cat_img = $_FILES["cat-img"]["name"];
+    }
     $item_img = "";
     $name = "";
     $def = "";
@@ -88,9 +83,9 @@ if (isset($_POST["add_category"])) {
 
     if ($in->execute()) {
 
-        move_uploaded_file($_FILES["cat_img"]["tmp_name"], "C:/xampp/htdocs/php/medicine_website/user_panel/shop/category_img/" . $_FILES["cat_img"]["name"] . "");
+        move_uploaded_file($_FILES["cat-img"]["tmp_name"], "C:/xampp/htdocs/php/medicine_website/user_panel/shop/category_img/" . $_FILES["cat-img"]["name"] . "");
 
-        $_SESSION["cat_success"] = "Product Category details added successfully";
+        $_SESSION["cat_success"] = "Product Category details added are successfully";
         $_SESSION["product_id"] = $product_id;
     }
     header("Location: http://localhost/php/medicine_website/admin_panel/products/add_product/add_product.php");
@@ -118,19 +113,64 @@ if (isset($_POST["add-product-details"])) {
 
         function insert()
         {
-            $this->name = $_POST["name"];
-            $this->definition = $_POST["definition"];
-            $this->discount = $_POST["discount"];
-            $this->offer_price = $_POST["offer-price"];
-            $this->price = $_POST["price"];
-            $this->quantity = $_POST["quantity"];
-            $this->weight = $_POST["weight"];
-
-            if ($_SESSION["status"] == "medicine") {
-                $this->expiry = $_POST["expiry"];
+            //* Name
+            if (str_contains($_POST["name"], "'")) {
+                $_POST["name"] = explode("'", $_POST["name"]);
+                $this->name = $_POST["name"][0] . $_POST["name"][1];
+            } else {
+                $this->name = $_POST["name"];
             }
-            $this->delivery_date = $_POST["delivery-date"];
-            $this->link = $_POST["link"];
+
+            //* Definition
+            if (str_contains($_POST["definition"], "'")) {
+                $_POST["definition"] = explode("'", $_POST["definition"]);
+                $this->definition = $_POST["definition"][0] . $_POST["definition"][1];
+            } else {
+                $this->definition = $_POST["definition"];
+            }
+
+            //* Discount
+            $this->discount = $_POST["discount"];
+            //* Offer Price
+            $this->offer_price = $_POST["offer-price"];
+            //* Price
+            $this->price = $_POST["price"];
+            //* Quantity
+            $this->quantity = $_POST["quantity"];
+
+            //* Weight
+            if (str_contains($_POST["weight"], "'")) {
+                $_POST["weight"] = explode("'", $_POST["weight"]);
+                $this->weight = $_POST["weight"][0] . $_POST["weight"][1];
+            } else {
+                $this->weight = $_POST["weight"];
+            }
+
+            //* Expiry
+            if ($_SESSION["status"] == "medicine") {
+                if (str_contains($_POST["expiry"], "'")) {
+                    $_POST["expiry"] = explode("'", $_POST["expiry"]);
+                    $this->expiry = $_POST["expiry"][0] . $_POST["expiry"][1];
+                } else {
+                    $this->expiry = $_POST["expiry"];
+                }
+            }
+
+            //* Delivery-Date
+            if (str_contains($_POST["delivery-date"], "'")) {
+                $_POST["delivery-date"] = explode("'", $_POST["delivery-date"]);
+                $this->delivery_date = $_POST["delivery-date"][0] . $_POST["delivery-date"][1];
+            } else {
+                $this->delivery_date = $_POST["delivery-date"];
+            }
+
+            //* Link
+            if (str_contains($_POST["link"], "'")) {
+                $_POST["link"] = explode("'", $_POST["link"]);
+                $this->link = $_POST["link"][0] . $_POST["link"][1];
+            } else {
+                $this->link = $_POST["link"];
+            }
         }
 
         function update()
@@ -151,7 +191,7 @@ if (isset($_POST["add-product-details"])) {
     $p->insert();
     $p->update();
 
-    $_SESSION["product_success"] = "Product details Added Successfully";
+    $_SESSION["pr_details_suc"] = "Product details are added auccessfully";
 
     header("Location: http://localhost/php/medicine_website/admin_panel/products/add_product/add_product.php");
 }

@@ -1,4 +1,7 @@
 <style>
+    img {
+        mix-blend-mode: multiply;
+    }
     .btn-group {
         width: 100% !important;
         height: 100% !important;

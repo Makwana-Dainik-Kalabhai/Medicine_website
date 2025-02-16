@@ -33,7 +33,7 @@
             <div class="content">
                 <div class="card p-5">
                     <?php if (isset($_SESSION["error"])) { ?>
-                        <div class="alert alert-danger" role="alert">
+                        <div class="alert" style="background-color: #ff1a1a;" role="alert">
                             <?php echo $_SESSION["error"]; ?>
                             <script>
                                 $(document).ready(function() {
@@ -59,10 +59,11 @@
 
                         <!-- //! Product Images -->
                         <h5 class="text-danger">Product Images</h5>
+                        <b style="color: red;">* Required Fields</b>
                         <div class="row border-bottom py-3">
                             <div class="col-md-1">Sr. no.</div>
                             <div class="col-md-4">Images</div>
-                            <div class="col-md-4">Select Image</div>
+                            <div class="col-md-4">Select Image <b style="color: red;">*</b></div>
                             <div class="col-md-2">Change</div>
                             <div class="col-md-1">Delete</div>
                         </div>
@@ -78,7 +79,7 @@
                                         <div class="col-md-4">
                                             <p class="text-danger mb-1">File Name:</p>
                                             <?php echo $item_img; ?>
-                                            <input type="file" name="item-img" class="form-control mt-4" disabled="true" />
+                                            <input type="file" name="item-img" class="form-control mt-4" disabled="true" required />
                                             <input type="checkbox" class="mt-3 mx-2" /> Are you want to change the image?
                                         </div>
                                         <div class="col-md-2">

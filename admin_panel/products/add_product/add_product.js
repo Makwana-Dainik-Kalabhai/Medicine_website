@@ -3,24 +3,41 @@ if (window.history.replaceState) {
 }
 
 $(document).ready(() => {
-  let checked = false;
+  let sel_cat_check = false;
+  let cat_img_check = true;
 
-  $(".select-cat").change(function () {
-    if (checked) {
+  //! Select Category-img from Select menu
+  $(".sel-cat-check").change(function () {
+    if (sel_cat_check) {
       $(".old-cat").attr("disabled", "true");
       $(".new-cat").removeAttr("disabled");
-      checked = false;
+      $(".category-form input[type='file']").show();
+      sel_cat_check = false;
     }
     //
     else {
       $(".old-cat").removeAttr("disabled");
       $(".new-cat").attr("disabled", "true");
-      checked = true;
+      $(".category-form input[type='file']").hide();
+      sel_cat_check = true;
     }
   });
 
-  
-  $("input[type='checkbox']").change(function () {
+
+  $(".cat-img-check").change(function () {
+    if (cat_img_check) {
+      $(".category-form input[type='file']").show();
+      cat_img_check = false;
+    }
+    //
+    else {
+      $(".category-form input[type='file']").hide();
+      cat_img_check = true;
+    }
+  });
+
+  //! Add Product Images
+  $(".item-imgs-form input[type='checkbox']").change(function () {
     $(this)
       .siblings("input[type='file']")
       .attr("disabled", function (index, attr) {
@@ -38,7 +55,7 @@ $(document).ready(() => {
     }
   });
 
-  let index = 1;
+  let index = $(".add-item-img").val();
 
   $(".add-item-img").click(function () {
     $(

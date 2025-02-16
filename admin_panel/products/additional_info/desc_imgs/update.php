@@ -6,11 +6,10 @@ include("C:/xampp/htdocs/php/medicine_website/database.php");
 if (isset($_POST["change"])) {
     if ($_FILES["desc-img"]["name"] == null) {
         $_SESSION["error"] = "Please! Select the File";
-?>
-        <script>
-            window.history.back();
-        </script>
-    <?php
+
+        if (isset($_SERVER['HTTP_REFERER'])) {
+            header("Location: " . $_SERVER['HTTP_REFERER'] . "");;
+        }
         return;
     }
 
@@ -43,7 +42,13 @@ if (isset($_POST["change"])) {
                 }
             }
         }
+
+        if (str_contains($_FILES["desc-img"]["name"], "'")) {
+            $_FILES["desc-img"]["name"] = explode("'", $_FILES["desc-img"]["name"]);
+            $_FILES["desc-img"]["name"] = $_FILES["desc-img"]["name"][0] . $_FILES["desc-img"]["name"][1];
+        }
         $desc_img[$_POST["change"] - 1] = $_FILES["desc-img"]["name"];
+
 
         $up = $conn->prepare("UPDATE `products` SET `desc_img`='" . serialize($desc_img) . "' WHERE `product_id`='" . $_SESSION["product_id"] . "'");
 
@@ -54,7 +59,9 @@ if (isset($_POST["change"])) {
             $_SESSION["error"] = "Please! Change name of the Image";
         }
     }
-    header("Location: http://localhost/php/medicine_website/admin_panel/products/additional_info/desc_imgs/edit_desc_imgs.php");
+    if (isset($_SERVER['HTTP_REFERER'])) {
+        header("Location: " . $_SERVER['HTTP_REFERER'] . "");;
+    }
 }
 
 
@@ -63,11 +70,10 @@ if (isset($_POST["change"])) {
 if (isset($_POST["add"])) {
     if ($_FILES["new-img"]["name"] == null) {
         $_SESSION["error"] = "Please! Select the File";
-    ?>
-        <script>
-            window.history.back();
-        </script>
-    <?php
+
+        if (isset($_SERVER['HTTP_REFERER'])) {
+            header("Location: " . $_SERVER['HTTP_REFERER'] . "");;
+        }
         return;
     }
 
@@ -97,6 +103,10 @@ if (isset($_POST["add"])) {
                 }
             }
         }
+        if (str_contains($_FILES["new-img"]["name"], "'")) {
+            $_FILES["new-img"]["name"] = explode("'", $_FILES["new-img"]["name"]);
+            $_FILES["new-img"]["name"] = $_FILES["new-img"]["name"][0] . $_FILES["new-img"]["name"][1];
+        }
         array_push($desc_img, $_FILES["new-img"]["name"]);
 
         $up = $conn->prepare("UPDATE `products` SET `desc_img`='" . serialize($desc_img) . "' WHERE `product_id`='" . $_SESSION["product_id"] . "'");
@@ -108,7 +118,9 @@ if (isset($_POST["add"])) {
             $_SESSION["error"] = "Please! Change name of the Image";
         }
     }
-    header("Location: http://localhost/php/medicine_website/admin_panel/products/additional_info/desc_imgs/edit_desc_imgs.php");
+    if (isset($_SERVER['HTTP_REFERER'])) {
+        header("Location: " . $_SERVER['HTTP_REFERER'] . "");;
+    }
 }
 
 
@@ -136,5 +148,7 @@ if (isset($_POST["delete"])) {
     $up = $conn->prepare("UPDATE `products` SET `desc_img`='" . serialize($desc_img) . "' WHERE `product_id`='" . $_SESSION["product_id"] . "'");
     $up->execute();
 
-    header("Location: http://localhost/php/medicine_website/admin_panel/products/additional_info/desc_imgs/edit_desc_imgs.php");
+    if (isset($_SERVER['HTTP_REFERER'])) {
+        header("Location: " . $_SERVER['HTTP_REFERER'] . "");;
+    }
 }

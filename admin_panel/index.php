@@ -32,12 +32,12 @@
 
       $.ajax({
         type: "POST",
-        url: "http://localhost/php/medicine_website/admin_panel/users/user.php",
+        url: "http://localhost/php/medicine_website/admin_panel/index.php",
         data: {
           email: email,
           status: "Active"
         },
-        success: function(data) {
+        success: function() {
           window.location.reload();
         }
       });
@@ -47,12 +47,12 @@
 
       $.ajax({
         type: "POST",
-        url: "http://localhost/php/medicine_website/admin_panel/users/user.php",
+        url: "http://localhost/php/medicine_website/admin_panel/index.php",
         data: {
           email: email,
           status: "Blocked"
         },
-        success: function(data) {
+        success: function() {
           window.location.reload();
         }
       });
@@ -275,16 +275,17 @@ if (isset($_POST["email"])) {
                                         } else {
                                           echo "-";
                                         } ?></td>
-                  <td class="col-md-3"><?php
-                                        if ($r_user["address"] != null && unserialize($r_user["address"])["suite"] != null) {
-                                          $address = unserialize($r_user["address"])["house_no"] . ", " . unserialize($r_user["address"])["street"] . " near " . unserialize($r_user["address"])["suite"] . ", " . unserialize($r_user["address"])["city"] . ", " . unserialize($r_user["address"])["state"] . " - " . unserialize($r_user["address"])["pincode"];
-                                        } else if ($r_user["address"] != null) {
-                                          $address = unserialize($r_user["address"])["house_no"] . ", " . unserialize($r_user["address"])["street"] . ", " . unserialize($r_user["address"])["city"] . ", " . unserialize($r_user["address"])["state"] . " - " . unserialize($r_user["address"])["pincode"];
-                                        } else {
-                                          $address = "-";
-                                        }
+                  <td class="col-md-3">
+                    <?php
+                    if ($r_user["address"] != null && unserialize($r_user["address"])["suite"] != null) {
+                      $address = unserialize($r_user["address"])["house_no"] . ", " . unserialize($r_user["address"])["street"] . " near " . unserialize($r_user["address"])["suite"] . ", " . unserialize($r_user["address"])["city"] . ", " . unserialize($r_user["address"])["state"] . " - " . unserialize($r_user["address"])["pincode"];
+                    } else if ($r_user["address"] != null) {
+                      $address = unserialize($r_user["address"])["house_no"] . ", " . unserialize($r_user["address"])["street"] . ", " . unserialize($r_user["address"])["city"] . ", " . unserialize($r_user["address"])["state"] . " - " . unserialize($r_user["address"])["pincode"];
+                    } else {
+                      $address = "-";
+                    }
 
-                                        echo $address; ?></td>
+                    echo $address; ?></td>
 
 
                   <?php if ($r_user["status"] == "Active") { ?>

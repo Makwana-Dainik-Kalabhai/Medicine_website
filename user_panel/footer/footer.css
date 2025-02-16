@@ -67,7 +67,8 @@
     width: 100%;
 }
 
-#footer2 #all_links span, #footer2 #all_links a {
+#footer2 #all_links span,
+#footer2 #all_links a {
     color: black;
     display: block;
     text-decoration: none;
@@ -168,39 +169,45 @@
     #company #logo {
         width: 25%;
     }
-    
+
     #company #description {
         width: 70%;
     }
 }
+
 @media (max-width: 1050px) {
     #company {
         width: 100%;
     }
+
     #company #logo {
         width: 30%;
     }
-    
+
     #company #description {
         width: 65%;
     }
+
     #main_footer {
         font-size: 27px;
     }
 }
+
 @media (max-width: 900px) {
     #main_footer {
         font-size: 25px;
     }
 }
+
 @media (max-width: 850px) {
     #main_footer {
         font-size: 22px;
     }
+
     #payment img {
         width: 20%;
     }
-    
+
     #payment #cash {
         width: 13%;
     }
@@ -210,10 +217,12 @@
     #footer2 #cus_care span {
         font-size: 0.7em;
     }
+
     #footer2 #cus_care p {
         font-size: 0.7em;
     }
 }
+
 @media (max-width: 580px) {
     #footer2 #all_links {
         display: grid;
@@ -221,10 +230,12 @@
         grid-template-rows: 14rem 17rem;
         gap: 1rem;
     }
+
     #footer2 #all_links>div:last-child {
         width: 32rem;
         display: flex;
     }
+
     #footer2 #all_links>div:last-child>div {
         width: 100%;
         margin: 0 1rem;
@@ -235,40 +246,48 @@
     #footer1 #company {
         display: block;
     }
+
     #footer1 #company #logo {
         width: 40%;
         margin: 0;
     }
+
     #footer1 #company #description {
         width: 100%;
         margin-top: 1.5rem;
     }
+
     #footer2 #all_links {
         grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
     }
 }
+
 @media (max-width: 470px) {
     #footer2 #all_links {
         grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
         grid-template-rows: 16rem 17rem;
     }
+
     #payment img {
         width: 25%;
     }
-    
+
     #payment #cash {
         width: 16%;
     }
 }
+
 @media (max-width: 390px) {
     #footer2 #all_links {
         grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
         grid-template-rows: 11rem 21rem;
     }
+
     #footer2 #all_links>div:last-child {
         width: 100%;
         display: block;
     }
+
     #footer2 #all_links>div:last-child>div {
         margin: 0;
     }
@@ -278,31 +297,53 @@
     #main_footer {
         font-size: 20px;
     }
+
     #footer2 #all_links {
         grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
         grid-template-rows: 12rem 23rem;
     }
+    #footer2 #all_links span {
+        font-weight: 500;
+    }
     #payment img {
         width: 35%;
     }
+
     #payment #cash {
         width: 20%;
     }
 }
+
 @media (max-width: 300px) {
     #main_footer {
         font-size: 18px;
     }
+
     #footer1 #company #logo {
         width: 50%;
     }
 }
+
 @media (max-width: 265px) {
     #main_footer {
         font-size: 15px;
     }
+
     #footer2 #all_links {
         grid-template-columns: repeat(auto-fill, minmax(7rem, 1fr));
         grid-template-rows: 9rem 16rem;
+    }
+}
+
+@media (max-width: 230px) {
+    #main_footer {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 190px) {
+    #footer2 #all_links {
+        grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+        grid-template-rows: 5rem 7rem 5rem 12rem;
     }
 }

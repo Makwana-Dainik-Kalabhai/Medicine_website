@@ -6,17 +6,21 @@ include("C:/xampp/htdocs/php/medicine_website/database.php");
 if (isset($_POST["change"])) {
     if ($_FILES["item-img"]["name"] == null) {
         $_SESSION["error"] = "Please! Select the File";
-?>
-        <script>
-            window.history.back();
-        </script>
-    <?php
+
+        if (isset($_SERVER['HTTP_REFERER'])) {
+            header("Location: " . $_SERVER['HTTP_REFERER'] . "");;
+        }
         return;
     }
 
     $sel = $conn->prepare("SELECT * FROM `products`");
     $sel->execute();
     $sel = $sel->fetchAll();
+
+    if (str_contains($_FILES["item-img"]["name"], "'")) {
+        $_FILES["item-img"]["name"] = explode("'", $_FILES["item-img"]["name"]);
+        $_FILES["item-img"]["name"] = $_FILES["item-img"]["name"][0] . $_FILES["item-img"]["name"][1];
+    }
 
     foreach ($sel as $r) {
         if ($r["item_img"] != null) {
@@ -38,12 +42,15 @@ if (isset($_POST["change"])) {
 
         foreach ($sel as $r) {
             if ($r["item_img"] != null) {
-                foreach (unserialize($r["item_img"]) as $img) {
-                    array_push($item_img, $img);
+                foreach (unserialize($r["item_img"]) as $key => $img) {
+                    if ($key + 1 != $_POST["change"]) {
+                        array_push($item_img, $img);
+                    } else {
+                        array_push($item_img, $_FILES["item-img"]["name"]);
+                    }
                 }
             }
         }
-        $item_img[$_POST["change"] - 1] = $_FILES["item-img"]["name"];
 
         $up = $conn->prepare("UPDATE `products` SET `item_img`='" . serialize($item_img) . "' WHERE `product_id`='" . $_SESSION["product_id"] . "'");
 
@@ -63,17 +70,21 @@ if (isset($_POST["change"])) {
 if (isset($_POST["add"])) {
     if ($_FILES["new-img"]["name"] == null) {
         $_SESSION["error"] = "Please! Select the File";
-    ?>
-        <script>
-            window.history.back();
-        </script>
-    <?php
+
+        if (isset($_SERVER['HTTP_REFERER'])) {
+            header("Location: " . $_SERVER['HTTP_REFERER'] . "");;
+        }
         return;
     }
 
     $sel = $conn->prepare("SELECT * FROM `products` WHERE `product_id`='" . $_SESSION["product_id"] . "'");
     $sel->execute();
     $sel = $sel->fetchAll();
+
+    if (str_contains($_FILES["new-img"]["name"], "'")) {
+        $_FILES["new-img"]["name"] = explode("'", $_FILES["new-img"]["name"]);
+        $_FILES["new-img"]["name"] = $_FILES["new-img"]["name"][0] . $_FILES["new-img"]["name"][1];
+    }
 
     foreach ($sel as $r) {
         if ($r["item_img"] != null) {
@@ -115,7 +126,6 @@ if (isset($_POST["add"])) {
 
 // ! Delete Product Image
 if (isset($_POST["delete"])) {
-    $i = 1;
     $item_img = array();
 
     $sel = $conn->prepare("SELECT * FROM `products` WHERE `product_id`='" . $_SESSION["product_id"] . "'");
@@ -124,14 +134,13 @@ if (isset($_POST["delete"])) {
 
     foreach ($sel as $r) {
         if ($r["item_img"] != null) {
-            foreach (unserialize($r["item_img"]) as $img) {
-                if ($i != $_POST["delete"]) {
+            foreach (unserialize($r["item_img"]) as $key => $img) {
+                if ($key + 1 != $_POST["delete"]) {
                     array_push($item_img, $img);
                 } //
-                else if ($i == $_POST["delete"]) {
+                else if ($key + 1 == $_POST["delete"]) {
                     unlink("C:/xampp/htdocs/php/medicine_website/user_panel/shop/imgs/$img");
                 }
-                $i++;
             }
         }
     }

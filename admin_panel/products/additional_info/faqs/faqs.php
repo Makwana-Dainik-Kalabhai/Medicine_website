@@ -27,11 +27,10 @@
                 <div class="card p-5">
                     <!-- //** faqs updated successfully -->
                     <?php if (isset($_SESSION["success"])) { ?>
-                        <div class="alert alert-success" role="alert">
+                        <div class="alert" style="background-color: #00b300;" role="alert">
                             <?php echo $_SESSION["success"]; ?>
                             <script>
                                 $(document).ready(function() {
-                                    window.location.reload();
                                     $(".alert").fadeOut(10000);
                                     <?php unset($_SESSION["success"]); ?>
                                 });
@@ -99,15 +98,16 @@
 
 
                         <h5 class="text-danger mt-5">Frequently Asked Questions (FAQS)</h5>
+                        <b style="color: red;">* Required Fields</b>
                         <div class="row p-0">
                             <div class="col-md-1 border p-3">
                                 <p>Sr. no.</p>
                             </div>
                             <div class="col-md-3 border p-3">
-                                <p>Question</p>
+                                <p>Question <b style="color: red;">*</b></p>
                             </div>
                             <div class="col-md-6 border p-3">
-                                <p>Answer</p>
+                                <p>Answer <b style="color: red;">*</b></p>
                             </div>
                             <div class="col-md-2 border p-3">
                                 <p>Delete / Update</p>
@@ -126,18 +126,18 @@
                                         </div>
                                         <?php if (isset($ben[0]) && isset($ben[1])) { ?>
                                             <div class="col-md-3 border p-3">
-                                                <input type="text" class="form-control" name="key[]" value="<?php echo $ben[0]; ?>" />
+                                                <input type="text" class="form-control" name="key[]" value="<?php echo $ben[0]; ?>" required />
                                             </div>
                                             <div class="col-md-6 border p-3">
-                                                <textarea class="border w-100 text-secondary py-1 px-2" name="value[]" value="<?php echo $ben[1]; ?>" rows="5"><?php echo $ben[1]; ?></textarea>
+                                                <textarea class="border w-100 text-secondary py-1 px-2" name="value[]" value="<?php echo $ben[1]; ?>" rows="5" required><?php echo $ben[1]; ?></textarea>
                                             </div>
                                         <?php } //
                                         else { ?>
                                             <div class="col-md-3 border p-3">
-                                                <input type="text" class="form-control" name="key[]" />
+                                                <input type="text" class="form-control" name="key[]" required />
                                             </div>
                                             <div class="col-md-6 border p-3">
-                                                <textarea class="border w-100 text-secondary py-1 px-2" name="value[]" value="<?php echo $ben[1]; ?>" rows="5"><?php echo $ben[0]; ?></textarea>
+                                                <textarea class="border w-100 text-secondary py-1 px-2" name="value[]" value="<?php echo $ben[1]; ?>" rows="5" required><?php echo $ben[0]; ?></textarea>
                                             </div>
                                         <?php } ?>
                                         <div class="col-md-2 border p-3">

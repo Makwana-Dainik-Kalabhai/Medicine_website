@@ -17,10 +17,26 @@ if (isset($_POST["update-description"])) {
 
             foreach (unserialize($row["description"]) as $d) {
                 if (($i + 1) == $_POST["update-description"]) {
+
+                    //* Push only Value on particular index
                     if ($_POST["key"][$i] == null && $_POST["value"][$i] != null) {
+                        if (str_contains($_POST["value"][$i], "'")) {
+                            $_POST["value"][$i] = explode("'", $_POST["value"][$i]);
+                            $_POST["value"][$i] = $_POST["value"][$i][0] . $_POST["value"][$i][1];
+                        }
                         array_push($desc, array($_POST["value"][$i]));
                     }
+
+                    //* Push Key & Value on particular index
                     if ($_POST["key"][$i] != null && $_POST["value"][$i] != null) {
+                        if (str_contains($_POST["key"][$i], "'")) {
+                            $_POST["key"][$i] = explode("'", $_POST["key"][$i]);
+                            $_POST["key"][$i] = $_POST["key"][$i][0] . $_POST["key"][$i][1];
+                        }
+                        if (str_contains($_POST["value"][$i], "'")) {
+                            $_POST["value"][$i] = explode("'", $_POST["value"][$i]);
+                            $_POST["value"][$i] = $_POST["value"][$i][0] . $_POST["value"][$i][1];
+                        }
                         array_push($desc, array($_POST["key"][$i], $_POST["value"][$i]));
                     }
                     $key = $_POST["key"][$i];
@@ -66,10 +82,22 @@ if (isset($_POST["add-description"])) {
     }
 
     if ($_POST["add-key"] != null && $_POST["add-value"] != null) {
+        if (str_contains($_POST["add-key"], "'")) {
+            $_POST["add-key"] = explode("'", $_POST["add-key"]);
+            $_POST["add-key"] = $_POST["add-key"][0] . $_POST["add-key"][1];
+        }
+        if (str_contains($_POST["add-value"], "'")) {
+            $_POST["add-value"] = explode("'", $_POST["add-value"]);
+            $_POST["add-value"] = $_POST["add-value"][0] . $_POST["add-value"][1];
+        }
         array_push($desc, array($_POST["add-key"], $_POST["add-value"]));
     }
     //
     else if ($_POST["add-value"] != null) {
+        if (str_contains($_POST["add-value"], "'")) {
+            $_POST["add-value"] = explode("'", $_POST["add-value"]);
+            $_POST["add-value"] = $_POST["add-value"][0] . $_POST["add-value"][1];
+        }
         array_push($desc, array($_POST["add-value"]));
     }
 
@@ -115,5 +143,5 @@ if (isset($_POST["delete-description"])) {
 
     $_SESSION["success"] = "Key \"" . $key . "\" deleted successfully";
 
-    header("Location: http://localhost/php/medicine_website/admin_panel/products/additional_info/description/description.php");}
-?>
+    header("Location: http://localhost/php/medicine_website/admin_panel/products/additional_info/description/description.php");
+}

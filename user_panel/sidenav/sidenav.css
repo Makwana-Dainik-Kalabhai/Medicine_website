@@ -34,3 +34,19 @@
     border-radius: 5px;
     background-color: #d8ecf3;
 }
+
+@media (max-width: 400px) {
+    #side_nav .count {
+        width: 20px;
+        height: 20px;
+    }
+    #side_nav a:hover {
+        border-radius: 3px;
+    }
+}
+@media (max-width: 270px) {
+    #side_nav .count {
+        width: 15px;
+        height: 15px;
+    }
+}

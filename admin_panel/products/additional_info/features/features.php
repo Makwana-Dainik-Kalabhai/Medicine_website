@@ -27,11 +27,10 @@
                 <div class="card p-5">
                     <!-- //** features updated successfully -->
                     <?php if (isset($_SESSION["success"])) { ?>
-                        <div class="alert alert-success" role="alert">
+                        <div class="alert" style="background-color: #00b300;" role="alert">
                             <?php echo $_SESSION["success"]; ?>
                             <script>
                                 $(document).ready(function() {
-                                    window.location.reload();
                                     $(".alert").fadeOut(10000);
                                     <?php unset($_SESSION["success"]); ?>
                                 });
@@ -99,6 +98,7 @@
 
 
                         <h5 class="text-danger mt-5">Features of the Product</h5>
+                        <b style="color: red;">* Required Fields</b>
                         <div class="row p-0">
                             <div class="col-md-1 border p-3">
                                 <p>Sr. no.</p>
@@ -107,7 +107,7 @@
                                 <p>Key</p>
                             </div>
                             <div class="col-md-6 border p-3">
-                                <p>Value</p>
+                                <p>Value <b style="color: red;">*</b></p>
                             </div>
                             <div class="col-md-2 border p-3">
                                 <p>Delete / Update</p>
@@ -129,7 +129,7 @@
                                                 <input type="text" class="form-control" name="key[]" value="<?php echo $fea[0]; ?>" />
                                             </div>
                                             <div class="col-md-6 border p-3">
-                                                <textarea class="border w-100 text-secondary py-1 px-2" name="value[]" value="<?php echo $fea[1]; ?>" rows="5"><?php echo $fea[1]; ?></textarea>
+                                                <textarea class="border w-100 text-secondary py-1 px-2" name="value[]" value="<?php echo $fea[1]; ?>" rows="5" required><?php echo $fea[1]; ?></textarea>
                                             </div>
                                         <?php } //
                                         else { ?>
@@ -137,7 +137,7 @@
                                                 <input type="text" class="form-control" name="key[]" />
                                             </div>
                                             <div class="col-md-6 border p-3">
-                                                <textarea class="border w-100 text-secondary py-1 px-2" name="value[]" value="<?php echo $fea[1]; ?>" rows="5"><?php echo $fea[0]; ?></textarea>
+                                                <textarea class="border w-100 text-secondary py-1 px-2" name="value[]" value="<?php echo $fea[1]; ?>" rows="5" required><?php echo $fea[0]; ?></textarea>
                                             </div>
                                         <?php } ?>
                                         <div class="col-md-2 border p-3">

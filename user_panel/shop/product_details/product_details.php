@@ -180,10 +180,7 @@ if (isset($_GET["status"])) {
 
 
                 <?php
-                if ($_SESSION["status"] == "device")
-                    disProductDetalis();
-                else
-                    disMedicineDetalis();
+                disProductDetalis();
                 ?>
                 <div id=description_img>
                     <?php if ($row["desc_img"] != "") {
@@ -298,53 +295,6 @@ function disProductDetalis()
                 </div>
             <?php } ?>
 
-            <?php if ($row["faqs"] != null) { ?>
-                <p class="responsive-head">FAQS</p>
-                <hr>
-                <div id="faqs">
-                    <?php foreach (unserialize($row["faqs"]) as $faqs) { ?>
-                        <?php if (isset($faqs[0]) && isset($faqs[1])) { ?>
-                            <p style="margin-bottom:3%;">
-                                <li style="display:inline;font-weight: 700;">Que.&ensp;<?php echo $faqs[0]; ?></li>
-                                <hr />
-                                <span>Ans.&ensp;<?php echo $faqs[1]; ?></span>
-                            </p>
-                        <?php } ?>
-                    <?php } ?>
-                </div>
-            <?php } ?>
-        </div>
-    <?php } ?>
-    <?php
-}
-//
-//* Display Medicine Details
-function disMedicineDetalis()
-{
-    global $sel;
-
-    foreach ($sel as $row) {
-        $_GET["des"] = true; ?>
-        <div id="details">
-            <?php if ($row["description"] != null) { ?>
-                <p class="responsive-head">Description</p>
-                <hr>
-                <div id="description">
-                    <?php foreach (unserialize($row["description"]) as $des) {
-                        if (isset($des[0]) && isset($des[1])) { ?>
-                            <p>
-                                <li style="display: inline;font-weight: 700;"><?php echo $des[0]; ?></li>
-                                <span>: -&ensp;<?php echo $des[1]; ?></span>
-                            </p>
-                        <?php }
-                        //
-                        else if (isset($des[0])) { ?>
-                            <li><?php echo $des[0]; ?></li>
-                    <?php }
-                    } ?>
-                </div>
-            <?php } ?>
-
             <?php if ($row["benefits"] != null) { ?>
                 <p class="responsive-head">Benefits</p>
                 <hr>
@@ -429,10 +379,10 @@ function disMedicineDetalis()
                 <p class="responsive-head">FAQS</p>
                 <hr>
                 <div id="faqs">
-                    <?php foreach (unserialize($row["faqs"]) as $faqs) { ?>
+                    <?php foreach (unserialize($row["faqs"]) as $key => $faqs) { ?>
                         <?php if (isset($faqs[0]) && isset($faqs[1])) { ?>
                             <p style="margin-bottom:3%;">
-                                <li style="display:inline;font-weight: 700;">Que.&ensp;<?php echo $faqs[0]; ?></li>
+                                <li style="display:block;font-weight: 700;">Que-<?php echo $key + 1; ?>)&ensp;<?php echo $faqs[0]; ?></li>
                                 <hr />
                                 <span>Ans.&ensp;<?php echo $faqs[1]; ?></span>
                             </p>

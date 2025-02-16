@@ -3,6 +3,9 @@ session_start();
 if (isset($_GET["status"])) {
     $_SESSION["status"] = $_GET["status"];
 }
+if (isset($_GET["product_id"])) {
+    $_SESSION["product_id"] = $_GET["product_id"];
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,7 +38,7 @@ if (isset($_GET["status"])) {
                 $product_id = $product_id->fetchAll();
                 $product_id = $product_id[0]["product_id"] + 1;
 
-                if (isset($_SESSION["cat_success"])) {
+                if (isset($_SESSION["product_id"])) {
                     $sel = $conn->prepare("SELECT * FROM `products` WHERE `product_id`='" . $_SESSION["product_id"] . "'");
                     $sel->execute();
                     $sel = $sel->fetchAll();
@@ -52,11 +55,9 @@ if (isset($_GET["status"])) {
                         }
                     } ?>
 
-                    <form action="http://localhost/php/medicine_website/admin_panel/products/add_product/update.php" method="post" enctype="multipart/form-data">
-                        <div class="card px-4 py-2">
-                            <h6>Are You want to Delete this Product?&emsp;<button class="btn btn-dark" name="delete-product">Delete</button></h6>
-                        </div>
-                    </form>
+                    <div class="card px-4 py-2">
+                        <h6>Are You want to Delete this Product?&emsp;<a href="http://localhost/php/medicine_website/admin_panel/products/delete_pr.php?product_id=<?php echo $row["product_id"]; ?>" class="btn btn-secondary text-light">Delete</a></h6>
+                    </div>
                 <?php } ?>
 
 
@@ -85,14 +86,15 @@ if (isset($_GET["status"])) {
 
 
                     <!-- //! Category Details -->
-                    <form action="http://localhost/php/medicine_website/admin_panel/products/add_product/update.php" method="post" enctype="multipart/form-data">
+                    <form action="http://localhost/php/medicine_website/admin_panel/products/add_product/update.php" class="category-form" method="post" enctype="multipart/form-data">
                         <h5 class="text-danger">Category Details</h5>
+                        <b style="color: red;">* Required Fields</b>
 
                         <div class="row">
                             <div class="col-md-3 border pb-3 p-2">Category Image</div>
-                            <div class="col-md-3 border pb-3 p-2">Change Category Image</div>
-                            <div class="col-md-3 border pb-3 p-2">Category Name</div>
-                            <div class="col-md-3 border pb-3 p-2">Product ID</div>
+                            <div class="col-md-3 border pb-3 p-2">Change Category Image <b style="color: red;">*</b></div>
+                            <div class="col-md-3 border pb-3 p-2">Category Name <b style="color: red;">*</b></div>
+                            <div class="col-md-3 border pb-3 p-2">Product ID <b style="color: red;">*</b></div>
                         </div>
                         <div class="row">
                             <div class="col-md-3 border p-3 pb-5">
@@ -100,7 +102,8 @@ if (isset($_GET["status"])) {
                             </div>
 
                             <div class="col-md-3 border p-3 pb-5">
-                                <input type="file" name="cat_img" class="form-control" accept="image/png, image/jpeg, image/jpg" />
+                                <input type="file" name="cat-img" class="form-control" accept="image/png, image/jpeg, image/jpg" />
+                                <input type="checkbox" class="mt-3 cat-img-check" />&ensp;Are you want to change Category Image?
                             </div>
 
                             <div class="col-md-3 border p-3 pb-5">
@@ -109,6 +112,7 @@ if (isset($_GET["status"])) {
                                 $category = $conn->prepare("SELECT * FROM `products` WHERE `status`='" . $_SESSION["status"] . "' GROUP BY `category`");
                                 $category->execute();
                                 $category = $category->fetchAll(); ?>
+
                                 <select class="form-control old-cat" name="category" disabled="true">
                                     <?php foreach ($category as $cat) { ?>
                                         <option value="<?php echo $cat["category"]; ?>"><?php echo $cat["category"]; ?></option>
@@ -117,7 +121,7 @@ if (isset($_GET["status"])) {
 
                                 <input type="text" class="form-control my-3 new-cat" name="category" placeholder="Enter Category" />
 
-                                <input type="checkbox" class="select-cat" />&ensp;Are you want to select existing category?
+                                <input type="checkbox" class="sel-cat-check" />&ensp;Are you want to select existing category?
                             </div>
 
                             <div class="col-md-3">
@@ -135,28 +139,22 @@ if (isset($_GET["status"])) {
                 <!-- //! Product Images -->
                 <div class="card p-5 mt-5">
                     <!-- //** Error -->
-                    <?php if (isset($_SESSION["error"])) { ?>
+                    <?php if (isset($_SESSION["pr_img_error"])) { ?>
                         <div class="alert" style="background-color: #ff1a1a;" role="alert">
-                            <?php echo $_SESSION["error"]; ?>
+                            <?php echo $_SESSION["pr_img_error"]; ?>
                             <script>
                                 $(document).ready(function() {
                                     $(".alert").fadeOut(10000);
-                                    <?php unset($_SESSION["error"]); ?>
+                                    <?php unset($_SESSION["pr_img_error"]); ?>
                                 });
                             </script>
                         </div>
                     <?php } ?>
 
                     <!-- //** Success -->
-                    <?php if (isset($_SESSION["success"])) { ?>
+                    <?php if (isset($_SESSION["pr_img_suc"])) { ?>
                         <div class="alert" style="background-color: #00b300;" role="alert">
-                            <?php echo $_SESSION["success"]; ?>
-                            <script>
-                                $(document).ready(function() {
-                                    $(".alert").fadeOut(10000);
-                                    <?php unset($_SESSION["success"]); ?>
-                                });
-                            </script>
+                            <?php echo $_SESSION["pr_img_suc"]; ?>
                         </div>
                     <?php } ?>
                     <h5 class="text-danger">Product Images</h5>
@@ -200,7 +198,7 @@ if (isset($_GET["status"])) {
                         } ?>
                     </form>
                     <?php if (isset($_SESSION["cat_success"])) { ?>
-                        <button class="btn btn-danger add-item-img">ADD Product Image</button>
+                        <button class="btn btn-danger add-item-img" value="<?php echo $i; ?>">ADD Product Image</button>
                     <?php } //
                     else { ?>
                         <div class="px-3 py-3 text-light rounded mt-3" style="background-color: #ff1a1a;">Please! Enter Category Details First</div>
@@ -213,21 +211,15 @@ if (isset($_GET["status"])) {
                 <!-- //! Product Details -->
                 <div class="card p-5 mt-5">
                     <!-- //** Success -->
-                    <?php if (isset($_SESSION["product_success"])) { ?>
+                    <?php if (isset($_SESSION["pr_details_suc"])) { ?>
                         <div class="alert" style="background-color: #00b300;" role="alert">
-                            <?php echo $_SESSION["product_success"]; ?>
-                            <script>
-                                $(document).ready(function() {
-                                    $(".alert").fadeOut(10000);
-                                    <?php unset($_SESSION["product_success"]); ?>
-                                });
-                            </script>
+                            <?php echo $_SESSION["pr_details_suc"]; ?>
                         </div>
                     <?php } ?>
 
                     <h5 class="text-danger">Product Details</h5>
                     <hr>
-                    <?php if (isset($sel)) { ?>
+                    <?php if (isset($_SESSION["pr_img_suc"])) { ?>
                         <div class="row">
                             <div class="col-md-6">
                                 <div id="carouselExampleIndicators" class="carousel slide border">
@@ -264,8 +256,9 @@ if (isset($_GET["status"])) {
 
                             <div class="col-md-6">
                                 <form action="http://localhost/php/medicine_website/admin_panel/products/add_product/update.php" method="post" enctype="multipart/form-data">
+                                    <b style="color: red;">* Required Fields</b>
                                     <div class="row">
-                                        <p class="text-danger fs-3 my-2">Product Name</p>
+                                        <p class="text-danger fs-3 my-2">Product Name <b style="color: red;">*</b></p>
                                         <input type="text" name="name" class="form-control" value="<?php echo $r["name"]; ?>" />
                                     </div>
                                     <div class="row">
@@ -274,23 +267,23 @@ if (isset($_GET["status"])) {
                                     </div>
                                     <div class="row mt-4">
                                         <div class="col-md-5">
-                                            <p class="text-danger fs-3 m-0">Discount</p>
+                                            <p class="text-danger fs-3 m-0">Discount <b style="color: red;">*</b></p>
                                             <input type="number" name="discount" class="form-control" step="0.01" value="<?php echo $r["discount"]; ?>">
                                         </div>
                                     </div>
                                     <div class="row mt-4">
                                         <div class="col-md-5">
-                                            <p class="text-danger fs-3 m-0">Offer Price</p>
+                                            <p class="text-danger fs-3 m-0">Offer Price <b style="color: red;">*</b></p>
                                             <input type="number" name="offer-price" class="form-control" step="0.01" value="<?php echo $r["offer_price"]; ?>">
                                         </div>
                                         <div class="col-md-5">
-                                            <p class="text-danger fs-3 m-0">Price</p>
+                                            <p class="text-danger fs-3 m-0">Price <b style="color: red;">*</b></p>
                                             <input type="number" name="price" class="form-control" step="0.01" value="<?php echo $r["price"]; ?>">
                                         </div>
                                     </div>
                                     <div class="row mt-4">
                                         <div class="col-md-5">
-                                            <p class="text-danger fs-3 m-0">Quantity</p>
+                                            <p class="text-danger fs-3 m-0">Quantity <b style="color: red;">*</b></p>
                                             <input type="number" name="quantity" class="form-control" value="<?php echo $r["quantity"]; ?>">
                                         </div>
                                         <div class="col-md-5">
@@ -300,11 +293,11 @@ if (isset($_GET["status"])) {
                                     </div>
                                     <div class="row mt-4">
                                         <div class="col-md-5">
-                                            <p class="text-danger fs-3 m-0">Expiry Date</p>
+                                            <p class="text-danger fs-3 m-0">Expiry Date <b style="color: red;">*</b></p>
                                             <input type="text" name="expiry" class="form-control" placeholder="Nov 2024">
                                         </div>
                                         <div class="col-md-5">
-                                            <p class="text-danger fs-3 m-0">Delivery Date</p>
+                                            <p class="text-danger fs-3 m-0">Delivery Date <b style="color: red;">*</b></p>
                                             <?php if (!isset($_SESSION["product_success"])) { ?>
                                                 <input type="date" name="delivery-date" class="form-control" />
                                             <?php } //
@@ -343,8 +336,9 @@ if (isset($_GET["status"])) {
                         <div class="col-md-4 border pb-3 py-2">Change</div>
                     </div>
 
+
                     <!-- //! Description Images -->
-                    <?php if (isset($sel)) { ?>
+                    <?php if (isset($_SESSION["pr_details_suc"])) { ?>
                         <div class="row">
                             <div class="col-md-2 border py-2"><?php echo $i;
                                                                 $i++; ?>)</div>

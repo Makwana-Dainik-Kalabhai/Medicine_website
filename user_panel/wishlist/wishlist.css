@@ -11,23 +11,13 @@ body {
 main {
     width: 100%;
     font-size: 27px;
-    padding: 4% 0;
-}
-
-::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-}
-
-::-webkit-scrollbar-thumb {
-    background-color: gray;
-    border-radius: 25px;
+    padding: 5.5% 0;
 }
 
 /* Wishlist main div */
 #wishlist {
     width: 70%;
-    margin: 3% auto;
+    margin: auto;
 }
 
 /* Wishlist Header */
@@ -40,7 +30,7 @@ main {
 
 #wishlist_header h1 {
     color: #2a7189;
-    font-size: 0.92em;
+    font-size: 0.9em;
 }
 
 
@@ -49,14 +39,14 @@ main {
     width: 100%;
 }
 
-#box {
+#wishlist_products #box {
     width: 96%;
     padding: 1.5% 3%;
     display: flex;
     text-decoration: none;
 }
 
- 
+
 #products {
     position: relative;
     width: 100%;
@@ -65,6 +55,7 @@ main {
     cursor: pointer;
     background-color: white;
 }
+
 #products:hover {
     background-color: rgba(173, 216, 230, 0.5);
 }
@@ -83,39 +74,38 @@ main {
 
 
 /* //! Product Details */
-#product_details {
+#wishlist_products #product_details {
     width: 80%;
     margin-left: 5%;
     text-align: justify;
 }
 
-#product_details #name {
+#wishlist_products #name {
     color: black;
     display: block;
-    font-size: 0.8em;
-    font-weight: 500;
+    font-size: 0.75em;
     line-height: 1.5;
     text-transform: capitalize;
 }
 
-#product_details #off_price {
+#wishlist_products #off_price {
     color: red;
     font-size: 0.77em;
 }
 
-#product_details #price {
+#wishlist_products #price {
     color: gray;
     font-size: 0.7em;
     text-decoration: line-through;
 }
 
 /* Discount */
-#product_details #dis {
+#wishlist_products #dis {
     color: green;
     font-size: 0.6em;
 }
 
-#product_details #def {
+#wishlist_products #def {
     display: block;
     color: gray;
     font-size: 0.65em;
@@ -129,15 +119,15 @@ main {
 }
 
 /* Remove btn */
-#products #remove_btn {
+#wishlist_products #remove_btn {
     position: absolute;
     top: 9%;
     right: 2%;
-    font-size: 1.2vw;
+    font-size: 0.7em;
     color: #2a7189;
 }
 
-#products #remove_btn:hover {
+#wishlist_products #remove_btn:hover {
     color: #1e5162;
 }
 
@@ -168,4 +158,125 @@ main {
     background-color: #30819c;
     text-decoration: none;
     border-radius: 3px;
+}
+
+@media (max-width: 1100px) {
+    main {
+        font-size: 25px;
+        padding: 8% 0;
+    }
+
+    #wishlist {
+        width: 80%;
+    }
+}
+
+@media (max-width: 900px) {
+    main {
+        font-size: 23px;
+    }
+
+    #wishlist {
+        width: 90%;
+    }
+
+    #product_img {
+        width: 25%;
+    }
+}
+
+@media (max-width: 700px) {
+    main {
+        font-size: 20px;
+    }
+
+    #wishlist {
+        width: 95%;
+    }
+
+    #product_img {
+        width: 30%;
+    }
+
+    #wishlist_products #remove_btn {
+        top: 7%;
+        right: 2%;
+    }
+}
+
+@media (max-width: 550px) {
+    main {
+        padding: 10% 0;
+        font-size: 18px;
+    }
+
+    #wishlist_header {
+        border-radius: 3px;
+    }
+
+    #wishlist_products #box {
+        width: 96%;
+        padding: 3%;
+    }
+    #products {
+        border-radius: 3px;
+        margin: 1.5% 0;
+    }
+
+    #product_img {
+        border-radius: 10px;
+    }
+
+    #product_img img {
+        border-radius: 10px;
+    }
+}
+
+@media (max-width: 400px) {
+    main {
+        font-size: 16px;
+    }
+    #wishlist_header {
+        border-radius: 1.5px;
+    }
+    #products {
+        border-radius: 1.5px;
+    }
+    #product_img {
+        border-radius: 5px;
+    }
+
+    #product_img img {
+        border-radius: 5px;
+    }
+}
+
+@media (max-width: 300px) {
+    main {
+        font-size: 13px;
+    }
+
+    #wishlist_products #box {
+        flex-direction: column;
+    }
+
+    #product_img {
+        border-radius: 3px;
+    }
+
+    #product_img img {
+        border-radius: 3px;
+    }
+
+    #wishlist_products #product_details {
+        margin: 0;
+        margin-top: 3%;
+        width: 100%;
+    }
+}
+
+@media (max-width: 270px) {
+    main {
+        font-size: 11px;
+    }
 }

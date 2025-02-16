@@ -97,14 +97,6 @@ if (isset($_SESSION["email"]) && $order_exist) { ?>
     </a>
 <?php } ?>
 
-
-<!-- //! Book Appoitment -->
-<a href=""><i class="fa-solid fa-calendar-check"></i>&ensp;Book Appoitment</a>
-
-
-<!-- //! Health Tips -->
-<a href=""><i class="fa-solid fa-heart-pulse"></i>&ensp;Health Tips</a>
-
 <a href="http://localhost/php/medicine_website/user_panel/about_us/about_us.php"><i class="fa-solid fa-address-card"></i>&ensp;About us</a>
 <a href="http://localhost/php/medicine_website/user_panel/contact_us/contact_us.php"><i class="fa-solid fa-phone"></i>&ensp;Contact us</a>
 

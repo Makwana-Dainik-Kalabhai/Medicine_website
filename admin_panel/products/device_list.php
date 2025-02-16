@@ -10,6 +10,35 @@
     <?php include("C:/xampp/htdocs/php/medicine_website/admin_panel/links.php"); ?>
 </head>
 
+<style>
+    tbody tr .edit-delete-btn a {
+        display: none;
+    }
+
+    tbody tr:hover td {
+        background-color: antiquewhite;
+    }
+
+    tbody tr:hover .edit-delete-btn a {
+        display: block;
+    }
+</style>
+
+<?php
+if (isset($_SESSION["product_id"])) {
+    unset($_SESSION["product_id"]);
+}
+if (isset($_SESSION["cat_success"])) {
+    unset($_SESSION["cat_success"]);
+}
+if (isset($_SESSION["pr_img_suc"])) {
+    unset($_SESSION["pr_img_suc"]);
+}
+if (isset($_SESSION["pr_details_suc"])) {
+    unset($_SESSION["pr_details_suc"]);
+}
+?>
+
 <script>
     $(document).ready(() => {
         $(".product-list").DataTable();
@@ -49,7 +78,7 @@
                                 <th class="col-md-1">Discount</th>
                                 <th class="col-md-1">Quantity</th>
                                 <th class="col-md-1">Delivery Date</th>
-                                <th class="col-md-1">Edit</th>
+                                <th class="col-md-1">Edit / Delete</th>
                             </tr>
                         </thead>
 
@@ -73,8 +102,9 @@
                                         <?php $date = strtotime($row["delivery_date"]);
                                         echo date("M d, Y", $date); ?>
                                     </td>
-                                    <td class="col-md-1">
-                                        <a href="http://localhost/php/medicine_website/admin_panel/products/edit_device/edit_device.php?product_id=<?php echo $row["product_id"]; ?>" class="btn btn-secondary text-light">Edit</a>
+                                    <td class="col-md-1 text-center edit-delete-btn">
+                                        <a href="http://localhost/php/medicine_website/admin_panel/products/edit_medicine/edit_medicine.php?product_id=<?php echo $row["product_id"]; ?>" style="color: #3333ff;" class="pb-3 edit-btn"><i class="fa-solid fa-edit"></i> Edit</a>
+                                        <a href="http://localhost/php/medicine_website/admin_panel/products/delete_pr.php?product_id=<?php echo $row["product_id"]; ?>" style="color: #3333ff;" class="delete-btn"><i class="fa-solid fa-trash"></i> Delete</a>
                                     </td>
                                 </tr>
                             <?php } ?>

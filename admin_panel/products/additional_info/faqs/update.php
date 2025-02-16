@@ -17,8 +17,17 @@ if (isset($_POST["update-faqs"])) {
 
             foreach (unserialize($row["faqs"]) as $f) {
                 if (($i + 1) == $_POST["update-faqs"]) {
-                    //
+
+                    //* Push Key & Value on particular index
                     if ($_POST["key"][$i] != null && $_POST["value"][$i] != null) {
+                        if (str_contains($_POST["key"][$i], "'")) {
+                            $_POST["key"][$i] = explode("'", $_POST["key"][$i]);
+                            $_POST["key"][$i] = $_POST["key"][$i][0] . $_POST["key"][$i][1];
+                        }
+                        if (str_contains($_POST["value"][$i], "'")) {
+                            $_POST["value"][$i] = explode("'", $_POST["value"][$i]);
+                            $_POST["value"][$i] = $_POST["value"][$i][0] . $_POST["value"][$i][1];
+                        }
                         array_push($faqs, array($_POST["key"][$i], $_POST["value"][$i]));
                     }
                     $key = $_POST["key"][$i];
@@ -38,7 +47,7 @@ if (isset($_POST["update-faqs"])) {
     $up = $conn->prepare("UPDATE `products` SET `faqs`='" . serialize($faqs) . "' WHERE `product_id`='" . $_SESSION["product_id"] . "'");
     $up->execute();
 
-    $_SESSION["success"] = "Key \"" . $key . "\" updated successfully";
+    $_SESSION["success"] = "Question \"" . $key . "\" updated successfully";
 
     header("Location: http://localhost/php/medicine_website/admin_panel/products/additional_info/faqs/faqs.php");
 }
@@ -64,13 +73,21 @@ if (isset($_POST["add-faqs"])) {
     }
 
     if ($_POST["add-key"] != null && $_POST["add-value"] != null) {
+        if (str_contains($_POST["add-key"], "'")) {
+            $_POST["add-key"] = explode("'", $_POST["add-key"]);
+            $_POST["add-key"] = $_POST["add-key"][0] . $_POST["add-key"][1];
+        }
+        if (str_contains($_POST["add-value"], "'")) {
+            $_POST["add-value"] = explode("'", $_POST["add-value"]);
+            $_POST["add-value"] = $_POST["add-value"][0] . $_POST["add-value"][1];
+        }
         array_push($faqs, array($_POST["add-key"], $_POST["add-value"]));
     }
 
     $up = $conn->prepare("UPDATE `products` SET `faqs`='" . serialize($faqs) . "' WHERE `product_id`='" . $_SESSION["product_id"] . "'");
     $up->execute();
 
-    $_SESSION["success"] = "Data no. " . $_POST["add-faqs"] . " added successfully";
+    $_SESSION["success"] = "Question-" . $_POST["add-faqs"] . " added successfully";
 
     header("Location: http://localhost/php/medicine_website/admin_panel/products/additional_info/faqs/faqs.php");
 }
@@ -111,4 +128,3 @@ if (isset($_POST["delete-faqs"])) {
 
     header("Location: http://localhost/php/medicine_website/admin_panel/products/additional_info/faqs/faqs.php");
 }
-?>

@@ -29,6 +29,9 @@ if (isset($_GET["product_id"])) {
             <?php include("C:/xampp/htdocs/php/medicine_website/admin_panel/header/header.php"); ?>
 
             <div class="content">
+                <div class="card px-4 py-2">
+                    <h6>Are You want to Delete this Product?&emsp;<a href="http://localhost/php/medicine_website/admin_panel/products/delete_pr.php?product_id=<?php echo $row["product_id"]; ?>" class="btn btn-secondary text-light">Delete</a></h6>
+                </div>
 
                 <?php
                 $sel = $conn->prepare("SELECT * FROM `products` WHERE `product_id`='" . $_SESSION["product_id"] . "'");
@@ -44,38 +47,28 @@ if (isset($_GET["product_id"])) {
                     <!-- //! Category Details -->
                     <div class="card px-5 py-4 mb-5">
 
-                        <!-- //** Error -->
-                        <?php if (isset($_SESSION["error"])) { ?>
-                            <div class="alert alert-danger" role="alert">
-                                <?php echo $_SESSION["error"]; ?>
+                        <!-- //** suc -->
+                        <?php if (isset($_SESSION["cat_suc"])) { ?>
+                            <div class="alert" style="background-color: #ff1a1a;" role="alert">
+                                <?php echo $_SESSION["cat_suc"]; ?>
                                 <script>
                                     $(document).ready(function() {
                                         $(".alert").fadeOut(10000);
-                                        <?php unset($_SESSION["error"]); ?>
+                                        <?php unset($_SESSION["cat_suc"]); ?>
                                     });
                                 </script>
                             </div>
                         <?php } ?>
-                        <!-- //** Product details updated successfully -->
-                        <?php if (isset($_SESSION["success"])) { ?>
-                            <div class="alert alert-success" role="alert">
-                                <?php echo $_SESSION["success"]; ?>
-                                <script>
-                                    $(document).ready(function() {
-                                        $(".alert").fadeOut(10000);
-                                        <?php unset($_SESSION["success"]); ?>
-                                    });
-                                </script>
-                            </div>
-                        <?php } ?>
+
 
                         <form action="http://localhost/php/medicine_website/admin_panel/products/edit_device/update_data.php" method="post" enctype="multipart/form-data">
                             <h5 class="text-danger">Category Details</h5>
+                            <b style="color: red;">* Required Fields</b>
 
                             <div class="row">
                                 <div class="col-md-4 border pb-3 p-2">Category Image</div>
-                                <div class="col-md-4 border pb-3 p-2">Category Name</div>
-                                <div class="col-md-4 border pb-3 p-2">Change Category Image</div>
+                                <div class="col-md-4 border pb-3 p-2">Category Name <b style="color: red;">*</b></div>
+                                <div class="col-md-4 border pb-3 p-2">Change Category Image <b style="color: red;">*</b></div>
                             </div>
                             <div class="row">
                                 <input type="hidden" name="product-id" value="<?php echo $row["product_id"]; ?>" />
@@ -109,6 +102,19 @@ if (isset($_GET["product_id"])) {
 
                     <!-- //! Product Details -->
                     <div class="card p-5 mt-5">
+                        <!-- //** Success -->
+                        <?php if (isset($_SESSION["pr_details_suc"])) { ?>
+                            <div class="alert" style="background-color: #00b300;" role="alert">
+                                <?php echo $_SESSION["pr_details_suc"]; ?>
+                                <script>
+                                    $(document).ready(function() {
+                                        $(".alert").fadeOut(10000);
+                                        <?php unset($_SESSION["pr_details_suc"]); ?>
+                                    });
+                                </script>
+                            </div>
+                        <?php } ?>
+
                         <h5 class="text-dark">Product Details</h5>
                         <hr>
                         <div class="row">
@@ -152,9 +158,10 @@ if (isset($_GET["product_id"])) {
 
                             <div class="col-md-6">
                                 <form action="http://localhost/php/medicine_website/admin_panel/products/edit_device/update_data.php" method="post" enctype="multipart/form-data">
+                                    <b style="color: red;">* Required Fields</b>
                                     <div class="row">
-                                        <p class="text-danger fs-3 my-2">Product Name</p>
-                                        <input type="text" name="name" class="form-control" value="<?php echo $row["name"]; ?>" />
+                                        <p class="text-danger fs-3 my-2">Product Name<b style="color: red;">*</b></p>
+                                        <input type="text" name="name" class="form-control" value="<?php echo $row["name"]; ?>" required />
                                     </div>
                                     <div class="row">
                                         <p class="text-danger fs-3 mt-4 mb-2">Definition</p>
@@ -162,24 +169,24 @@ if (isset($_GET["product_id"])) {
                                     </div>
                                     <div class="row mt-4">
                                         <div class="col-md-5">
-                                            <p class="text-danger fs-3 m-0">Discount</p>
-                                            <input type="number" name="discount" class="form-control" value="<?php echo $row["discount"]; ?>">
+                                            <p class="text-danger fs-3 m-0">Discount <b style="color: red;">*</b></p>
+                                            <input type="number" name="discount" class="form-control" value="<?php echo $row["discount"]; ?>" required />
                                         </div>
                                     </div>
                                     <div class="row mt-4">
                                         <div class="col-md-5">
-                                            <p class="text-danger fs-3 m-0">Offer Price</p>
-                                            <input type="number" name="offer-price" class="form-control" value="<?php echo $row["offer_price"]; ?>">
+                                            <p class="text-danger fs-3 m-0">Offer Price <b style="color: red;">*</b></p>
+                                            <input type="number" name="offer-price" class="form-control" value="<?php echo $row["offer_price"]; ?>" required />
                                         </div>
                                         <div class="col-md-5">
-                                            <p class="text-danger fs-3 m-0">Price</p>
-                                            <input type="number" name="price" class="form-control" value="<?php echo $row["price"]; ?>">
+                                            <p class="text-danger fs-3 m-0">Price <b style="color: red;">*</b></p>
+                                            <input type="number" name="price" class="form-control" value="<?php echo $row["price"]; ?>" required />
                                         </div>
                                     </div>
                                     <div class="row mt-4">
                                         <div class="col-md-5">
-                                            <p class="text-danger fs-3 m-0">Quantity</p>
-                                            <input type="number" name="quantity" class="form-control" value="<?php echo $row["quantity"]; ?>">
+                                            <p class="text-danger fs-3 m-0">Quantity <b style="color: red;">*</b></p>
+                                            <input type="number" name="quantity" class="form-control" value="<?php echo $row["quantity"]; ?>" required />
                                         </div>
                                         <div class="col-md-5">
                                             <p class="text-danger fs-3 m-0">Weight</p>
@@ -188,8 +195,8 @@ if (isset($_GET["product_id"])) {
                                     </div>
                                     <div class="row mt-4">
                                         <div class="col-md-5">
-                                            <p class="text-danger fs-3 m-0">Delivery Date</p>
-                                            <input type="text" name="delivery-date" class="form-control" value="<?php echo $row["delivery_date"]; ?>">
+                                            <p class="text-danger fs-3 m-0">Delivery Date <b style="color: red;">*</b></p>
+                                            <input type="text" name="delivery-date" class="form-control" value="<?php echo $row["delivery_date"]; ?>" required />
                                         </div>
                                     </div>
                                     <div class="row mt-4">

@@ -6,14 +6,20 @@ include("C:/xampp/htdocs/php/medicine_website/database.php");
 //* Add Product Images
 if (isset($_POST["add-item-img"])) {
     if ($_FILES["new-item-img"]["name"] == null) {
-        $_SESSION["error"] = "Please! Select the File";
-?>
-        <script>
-            window.history.back();
-        </script>
-    <?php
+        $_SESSION["pr_img_error"] = "Please! Select the File";
+
+
+        if (isset($_SERVER['HTTP_REFERER'])) {
+            header("Location: " . $_SERVER['HTTP_REFERER'] . "");;
+        }
         return;
     }
+
+    if (str_contains($_FILES["new-item-img"]["name"], "'")) {
+        $_FILES["new-item-img"]["name"] = explode("'", $_FILES["new-item-img"]["name"]);
+        $_FILES["new-item-img"]["name"] = $_FILES["new-item-img"]["name"][0] . $_FILES["new-item-img"]["name"][1];
+    }
+
 
     $sel = $conn->prepare("SELECT * FROM `products` WHERE `product_id`='" . $_SESSION["product_id"] . "'");
     $sel->execute();
@@ -29,12 +35,13 @@ if (isset($_POST["add-item-img"])) {
         }
     }
     if (isset($contain)) {
-        $_SESSION["error"] = "Please! Check that Image is already exist this Product";
-    ?>
-        <script>
-            window.history.back();
-        </script>
-    <?php return;
+        $_SESSION["pr_img_error"] = "Please! Check that Image is already exist this Product";
+
+
+        if (isset($_SERVER['HTTP_REFERER'])) {
+            header("Location: " . $_SERVER['HTTP_REFERER'] . "");;
+        }
+        return;
     } //
     else {
         $item_img = array();
@@ -53,17 +60,18 @@ if (isset($_POST["add-item-img"])) {
         if ($up->execute()) {
             move_uploaded_file($_FILES["new-item-img"]["tmp_name"], "C:/xampp/htdocs/php/medicine_website/user_panel/shop/imgs/" . $_FILES["new-item-img"]["name"] . "");
 
-            $_SESSION["success"] = "Product Image Added Successfully";
+            $_SESSION["pr_img_suc"] = "Product Image Added Successfully";
         } //
         else {
-            $_SESSION["error"] = "Please! Change name of the Image";
+            $_SESSION["pr_img_error"] = "Please! Change name of the Image";
         }
     }
-    ?>
-    <script>
-        window.history.back();
-    </script>
-<?php }
+
+
+    if (isset($_SERVER['HTTP_REFERER'])) {
+        header("Location: " . $_SERVER['HTTP_REFERER'] . "");;
+    }
+}
 
 
 
@@ -94,24 +102,29 @@ if (isset($_POST["delete-item-img"])) {
 
     $up = $conn->prepare("UPDATE `products` SET `item_img`='" . serialize($item_img) . "' WHERE `product_id`='" . $_SESSION["product_id"] . "'");
     $up->execute();
-?>
-    <script>
-        window.history.back();
-    </script>
-    <?php }
+
+
+    if (isset($_SERVER['HTTP_REFERER'])) {
+        header("Location: " . $_SERVER['HTTP_REFERER'] . "");;
+    }
+}
 
 
 
 //* Update Product Images
 if (isset($_POST["update-item-img"])) {
     if ($_FILES["item-img"]["name"] == null) {
-        $_SESSION["error"] = "Please! Select the File";
-    ?>
-        <script>
-            window.history.back();
-        </script>
-    <?php
+        $_SESSION["pr_img_error"] = "Please! Select the File";
+
+
+        if (isset($_SERVER['HTTP_REFERER'])) {
+            header("Location: " . $_SERVER['HTTP_REFERER'] . "");;
+        }
         return;
+    }
+    if (str_contains($_FILES["item-img"]["name"], "'")) {
+        $_FILES["item-img"]["name"] = explode("'", $_FILES["item-img"]["name"]);
+        $_FILES["item-img"]["name"] = $_FILES["item-img"]["name"][0] . $_FILES["item-img"]["name"][1];
     }
 
     $sel = $conn->prepare("SELECT * FROM `products`");
@@ -128,7 +141,7 @@ if (isset($_POST["update-item-img"])) {
         }
     }
     if (isset($contain)) {
-        $_SESSION["error"] = "Please! Change name of the Image, Name is already exist";
+        $_SESSION["pr_img_error"] = "Please! Change name of the Image, Name is already exist";
     } //
     else {
         $item_img = array();
@@ -151,11 +164,12 @@ if (isset($_POST["update-item-img"])) {
             move_uploaded_file($_FILES["item-img"]["tmp_name"], "C:/xampp/htdocs/php/medicine_website/user_panel/shop/imgs/" . $_FILES["item-img"]["name"] . "");
         } //
         else {
-            $_SESSION["error"] = "Please! Change name of the Image";
+            $_SESSION["pr_img_error"] = "Please! Change name of the Image";
         }
     }
-    ?>
-    <script>
-        window.history.back();
-    </script>
-<?php }
+
+
+    if (isset($_SERVER['HTTP_REFERER'])) {
+        header("Location: " . $_SERVER['HTTP_REFERER'] . "");;
+    }
+}
