@@ -31,9 +31,11 @@ if (isset($_SESSION["pr_details_suc"])) {
     tbody tr .edit-delete-btn a {
         display: none;
     }
+
     tbody tr:hover td {
         background-color: antiquewhite;
     }
+
     tbody tr:hover .edit-delete-btn a {
         display: block;
     }
@@ -70,16 +72,16 @@ if (isset($_SESSION["pr_details_suc"])) {
                     <table class="product-list">
                         <thead class="bg-danger text-light">
                             <tr>
-                                <th class="col-md-1">Product</th>
-                                <th class="col-md-1">Category</th>
-                                <th class="col-md-2">Name</th>
-                                <th class="col-md-1">Expiry</th>
-                                <th class="col-md-1">Offer Price</th>
-                                <th class="col-md-1">Price</th>
-                                <th class="col-md-1">Discount</th>
-                                <th class="col-md-1">Quantity</th>
+                                <th class="col-md-1 text-center">Product</th>
+                                <th class="col-md-1 text-center">Category</th>
+                                <th class="col-md-3 text-center">Name</th>
+                                <th class="col-md-1 text-center">Expiry</th>
+                                <th class="col-md-1 text-center">Price</th>
+                                <th class="col-md-1 text-center">Discount</th>
+                                <th class="col-md-1 text-center">Quantity</th>
                                 <th class="col-md-1">Delivery Date</th>
-                                <th class="col-md-1">Edit / Delete</th>
+                                <th class="col-md-1 text-center">Edit</th>
+                                <th class="col-md-1 text-center">Delete</th>
                             </tr>
                         </thead>
 
@@ -91,22 +93,29 @@ if (isset($_SESSION["pr_details_suc"])) {
 
                             foreach ($sel as $row) { ?>
                                 <tr class="border-bottom">
-                                    <td class="col-md-1"><img src="http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo unserialize($row["item_img"])[0]; ?>" /></td>
+                                    <td class="col-md-1 text-center"><img src="http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo unserialize($row["item_img"])[0]; ?>" /></td>
                                     <td class="col-md-1"><?php echo $row["category"]; ?></td>
-                                    <td class="col-md-2"><?php echo $row["name"]; ?></td>
-                                    <td class="col-md-1"><?php if ($row["expiry"] != null) echo $row["expiry"];
-                                                            else echo "-"; ?></td>
-                                    <td class="col-md-1">₹<?php echo $row["offer_price"]; ?></td>
-                                    <td class="col-md-1">₹<?php echo $row["price"]; ?></td>
-                                    <td class="col-md-1"><?php if ($row["discount"] != 0) echo $row["discount"] . "%";
-                                                            else echo "-";  ?></td>
-                                    <td class="col-md-1"><?php echo $row["quantity"]; ?></td>
+                                    <td class="col-md-3"><?php echo $row["name"]; ?></td>
+                                    <td class="col-md-1"><?php
+                                                                        if ($row["expiry"] != null) echo $row["expiry"];
+                                                                        else echo "-"; ?></td>
+                                    <td class="col-md-1 text-center">
+                                        ₹<?php echo $row["offer_price"]; ?><br />
+                                        <span style="color:gray; text-decoration: line-through;">₹<?php echo $row["price"]; ?></span>
+                                    </td>
+                                    <td class="col-md-1 text-center">
+                                        <?php if ($row["discount"] != 0) echo $row["discount"] . "%";
+                                        else echo "-";
+                                    ?></td>
+                                    <td class="col-md-1 text-center"><?php echo $row["quantity"]; ?></td>
                                     <td class="col-md-1">
                                         <?php $date = strtotime($row["delivery_date"]);
                                         echo date("M d, Y", $date); ?>
                                     </td>
                                     <td class="col-md-1 text-center edit-delete-btn">
-                                        <a href="http://localhost/php/medicine_website/admin_panel/products/edit_medicine/edit_medicine.php?product_id=<?php echo $row["product_id"]; ?>" style="color: #3333ff;" class="pb-3 edit-btn"><i class="fa-solid fa-edit"></i> Edit</a>
+                                        <a href="http://localhost/php/medicine_website/admin_panel/products/edit_medicine/edit_medicine.php?product_id=<?php echo $row["product_id"]; ?>" style="color: #3333ff;" class="edit-btn"><i class="fa-solid fa-edit"></i> Edit</a>
+                                    </td>
+                                    <td class="col-md-1 text-center edit-delete-btn">
                                         <a href="http://localhost/php/medicine_website/admin_panel/products/delete_pr.php?product_id=<?php echo $row["product_id"]; ?>" style="color: #3333ff;" class="delete-btn"><i class="fa-solid fa-trash"></i> Delete</a>
                                     </td>
                                 </tr>

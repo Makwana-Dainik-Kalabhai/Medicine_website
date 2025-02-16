@@ -29,7 +29,7 @@ $(document).ready(function () {
         <div class='col-md-3'><img /></div>
         <div class='col-md-4'>
           Select the Image
-          <input type='file' name='new-img' class='form-control mt-4' required />
+          <input type='file' name='new-img' class='form-control mt-4' accept='image/*' required />
         </div>
         <div class='col-md-2'>
           <button class='btn btn-light add-btn' name='add'>Add</button>

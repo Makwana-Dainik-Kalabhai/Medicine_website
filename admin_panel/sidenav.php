@@ -1,6 +1,6 @@
 <style>
     img {
-        mix-blend-mode: multiply;
+        mix-blend-mode: multiply !important;
     }
     .btn-group {
         width: 100% !important;

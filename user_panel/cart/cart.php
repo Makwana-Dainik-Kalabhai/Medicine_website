@@ -68,8 +68,12 @@ if (!isset($_SESSION["email"])) { ?>
                         $sel_qua->execute();
                         $sel_qua = $sel_qua->fetchAll();
                         $prod_qua = $sel_qua[0]["quantity"];
-                    ?>
 
+                        if ($row["quantity"] > $prod_qua) {
+                            $up = $conn->prepare("UPDATE `cart` SET `quantity`=$prod_qua WHERE product_id='" . $row["product_id"] . "' AND email='" . $_SESSION["email"] . "'");
+                            $up->execute();
+                        }
+                    ?>
                         <div id="products" class="<?php if ($prod_qua <= 0) {
                                                         echo "disable";
                                                     } ?>">

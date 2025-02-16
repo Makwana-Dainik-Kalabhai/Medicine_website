@@ -64,7 +64,7 @@ $(document).ready(() => {
             <div class='col-md-3'></div>
             <div class='col-md-4'>
                 Select the Image
-                <input type='file' name='new-item-img' class='form-control mt-4' />
+                <input type='file' name='new-item-img' class='form-control mt-4' accept='image/*' />
             </div>
             <div class='col-md-2'>
                 <button class='btn btn-light' name='add-item-img'>Add</button>

@@ -52,7 +52,7 @@
                     foreach ($sel as $row) {
                         $count_img = 0;
                         $i = 1;
-                        
+
                         foreach (unserialize($row["item_img"]) as $img) {
                             $count_img++;
                         } ?>
@@ -62,7 +62,7 @@
                         <b style="color: red;">* Required Fields</b>
                         <div class="row border-bottom py-3">
                             <div class="col-md-1">Sr. no.</div>
-                            <div class="col-md-4">Images</div>
+                            <div class="col-md-4 text-center">Images</div>
                             <div class="col-md-4">Select Image <b style="color: red;">*</b></div>
                             <div class="col-md-2">Change</div>
                             <div class="col-md-1">Delete</div>
@@ -79,7 +79,7 @@
                                         <div class="col-md-4">
                                             <p class="text-danger mb-1">File Name:</p>
                                             <?php echo $desc_img; ?>
-                                            <input type="file" name="desc-img" class="form-control mt-4" disabled="true" value="<?php echo $desc_img; ?>" required />
+                                            <input type="file" name="desc-img" class="form-control mt-4" accept="image/*" disabled="true" value="<?php echo $desc_img; ?>" required />
                                             <input type="checkbox" class="mt-3 mx-2" /> Are you want to change the image?
                                         </div>
                                         <div class="col-md-2">

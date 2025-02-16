@@ -91,7 +91,7 @@ if (isset($_GET["product_id"])) {
                         <b style="color: red;">* Required Fields</b>
 
                         <div class="row">
-                            <div class="col-md-3 border pb-3 p-2">Category Image</div>
+                            <div class="col-md-3 border pb-3 p-2 text-center">Category Image</div>
                             <div class="col-md-3 border pb-3 p-2">Change Category Image <b style="color: red;">*</b></div>
                             <div class="col-md-3 border pb-3 p-2">Category Name <b style="color: red;">*</b></div>
                             <div class="col-md-3 border pb-3 p-2">Product ID <b style="color: red;">*</b></div>
@@ -161,7 +161,7 @@ if (isset($_GET["product_id"])) {
                     <hr>
                     <div class="row border-bottom py-3">
                         <div class="col-md-1">Sr. no.</div>
-                        <div class="col-md-3">Images</div>
+                        <div class="col-md-3 text-center">Images</div>
                         <div class="col-md-4">Select Image</div>
                         <div class="col-md-2">Add / Update</div>
                         <div class="col-md-2">Delete</div>
@@ -180,7 +180,7 @@ if (isset($_GET["product_id"])) {
                                             <div class='col-md-4'>
                                                 <p class="text-danger mb-1">File Name:</p>
                                                 <?php echo $img; ?>
-                                                <input type="file" name="item-img" class="form-control mt-4" disabled="true" />
+                                                <input type="file" name="item-img" class="form-control mt-4" accept="image/*" disabled="true" />
                                                 <input type="checkbox" class="mt-3 mx-2" /> Are you want to change the image?
                                             </div>
                                             <div class='col-md-2'>
