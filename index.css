@@ -54,7 +54,7 @@ main #home_medicines {
 }
 
 main #home_products {
-    font-size: 30px;
+    font-size: 27px;
     padding: 2% 0;
 }
 
@@ -69,12 +69,12 @@ main #home_products {
 
 /* //! Media Queries */
 @media (max-width: 1000px) {
-    #medicines {
+    main #home_medicines {
         font-size: 26px;
     }
 
-    #products {
-        font-size: 29px;
+    main #home_products {
+        font-size: 27px;
     }
 
     #health_tips {
@@ -83,12 +83,12 @@ main #home_products {
 }
 
 @media (max-width: 890px) {
-    #medicines {
+    main #home_medicines {
         font-size: 25px;
     }
 
-    #products {
-        font-size: 27px;
+    main #home_products {
+        font-size: 25px;
     }
 
     #health_tips {
@@ -97,12 +97,12 @@ main #home_products {
 }
 
 @media (max-width: 630px) {
-    #medicines {
+    main #home_medicines {
         font-size: 24px;
     }
 
-    #products {
-        font-size: 26px;
+    main #home_products {
+        font-size: 24px;
     }
 
     #health_tips {
@@ -111,12 +111,12 @@ main #home_products {
 }
 
 @media (max-width: 400px) {
-    #medicines {
+    main #home_medicines {
         font-size: 22px;
     }
 
-    #products {
-        font-size: 24px;
+    main #home_products {
+        font-size: 22px;
     }
 
     #health_tips {
@@ -125,12 +125,12 @@ main #home_products {
 }
 
 @media (max-width: 370px) {
-    #medicines {
+    main #home_medicines {
         font-size: 20px;
     }
 
-    #products {
-        font-size: 22px;
+    main #home_products {
+        font-size: 20px;
     }
 
     #health_tips {
@@ -139,12 +139,12 @@ main #home_products {
 }
 
 @media (max-width: 300px) {
-    #medicines {
+    main #home_medicines {
         font-size: 18px;
     }
 
-    #products {
-        font-size: 20px;
+    main #home_products {
+        font-size: 18px;
     }
 
     #health_tips {

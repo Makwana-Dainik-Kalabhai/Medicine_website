@@ -45,7 +45,7 @@
     </footer>
 
     <?php if (!isset($_SESSION["intro_loaded"])) { ?>
-        <div class="intro" id="intro">
+        <div class="intro">
             <div id="logo">
                 <img src="http://localhost/php/medicine_website/user_panel/header/logo1.png" alt="img not found">
             </div>

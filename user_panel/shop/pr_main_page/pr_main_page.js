@@ -15,8 +15,8 @@ $(document).ready(function () {
     $("#top_load").css("width", "20%");
 
     filter = $(this).val();
-    price_range = $("#price_range input").val();
-    discount_range = $("#discount_range input").val();
+    price_range = $("#price_range input[type='range']").val();
+    discount_range = $("#discount_range input[type='range']").val();
 
     $("#sort_products div button").css({
       color: "#ff0000",
@@ -56,8 +56,8 @@ $(document).ready(function () {
     $("#top_load").css("width", "20%");
 
     category = $(this).val();
-    price_range = $(".max-price").val();
-    discount_range = $(".max-discount").val();
+    price_range = $("#price_range input[type='range']").val();
+    discount_range = $("#discount_range input[type='range']").val();
 
     setTimeout(() => {
       $("#top_load").css("width", "40%");
@@ -106,8 +106,8 @@ $(document).ready(function () {
     $("#top_load").css("width", "20%");
 
     category = $(this).val();
-    price_range = $("#price_range input").val();
-    discount_range = $("#discount_range input").val();
+    price_range = $("#price_range input[type='range']").val();
+    discount_range = $("#discount_range input[type='range']").val();
 
     setTimeout(() => {
       $("#top_load").css("width", "40%");

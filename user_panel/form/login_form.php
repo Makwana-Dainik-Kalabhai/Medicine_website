@@ -57,10 +57,10 @@ if (isset($_SESSION["email"]) && !isset($_SESSION["form_succ"]) && isset($_SERVE
                 <span class="description">Login now to access your orders, book appoitment, get heath tips and for many more</span>
 
                 <form action="verify.php" method="post" enctype="multipart/form-data">
-                    <label for="login_email">Email:</label>
+                    <label for="login_email">Email <b style="color: red;font-weight: 500;">*</b></label>
                     <input type="email" name="login_email" placeholder="Enter your Email ID" required />
 
-                    <label for="login_pass">Password:</label>
+                    <label for="login_pass">Password <b style="color: red;font-weight: 500;">*</b></label>
                     <div class="pass_div">
                         <input type="password" name="login_pass" class="pass" placeholder="Enter your Password" required />
                         <i class="fa-regular fa-eye"></i><i class="fa-regular fa-eye-slash"></i>

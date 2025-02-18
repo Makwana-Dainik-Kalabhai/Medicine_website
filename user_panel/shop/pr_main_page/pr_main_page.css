@@ -358,6 +358,7 @@ output {
     width: 70%;
     left: 50%;
     transform: translate(-50%, 0);
+    border-radius: 3px;
 }
 
 /* //* Product Details */
@@ -399,17 +400,23 @@ output {
 
 #products #add_cart {
     position: absolute;
+    padding: 0.5% 0;
     left: 50%;
     bottom: 3%;
     transform: translate(-50%, 0);
     color: #2a7189;
     display: block;
     width: 90%;
-    font-size: 0.6em;
+    font-size: 0.55em;
+    font-weight: 500;
     border: 2px solid #30819c;
     text-align: center;
     border-radius: 3px;
     background-color: transparent;
+}
+#products #add_cart:hover {
+    color: white;
+    background-color: #30819c;
 }
 
 /* //! Person search pr & if pr not found*/

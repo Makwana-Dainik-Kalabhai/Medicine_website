@@ -41,6 +41,12 @@ $(document).ready(() => {
   });
 
   $("#search_input").keyup(function (e) {
+    if ($(this).val().length >= 1) {
+      $("body").css("overflow", "hidden");
+    } else {
+      $("body").css("overflow", "auto");
+    }
+    
     $("#searched_items #new_items").html("");
 
     var search_val = $("#search_input").val();
@@ -62,7 +68,10 @@ $(document).ready(() => {
   });
 
   $("#search_input").focus(function () {
-    if ($(this).val().length >= 1) $("#searched_items").show();
+    if ($(this).val().length >= 1) {
+      $("#searched_items").show();
+      $("body").css("overflow", "hidden");
+    }
   });
   $("#searched_items").click(() => {
     $("#searched_items").show();
@@ -80,6 +89,7 @@ $(document).ready(() => {
 
   $("main").click(function () {
     $("#searched_items").hide();
+    $("body").css("overflow", "auto");
     botpress.close();
   });
 });

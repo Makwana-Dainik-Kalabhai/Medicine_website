@@ -69,6 +69,9 @@ if (isset($_GET["product_id"])) {
                             <?php echo $_SESSION["cat_error"]; ?>
                             <script>
                                 $(document).ready(function() {
+                                    $('html, body').animate({
+                                        scrollTop: $(".category-form").parent(".card").offset().top
+                                    }, 100);
                                     $(".alert").fadeOut(10000);
                                     <?php unset($_SESSION["cat_error"]); ?>
                                 });
@@ -80,6 +83,13 @@ if (isset($_GET["product_id"])) {
                     <?php if (isset($_SESSION["cat_success"])) { ?>
                         <div class="alert" style="background-color: #00b300;" role="alert">
                             <?php echo $_SESSION["cat_success"]; ?>
+                            <script>
+                                $(document).ready(function() {
+                                    $('html, body').animate({
+                                        scrollTop: $(".category-form").parent(".card").offset().top
+                                    }, 100);
+                                });
+                            </script>
                         </div>
                     <?php } ?>
 
@@ -144,6 +154,9 @@ if (isset($_GET["product_id"])) {
                             <?php echo $_SESSION["pr_img_error"]; ?>
                             <script>
                                 $(document).ready(function() {
+                                    $('html, body').animate({
+                                        scrollTop: $(".item-imgs-form").parent(".card").offset().top
+                                    }, 100);
                                     $(".alert").fadeOut(10000);
                                     <?php unset($_SESSION["pr_img_error"]); ?>
                                 });
@@ -155,6 +168,13 @@ if (isset($_GET["product_id"])) {
                     <?php if (isset($_SESSION["pr_img_suc"])) { ?>
                         <div class="alert" style="background-color: #00b300;" role="alert">
                             <?php echo $_SESSION["pr_img_suc"]; ?>
+                            <script>
+                                $(document).ready(function() {
+                                    $('html, body').animate({
+                                        scrollTop: $(".item-imgs-form").parent(".card").offset().top
+                                    }, 100);
+                                });
+                            </script>
                         </div>
                     <?php } ?>
                     <h5 class="text-danger">Product Images</h5>
@@ -214,13 +234,20 @@ if (isset($_GET["product_id"])) {
                     <?php if (isset($_SESSION["pr_details_suc"])) { ?>
                         <div class="alert" style="background-color: #00b300;" role="alert">
                             <?php echo $_SESSION["pr_details_suc"]; ?>
+                            <script>
+                                $(document).ready(function() {
+                                    $('html, body').animate({
+                                        scrollTop: $(".product-details").parent(".card").offset().top
+                                    }, 100);
+                                });
+                            </script>
                         </div>
                     <?php } ?>
 
                     <h5 class="text-danger">Product Details</h5>
                     <hr>
                     <?php if (isset($_SESSION["pr_img_suc"])) { ?>
-                        <div class="row">
+                        <div class="row product-details">
                             <div class="col-md-6">
                                 <div id="carouselExampleIndicators" class="carousel slide border">
 

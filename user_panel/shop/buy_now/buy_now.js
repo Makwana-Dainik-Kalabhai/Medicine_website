@@ -1,4 +1,5 @@
 $(document).ready(function () {
+  //! Delivery Charge
   $("#del_charge").hide();
 
   var items = [];
@@ -16,7 +17,7 @@ $(document).ready(function () {
   $("input[name='price_arr[]']").map(function () {
     price.push($(this).val());
   });
-  $(".user-quantity").map(function () {
+  $(".quantity").map(function () {
     quantity.push($(this).val());
   });
 
@@ -58,19 +59,21 @@ $(document).ready(function () {
   });
 
   //! Update Quantity onchange quantity input
-  $(".user-quantity").change(function () {
+  //* Minus Quantity
+  $(".minus-quantity").click(function () {
     let total = 0;
+    $(this)
+      .next()
+      .val(parseInt($(this).next().val()) - 1);
+      $(this).siblings("button").removeAttr("disabled");
 
-    if ($(this).val() > 5) {
-      alert("You can Order maximum 5 quantites only at a time");
-      $(this).val(5);
-    }
-    if ($(this).val() < 1) {
-      alert("You need to Order minimum 1 quantity");
-      $(this).val(1);
+    if (parseInt($(this).next().val()) <= 1) {
+      $(this).attr("disabled", "true");
     }
 
-    quantity[$(this).attr("id")] = $(this).val();
+    quantity[$(this).next(".quantity").attr("id")] = $(this)
+      .next(".quantity")
+      .val();
 
     for (let i = 0; i < off_price.length; i++) {
       total += off_price[i] * quantity[i];
@@ -83,8 +86,45 @@ $(document).ready(function () {
 
     $("input[name='form_total']").val(total);
 
-    if (total < 1000) $("#del_charge").show();
-    else $("#del_charge").hide();
+    total < 1000 ? $("#del_charge").show() : $("#del_charge").hide();
+
+    $("#rzp-button1").html(`Pay Now<br />₹${total}`);
+  });
+
+  //* Plus Quantity
+  $(".plus-quantity").click(function () {
+    let total = 0;
+    $(this)
+      .prev(".quantity")
+      .val(parseInt($(this).prev(".quantity").val()) + 1);
+      $(this).siblings("button").removeAttr("disabled");
+
+    if (parseInt($(this).prev(".quantity").val()) >= 5) {
+      $(this).attr("disabled", "true");
+    }
+    if (
+      parseInt($(this).prev(".quantity").val()) >=
+      parseInt($(this).siblings(".available-quantity").val())
+    ) {
+      $(this).attr("disabled", "true");
+    }
+
+    quantity[$(this).prev(".quantity").attr("id")] = $(this)
+      .prev(".quantity")
+      .val();
+
+    for (let i = 0; i < off_price.length; i++) {
+      total += off_price[i] * quantity[i];
+    }
+    for (let i = 0; i < items.length; i++) {
+      $(`#form_quantity${i}`).val(quantity[i]);
+    }
+
+    if (total < 1000) total += 50;
+
+    $("input[name='form_total']").val(total);
+
+    total < 1000 ? $("#del_charge").show() : $("#del_charge").hide();
 
     $("#rzp-button1").html(`Pay Now<br />₹${total}`);
   });

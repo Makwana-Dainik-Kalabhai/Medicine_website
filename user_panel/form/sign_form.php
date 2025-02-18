@@ -58,39 +58,39 @@ if (!isset($_SESSION["email"])) { ?>
                     <span class="heading">Signup Now</span>
 
                     <form action="verify.php" method="post" enctype="multipart/form-data">
-                        <label for="sign_name">Name:</label>
+                        <label for="sign_name">Name <b style="color: red;font-weight: 500;">*</b></label>
                         <input type="text" name="sign_name" pattern="[A-Za-z ]*" placeholder="Enter Name" required />
 
-                        <label for="sign_email">Email:</label>
+                        <label for="sign_email">Email <b style="color: red;font-weight: 500;">*</b></label>
                         <input type="email" name="sign_email" placeholder="Enter Email ID" required />
 
-                        <label for="sign_pass">Password:</label>
+                        <label for="sign_pass">Password <b style="color: red;font-weight: 500;">*</b></label>
                         <div class="pass_div">
                             <input type="password" name="sign_pass" class="pass" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Enter Password" required />
                             <i class="fa-regular fa-eye"></i><i class="fa-regular fa-eye-slash"></i>
                         </div>
                         <span id="pass_des">Minimum 8 digits, 1 Uppercase, 1 Lowercase letter</span>
 
-                        <label for="sign_phone">Phone:</label>
+                        <label for="sign_phone">Phone <b style="color: red;font-weight: 500;">*</b></label>
                         <input type="number" name="sign_phone" pattern="[0-9].{10,10}" minlength="10" maxlength="10" placeholder="Enter Phone no." title="Please! Enter 10 digit number" required />
 
                         <div class="row">
                             <div class="col-md-6">
-                                <label for="house_no">House No.:</label>
+                                <label for="house_no">House No. <b style="color: red;font-weight: 500;">*</b></label>
                                 <input type="text" name="house_no" placeholder="House No." required />
                             </div>
                             <div class="col-md-6">
-                                <label for="street">Street:</label>
+                                <label for="street">Street <b style="color: red;font-weight: 500;">*</b></label>
                                 <input type="text" name="street" placeholder="Street" required />
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <label for="suite">Apartment Suite:</label>
+                                <label for="suite">Apartment Suite <b style="color: red;font-weight: 500;">*</b></label>
                                 <input type="text" name="suite" placeholder="Apartment Suite" required />
                             </div>
                             <div class="col-md-6">
-                                <label for="pincode">Pincode:</label>
+                                <label for="pincode">Pincode <b style="color: red;font-weight: 500;">*</b></label>
                                 <input type="number" pattern="[0-9].{6,6}" minlength="6" maxlength="6" name="pincode" placeholder="Pincode" title="Please! Enter 6 digit pincode" required />
                             </div>
                         </div>

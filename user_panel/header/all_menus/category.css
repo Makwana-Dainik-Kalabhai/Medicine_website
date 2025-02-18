@@ -16,6 +16,13 @@
 .category {
     position: relative;
     width: 100%;
+    max-height: 300px;
+    overflow: auto;
+}
+.category::-webkit-scrollbar {
+    width: 4px;
+    background-color: gray;
+    border-radius: 50px;
 }
 
 #main h1 {

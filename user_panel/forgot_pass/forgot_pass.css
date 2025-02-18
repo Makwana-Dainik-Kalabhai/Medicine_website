@@ -21,7 +21,6 @@ main {
     display: flex;
     margin: auto;
     width: 70%;
-    padding: 1rem 0;
     background-color: white;
     border-radius: 8px;
     overflow: hidden;
@@ -29,6 +28,7 @@ main {
 
 #main_form>div {
     width: 100%;
+    padding: 3%;
     position: relative;
     font-family: "Mukta", sans-serif;
 }
@@ -36,7 +36,6 @@ main {
 /* //! Left Image */
 .left_img {
     width: 100%;
-    padding: 2%;
 }
 
 .left_img img {
@@ -53,7 +52,7 @@ main {
     width: 100%;
     color: white;
     padding: 1.5%;
-    font-size: 0.6em;
+    font-size: 0.55em;
     animation: slide 0.3s linear;
 }
 
@@ -90,12 +89,12 @@ main {
 }
 #forgot_pass_form #heading {
     color: black;
-    font-size: 0.9em;
+    font-size: 0.8em;
     font-weight: 600;
 }
 #forgot_pass_form #definition {
     color: gray;
-    font-size: 0.7em;
+    font-size: 0.6em;
     font-weight: 500;
     line-height: 1.2;
     margin: 1.5% 0;
@@ -107,14 +106,14 @@ main {
 #forgot_pass_form label {
     color: #2a7189;
     display: block;
-    font-size: 0.7em;
+    font-size: 0.65em;
     margin-top: 5%;
     line-height: 1;
 }
 #forgot_pass_form input {
     width: 100%;
     padding: 1% 2%;
-    font-size: 0.65em;
+    font-size: 0.6em;
     border: 1px solid gray;
     outline: none;
     border-bottom: 3px solid gray;
@@ -129,13 +128,16 @@ main {
     padding: 3% 0;
 }
 #forgot_pass_form input[type="submit"], #forgot_pass_form input[type="reset"] {
-    font-size: 0.65em;
+    font-size: 0.6em;
     color: white;
     width: fit-content;
-    padding: 0.2% 4%;
+    padding: 0.8% 4%;
     margin-right: 1.5%;
     border: none;
     background-color: black;
+}
+#forgot_pass_form input[type="submit"]:hover, #forgot_pass_form input[type="reset"]:hover {
+    scale: 0.98;
 }
 
 

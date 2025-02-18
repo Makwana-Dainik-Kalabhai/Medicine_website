@@ -1,3 +1,5 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
     <?php include("medicines.css"); ?>
 </style>
@@ -40,7 +42,7 @@
                         <?php } ?>
 
                         <?php if (isset($_SESSION["email"])) {
-                            $sel_item = $conn->prepare("SELECT * FROM `wishlist` WHERE `email`='".$_SESSION["email"]."'");
+                            $sel_item = $conn->prepare("SELECT * FROM `wishlist` WHERE `email`='" . $_SESSION["email"] . "'");
                             $sel_item->execute();
                             $sel_item = $sel_item->fetchAll();
 

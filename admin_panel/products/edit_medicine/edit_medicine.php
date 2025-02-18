@@ -52,6 +52,9 @@ if (isset($_GET["product_id"])) {
                                 <?php echo $_SESSION["cat_error"]; ?>
                                 <script>
                                     $(document).ready(function() {
+                                        $('html, body').animate({
+                                            scrollTop: $(".category-form").parent(".card").offset().top
+                                        }, 100);
                                         $(".alert").fadeOut(10000);
                                         <?php unset($_SESSION["cat_error"]); ?>
                                     });
@@ -60,7 +63,7 @@ if (isset($_GET["product_id"])) {
                         <?php } ?>
 
 
-                        <form action="http://localhost/php/medicine_website/admin_panel/products/edit_medicine/update_data.php" method="post" enctype="multipart/form-data">
+                        <form action="http://localhost/php/medicine_website/admin_panel/products/edit_medicine/update_data.php" class="category-form" method="post" enctype="multipart/form-data">
                             <h5 class="text-danger">Category Details</h5>
                             <b style="color: red;">* Required Fields</b>
 
@@ -107,6 +110,9 @@ if (isset($_GET["product_id"])) {
                                 <?php echo $_SESSION["pr_details_suc"]; ?>
                                 <script>
                                     $(document).ready(function() {
+                                        $('html, body').animate({
+                                            scrollTop: $(".product-details").parent(".card").offset().top
+                                        }, 100);
                                         $(".alert").fadeOut(10000);
                                         <?php unset($_SESSION["pr_details_suc"]); ?>
                                     });
@@ -116,7 +122,7 @@ if (isset($_GET["product_id"])) {
 
                         <h5 class="text-dark">Product Details</h5>
                         <hr>
-                        <div class="row">
+                        <div class="row product-details">
                             <div class="col-md-6">
                                 <div id="carouselExampleIndicators" class="carousel slide border">
 

@@ -66,7 +66,7 @@ main {
 }
 
 .buy_now_main .card .card-title {
-    font-size: 0.55em;
+    font-size: 0.5em;
     font-weight: 500;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -96,9 +96,26 @@ main {
     margin-left: 1%;
 }
 
-.buy_now_main .card input {
-    width: 40%;
+.buy_now_main .quantity-form {
+    position: relative !important;
+    width: 50%;
+}
+.buy_now_main .quantity-form button {
+    position: absolute;
+    height: 100%;
+    width: fit-content !important;
+}
+.buy_now_main .quantity-form input {
+    width: 100%;
     font-size: 0.5em;
+}
+.buy_now_main .quantity-form button:first-of-type {
+    left: 0;
+    bottom: 0;
+}
+.buy_now_main .quantity-form button:last-of-type {
+    right: 0 !important;
+    bottom: 0;
 }
 
 .buy_now_main .card .not-available {
@@ -108,19 +125,19 @@ main {
 
 
 /*! User details form */
-.buy_now_main form {
+.buy_now_main .user-form {
     margin-top: 7%;
 }
 
 .buy_now_main .sub-head {
     color: #30819c;
-    font-size: 0.7em;
+    font-size: 0.65em;
     font-weight: 600;
     margin-top: 3%;
 }
 
 .buy_now_main .form-label {
-    font-size: 0.6em;
+    font-size: 0.5em;
 }
 
 .buy_now_main .form-control,
@@ -131,7 +148,7 @@ main {
 .buy_now_main .purchase {
     display: none;
     width: 100%;
-    font-size: 0.6em;
+    font-size: 0.5em;
     font-weight: 500;
     color: white;
     border: none;
@@ -146,7 +163,7 @@ main {
 
 .buy_now_main .pay_btn {
     display: none;
-    font-size: 0.55em;
+    font-size: 0.5em;
     color: white;
     border: none;
     border-radius: 3px;
@@ -243,7 +260,7 @@ main {
     }
     .buy_now_main .card {
         width: 100%;
-        height: 100px;
+        height: 120px;
     }
     .buy_now_main .remove_btn {
         width: 20px;
@@ -269,11 +286,20 @@ main {
         display: flex;
     }
     .buy_now_main .card label {
-        margin: 0;
+        display: none;
     }
     .buy_now_main .card input {
         margin: 0;
-        margin-top: 2%;
+        padding: 0;
+    }
+    .buy_now_main .quantity-form {
+        width: 25%;
+        margin-top: 3%;
+    }
+    .buy_now_main .quantity-form button {
+        padding: 0 7%;
+        height: fit-content;
+        top: 0;
     }
 }
 

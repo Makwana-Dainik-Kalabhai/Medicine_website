@@ -23,7 +23,6 @@ $(document).ready(() => {
     }
   });
 
-
   $(".cat-img-check").change(function () {
     if (cat_img_check) {
       $(".category-form input[type='file']").show();

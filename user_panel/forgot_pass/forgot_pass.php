@@ -80,9 +80,6 @@
                         <span id="definition">Write down OTP here to change your password with new one.</span>
 
                         <form action="submit_form.php" method="post" enctype="multipart/form-data">
-                            <label for="email">Email:</label>
-                            <input type="email" name="email" placeholder="example123@gmail.com" />
-
                             <label for="otp">OTP:</label>
                             <input type="text" name="otp" placeholder="OTP Here..." required />
 

@@ -45,9 +45,7 @@ if (!isset($_SESSION["email"])) { ?>
 </style>
 
 <?php
-session_start();
 include("C:/xampp/htdocs/php/medicine_website/database.php");
-include("C:/xampp/htdocs/php/medicine_website/user_panel/links.php");
 
 require "./payment/vendor/autoload.php";
 

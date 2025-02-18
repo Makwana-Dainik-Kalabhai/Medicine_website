@@ -120,7 +120,7 @@ if (isset($_POST["email"])) {
                 <div class="row">
                   <div class="col-5 col-md-4">
                     <div class="icon-big text-center icon-warning">
-                      <img src="http://localhost/php/medicine_website/admin_panel/devices.png" alt="">
+                      <img src="http://localhost/php/medicine_website/admin_panel/device.png" alt="">
                     </div>
                   </div>
                   <div class="col-7 col-md-8">

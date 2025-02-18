@@ -31,8 +31,8 @@ include("C:/xampp/htdocs/php/medicine_website/database.php");
 
     <?php
     if (isset($_POST["product_id"])) {
-        $up = $conn->prepare("DELETE FROM `cart` WHERE `product_id`='" . $_POST["product_id"] . "' AND `email`='" . $_SESSION["email"] . "'");
-        $up->execute();
+        $del = $conn->prepare("DELETE FROM `cart` WHERE `product_id`='" . $_POST["product_id"] . "' AND `email`='" . $_SESSION["email"] . "'");
+        $del->execute();
     }
     ?>
 
@@ -104,9 +104,12 @@ include("C:/xampp/htdocs/php/medicine_website/database.php");
                                     <!-- //! Quantity -->
                                     <label class="form-label mx-2 mt-3">Quantity:</label>
                                     <?php if (isset($_GET["product"]) && $_GET["product"] == "multiple") { ?>
-                                        <input type="number" id="<?php echo $count - 1; ?>" class="form-control mx-2 mb-3 user-quantity" value="<?php echo $row["quantity"]; ?>" min="1" max="<?php echo ($prod_qua < 5) ? $prod_qua : 5; ?>" />
-                                    <?php } else { ?>
-                                        <input type="number" id="<?php echo $count - 1; ?>" value="1" class="form-control mx-2 mb-3 user-quantity" min="1" max="<?php echo ($prod_qua < 5) ? $prod_qua : 5; ?>" />
+                                        <div class="quantity-form">
+                                            <input type="hidden" class="available-quantity" value="<?php echo $prod_qua; ?>" />
+                                            <button class="form-control minus-quantity">-</button>
+                                            <input type="number" class="form-control text-center mb-3 quantity" name="quantity" id="<?php echo $count - 1; ?>" value="<?php echo (isset($_GET["product"]) && $_GET["product"] == "multiple") ? $row["quantity"] : 1; ?>" min="1" max="<?php echo ($prod_qua < 5) ? $prod_qua : 5; ?>" />
+                                            <button class="form-control plus-quantity">+</button>
+                                        </div>
                                     <?php } ?>
                                 </div>
 
@@ -136,7 +139,7 @@ include("C:/xampp/htdocs/php/medicine_website/database.php");
                 $select = $select->fetchAll();
 
                 foreach ($select as $row) { ?>
-                    <form action="http://localhost/php/medicine_website/user_panel/shop/buy_now/success.php" method="post">
+                    <form action="http://localhost/php/medicine_website/user_panel/shop/buy_now/success.php" method="post" class="user-form">
                         <!-- //! Order_id -->
                         <input type="hidden" name="form_order_id" value="<?php echo $order_id; ?>" />
 
@@ -230,7 +233,7 @@ include("C:/xampp/htdocs/php/medicine_website/database.php");
                         </div>
 
                         <div class="row">
-                            <p id="del_charge" style="color: red;font-size: 0.6em;font-weight: 600;">Delivery Charge:&emsp;+&#8377;50</p>
+                            <p id="del_charge" style="color: red;font-size: 0.55em;font-weight: 600;">Delivery Charge:&emsp;+&#8377;50</p>
                         </div>
                         <button id="rzp-button1" name="pay_now" value="razorpay" class="pay_btn px-5 py-3">Pay Now<br />₹</button>
                         <button name="pay_now" value="purchase" class="purchase px-5 py-3 mt-5"><i class="fa-solid fa-shopping-bag"></i>&ensp;Purchase</button>

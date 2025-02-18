@@ -30,7 +30,7 @@ main #cart {
 
 #cart #cart_header {
     position: relative;
-    padding: 1% 0;
+    padding: 1.5% 0;
     padding-left: 2%;
     margin-bottom: 1%;
     background-color: white;
@@ -42,13 +42,13 @@ main #cart {
     top: 45%;
     right: 1%;
     color: red;
-    font-size: 0.65em;
+    font-size: 0.6em;
     font-weight: 500;
     line-height: 0;
 }
 
 #cart #cart_header h1 {
-    font-size: 0.93em;
+    font-size: 0.85em;
 }
 
 /* //! All Products */
@@ -100,7 +100,7 @@ main #cart {
 }
 
 #products form input {
-    font-size: 0.7em;
+    font-size: 0.65em;
     width: 100%;
     height: 100%;
     padding-left: 3%;
@@ -126,13 +126,13 @@ main #cart {
 .available {
     color: green;
     text-align: center;
-    font-size: 0.8em;
+    font-size: 0.75em;
 }
 
 .not-available {
     color: red;
     text-align: center;
-    font-size: 0.8em;
+    font-size: 0.7em;
 }
 
 /* //! Product Details */
@@ -146,7 +146,7 @@ main #cart {
     top: 4%;
     right: 2%;
     color: gray;
-    font-size: 0.7em;
+    font-size: 0.65em;
     font-weight: 600;
     text-decoration: none;
     border-radius: 2px;
@@ -160,7 +160,7 @@ main #cart {
 #product_details #name {
     color: black;
     display: block;
-    font-size: 0.8em;
+    font-size: 0.75em;
     font-weight: 500;
     line-height: 1.5;
     text-transform: capitalize;
@@ -168,25 +168,25 @@ main #cart {
 
 #product_details #off_price {
     color: red;
-    font-size: 0.77em;
+    font-size: 0.72em;
 }
 
 #product_details #price {
     color: gray;
-    font-size: 0.7em;
+    font-size: 0.65em;
     text-decoration: line-through;
 }
 
 /* Discount */
 #product_details #dis {
     color: green;
-    font-size: 0.6em;
+    font-size: 0.55em;
 }
 
 #product_details #def {
     display: block;
     color: gray;
-    font-size: 0.65em;
+    font-size: 0.6em;
     line-height: 1.3;
     margin-top: 1.5%;
     text-align: justify;
@@ -208,9 +208,9 @@ main #cart {
 #product_details #buy_btn {
     position: absolute;
     bottom: 5%;
-    font-size: 0.7em;
+    font-size: 0.65em;
     font-weight: 600;
-    padding: 0.2% 3%;
+    padding: 0.3% 2.5%;
     color: white;
     background-color: #3ca1c3;
     text-decoration: none;
@@ -245,7 +245,7 @@ main #cart {
     width: 100%;
     text-align: center;
     padding: 1% 2%;
-    font-size: 0.85em;
+    font-size: 0.8em;
     font-weight: 500;
 }
 
@@ -296,19 +296,19 @@ main #cart {
 
 #bill_values th {
     width: 76%;
-    font-size: 0.7em;
+    font-size: 0.67em;
     font-weight: 400 !important;
     text-transform: capitalize;
 }
 
 #bill_values th span {
     color: gray;
-    font-size: 0.95em;
+    font-size: 1em;
 }
 
 #bill_values td {
     vertical-align: bottom;
-    font-size: 0.75em;
+    font-size: 0.7em;
 }
 
 
@@ -322,11 +322,11 @@ main #cart {
 
 #total_value th {
     color: #404040;
-    font-size: 0.78em;
+    font-size: 0.72em;
 }
 
 #total_value td {
-    font-size: 0.77em;
+    font-size: 0.72em;
 }
 
 
@@ -341,13 +341,13 @@ main #cart {
 
 #charges th {
     color: red;
-    font-size: 0.67em;
+    font-size: 0.62em;
     line-height: 1.2;
 }
 
 #charges td {
     color: red;
-    font-size: 0.69em;
+    font-size: 0.64em;
     line-height: 1.2;
 }
 
@@ -362,12 +362,12 @@ main #cart {
 
 #total_payble_value th {
     color: #2a7189;
-    font-size: 0.8em;
+    font-size: 0.75em;
 }
 
 #total_payble_value td {
     color: #2a7189;
-    font-size: 0.8em;
+    font-size: 0.75em;
 }
 
 
@@ -383,7 +383,7 @@ main #cart {
 #bill #btns a {
     width: fit-content;
     padding: 0.8% 5%;
-    font-size: 0.7em;
+    font-size: 0.65em;
     font-weight: 500;
     color: white;
     background-color: #3ca1c3;
@@ -410,7 +410,7 @@ main #cart {
 #bill #total_save {
     display: block;
     color: green;
-    font-size: 0.82em;
+    font-size: 0.77em;
     font-weight: 500;
     text-align: center;
     padding-bottom: 2%;
@@ -443,7 +443,7 @@ main #cart {
     width: fit-content;
     margin: 10% auto 0 auto;
     padding: 0.5% 2%;
-    font-size: 0.8em;
+    font-size: 0.75em;
     color: white;
     background-color: #3ca1c3;
     text-decoration: none;
@@ -624,7 +624,7 @@ main #cart {
     }
     #products #remove_btn {
         right: 5%;
-        font-size: 0.8em;
+        font-size: 0.75em;
     }
 
     #bill #btns a {
