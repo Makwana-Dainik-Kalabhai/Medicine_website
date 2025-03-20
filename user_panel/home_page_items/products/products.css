@@ -35,8 +35,8 @@
 #product_shop_category #products {
     width: 70%;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(23rem, 1fr));
-    grid-template-rows: 32rem 32rem;
+    grid-template-columns: repeat(auto-fill, minmax(21rem, 1fr));
+    grid-template-rows: 23rem 23rem;
     gap: 1.5rem;
     padding: 1.7rem;
     margin-left: 5%;
@@ -169,6 +169,7 @@
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
 }
+
 #popular_product #discount {
     position: absolute;
     top: 2%;
@@ -184,6 +185,7 @@
     background-color: red;
     z-index: 1;
 }
+
 #popular_product #price {
     color: gray;
     display: inline;
@@ -216,8 +218,8 @@
 
 @media (max-width: 1300px) {
     #product_shop_category #products {
-        grid-template-columns: repeat(auto-fill, minmax(23rem, 1fr));
-        grid-template-rows: 28rem 28rem;
+        grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+        grid-template-rows: 20rem 20rem;
     }
 
     #popular_product #products {
@@ -228,9 +230,10 @@
 
 @media (max-width: 1230px) {
     #product_shop_category #products {
-        grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
-        grid-template-rows: 25rem 25rem;
+        grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+        grid-template-rows: 19rem 19rem;
     }
+
     #popular_product #products {
         grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
     }
@@ -238,13 +241,14 @@
 
 @media (max-width: 1175px) {
     #product_shop_category #products {
-        grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
-        grid-template-rows: 25rem 25rem;
+        grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
+        grid-template-rows: 18rem 18rem;
     }
+
     #product_shop_category .category {
         font-size: 0.6em;
     }
-    
+
     #popular_product #products {
         grid-template-rows: 30rem 30rem 30rem;
     }
@@ -252,16 +256,18 @@
 
 @media (max-width: 1100px) {
     #product_shop_category #products {
-        grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
-        grid-template-rows: 23rem 23rem;
+        grid-template-columns: repeat(auto-fill, minmax(12.5rem, 1fr));
+        grid-template-rows: 16rem 16rem;
     }
+
     #product_shop_category .box img {
         padding: 1rem;
     }
+
     #product_shop_category .category {
         font-size: 0.55em;
     }
-    
+
     #popular_product #products {
         grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
         grid-template-rows: 29rem 29rem 29rem;
@@ -270,10 +276,10 @@
 
 @media (max-width: 985px) {
     #product_shop_category #products {
-        grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
-        grid-template-rows: 20rem 20rem;
+        grid-template-columns: repeat(auto-fill, minmax(11.5rem, 1fr));
+        grid-template-rows: 14rem 14rem;
     }
-    
+
     #popular_product #products {
         grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
         grid-template-rows: 27rem 27rem 27rem;
@@ -281,22 +287,31 @@
 }
 
 @media (max-width: 885px) {
-    #product_shop_category #products {
-        grid-template-columns: repeat(auto-fill, minmax(15.5rem, 1fr));
-        grid-template-rows: 18rem 18rem;
-        padding: 1rem;
-        margin-left: 2.5%;
+    #product_shop_category>div>img {
+        display: none;
     }
+
+    #product_shop_category #products {
+        width: 100%;
+        grid-template-columns: repeat(auto-fill, minmax(15.5rem, 1fr));
+        grid-template-rows: 19rem 19rem;
+        padding: 1rem;
+        margin: 0;
+    }
+
     #product_shop_category .box img {
         padding: 0.7rem;
     }
-    
+
     #popular_product>div>img {
         display: none;
     }
+    #popular_product {
+        font-size: 25px;
+    }
     #popular_product #products {
         width: 100%;
-        grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(15.5rem, 1fr));
         grid-template-rows: 26rem 26rem;
         padding: 1rem;
         margin: 0;
@@ -307,7 +322,7 @@
     #product_shop_category #products {
         grid-template-columns: repeat(auto-fill, minmax(14.5rem, 1fr));
     }
-    
+
     #popular_product #products {
         grid-template-columns: repeat(auto-fill, minmax(14.5rem, 1fr));
     }
@@ -318,18 +333,21 @@
         grid-template-columns: repeat(auto-fill, minmax(12.5rem, 1fr));
         grid-template-rows: 16rem 16rem;
     }
+
     #product_shop_category .box img {
         padding: 0.5rem;
     }
-    
+
     #popular_product #products {
         grid-template-rows: 24rem 24rem;
     }
+
     #popular_product #discount {
         width: 32px;
         height: 32px;
         font-size: 0.5em;
     }
+
     #popular_product .box a:last-of-type {
         font-size: 0.57em;
     }
@@ -340,43 +358,49 @@
         grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
         grid-template-rows: 14rem 14rem;
     }
+
     #product_shop_category .category {
         font-size: 0.45em;
     }
-    
-    #popular_product #products {
-        grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
-        grid-template-rows: 26rem 26rem 26rem;
+
+    #popular_product {
+        font-size: 20px;
     }
+    #popular_product #products {
+        grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+        grid-template-rows: 21rem 21rem;
+    }
+
     #popular_product #price {
         font-weight: 500;
     }
+
     #popular_product #off_price {
         font-weight: 500;
     }
+
     #popular_product #discount {
         font-weight: 600;
     }
+
     #popular_product .box a:last-of-type {
         font-weight: 500;
     }
 }
 
 @media (max-width: 595px) {
-    #product_shop_category img {
-        display: none;
-    }
     #product_shop_category #products {
         width: 100%;
         margin: 2rem auto;
-        grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
-        grid-template-rows: 16rem 16rem;
+        grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+        grid-template-rows: 17rem 17rem;
     }
-    
+
     #popular_product #products {
         grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
-        grid-template-rows: 23rem 23rem 23rem;
+        grid-template-rows: 20rem 20rem 20rem;
     }
+    
     #popular_product #discount {
         width: 30px;
         height: 30px;
@@ -390,13 +414,14 @@
     #product_shop_category #products {
         grid-template-rows: 19rem 19rem;
     }
+
     #product_shop_category .category {
         font-size: 0.55em;
     }
-    
+
     #popular_product #products {
-        grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
-        grid-template-rows: 26rem 26rem 26rem 26rem;
+        grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+        grid-template-rows: 18rem 18rem 18rem;
     }
 }
 
@@ -404,12 +429,10 @@
     #product_shop_category #products {
         grid-template-rows: 16rem 16rem 16rem;
     }
-    
+
     #popular_product #products {
-        grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
-    }
-    #popular_product #products img {
-        width: 100%;
+        grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+        grid-template-rows: 22rem 22rem 22rem 22rem;
     }
 }
 
@@ -418,10 +441,9 @@
         grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
         grid-template-rows: 14rem 14rem 14rem;
     }
-    
+
     #popular_product #products {
-        grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
-        grid-template-rows: 22rem 22rem 22rem 22rem;
+        grid-template-rows: 18rem 18rem 18rem 18rem;
     }
 }
 
@@ -430,17 +452,19 @@
         grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
         grid-template-rows: 12rem 12rem 12rem;
     }
-    
+
     #popular_product #products {
         grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
         grid-template-rows: 19rem 19rem 19rem 19rem;
     }
+
     #popular_product #discount {
         width: 20px;
         height: 20px;
         font-size: 0.3em;
         font-weight: 400;
     }
+
     #popular_product .box a:last-of-type {
         font-size: 0.45em;
     }

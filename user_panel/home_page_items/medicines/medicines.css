@@ -6,16 +6,17 @@
 /* //! Shop by category */
 #medicine_shop_category {
     width: 100%;
-    padding: 2%;
+    padding: 2% 0;
     margin: 0 auto;
     margin-bottom: 2.5%;
     background: linear-gradient(white, #76bdd5);
 }
 
 #medicine_shop_category>div {
+    padding: 0 2%;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
-    grid-gap: 1em;
+    grid-gap: 0.7em;
 }
 
 #medicine_shop_category>p {
@@ -51,7 +52,7 @@
     width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
-    grid-gap: 1em;
+    grid-gap: 0.7em;
     padding: 0 2%;
 }
 
@@ -156,20 +157,20 @@
 
 
 /* //! Media Queries */
-@media (max-width: 1000px) {
+@media (max-width: 1250px) {
     #medicine_shop_category>div {
-        grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
     }
     #popular_picks #picks {
-        grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
     }
 }
-@media (max-width: 890px) {
+@media (max-width: 1000px) {
     #medicine_shop_category>div {
-        grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
     }
     #popular_picks #picks {
-        grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
     }
 }
 @media (max-width: 630px) {
@@ -177,10 +178,10 @@
         margin-bottom: 5%;
     }
     #medicine_shop_category>div {
-        grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
     }
     #popular_picks #picks {
-        grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
     }
     #popular_picks #details {
         height: 105px;
@@ -193,8 +194,14 @@
     #medicine_shop_category>div {
         gap: 1rem;
     }
+    #medicine_shop_category img {
+        border-radius: 5px;
+    }
     #popular_picks #picks {
         gap: 1rem;
+    }
+    #picks #box {
+        border-radius: 5px;
     }
     #popular_picks #details {
         height: 85px;
@@ -208,14 +215,14 @@
         margin-bottom: 3%;
     }
     #medicine_shop_category>div {
-        grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
     }
     #popular_picks {
         padding: 5% 0;
         margin-bottom: 4%;
     }
     #popular_picks #picks {
-        grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
     }
 }
 @media (max-width: 300px) {

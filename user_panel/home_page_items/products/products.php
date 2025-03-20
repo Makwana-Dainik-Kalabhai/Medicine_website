@@ -18,7 +18,7 @@
             <?php
             include("C:/xampp/htdocs/php/medicine_website/database.php");
 
-            $sel = $conn->prepare("SELECT * FROM `products` WHERE `status`='device' GROUP BY `category`");
+            $sel = $conn->prepare("SELECT * FROM `products` WHERE `status`='device' GROUP BY `category` LIMIT 8");
             $sel->execute();
             $sel = $sel->fetchAll();
 
