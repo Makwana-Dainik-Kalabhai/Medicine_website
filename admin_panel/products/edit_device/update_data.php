@@ -3,26 +3,24 @@ session_start();
 include("C:/xampp/htdocs/php/medicine_website/database.php");
 
 if (isset($_POST["update-category"])) {
-    if ($_FILES["cat-img"]["name"] == null) {
-        $_SESSION["cat_error"] = "Please! Select the File";
-
-        if (isset($_SERVER['HTTP_REFERER'])) {
-            header("Location: " . $_SERVER['HTTP_REFERER'] . "");;
-        }
-        return;
-    }
 
     if (str_contains($_FILES["cat-img"]["name"], "'")) {
         $_FILES["cat-img"]["name"] = explode("'", $_FILES["cat-img"]["name"]);
         $_FILES["cat-img"]["name"] = $_FILES["cat-img"]["name"][0] . $_FILES["cat-img"]["name"][1];
     }
 
-    if (isset($_FILES["cat-img"])) {
-        $update = $conn->prepare("UPDATE `products` SET `category`='" . $_POST["category"] . "', `cat_img`='" . $_FILES["cat-img"]["name"] . "' WHERE `product_id`='" . $_SESSION["product_id"] . "'");
+    if ($_POST["category"] != null && isset($_FILES["cat-img"])) {
+        $update = $conn->prepare("UPDATE `products` SET `category`='" . $_POST["category"] . "', `cat_img`='" . $_FILES["cat-img"]["name"] . "' WHERE `category`='" . $_POST["old-cat"] . "'");
 
         move_uploaded_file($_FILES["cat-img"]["tmp_name"], "C:/xampp/htdocs/php/medicine_website/user_panel/shop/category_img/" . $_FILES["cat-img"]["name"] . "");
-    } else {
-        $update = $conn->prepare("UPDATE `products` SET `category`='" . $_POST["category"] . "' WHERE `product_id`='" . $_SESSION["product_id"] . "'");
+    } //
+    else if ($_POST["category"] != null && !isset($_FILES["cat-img"])) {
+        $update = $conn->prepare("UPDATE `products` SET `category`='" . $_POST["category"] . "' WHERE `category`='" . $_POST["old-cat"] . "'");
+    } //
+    else if ($_POST["category"] == null && isset($_FILES["cat-img"])) {
+        $update = $conn->prepare("UPDATE `products` SET `cat_img`='" . $_FILES["cat-img"]["name"] . "' WHERE `category`='" . $_POST["old-cat"] . "'");
+
+        move_uploaded_file($_FILES["cat-img"]["tmp_name"], "C:/xampp/htdocs/php/medicine_website/user_panel/shop/category_img/" . $_FILES["cat-img"]["name"] . "");
     }
     $update->execute();
 

@@ -43,6 +43,17 @@
                             </script>
                         </div>
                     <?php } ?>
+                    <?php if (isset($_SESSION["success"])) { ?>
+                        <div class="alert" style="background-color: #00b300;" role="alert">
+                            <?php echo $_SESSION["success"]; ?>
+                            <script>
+                                $(document).ready(function() {
+                                    $(".alert").fadeOut(15000);
+                                    <?php unset($_SESSION["success"]); ?>
+                                });
+                            </script>
+                        </div>
+                    <?php } ?>
 
                     <?php
                     $sel = $conn->prepare("SELECT * FROM `products` WHERE `product_id`='" . $_SESSION["product_id"] . "'");

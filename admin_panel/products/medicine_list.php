@@ -97,8 +97,8 @@ if (isset($_SESSION["pr_details_suc"])) {
                                     <td class="col-md-1"><?php echo $row["category"]; ?></td>
                                     <td class="col-md-3"><?php echo $row["name"]; ?></td>
                                     <td class="col-md-1"><?php
-                                                                        if ($row["expiry"] != null) echo $row["expiry"];
-                                                                        else echo "-"; ?></td>
+                                                            if ($row["expiry"] != null) echo $row["expiry"];
+                                                            else echo "-"; ?></td>
                                     <td class="col-md-1 text-center">
                                         ₹<?php echo $row["offer_price"]; ?><br />
                                         <span style="color:gray; text-decoration: line-through;">₹<?php echo $row["price"]; ?></span>
@@ -106,7 +106,7 @@ if (isset($_SESSION["pr_details_suc"])) {
                                     <td class="col-md-1 text-center">
                                         <?php if ($row["discount"] != 0) echo $row["discount"] . "%";
                                         else echo "-";
-                                    ?></td>
+                                        ?></td>
                                     <td class="col-md-1 text-center"><?php echo $row["quantity"]; ?></td>
                                     <td class="col-md-1">
                                         <?php $date = strtotime($row["delivery_date"]);
@@ -122,6 +122,26 @@ if (isset($_SESSION["pr_details_suc"])) {
                             <?php } ?>
                         </tbody>
                     </table>
+                </div>
+
+
+                <!-- //* Categories -->
+                <div class="card p-3 mt-5">
+                    <h6>Categories</h6>
+                </div>
+                <div class="card p-3">
+                    <div class="row">
+                        <?php
+                        $sel = $conn->prepare("SELECT * FROM `products` WHERE `status`='medicine' GROUP BY `category`");
+                        $sel->execute();
+                        $sel = $sel->fetchAll();
+
+                        foreach ($sel as $row) { ?>
+                            <div class="col-2 bg-light m-2"><img src="http://localhost/php/medicine_website/user_panel/shop/category_img/<?php echo $row["cat_img"]; ?>" alt="">
+                                <h6 class="text-center"><?php echo $row["category"]; ?></h6>
+                            </div>
+                        <?php } ?>
+                    </div>
                 </div>
             </div>
 

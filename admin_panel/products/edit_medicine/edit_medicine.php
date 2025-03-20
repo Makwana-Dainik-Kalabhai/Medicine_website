@@ -40,8 +40,10 @@ if (isset($_GET["product_id"])) {
 
                 foreach ($sel as $row) {
                     $count_img = 0;
-                    foreach (unserialize($row["item_img"]) as $img) {
-                        $count_img++;
+                    if ($row["item_img"] != null) {
+                        foreach (unserialize($row["item_img"]) as $img) {
+                            $count_img++;
+                        }
                     } ?>
 
                     <!-- //! Category Details -->
@@ -77,24 +79,14 @@ if (isset($_GET["product_id"])) {
                                 <div class="col-md-4 border p-2">
                                     <img class="category-img d-block w-50 m-auto" src="http://localhost/php/medicine_website/user_panel/shop/category_img/<?php echo $row["cat_img"]; ?>" />
                                 </div>
-                                <div class="col-md-8">
-                                    <div class="row">
-                                        <div class="col-md-6 border p-3 pb-5">
-                                            <input type="hidden" class="old-cat" value="<?php echo $row["category"]; ?>">
-                                            <input type="text" class="new-cat form-control" name="category" value="<?php echo $row["category"]; ?>">
-                                        </div>
-                                        <div class="col-md-6 border p-3 pb-5">
-                                            <input type="checkbox" class="mb-4" />&ensp;Are you want to change category image?
-                                            <input type="hidden" class="form-control old-cat-img" value="<?php echo $row["cat_img"]; ?>" />
-                                            <input type="file" name="cat-img" class="form-control cat-img" value="<?php echo $row["cat_img"]; ?>" disabled="true" accept="image/png, image/jpeg, image/jpg" />
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12 border p-4" style="color: red;">
-                                            <p>Note:</p>
-                                            ** If you update Category name, must to change category image **
-                                        </div>
-                                    </div>
+                                <div class="col-md-4 border p-3 pb-5">
+                                    <input type="hidden" class="old-cat" name="old-cat" value="<?php echo $row["category"]; ?>">
+                                    <input type="text" class="new-cat form-control" name="category" value="<?php echo $row["category"]; ?>">
+                                </div>
+                                <div class="col-md-4 border p-3 pb-5">
+                                    <input type="checkbox" class="mb-4" />&ensp;Are you want to change category image?
+                                    <input type="hidden" class="form-control old-cat-img" value="<?php echo $row["cat_img"]; ?>" />
+                                    <input type="file" name="cat-img" class="form-control cat-img" value="<?php echo $row["cat_img"]; ?>" disabled="true" accept="image/*" />
                                 </div>
                             </div>
                             <button class="update-category btn btn-danger m-0 mt-3 w-100" name="update-category">Update Category Details</button>
@@ -137,18 +129,20 @@ if (isset($_GET["product_id"])) {
                                     </div>
                                     <div class="carousel-inner">
                                         <?php $i = 0;
-                                        foreach (unserialize($row["item_img"]) as $img) {
-                                            if ($i == 0) { ?>
-                                                <div class="carousel-item active">
-                                                    <img src="http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo $img; ?>" />
-                                                </div>
-                                            <?php $i++;
-                                            } //
-                                            else { ?>
-                                                <div class="carousel-item">
-                                                    <img src="http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo $img; ?>" />
-                                                </div>
+                                        if ($row["item_img"] != null) {
+                                            foreach (unserialize($row["item_img"]) as $img) {
+                                                if ($i == 0) { ?>
+                                                    <div class="carousel-item active">
+                                                        <img src="http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo $img; ?>" />
+                                                    </div>
+                                                <?php $i++;
+                                                } //
+                                                else { ?>
+                                                    <div class="carousel-item">
+                                                        <img src="http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo $img; ?>" />
+                                                    </div>
                                         <?php }
+                                            }
                                         } ?>
                                     </div>
                                     <button class="carousel-control-prev border-0 bg-transparent" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -206,7 +200,7 @@ if (isset($_GET["product_id"])) {
                                             <p class="text-danger fs-3 m-0">Delivery Date <b style="color: red;">*</b></p>
                                             <?php if ($row["delivery_date"] != "0000-00-00") { ?>
                                                 <input type="text" name="delivery-date" class="form-control" value="<?php $date = strtotime($row["delivery_date"]);
-                                                                                                                    echo date("Y-m-d", $date); ?>" required />
+                                                                                                                    echo date("d-m-Y", $date); ?>" required />
                                             <?php } //
                                             else { ?>
                                                 <input type="date" name="delivery-date" class="form-control" required />

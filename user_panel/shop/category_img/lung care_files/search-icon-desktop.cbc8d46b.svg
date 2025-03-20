@@ -1,0 +1,34 @@
+<svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="28" height="28" fill="#F5F5F5"/>
+<g id="Desktop Home" clip-path="url(#clip0_131_7958)">
+<rect width="1440" height="4774" transform="translate(-452 -31)" fill="#FFFDFA"/>
+<g id="Nav Bar">
+<g id="Group 1000015721">
+<g id="Group 1000015718">
+<g id="Rectangle 40358" filter="url(#filter0_d_131_7958)">
+<rect x="-452" y="-31" width="1440" height="90" fill="white"/>
+</g>
+<g id="Search Bar">
+<rect id="Rectangle 40134" x="-17.5" y="-9.5" width="570" height="47" rx="23.5" fill="white" stroke="#ECECEC"/>
+<path id="Vector" d="M26 26L20.2 20.2M23.3333 12.6667C23.3333 18.5577 18.5577 23.3333 12.6667 23.3333C6.77563 23.3333 2 18.5577 2 12.6667C2 6.77563 6.77563 2 12.6667 2C18.5577 2 23.3333 6.77563 23.3333 12.6667Z" stroke="#5E5E5E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</g>
+</g>
+</g>
+</g>
+<defs>
+<filter id="filter0_d_131_7958" x="-462" y="-37" width="1460" height="110" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="4"/>
+<feGaussianBlur stdDeviation="5"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0.756863 0 0 0 0 0.643137 0 0 0 0 0.427451 0 0 0 0.1 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_131_7958"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_131_7958" result="shape"/>
+</filter>
+<clipPath id="clip0_131_7958">
+<rect width="1440" height="4774" fill="white" transform="translate(-452 -31)"/>
+</clipPath>
+</defs>
+</svg>

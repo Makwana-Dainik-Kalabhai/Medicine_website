@@ -40,7 +40,7 @@
                     } ?>
 
                     <div class="card px-3 py-0 my-5 overflow-hidden">
-                        <div class="row bg-danger text-light pt-4">
+                        <div class="row bg-success text-light pt-4">
                             <h5 class="ml-3 px-2 bg-light text-dark rounded"><?php echo $i; ?></h5>
                             <div class="col-md-2">
                                 <h6>Order ID</h6>
@@ -72,7 +72,7 @@
                             </div>
                         </div>
                         <div class="row py-2 border-bottom">
-                            <div class="col-md-2 py-4 text-danger">
+                            <div class="col-md-2 py-4 text-success">
                                 <h6>When Order Placed?</h6>
                             </div>
                             <div class="col-md-2 py-4">

@@ -5,14 +5,30 @@ include("C:/xampp/htdocs/php/medicine_website/database.php");
 
 //* Add Category Details
 if (isset($_POST["add_category"])) {
-    if ($_POST["category"] == null) {
+    if (isset($_POST["new-category"]) && $_POST["new-category"] == null) {
         $_SESSION["cat_error"] = "Please! Enter the Category Name";
 
         if (isset($_SERVER['HTTP_REFERER'])) {
             header("Location: " . $_SERVER['HTTP_REFERER'] . "");;
         }
         return;
+    } else {
+        $cat = $conn->prepare("SELECT * FROM `products` GROUP BY `category`");
+        $cat->execute();
+        $cat = $cat->fetchAll();
+
+        foreach ($cat as $r) {
+            if (isset($_POST["new-category"]) && $_POST["new-category"] == $r["category"]) {
+                $_SESSION["cat_error"] = "Category is Already Exist";
+
+                if (isset($_SERVER['HTTP_REFERER'])) {
+                    header("Location: " . $_SERVER['HTTP_REFERER'] . "");;
+                }
+                return;
+            }
+        }
     }
+
     if ($_POST["product_id"] == null) {
         $_SESSION["cat_error"] = "Please! Enter the Product ID";
 
@@ -22,15 +38,19 @@ if (isset($_POST["add_category"])) {
         return;
     }
 
-    if ($_FILES["cat-img"]["name"] == null) {
-        $cat_img = $conn->prepare("SELECT `cat_img` FROM `products` WHERE `category`='" . $_POST["category"] . "'");
-        $cat_img->execute();
-        $cat_img = $cat_img->fetchAll();
-        $cat_img = $cat_img[0][0];
+    if (isset($_POST["new-category"]) && $_FILES["cat-img"]["name"] == null) {
+        $_SESSION["cat_error"] = "Please! Select the Category Image";
 
         if (isset($_SERVER['HTTP_REFERER'])) {
             header("Location: " . $_SERVER['HTTP_REFERER'] . "");;
         }
+        return;
+    }
+    if (isset($_POST["old-category"]) && $_FILES["cat-img"]["name"] == null) {
+        $cat_img = $conn->prepare("SELECT `cat_img` FROM `products` WHERE `category`='" . $_POST["old-category"] . "'");
+        $cat_img->execute();
+        $cat_img = $cat_img->fetchAll();
+        $cat_img = $cat_img[0][0];
     }
 
     if (str_contains($_FILES["cat-img"]["name"], "'")) {
@@ -53,7 +73,7 @@ if (isset($_POST["add_category"])) {
         }
     }
 
-    $cat = $_POST["category"];
+    $cat = (isset($_POST["new-category"])) ? $_POST["new-category"] : $_POST["old-category"];
     if (!isset($cat_img)) {
         $cat_img = $_FILES["cat-img"]["name"];
     }
@@ -82,10 +102,11 @@ if (isset($_POST["add_category"])) {
     $in = $conn->prepare("INSERT INTO `products` VALUES(NOW(), '$cat','$cat_img','$item_img','$name','$def','$off_price','$price','$discount','$weight','$quantity','$desc_img','$desciption','$features','$specification','$link','$expiry','$benefits','$how_use','$safety','$other','$faqs','$del_date','$product_id','" . $_SESSION["status"] . "')");
 
     if ($in->execute()) {
+        if (!isset($_POST["old-category"])) {
+            move_uploaded_file($_FILES["cat-img"]["tmp_name"], "C:/xampp/htdocs/php/medicine_website/user_panel/shop/category_img/" . $_FILES["cat-img"]["name"] . "");
+        }
 
-        move_uploaded_file($_FILES["cat-img"]["tmp_name"], "C:/xampp/htdocs/php/medicine_website/user_panel/shop/category_img/" . $_FILES["cat-img"]["name"] . "");
-
-        $_SESSION["cat_success"] = "Product Category details added are successfully";
+        $_SESSION["cat_success"] = "Product Category Details are Added Successfully";
         $_SESSION["product_id"] = $product_id;
     }
     header("Location: http://localhost/php/medicine_website/admin_panel/products/add_product/add_product.php");
@@ -191,7 +212,7 @@ if (isset($_POST["add-product-details"])) {
     $p->insert();
     $p->update();
 
-    $_SESSION["pr_details_suc"] = "Product details are added auccessfully";
+    $_SESSION["pr_details_suc"] = "Product Details are Added Successfully";
 
     header("Location: http://localhost/php/medicine_website/admin_panel/products/add_product/add_product.php");
 }

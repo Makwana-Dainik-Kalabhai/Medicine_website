@@ -46,18 +46,34 @@ if (isset($_GET["product_id"])) {
 
                     <!-- //! Category Details -->
                     <div class="card px-5 py-4 mb-5">
-
-                        <!-- //** suc -->
-                        <?php if (isset($_SESSION["cat_suc"])) { ?>
+                        <!-- //** Error -->
+                        <?php if (isset($_SESSION["cat_error"])) { ?>
                             <div class="alert" style="background-color: #ff1a1a;" role="alert">
-                                <?php echo $_SESSION["cat_suc"]; ?>
+                                <?php echo $_SESSION["cat_error"];
+                                if (isset($_SESSION["cat_success"])) {
+                                    unset($_SESSION["cat_success"]);
+                                } ?>
                                 <script>
                                     $(document).ready(function() {
                                         $('html, body').animate({
                                             scrollTop: $(".category-form").parent(".card").offset().top
                                         }, 100);
                                         $(".alert").fadeOut(10000);
-                                        <?php unset($_SESSION["cat_suc"]); ?>
+                                        <?php unset($_SESSION["cat_error"]); ?>
+                                    });
+                                </script>
+                            </div>
+                        <?php } ?>
+
+                        <!-- //** Category details Added successfully -->
+                        <?php if (isset($_SESSION["cat_success"])) { ?>
+                            <div class="alert" style="background-color: #00b300;" role="alert">
+                                <?php echo $_SESSION["cat_success"]; ?>
+                                <script>
+                                    $(document).ready(function() {
+                                        $('html, body').animate({
+                                            scrollTop: $(".category-form").parent(".card").offset().top
+                                        }, 100);
                                     });
                                 </script>
                             </div>
@@ -86,8 +102,8 @@ if (isset($_GET["product_id"])) {
                                         </div>
                                         <div class="col-md-6 border p-3 pb-5">
                                             <input type="checkbox" class="mb-4" />&ensp;Are you want to change category image?
-                                            <input type="hidden" class="form-control old-cat-img" value="<?php echo $row["cat_img"]; ?>" />
-                                            <input type="file" name="cat-img" class="form-control cat-img" value="<?php echo $row["cat_img"]; ?>" disabled="true" accept="image/png, image/jpeg, image/jpg" />
+                                            <input type="hidden" class="form-control old-cat-img" name="old-cat" value="<?php echo $row["cat_img"]; ?>" />
+                                            <input type="file" name="cat-img" class="form-control cat-img" value="<?php echo $row["cat_img"]; ?>" disabled="true" accept="image/*" />
                                         </div>
                                     </div>
                                     <div class="row">
@@ -202,7 +218,13 @@ if (isset($_GET["product_id"])) {
                                     <div class="row mt-4">
                                         <div class="col-md-5">
                                             <p class="text-danger fs-3 m-0">Delivery Date <b style="color: red;">*</b></p>
-                                            <input type="text" name="delivery-date" class="form-control" value="<?php echo $row["delivery_date"]; ?>" required />
+                                            <?php if ($row["delivery_date"] != "0000-00-00") { ?>
+                                                <input type="text" name="delivery-date" class="form-control" value="<?php $date = strtotime($row["delivery_date"]);
+                                                                                                                    echo date("d-m-Y", $date); ?>" required />
+                                            <?php } //
+                                            else { ?>
+                                                <input type="date" name="delivery-date" class="form-control" required />
+                                            <?php } ?>
                                         </div>
                                     </div>
                                     <div class="row mt-4">

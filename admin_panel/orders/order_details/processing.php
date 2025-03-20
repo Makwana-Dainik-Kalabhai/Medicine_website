@@ -49,14 +49,13 @@ if (isset($_GET["order_id"])) {
                 foreach ($sel as $row) { ?>
                     <div class="card px-3 py-0 my-5 overflow-hidden">
                         <div class="row bg-danger text-light pt-4">
-                            <h5 class="ml-3 px-2 bg-light text-dark rounded"><?php echo $i; ?></h5>
                             <div class="col-md-2">
                                 <h6>Order ID</h6>
                             </div>
                             <div class="col-md-2">
                                 <h6>Name</h6>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <h6>Email</h6>
                             </div>
                             <div class="col-md-2">
@@ -67,10 +66,9 @@ if (isset($_GET["order_id"])) {
                             </div>
                         </div>
                         <div class="row py-3 border-bottom">
-                            <h5 class="ml-3 px-2"></h5>
                             <div class="col-md-2"><?php echo $row["order_id"]; ?></div>
                             <div class="col-md-2"><?php echo $row["name"]; ?></div>
-                            <div class="col-md-2"><?php echo $row["email"]; ?></div>
+                            <div class="col-md-3"><?php echo $row["email"]; ?></div>
                             <div class="col-md-2"><?php echo $row["phone"]; ?></div>
                             <div class="col-md-3">
                                 <?php if ($row["delivery_address"] != null) {
@@ -142,7 +140,7 @@ if (isset($_GET["order_id"])) {
                                 <p class="my-2 text-danger">Payment Status</p>
 
                                 <?php if ($row["payment_status"] == "Paid") { ?>
-                                    <input type="text" value="<?php echo $row["payment_status"]; ?>" disabled />
+                                    <input type="text" class="form-control" value="<?php echo $row["payment_status"]; ?>" disabled />
                                 <?php } //
                                 else { ?>
                                     <select name="payment_status" class="form-control">

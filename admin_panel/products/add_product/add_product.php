@@ -3,9 +3,6 @@ session_start();
 if (isset($_GET["status"])) {
     $_SESSION["status"] = $_GET["status"];
 }
-if (isset($_GET["product_id"])) {
-    $_SESSION["product_id"] = $_GET["product_id"];
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -53,12 +50,8 @@ if (isset($_GET["product_id"])) {
                                 $count_img++;
                             }
                         }
-                    } ?>
-
-                    <div class="card px-4 py-2">
-                        <h6>Are You want to Delete this Product?&emsp;<a href="http://localhost/php/medicine_website/admin_panel/products/delete_pr.php?product_id=<?php echo $row["product_id"]; ?>" class="btn btn-secondary text-light">Delete</a></h6>
-                    </div>
-                <?php } ?>
+                    }
+                } ?>
 
 
                 <!-- //! Category Details -->
@@ -66,7 +59,10 @@ if (isset($_GET["product_id"])) {
                     <!-- //** Error -->
                     <?php if (isset($_SESSION["cat_error"])) { ?>
                         <div class="alert" style="background-color: #ff1a1a;" role="alert">
-                            <?php echo $_SESSION["cat_error"]; ?>
+                            <?php echo $_SESSION["cat_error"];
+                            if (isset($_SESSION["cat_success"])) {
+                                unset($_SESSION["cat_success"]);
+                            } ?>
                             <script>
                                 $(document).ready(function() {
                                     $('html, body').animate({
@@ -112,7 +108,7 @@ if (isset($_GET["product_id"])) {
                             </div>
 
                             <div class="col-md-3 border p-3 pb-5">
-                                <input type="file" name="cat-img" class="form-control" accept="image/png, image/jpeg, image/jpg" />
+                                <input type="file" name="cat-img" class="form-control" accept="image/*" />
                                 <input type="checkbox" class="mt-3 cat-img-check" />&ensp;Are you want to change Category Image?
                             </div>
 
@@ -123,13 +119,13 @@ if (isset($_GET["product_id"])) {
                                 $category->execute();
                                 $category = $category->fetchAll(); ?>
 
-                                <select class="form-control old-cat" name="category" disabled="true">
+                                <select class="form-control old-cat" name="old-category" disabled="true">
                                     <?php foreach ($category as $cat) { ?>
                                         <option value="<?php echo $cat["category"]; ?>"><?php echo $cat["category"]; ?></option>
                                     <?php } ?>
                                 </select>
 
-                                <input type="text" class="form-control my-3 new-cat" name="category" placeholder="Enter Category" />
+                                <input type="text" class="form-control my-3 new-cat" name="new-category" placeholder="Enter Category" />
 
                                 <input type="checkbox" class="sel-cat-check" />&ensp;Are you want to select existing category?
                             </div>
@@ -151,7 +147,10 @@ if (isset($_GET["product_id"])) {
                     <!-- //** Error -->
                     <?php if (isset($_SESSION["pr_img_error"])) { ?>
                         <div class="alert" style="background-color: #ff1a1a;" role="alert">
-                            <?php echo $_SESSION["pr_img_error"]; ?>
+                            <?php echo $_SESSION["pr_img_error"];
+                            if (isset($_SESSION["pr_img_suc"])) {
+                                unset($_SESSION["pr_img_suc"]);
+                            } ?>
                             <script>
                                 $(document).ready(function() {
                                     $('html, body').animate({

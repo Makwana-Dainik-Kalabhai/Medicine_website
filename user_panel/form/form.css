@@ -135,7 +135,7 @@ main {
     font-size: 0.65em;
     outline: none;
     border: none;
-    border-bottom: 1px solid gray;
+    border-bottom: 2px solid gray;
 }
 
 .pass_div {
@@ -169,7 +169,7 @@ main {
 }
 
 .regi_form input:focus {
-    border-bottom: 2px solid gray;
+    border-bottom: 2.25px solid #0000b3;
 }
 
 #forget_pass_link {

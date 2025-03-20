@@ -63,7 +63,7 @@ if (isset($_POST["add-item-img"])) {
             $_SESSION["pr_img_suc"] = "Product Image Added Successfully";
         } //
         else {
-            $_SESSION["pr_img_error"] = "Please! Change name of the Image";
+            $_SESSION["pr_img_error"] = "Something went Wrong";
         }
     }
 
@@ -133,8 +133,8 @@ if (isset($_POST["update-item-img"])) {
 
     foreach ($sel as $r) {
         if ($r["item_img"] != null) {
-            foreach (unserialize($r["item_img"]) as $img) {
-                if ($_FILES["item-img"]["name"] == $img) {
+            foreach (unserialize($r["item_img"]) as $key => $img) {
+                if ($_FILES["item-img"]["name"] == $img && $_POST["update-item-img"] != $key+1) {
                     $contain = true;
                 }
             }
@@ -162,6 +162,7 @@ if (isset($_POST["update-item-img"])) {
 
         if ($up->execute()) {
             move_uploaded_file($_FILES["item-img"]["tmp_name"], "C:/xampp/htdocs/php/medicine_website/user_panel/shop/imgs/" . $_FILES["item-img"]["name"] . "");
+            $_SESSION["pr_img_suc"] = "Product Image Deleted Successfully";
         } //
         else {
             $_SESSION["pr_img_error"] = "Please! Change name of the Image";

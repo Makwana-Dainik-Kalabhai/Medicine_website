@@ -21,6 +21,10 @@ if (isset($_POST["cancel_yes"])) {
             }
             $upPro = $conn->prepare("UPDATE `products` SET `quantity`=$upQuan WHERE `product_id`='" . unserialize($row["items"])[$i] . "'");
             $upPro->execute();
+            
+
+            $upTime = $conn->prepare("UPDATE `orders` SET `time`=NOW WHERE `order_id`='" . $_POST["order_id"] . "'");
+            $upTime->execute();
         }
     }
 ?>

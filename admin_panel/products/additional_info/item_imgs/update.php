@@ -24,8 +24,8 @@ if (isset($_POST["change"])) {
 
     foreach ($sel as $r) {
         if ($r["item_img"] != null) {
-            foreach (unserialize($r["item_img"]) as $img) {
-                if ($_FILES["item-img"]["name"] == $img) {
+            foreach (unserialize($r["item_img"]) as $key => $img) {
+                if ($_FILES["item-img"]["name"] == $img && $_POST["change"] != $key + 1) {
                     $contain = true;
                 }
             }
@@ -56,9 +56,10 @@ if (isset($_POST["change"])) {
 
         if ($up->execute()) {
             move_uploaded_file($_FILES["item-img"]["tmp_name"], "C:/xampp/htdocs/php/medicine_website/user_panel/shop/imgs/" . $_FILES["item-img"]["name"] . "");
+            $_SESSION["pr_img_suc"] = "Product Image updated Successfully";
         } //
         else {
-            $_SESSION["error"] = "Please! Change name of the Image";
+            $_SESSION["error"] = "Something went Wrong";
         }
     }
     header("Location: http://localhost/php/medicine_website/admin_panel/products/additional_info/item_imgs/item_imgs.php");

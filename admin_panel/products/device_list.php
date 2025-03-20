@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -98,14 +99,14 @@ if (isset($_SESSION["pr_details_suc"])) {
                                         <span style="color:gray; text-decoration: line-through;">₹<?php echo $row["price"]; ?></span>
                                     </td>
                                     <td class="col-md-1 text-center"><?php if ($row["discount"] != 0) echo $row["discount"] . "%";
-                                                            else echo "-";  ?></td>
+                                                                        else echo "-";  ?></td>
                                     <td class="col-md-1 text-center"><?php echo $row["quantity"]; ?></td>
                                     <td class="col-md-1">
                                         <?php $date = strtotime($row["delivery_date"]);
                                         echo date("M d, Y", $date); ?>
                                     </td>
                                     <td class="col-md-1 text-center edit-delete-btn">
-                                        <a href="http://localhost/php/medicine_website/admin_panel/products/edit_medicine/edit_medicine.php?product_id=<?php echo $row["product_id"]; ?>" style="color: #3333ff;" class="edit-btn"><i class="fa-solid fa-edit"></i> Edit</a>
+                                        <a href="http://localhost/php/medicine_website/admin_panel/products/edit_device/edit_device.php?product_id=<?php echo $row["product_id"]; ?>" style="color: #3333ff;" class="edit-btn"><i class="fa-solid fa-edit"></i> Edit</a>
                                     </td>
                                     <td class="col-md-1 text-center edit-delete-btn">
                                         <a href="http://localhost/php/medicine_website/admin_panel/products/delete_pr.php?product_id=<?php echo $row["product_id"]; ?>" style="color: #3333ff;" class="delete-btn"><i class="fa-solid fa-trash"></i> Delete</a>
@@ -114,6 +115,26 @@ if (isset($_SESSION["pr_details_suc"])) {
                             <?php } ?>
                         </tbody>
                     </table>
+                </div>
+
+
+                <!-- //* Categories -->
+                <div class="card p-3 mt-5">
+                    <h6>Categories</h6>
+                </div>
+                <div class="card p-3">
+                    <div class="row">
+                        <?php
+                        $sel = $conn->prepare("SELECT * FROM `products` WHERE `status`='device' GROUP BY `category`");
+                        $sel->execute();
+                        $sel = $sel->fetchAll();
+
+                        foreach ($sel as $row) { ?>
+                            <div class="col-2 bg-light m-2"><img src="http://localhost/php/medicine_website/user_panel/shop/category_img/<?php echo $row["cat_img"]; ?>" alt="">
+                                <h6 class="text-center"><?php echo $row["category"]; ?></h6>
+                            </div>
+                        <?php } ?>
+                    </div>
                 </div>
             </div>
 

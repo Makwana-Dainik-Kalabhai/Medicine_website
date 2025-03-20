@@ -19,8 +19,8 @@ if (isset($_POST["change"])) {
 
     foreach ($sel as $r) {
         if ($r["desc_img"] != null) {
-            foreach (unserialize($r["desc_img"]) as $des) {
-                if ($_FILES["desc-img"]["name"] == $des) {
+            foreach (unserialize($r["desc_img"]) as $key => $des) {
+                if ($_FILES["desc-img"]["name"] == $des && $_POST["change"] != $key + 1) {
                     $contain = true;
                 }
             }
@@ -54,6 +54,7 @@ if (isset($_POST["change"])) {
 
         if ($up->execute()) {
             move_uploaded_file($_FILES["desc-img"]["tmp_name"], "C:/xampp/htdocs/php/medicine_website/user_panel/shop/desc_imgs/" . $_FILES["desc-img"]["name"] . "");
+            $_SESSION["success"] = "Product Description Image updated Successfully";
         } //
         else {
             $_SESSION["error"] = "Please! Change name of the Image";
@@ -127,7 +128,6 @@ if (isset($_POST["add"])) {
 
 // ! Delete Description Image
 if (isset($_POST["delete"])) {
-    $i = 1;
     $desc_img = array();
 
     $sel = $conn->prepare("SELECT * FROM `products` WHERE `product_id`='" . $_SESSION["product_id"] . "'");
@@ -136,11 +136,13 @@ if (isset($_POST["delete"])) {
 
     foreach ($sel as $r) {
         if ($r["desc_img"] != null) {
-            foreach (unserialize($r["desc_img"]) as $des) {
-                if ($i != $_POST["delete"]) {
+            foreach (unserialize($r["desc_img"]) as $key => $des) {
+                if ($key + 1 != $_POST["delete"]) {
                     array_push($desc_img, $des);
+                } //
+                else if ($key + 1 == $_POST["delete"]) {
+                    unlink("C:/xampp/htdocs/php/medicine_website/user_panel/shop/desc_imgs/$des");
                 }
-                $i++;
             }
         }
     }

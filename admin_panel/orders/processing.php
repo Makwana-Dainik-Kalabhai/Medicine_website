@@ -10,12 +10,6 @@
     <?php include("C:/xampp/htdocs/php/medicine_website/admin_panel/links.php"); ?>
 </head>
 
-<script>
-    // setInterval(() => {
-    //     window.location.reload();
-    // }, 1000);
-</script>
-
 <body class="">
     <div class="wrapper ">
         <!-- // Sidebar -->
@@ -26,18 +20,18 @@
 
             <div class="content">
                 <div class="card">
-                    <h6 class="mx-5 py-3" style="color: gray;">Processing Orders List</h6>
+                    <h6 class="mx-5 py-3" style="color: red;">Processing Orders List</h6>
                 </div>
 
                 <?php
-                $sel = $conn->prepare("SELECT * FROM `orders` WHERE `status`='Processing'");
+                $sel = $conn->prepare("SELECT * FROM `orders` WHERE `status`='Processing' ORDER BY `time` DESC");
                 $sel->execute();
                 $sel = $sel->fetchAll();
                 $i = 1;
 
                 foreach ($sel as $row) { ?>
                     <div class="card px-3 py-0 my-5 overflow-hidden">
-                        <div class="row bg-danger text-light pt-4">
+                        <div class="row text-light pt-4" style="background-color: #ff3333;">
                             <h5 class="ml-3 px-2 bg-light text-dark rounded"><?php echo $i; ?></h5>
                             <div class="col-md-2">
                                 <h6>Order ID</h6>
@@ -70,7 +64,7 @@
                         </div>
 
                         <div class="row py-2">
-                            <div class="col-md-2 py-4 text-danger">
+                            <div class="col-md-2 py-4" style="color: red;">
                                 <h6>When Order Placed?</h6>
                             </div>
                             <div class="col-md-2 py-4">
@@ -81,7 +75,7 @@
                             <div class="col-md-1"><a href="http://localhost/php/medicine_website/admin_panel/orders/order_details/processing.php?order_id=<?php echo $row["order_id"]; ?>" class="btn btn-secondary">View</a></div>
                         </div>
                     </div>
-                <?php } ?>
+                <?php $i++; } ?>
             </div>
         </div>
 

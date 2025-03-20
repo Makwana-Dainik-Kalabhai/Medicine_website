@@ -62,12 +62,14 @@ $(document).ready(function () {
   //* Minus Quantity
   $(".minus-quantity").click(function () {
     let total = 0;
-    $(this)
-      .next()
-      .val(parseInt($(this).next().val()) - 1);
+    if (parseInt($(this).next().val()) > 1) {
+      $(this)
+        .next()
+        .val(parseInt($(this).next().val()) - 1);
       $(this).siblings("button").removeAttr("disabled");
+    }
 
-    if (parseInt($(this).next().val()) <= 1) {
+    if (parseInt($(this).next().val()) < 2) {
       $(this).attr("disabled", "true");
     }
 
@@ -94,24 +96,26 @@ $(document).ready(function () {
   //* Plus Quantity
   $(".plus-quantity").click(function () {
     let total = 0;
-    $(this)
-      .prev(".quantity")
-      .val(parseInt($(this).prev(".quantity").val()) + 1);
-      $(this).siblings("button").removeAttr("disabled");
-
-    if (parseInt($(this).prev(".quantity").val()) >= 5) {
-      $(this).attr("disabled", "true");
-    }
     if (
+      parseInt($(this).prev(".quantity").val()) < 5 &&
+      parseInt($(this).prev(".quantity").val()) <
+        parseInt($(this).siblings(".available-quantity").val())
+    ) {
+      $(this)
+        .prev(".quantity")
+        .val(parseInt($(this).prev(".quantity").val()) + 1);
+      $(this).siblings("button").removeAttr("disabled");
+    }
+
+    if (
+      parseInt($(this).prev(".quantity").val()) >= 5 ||
       parseInt($(this).prev(".quantity").val()) >=
       parseInt($(this).siblings(".available-quantity").val())
     ) {
       $(this).attr("disabled", "true");
     }
 
-    quantity[$(this).prev(".quantity").attr("id")] = $(this)
-      .prev(".quantity")
-      .val();
+    quantity[$(this).prev(".quantity").attr("id")] = $(this).prev(".quantity").val();
 
     for (let i = 0; i < off_price.length; i++) {
       total += off_price[i] * quantity[i];

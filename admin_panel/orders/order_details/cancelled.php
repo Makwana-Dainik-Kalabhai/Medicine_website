@@ -72,7 +72,7 @@ if (isset($_GET["order_id"])) {
                             <div class="col-md-2">
                                 <h6>Name</h6>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <h6>Email</h6>
                             </div>
                             <div class="col-md-2">
@@ -85,7 +85,7 @@ if (isset($_GET["order_id"])) {
                         <div class="row py-3 border-bottom">
                             <div class="col-md-2"><?php echo $row["order_id"]; ?></div>
                             <div class="col-md-2"><?php echo $row["name"]; ?></div>
-                            <div class="col-md-2"><?php echo $row["email"]; ?></div>
+                            <div class="col-md-3"><?php echo $row["email"]; ?></div>
                             <div class="col-md-2"><?php echo $row["phone"]; ?></div>
                             <div class="col-md-3">
                                 <?php if ($row["delivery_address"] != null) {

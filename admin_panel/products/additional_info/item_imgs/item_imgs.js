@@ -26,7 +26,7 @@ $(document).ready(function () {
     $(
       `<div class='row border-bottom py-4'>
         <div class='col-md-1'>${last_img})</div>
-        <div class='col-md-3'><img /></div>
+        <div class='col-md-4'><img /></div>
         <div class='col-md-4'>
           Select the Image
           <input type='file' name='new-img' class='form-control mt-4' accept='image/*' required />
@@ -34,6 +34,7 @@ $(document).ready(function () {
         <div class='col-md-2'>
           <button class='btn btn-light add-btn' name='add'>Add</button>
         </div>
+        <div class='col-md-1'></div>
       </div>`
     ).appendTo(".item-imgs-form");
     last_img++;
