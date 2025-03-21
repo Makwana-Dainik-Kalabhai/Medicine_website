@@ -103,7 +103,7 @@ if (isset($_GET["status"])) {
                             <div class="col-md-3 border pb-3 p-2">Product ID <b style="color: red;">*</b></div>
                         </div>
                         <div class="row">
-                            <div class="col-md-3 border p-3 pb-5">
+                            <div class="col-md-3 border p-3 pb-5 d-flex justify-content-center">
                                 <img src="http://localhost/php/medicine_website/user_panel/shop/category_img/<?php echo isset($cat_img) ? $cat_img : ""; ?>" alt="">
                             </div>
 
@@ -195,7 +195,7 @@ if (isset($_GET["status"])) {
                                     foreach (unserialize($r["item_img"]) as $img) { ?>
                                         <div class='row border-bottom py-4'>
                                             <div class='col-md-1'><?php echo $i ?>)</div>
-                                            <div class='col-md-3'><img src="http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo $img; ?>" /></div>
+                                            <div class='col-md-3 d-flex justify-content-center'><img src="http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo $img; ?>" /></div>
                                             <div class='col-md-4'>
                                                 <p class="text-danger mb-1">File Name:</p>
                                                 <?php echo $img; ?>
@@ -285,7 +285,7 @@ if (isset($_GET["status"])) {
                                     <b style="color: red;">* Required Fields</b>
                                     <div class="row">
                                         <p class="text-danger fs-3 my-2">Product Name <b style="color: red;">*</b></p>
-                                        <input type="text" name="name" class="form-control" value="<?php echo $r["name"]; ?>" />
+                                        <input type="text" name="name" class="form-control" value="<?php echo $r["name"]; ?>" required />
                                     </div>
                                     <div class="row">
                                         <p class="text-danger fs-3 mt-4 mb-2">Definition</p>
@@ -294,23 +294,23 @@ if (isset($_GET["status"])) {
                                     <div class="row mt-4">
                                         <div class="col-md-5">
                                             <p class="text-danger fs-3 m-0">Discount <b style="color: red;">*</b></p>
-                                            <input type="number" name="discount" class="form-control" step="0.01" value="<?php echo $r["discount"]; ?>">
+                                            <input type="number" name="discount" class="form-control" step="0.01" value="<?php echo $r["discount"]; ?>" required>
                                         </div>
                                     </div>
                                     <div class="row mt-4">
                                         <div class="col-md-5">
                                             <p class="text-danger fs-3 m-0">Offer Price <b style="color: red;">*</b></p>
-                                            <input type="number" name="offer-price" class="form-control" step="0.01" value="<?php echo $r["offer_price"]; ?>">
+                                            <input type="number" name="offer-price" class="form-control" step="0.01" value="<?php echo $r["offer_price"]; ?>" required>
                                         </div>
                                         <div class="col-md-5">
                                             <p class="text-danger fs-3 m-0">Price <b style="color: red;">*</b></p>
-                                            <input type="number" name="price" class="form-control" step="0.01" value="<?php echo $r["price"]; ?>">
+                                            <input type="number" name="price" class="form-control" step="0.01" value="<?php echo $r["price"]; ?>" required>
                                         </div>
                                     </div>
                                     <div class="row mt-4">
                                         <div class="col-md-5">
                                             <p class="text-danger fs-3 m-0">Quantity <b style="color: red;">*</b></p>
-                                            <input type="number" name="quantity" class="form-control" value="<?php echo $r["quantity"]; ?>">
+                                            <input type="number" name="quantity" class="form-control" value="<?php echo $r["quantity"]; ?>" required>
                                         </div>
                                         <div class="col-md-5">
                                             <p class="text-danger fs-3 m-0">Weight</p>
@@ -318,17 +318,20 @@ if (isset($_GET["status"])) {
                                         </div>
                                     </div>
                                     <div class="row mt-4">
-                                        <div class="col-md-5">
-                                            <p class="text-danger fs-3 m-0">Expiry Date <b style="color: red;">*</b></p>
-                                            <input type="text" name="expiry" class="form-control" placeholder="Nov 2024">
-                                        </div>
+                                        <?php if ($_SESSION["status"] == "medicine") { ?>
+                                            <div class="col-md-5">
+                                                <p class="text-danger fs-3 m-0">Expiry Date <b style="color: red;">*</b></p>
+                                                <input type="text" name="expiry" class="form-control" placeholder="Nov 2024" required>
+                                            </div>
+                                        <?php } ?>
                                         <div class="col-md-5">
                                             <p class="text-danger fs-3 m-0">Delivery Date <b style="color: red;">*</b></p>
-                                            <?php if (!isset($_SESSION["product_success"])) { ?>
-                                                <input type="date" name="delivery-date" class="form-control" />
+                                            <?php if ($r["delivery_date"] == "0000-00-00") { ?>
+                                                <input type="date" name="delivery-date" class="form-control" required />
                                             <?php } //
                                             else { ?>
-                                                <input type="text" name="delivery-date" value="<?php echo $r["delivery_date"]; ?>" class="form-control" />
+                                                <input type="text" name="delivery-date" value="<?php $date = strtotime($r["delivery_date"]);
+                                                                                                echo date("d-m-Y", $date); ?>" class="form-control" />
                                             <?php } ?>
                                         </div>
                                     </div>

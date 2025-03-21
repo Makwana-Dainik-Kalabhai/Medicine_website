@@ -16,7 +16,7 @@ if (isset($_POST["update-description"])) {
         if ($row["description"] != null) {
 
             foreach (unserialize($row["description"]) as $d) {
-                if (($i + 1) == $_POST["update-description"]) {
+                if ($i == $_POST["update-description"]) {
 
                     //* Push only Value on particular index
                     if ($_POST["key"][$i] == null && $_POST["value"][$i] != null) {
@@ -39,7 +39,6 @@ if (isset($_POST["update-description"])) {
                         }
                         array_push($desc, array($_POST["key"][$i], $_POST["value"][$i]));
                     }
-                    $key = $_POST["key"][$i];
 
                     //
                 } else if ($_POST["key"][$i] == null && $_POST["value"][$i] != null) {
@@ -56,7 +55,7 @@ if (isset($_POST["update-description"])) {
     $up = $conn->prepare("UPDATE `products` SET `description`='" . serialize($desc) . "' WHERE `product_id`='" . $_SESSION["product_id"] . "'");
     $up->execute();
 
-    $_SESSION["success"] = "Key \"" . $key . "\" updated successfully";
+    $_SESSION["success"] = "Data No. " . $_POST["update-description"] + 1 . ") Updated successfully";
 
     header("Location: http://localhost/php/medicine_website/admin_panel/products/additional_info/description/description.php");
 }
@@ -121,17 +120,13 @@ if (isset($_POST["delete-description"])) {
 
             foreach (unserialize($row["description"]) as $d) {
                 if (isset($d[0]) && isset($d[1])) {
-                    if (($i + 1) != $_POST["delete-description"]) {
+                    if ($i != $_POST["delete-description"]) {
                         array_push($desc, array($d[0], $d[1]));
                     }
                 } else {
-                    if (($i + 1) != $_POST["delete-description"]) {
+                    if ($i != $_POST["delete-description"]) {
                         array_push($desc, array($d[0]));
                     }
-                }
-                //
-                if (($i + 1) == $_POST["delete-description"]) {
-                    $key = $_POST["key"][$i];
                 }
                 $i++;
             }
@@ -141,7 +136,7 @@ if (isset($_POST["delete-description"])) {
     $up = $conn->prepare("UPDATE `products` SET `description`='" . serialize($desc) . "' WHERE `product_id`='" . $_SESSION["product_id"] . "'");
     $up->execute();
 
-    $_SESSION["success"] = "Key \"" . $key . "\" deleted successfully";
+    $_SESSION["success"] = "Data No. " . $_POST["delete-description"] + 1 . ") " . "Deleted successfully";
 
     header("Location: http://localhost/php/medicine_website/admin_panel/products/additional_info/description/description.php");
 }

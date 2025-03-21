@@ -25,7 +25,7 @@ if (isset($_POST["change"])) {
     foreach ($sel as $r) {
         if ($r["item_img"] != null) {
             foreach (unserialize($r["item_img"]) as $key => $img) {
-                if ($_FILES["item-img"]["name"] == $img && $_POST["change"] != $key + 1) {
+                if ($_FILES["item-img"]["name"] == $img && $_POST["change"] != $key) {
                     $contain = true;
                 }
             }
@@ -43,7 +43,7 @@ if (isset($_POST["change"])) {
         foreach ($sel as $r) {
             if ($r["item_img"] != null) {
                 foreach (unserialize($r["item_img"]) as $key => $img) {
-                    if ($key + 1 != $_POST["change"]) {
+                    if ($key != $_POST["change"]) {
                         array_push($item_img, $img);
                     } else {
                         array_push($item_img, $_FILES["item-img"]["name"]);
@@ -136,10 +136,10 @@ if (isset($_POST["delete"])) {
     foreach ($sel as $r) {
         if ($r["item_img"] != null) {
             foreach (unserialize($r["item_img"]) as $key => $img) {
-                if ($key + 1 != $_POST["delete"]) {
+                if ($key != $_POST["delete"]) {
                     array_push($item_img, $img);
                 } //
-                else if ($key + 1 == $_POST["delete"]) {
+                else if ($key == $_POST["delete"]) {
                     unlink("C:/xampp/htdocs/php/medicine_website/user_panel/shop/imgs/$img");
                 }
             }

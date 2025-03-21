@@ -16,7 +16,7 @@ if (isset($_POST["update-benefits"])) {
         if ($row["benefits"] != null) {
 
             foreach (unserialize($row["benefits"]) as $b) {
-                if (($i + 1) == $_POST["update-benefits"]) {
+                if ($i == $_POST["update-benefits"]) {
                     //* Push only Value on particular index
                     if ($_POST["key"][$i] == null && $_POST["value"][$i] != null) {
 
@@ -59,7 +59,7 @@ if (isset($_POST["update-benefits"])) {
     $up = $conn->prepare("UPDATE `products` SET `benefits`='" . serialize($ben) . "' WHERE `product_id`='" . $_SESSION["product_id"] . "'");
     $up->execute();
 
-    $_SESSION["success"] = "Key \"" . $key . "\" updated successfully";
+    $_SESSION["success"] = "Data No. ".$_POST["update-benefits"]+1 . ") " . " Updated Successfully";
 
     header("Location: http://localhost/php/medicine_website/admin_panel/products/additional_info/benefits/benefits.php");
 }
@@ -124,7 +124,7 @@ if (isset($_POST["delete-benefits"])) {
 
             foreach (unserialize($row["benefits"]) as $b) {
                 if (isset($b[0]) && isset($b[1])) {
-                    if (($i + 1) != $_POST["delete-benefits"]) {
+                    if ($i != $_POST["delete-benefits"]) {
                         array_push($ben, array($b[0], $b[1]));
                     }
                 } else {
@@ -133,7 +133,7 @@ if (isset($_POST["delete-benefits"])) {
                     }
                 }
                 //
-                if (($i + 1) == $_POST["delete-benefits"]) {
+                if ($i == $_POST["delete-benefits"]) {
                     $key = $_POST["key"][$i];
                 }
                 $i++;
@@ -144,7 +144,7 @@ if (isset($_POST["delete-benefits"])) {
     $up = $conn->prepare("UPDATE `products` SET `benefits`='" . serialize($ben) . "' WHERE `product_id`='" . $_SESSION["product_id"] . "'");
     $up->execute();
 
-    $_SESSION["success"] = "Key \"" . $key . "\" deleted successfully";
+    $_SESSION["success"] = "Data No. ".$_POST["delete-benefits"]+1 . ") " . " Deleted Successfully";
 
     header("Location: http://localhost/php/medicine_website/admin_panel/products/additional_info/benefits/benefits.php");
 }

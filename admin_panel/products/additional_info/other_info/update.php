@@ -15,7 +15,7 @@ if (isset($_POST["update-other-info"])) {
         if ($row["other_info"] != null) {
 
             foreach (unserialize($row["other_info"]) as $o) {
-                if (($i + 1) == $_POST["update-other-info"]) {
+                if ($i == $_POST["update-other-info"]) {
 
                     //* Push only Value on particular index
                     if ($_POST["key"][$i] == null && $_POST["value"][$i] != null) {
@@ -55,7 +55,7 @@ if (isset($_POST["update-other-info"])) {
     $up = $conn->prepare("UPDATE `products` SET `other_info`='" . serialize($other) . "' WHERE `product_id`='" . $_SESSION["product_id"] . "'");
     $up->execute();
 
-    $_SESSION["success"] = "Key \"" . $key . "\" updated successfully";
+    $_SESSION["success"] = "Data No. ".$_POST["update-other-info"]+1 . ") " . " Updated Successfully";
     header("Location: http://localhost/php/medicine_website/admin_panel/products/additional_info/other_info/other_info.php");
 }
 
@@ -118,16 +118,16 @@ if (isset($_POST["delete-other-info"])) {
 
             foreach (unserialize($row["other_info"]) as $o) {
                 if (isset($o[0]) && isset($o[1])) {
-                    if (($i + 1) != $_POST["delete-other-info"]) {
+                    if ($i != $_POST["delete-other-info"]) {
                         array_push($other, array($o[0], $o[1]));
                     }
                 } else {
-                    if (($i + 1) != $_POST["delete-other-info"]) {
+                    if ($i != $_POST["delete-other-info"]) {
                         array_push($other, array($o[0]));
                     }
                 }
                 //
-                if (($i + 1) == $_POST["delete-other-info"]) {
+                if ($i == $_POST["delete-other-info"]) {
                     $key = $_POST["key"][$i];
                 }
                 $i++;
@@ -138,6 +138,6 @@ if (isset($_POST["delete-other-info"])) {
     $up = $conn->prepare("UPDATE `products` SET `other_info`='" . serialize($other) . "' WHERE `product_id`='" . $_SESSION["product_id"] . "'");
     $up->execute();
 
-    $_SESSION["success"] = "Key \"" . $key . "\" deleted successfully";
+    $_SESSION["success"] = "Data No. ".$_POST["delete-other-info"]+1 . ") " . " Deleted Successfully";
     header("Location: http://localhost/php/medicine_website/admin_panel/products/additional_info/other_info/other_info.php");
 }

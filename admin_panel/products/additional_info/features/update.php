@@ -16,7 +16,7 @@ if (isset($_POST["update-features"])) {
         if ($row["features"] != null) {
 
             foreach (unserialize($row["features"]) as $f) {
-                if (($i + 1) == $_POST["update-features"]) {
+                if ($i == $_POST["update-features"]) {
 
                     //* Push only Value on particular index
                     if ($_POST["key"][$i] == null && $_POST["value"][$i] != null) {
@@ -56,7 +56,7 @@ if (isset($_POST["update-features"])) {
     $up = $conn->prepare("UPDATE `products` SET `features`='" . serialize($fea) . "' WHERE `product_id`='" . $_SESSION["product_id"] . "'");
     $up->execute();
 
-    $_SESSION["success"] = "Key \"" . $key . "\" updated successfully";
+    $_SESSION["success"] = "Data No. ".$_POST["update-features"]+1 . ") " . " Updated Successfully";
 
     header("Location: http://localhost/php/medicine_website/admin_panel/products/additional_info/features/features.php");
 }
@@ -122,16 +122,16 @@ if (isset($_POST["delete-features"])) {
 
             foreach (unserialize($row["features"]) as $f) {
                 if (isset($f[0]) && isset($f[1])) {
-                    if (($i + 1) != $_POST["delete-features"]) {
+                    if ($i != $_POST["delete-features"]) {
                         array_push($fea, array($f[0], $f[1]));
                     }
                 } else {
-                    if (($i + 1) != $_POST["delete-features"]) {
+                    if ($i != $_POST["delete-features"]) {
                         array_push($fea, array($f[0]));
                     }
                 }
                 //
-                if (($i + 1) == $_POST["delete-features"]) {
+                if ($i == $_POST["delete-features"]) {
                     $key = $_POST["key"][$i];
                 }
                 $i++;
@@ -142,7 +142,7 @@ if (isset($_POST["delete-features"])) {
     $up = $conn->prepare("UPDATE `products` SET `features`='" . serialize($fea) . "' WHERE `product_id`='" . $_SESSION["product_id"] . "'");
     $up->execute();
 
-    $_SESSION["success"] = "Key \"" . $key . "\" deleted successfully";
+    $_SESSION["success"] = "Data No. ".$_POST["delete-features"]+1 . ") " . " Deleted Successfully";
 
     header("Location: http://localhost/php/medicine_website/admin_panel/products/additional_info/features/features.php");
 }

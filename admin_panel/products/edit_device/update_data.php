@@ -4,7 +4,7 @@ include("C:/xampp/htdocs/php/medicine_website/database.php");
 
 if (isset($_POST["update-category"])) {
 
-    if (str_contains($_FILES["cat-img"]["name"], "'")) {
+    if (isset($_FILES["cat-img"]) && str_contains($_FILES["cat-img"]["name"], "'")) {
         $_FILES["cat-img"]["name"] = explode("'", $_FILES["cat-img"]["name"]);
         $_FILES["cat-img"]["name"] = $_FILES["cat-img"]["name"][0] . $_FILES["cat-img"]["name"][1];
     }
@@ -18,8 +18,8 @@ if (isset($_POST["update-category"])) {
         $update = $conn->prepare("UPDATE `products` SET `category`='" . $_POST["category"] . "' WHERE `category`='" . $_POST["old-cat"] . "'");
     } //
     else if ($_POST["category"] == null && isset($_FILES["cat-img"])) {
-        $update = $conn->prepare("UPDATE `products` SET `cat_img`='" . $_FILES["cat-img"]["name"] . "' WHERE `category`='" . $_POST["old-cat"] . "'");
-
+        $update = $conn->prepare("UPDATE `products` SET `cat_img`='" . $_FILES["cat-img"]["name"] . "' WHERE `category`='" . $_POST["category"] . "'");
+        
         move_uploaded_file($_FILES["cat-img"]["tmp_name"], "C:/xampp/htdocs/php/medicine_website/user_panel/shop/category_img/" . $_FILES["cat-img"]["name"] . "");
     }
     $update->execute();

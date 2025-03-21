@@ -76,7 +76,7 @@ if (isset($_GET["product_id"])) {
                             </div>
                             <div class="row">
                                 <input type="hidden" name="product-id" value="<?php echo $row["product_id"]; ?>" />
-                                <div class="col-md-4 border p-2">
+                                <div class="col-md-4 border p-2 d-flex justify-content-center">
                                     <img class="category-img d-block w-50 m-auto" src="http://localhost/php/medicine_website/user_panel/shop/category_img/<?php echo $row["cat_img"]; ?>" />
                                 </div>
                                 <div class="col-md-4 border p-3 pb-5">

@@ -82,11 +82,13 @@
                         </div>
 
                         <form action="http://localhost/php/medicine_website/admin_panel/products/additional_info/item_imgs/update.php" class="item-imgs-form" method="post" enctype="multipart/form-data">
-                            <?php if (isset(unserialize($row["item_img"])[0])) {
+                            <?php
+                            $i=0;
+                            if (isset(unserialize($row["item_img"])[0])) {
                                 foreach (unserialize($row["item_img"]) as $item_img) { ?>
                                     <div class="row border-bottom py-4">
-                                        <div class="col-md-1"><?php echo $i . ")"; ?></div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-1"><?php echo $i+1 . ")"; ?></div>
+                                        <div class="col-md-4 d-flex justify-content-center">
                                             <img class="item-img" src="http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo $item_img; ?>" />
                                         </div>
                                         <div class="col-md-4">

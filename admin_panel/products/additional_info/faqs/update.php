@@ -16,7 +16,7 @@ if (isset($_POST["update-faqs"])) {
         if ($row["faqs"] != null) {
 
             foreach (unserialize($row["faqs"]) as $f) {
-                if (($i + 1) == $_POST["update-faqs"]) {
+                if ($i == $_POST["update-faqs"]) {
 
                     //* Push Key & Value on particular index
                     if ($_POST["key"][$i] != null && $_POST["value"][$i] != null) {
@@ -47,7 +47,7 @@ if (isset($_POST["update-faqs"])) {
     $up = $conn->prepare("UPDATE `products` SET `faqs`='" . serialize($faqs) . "' WHERE `product_id`='" . $_SESSION["product_id"] . "'");
     $up->execute();
 
-    $_SESSION["success"] = "Question \"" . $key . "\" updated successfully";
+    $_SESSION["success"] = "Question \"" . $key . "\" Updated Successfully";
 
     header("Location: http://localhost/php/medicine_website/admin_panel/products/additional_info/faqs/faqs.php");
 }
@@ -104,16 +104,16 @@ if (isset($_POST["delete-faqs"])) {
 
             foreach (unserialize($row["faqs"]) as $f) {
                 if (isset($f[0]) && isset($f[1])) {
-                    if (($i + 1) != $_POST["delete-faqs"]) {
+                    if ($i != $_POST["delete-faqs"]) {
                         array_push($faqs, array($f[0], $f[1]));
                     }
                 } else {
-                    if (($i + 1) != $_POST["delete-faqs"]) {
+                    if ($i != $_POST["delete-faqs"]) {
                         array_push($faqs, array($f[0]));
                     }
                 }
                 //
-                if (($i + 1) == $_POST["delete-faqs"]) {
+                if ($i == $_POST["delete-faqs"]) {
                     $key = $_POST["key"][$i];
                 }
                 $i++;
@@ -124,7 +124,7 @@ if (isset($_POST["delete-faqs"])) {
     $up = $conn->prepare("UPDATE `products` SET `faqs`='" . serialize($faqs) . "' WHERE `product_id`='" . $_SESSION["product_id"] . "'");
     $up->execute();
 
-    $_SESSION["success"] = "Key \"" . $key . "\" deleted successfully";
+    $_SESSION["success"] = "Key \"" . $key . "\" Deleted Successfully";
 
     header("Location: http://localhost/php/medicine_website/admin_panel/products/additional_info/faqs/faqs.php");
 }

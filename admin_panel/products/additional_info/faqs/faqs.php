@@ -117,12 +117,13 @@
 
                         <form class="faqs-form" action="http://localhost/php/medicine_website/admin_panel/products/additional_info/faqs/update.php" method="post" enctype="multipart/form-data">
                             <?php
+                            $i = 0;
                             if ($row["faqs"] != null) {
                                 foreach (unserialize($row["faqs"]) as $ben) {
                             ?>
                                     <div class="row">
                                         <div class="col-md-1 border p-3">
-                                            <p><?php echo $i; ?>)</p>
+                                            <p><?php echo $i+1; ?>)</p>
                                         </div>
                                         <?php if (isset($ben[0]) && isset($ben[1])) { ?>
                                             <div class="col-md-3 border p-3">

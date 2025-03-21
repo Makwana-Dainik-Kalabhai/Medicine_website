@@ -20,7 +20,7 @@ $(document).ready(function () {
     }
   });
 
-  var last_img = $(".add-desc-img").val();
+  var last_img = Number.parseInt($(".add-desc-img").val())+1;
 
   $(".add-desc-img").click(function () {
     $(

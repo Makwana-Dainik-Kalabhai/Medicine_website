@@ -3,7 +3,7 @@ if (window.history.replaceState) {
   }
   
   $(document).ready(function () {
-    var last_index = $(".add-safety").val();
+    var last_index = Number.parseInt($(".add-safety").val())+1;
   
     $(".add-safety").click(function () {
       $(".safety-form").append(

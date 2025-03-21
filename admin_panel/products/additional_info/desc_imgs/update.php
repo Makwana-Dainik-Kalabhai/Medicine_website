@@ -20,7 +20,7 @@ if (isset($_POST["change"])) {
     foreach ($sel as $r) {
         if ($r["desc_img"] != null) {
             foreach (unserialize($r["desc_img"]) as $key => $des) {
-                if ($_FILES["desc-img"]["name"] == $des && $_POST["change"] != $key + 1) {
+                if ($_FILES["desc-img"]["name"] == $des && $_POST["change"] != $key) {
                     $contain = true;
                 }
             }
@@ -47,7 +47,7 @@ if (isset($_POST["change"])) {
             $_FILES["desc-img"]["name"] = explode("'", $_FILES["desc-img"]["name"]);
             $_FILES["desc-img"]["name"] = $_FILES["desc-img"]["name"][0] . $_FILES["desc-img"]["name"][1];
         }
-        $desc_img[$_POST["change"] - 1] = $_FILES["desc-img"]["name"];
+        $desc_img[$_POST["change"]] = $_FILES["desc-img"]["name"];
 
 
         $up = $conn->prepare("UPDATE `products` SET `desc_img`='" . serialize($desc_img) . "' WHERE `product_id`='" . $_SESSION["product_id"] . "'");
@@ -137,10 +137,10 @@ if (isset($_POST["delete"])) {
     foreach ($sel as $r) {
         if ($r["desc_img"] != null) {
             foreach (unserialize($r["desc_img"]) as $key => $des) {
-                if ($key + 1 != $_POST["delete"]) {
+                if ($key != $_POST["delete"]) {
                     array_push($desc_img, $des);
                 } //
-                else if ($key + 1 == $_POST["delete"]) {
+                else if ($key == $_POST["delete"]) {
                     unlink("C:/xampp/htdocs/php/medicine_website/user_panel/shop/desc_imgs/$des");
                 }
             }

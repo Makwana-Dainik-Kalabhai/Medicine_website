@@ -91,27 +91,17 @@ if (isset($_GET["product_id"])) {
                             </div>
                             <div class="row">
                                 <input type="hidden" name="product-id" value="<?php echo $row["product_id"]; ?>" />
-                                <div class="col-md-4 border p-2">
+                                <div class="col-md-4 border p-2 d-flex justify-content-center">
                                     <img class="category-img d-block w-50 m-auto" src="http://localhost/php/medicine_website/user_panel/shop/category_img/<?php echo $row["cat_img"]; ?>" />
                                 </div>
-                                <div class="col-md-8">
-                                    <div class="row">
-                                        <div class="col-md-6 border p-3 pb-5">
-                                            <input type="hidden" class="old-cat" value="<?php echo $row["category"]; ?>">
-                                            <input type="text" class="new-cat form-control" name="category" value="<?php echo $row["category"]; ?>">
-                                        </div>
-                                        <div class="col-md-6 border p-3 pb-5">
-                                            <input type="checkbox" class="mb-4" />&ensp;Are you want to change category image?
-                                            <input type="hidden" class="form-control old-cat-img" name="old-cat" value="<?php echo $row["cat_img"]; ?>" />
-                                            <input type="file" name="cat-img" class="form-control cat-img" value="<?php echo $row["cat_img"]; ?>" disabled="true" accept="image/*" />
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12 border p-4" style="color: red;">
-                                            <p>Note:</p>
-                                            ** If you update Category name, must to change category image **
-                                        </div>
-                                    </div>
+                                <div class="col-md-4 border p-3 pb-5">
+                                    <input type="hidden" class="old-cat" value="<?php echo $row["category"]; ?>">
+                                    <input type="text" class="new-cat form-control" name="category" value="<?php echo $row["category"]; ?>">
+                                </div>
+                                <div class="col-md-4 border p-3 pb-5">
+                                    <input type="hidden" class="form-control" name="old-cat" value="<?php echo $row["category"]; ?>">
+                                    <input type="checkbox" class="mb-4" />&ensp;Are you want to change category image?
+                                    <input type="file" name="cat-img" class="form-control cat-img" value="<?php echo $row["cat_img"]; ?>" disabled="true" accept="image/*" />
                                 </div>
                             </div>
                             <button class="update-category btn btn-danger m-0 mt-3 w-100" name="update-category">Update Category Details</button>

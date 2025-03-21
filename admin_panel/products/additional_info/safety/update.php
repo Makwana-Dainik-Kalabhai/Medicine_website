@@ -10,7 +10,7 @@ $sel = $sel->fetchAll();
 if (isset($_POST["update-safety"])) {
     $saf = array();
 
-    $i = 1;
+    $i = 0;
     foreach ($sel as $row) {
         if ($row["safety"] != null) {
 
@@ -55,7 +55,7 @@ if (isset($_POST["update-safety"])) {
     $up = $conn->prepare("UPDATE `products` SET `safety`='" . serialize($saf) . "' WHERE `product_id`='" . $_SESSION["product_id"] . "'");
     $up->execute();
 
-    $_SESSION["success"] = "Key \"" . $key . "\" updated successfully";
+    $_SESSION["success"] = "Data No. ".$_POST["update-safety"]+1 . ") " . " Updated Successfully";
     header("Location: http://localhost/php/medicine_website/admin_panel/products/additional_info/safety/safety.php");
 }
 
@@ -112,7 +112,7 @@ if (isset($_POST["add-safety"])) {
 if (isset($_POST["delete-safety"])) {
     $saf = array();
 
-    $i = 1;
+    $i = 0;
     foreach ($sel as $row) {
         if ($row["safety"] != null) {
 
@@ -137,6 +137,6 @@ if (isset($_POST["delete-safety"])) {
     $up = $conn->prepare("UPDATE `products` SET `safety`='" . serialize($saf) . "' WHERE `product_id`='" . $_SESSION["product_id"] . "'");
     $up->execute();
 
-    $_SESSION["success"] = "Key \"" . $key . "\" deleted successfully";
+    $_SESSION["success"] = "Data No. ".$_POST["delete-safety"]+1 . ") " . " Deleted Successfully";
     header("Location: http://localhost/php/medicine_website/admin_panel/products/additional_info/safety/safety.php");
 }

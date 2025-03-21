@@ -3,7 +3,7 @@ if (window.history.replaceState) {
   }
   
   $(document).ready(function () {
-    var last_index = $(".add-faqs").val();
+    var last_index = Number.parseInt($(".add-faqs").val())+1;
   
     $(".add-faqs").click(function () {
       $(".faqs-form").append(

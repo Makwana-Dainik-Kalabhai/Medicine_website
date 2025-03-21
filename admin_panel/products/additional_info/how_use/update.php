@@ -16,7 +16,7 @@ if (isset($_POST["update-how-use"])) {
         if ($row["how_use"] != null) {
 
             foreach (unserialize($row["how_use"]) as $h) {
-                if (($i + 1) == $_POST["update-how-use"]) {
+                if ($i == $_POST["update-how-use"]) {
 
                     //* Push only Value on particular index
                     if ($_POST["key"][$i] == null && $_POST["value"][$i] != null) {
@@ -56,7 +56,7 @@ if (isset($_POST["update-how-use"])) {
     $up = $conn->prepare("UPDATE `products` SET `how_use`='" . serialize($how) . "' WHERE `product_id`='" . $_SESSION["product_id"] . "'");
     $up->execute();
 
-    $_SESSION["success"] = "Key \"" . $key . "\" updated successfully";
+    $_SESSION["success"] = "Data No. ".$_POST["update-how-use"]+1 . ") " . " Updated Successfully";
 
     header("Location: http://localhost/php/medicine_website/admin_panel/products/additional_info/how_use/how_use.php");
 }
@@ -122,16 +122,16 @@ if (isset($_POST["delete-how-use"])) {
 
             foreach (unserialize($row["how_use"]) as $h) {
                 if (isset($h[0]) && isset($h[1])) {
-                    if (($i + 1) != $_POST["delete-how-use"]) {
+                    if ($i != $_POST["delete-how-use"]) {
                         array_push($how, array($h[0], $h[1]));
                     }
                 } else {
-                    if (($i + 1) != $_POST["delete-how-use"]) {
+                    if ($i != $_POST["delete-how-use"]) {
                         array_push($how, array($h[0]));
                     }
                 }
                 //
-                if (($i + 1) == $_POST["delete-how-use"]) {
+                if ($i == $_POST["delete-how-use"]) {
                     $key = $_POST["key"][$i];
                 }
                 $i++;
@@ -142,6 +142,6 @@ if (isset($_POST["delete-how-use"])) {
     $up = $conn->prepare("UPDATE `products` SET `how_use`='" . serialize($how) . "' WHERE `product_id`='" . $_SESSION["product_id"] . "'");
     $up->execute();
 
-    $_SESSION["success"] = "Key \"" . $key . "\" deleted successfully";
+    $_SESSION["success"] = "Data No. ".$_POST["delete-how-use"]+1 . ") " . " Deleted Successfully";
     header("Location: http://localhost/php/medicine_website/admin_panel/products/additional_info/how_use/how_use.php");
 }

@@ -45,7 +45,7 @@
 
                     foreach ($sel as $row) {
                         $count_img = 0;
-                        $i = 1;
+                        $i = 0;
 
                         foreach (unserialize($row["item_img"]) as $img) {
                             $count_img++;
@@ -117,12 +117,13 @@
 
                         <form class="specification-form" action="http://localhost/php/medicine_website/admin_panel/products/additional_info/specification/update.php" method="post" enctype="multipart/form-data">
                             <?php
+                            $i=0;
                             if ($row["specification"] != null) {
                                 foreach (unserialize($row["specification"]) as $spe) {
                             ?>
                                     <div class="row">
                                         <div class="col-md-1 border p-3">
-                                            <p><?php echo $i; ?>)</p>
+                                            <p><?php echo $i+1; ?>)</p>
                                         </div>
                                         <?php if (isset($spe[0]) && isset($spe[1])) { ?>
                                             <div class="col-md-3 border p-3">

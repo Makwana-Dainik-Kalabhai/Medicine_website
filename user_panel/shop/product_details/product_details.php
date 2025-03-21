@@ -23,6 +23,7 @@ if (isset($_GET["status"])) {
 </script>
 
 <body>
+    <div class="full-img"><img src="" alt="Img not Found"></div>
     <header>
         <?php include("C:/xampp/htdocs/php/medicine_website/user_panel/header/header.php"); ?>
     </header>
@@ -279,11 +280,14 @@ function disProductDetalis()
                 <hr>
                 <div id="specification">
                     <table>
-                        <tr>
-                            <th>Weight</th>
-                            <td><?php echo $row["weight"]; ?></td>
-                        </tr>
-                        <?php foreach (unserialize($row["specification"]) as $spe) {
+                        <?php if ($row["weight"] != null) { ?>
+                            <tr>
+                                <th>Weight</th>
+                                <td><?php echo $row["weight"]; ?></td>
+                            </tr>
+                            <?php
+                        }
+                        foreach (unserialize($row["specification"]) as $spe) {
                             if (isset($spe[0]) && isset($spe[1])) { ?>
                                 <tr>
                                     <th><?php echo $spe[0]; ?></th>

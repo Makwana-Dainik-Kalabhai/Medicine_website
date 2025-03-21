@@ -240,7 +240,7 @@ if (isset($_POST["email"])) {
           <table class="user-list">
             <thead class="bg-danger text-light">
               <tr>
-                <th class="col-md-1">Sr.No.</th>
+                <th class="col-md-1">Sr.</th>
                 <th class="col-md-1">Profile</th>
                 <th class="col-md-2">Name</th>
                 <th class="col-md-3">Email</th>
@@ -289,12 +289,12 @@ if (isset($_POST["email"])) {
 
 
                   <?php if ($r_user["status"] == "Active") { ?>
-                    <td class="col-md-1 text-success fw-bolder"><?php echo $r_user["status"]; ?>&emsp;
+                    <td class="col-md-1 fw-bolder" style="color: green;"><?php echo $r_user["status"]; ?>&emsp;
 
-                      <button class="btn btn-dark block-user" value="<?php echo $r_user["email"]; ?>">Block</button>
+                      <button class="btn block-user" style="background-color: #ff4d4d;" value="<?php echo $r_user["email"]; ?>">Block</button>
                     </td>
                   <?php } else { ?>
-                    <td class="col-md-1 text-danger fw-bolder"><?php echo $r_user["status"]; ?>&emsp;
+                    <td class="col-md-1 fw-bolder" style="color: red;"><?php echo $r_user["status"]; ?>&emsp;
                       <button class="btn btn-success active-user" value="<?php echo $r_user["email"]; ?>">Active</button>
                     </td>
                   <?php } ?>

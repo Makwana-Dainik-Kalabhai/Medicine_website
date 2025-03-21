@@ -11,13 +11,12 @@ $sel = $sel->fetchAll();
 if (isset($_POST["update-specification"])) {
     $spe = array();
 
-    $i = 1;
+    $i = 0;
     foreach ($sel as $row) {
         if ($row["specification"] != null) {
-
             foreach (unserialize($row["specification"]) as $s) {
-                if ($i == $_POST["update-specification"]) {
 
+                if ($i == $_POST["update-specification"]) {
                     //* Push only Value on particular index
                     if ($_POST["key"][$i] == null && $_POST["value"][$i] != null) {
                         if (str_contains($_POST["value"][$i], "'")) {
@@ -56,7 +55,7 @@ if (isset($_POST["update-specification"])) {
     $up = $conn->prepare("UPDATE `products` SET `specification`='" . serialize($spe) . "' WHERE `product_id`='" . $_SESSION["product_id"] . "'");
     $up->execute();
 
-    $_SESSION["success"] = "Key \"" . $key . "\" updated successfully";
+    $_SESSION["success"] = "Data No. " . $_POST["update-specification"] + 1 . ") " . " Updated Successfully";
     header("Location: http://localhost/php/medicine_website/admin_panel/products/additional_info/specification/specification.php");
 }
 
@@ -113,7 +112,7 @@ if (isset($_POST["add-specification"])) {
 if (isset($_POST["delete-specification"])) {
     $spe = array();
 
-    $i = 1;
+    $i = 0;
     foreach ($sel as $row) {
         if ($row["specification"] != null) {
 
@@ -139,6 +138,6 @@ if (isset($_POST["delete-specification"])) {
     $up = $conn->prepare("UPDATE `products` SET `specification`='" . serialize($spe) . "' WHERE `product_id`='" . $_SESSION["product_id"] . "'");
     $up->execute();
 
-    $_SESSION["success"] = "Key \"" . $key . "\" deleted successfully";
+    $_SESSION["success"] = "Data No. " . $_POST["delete-specification"] + 1 . ") " . " Deleted Successfully";
     header("Location: http://localhost/php/medicine_website/admin_panel/products/additional_info/specification/specification.php");
 }
