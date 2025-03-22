@@ -198,7 +198,7 @@ if (isset($_GET["product_id"])) {
                                         </div>
                                         <div class="col-md-5">
                                             <p class="text-danger fs-3 m-0">Delivery Date <b style="color: red;">*</b></p>
-                                            <?php if ($row["delivery_date"] != "0000-00-00") { ?>
+                                            <?php if (strtotime($row["delivery_date"]) > 0) { ?>
                                                 <input type="text" name="delivery-date" class="form-control" value="<?php $date = strtotime($row["delivery_date"]);
                                                                                                                     echo date("d-m-Y", $date); ?>" required />
                                             <?php } //

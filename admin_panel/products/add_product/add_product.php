@@ -326,7 +326,8 @@ if (isset($_GET["status"])) {
                                         <?php } ?>
                                         <div class="col-md-5">
                                             <p class="text-danger fs-3 m-0">Delivery Date <b style="color: red;">*</b></p>
-                                            <?php if ($r["delivery_date"] == "0000-00-00") { ?>
+                                            <?php
+                                            if (strtotime($r["delivery_date"]) <= 0) { ?>
                                                 <input type="date" name="delivery-date" class="form-control" required />
                                             <?php } //
                                             else { ?>

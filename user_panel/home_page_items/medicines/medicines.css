@@ -6,14 +6,13 @@
 /* //! Shop by category */
 #medicine_shop_category {
     width: 100%;
-    padding: 2% 0;
+    padding: 2%;
     margin: 0 auto;
     margin-bottom: 2.5%;
     background: linear-gradient(white, #76bdd5);
 }
 
 #medicine_shop_category>div {
-    padding: 0 2%;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
     grid-gap: 0.7em;
