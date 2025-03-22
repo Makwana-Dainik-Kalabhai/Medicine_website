@@ -145,7 +145,7 @@
 
 #popular_product .box img {
     display: block;
-    width: 80%;
+    height: 60%;
     padding: 1rem;
     margin: 0 auto;
 }

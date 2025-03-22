@@ -78,10 +78,10 @@ foreach ($sel as $row) {
             <div id="product_details">
                 <span id="name"><?php echo $row["name"]; ?></span>
 
-                <span id="off_price">&#8377;<?php echo $row["offer_price"]; ?></span>
+                <span id="off_price"><?php echo ($row["offer_price"]>0)?"&#8377;".$row["offer_price"]:""; ?></span>
                 <?php
                 if ($row["discount"] != 0) { ?>
-                    <span id="price">&#8377;<?php echo $row["price"]; ?></span>
+                    <span id="price"><?php echo ($row["price"]>0)?"&#8377;".$row["price"]:""; ?></span>
                 <?php }
 
                 if ($row["quantity"] <= 0) { ?>

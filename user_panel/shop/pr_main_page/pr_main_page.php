@@ -151,6 +151,9 @@ if (isset($_POST["search_input"]) || isset($_POST["search-btn"]) || isset($_SESS
                     <option disabled style="background-color: #f2f2f2;">Medicines</option>
                     <?php
                     foreach ($sel_cat as $row_cat) {
+                        if (isset($_GET["category"]) && str_contains($row_cat["category"], '&') && str_contains($row_cat["category"], $_GET["category"])) {
+                            $_SESSION["category"] = $row_cat["category"];
+                        }
                         if ($row_cat["status"] == "medicine") { ?>
                             <option value="<?php echo $row_cat["category"]; ?>"><?php echo $row_cat["category"]; ?></option>
                     <?php }
@@ -273,10 +276,10 @@ if (isset($_POST["search_input"]) || isset($_POST["search-btn"]) || isset($_SESS
                                 <div id="product_details">
                                     <span id="name"><?php echo $row["name"]; ?></span>
 
-                                    <span id="off_price">&#8377;<?php echo $row["offer_price"]; ?></span>
+                                    <span id="off_price"><?php echo ($row["offer_price"] > 0) ? "&#8377;" . $row["offer_price"] : ""; ?></span>
                                     <?php
                                     if ($row["discount"] != 0) { ?>
-                                        <span id="price">&#8377;<?php echo $row["price"]; ?></span>
+                                        <span id="price"><?php echo ($row["price"] > 0) ? "&#8377;" . $row["price"] : ""; ?></span>
                                     <?php }
                                     if ($row["quantity"] <= 0) { ?>
                                         <h5 id='out_stock'>Out Of Stock</h5>
