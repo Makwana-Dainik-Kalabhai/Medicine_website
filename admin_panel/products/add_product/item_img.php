@@ -5,19 +5,19 @@ include("C:/xampp/htdocs/php/medicine_website/database.php");
 
 //* Add Product Images
 if (isset($_POST["add-item-img"])) {
-    if ($_FILES["new-item-img"]["name"] == null) {
+    if ($_FILES["item-img"]["name"] == null) {
         $_SESSION["pr_img_error"] = "Please! Select the File";
 
 
         if (isset($_SERVER['HTTP_REFERER'])) {
-            header("Location: " . $_SERVER['HTTP_REFERER'] . "");;
+            header("Location: " . $_SERVER['HTTP_REFERER'] . "");
         }
         return;
     }
 
-    if (str_contains($_FILES["new-item-img"]["name"], "'")) {
-        $_FILES["new-item-img"]["name"] = explode("'", $_FILES["new-item-img"]["name"]);
-        $_FILES["new-item-img"]["name"] = $_FILES["new-item-img"]["name"][0] . $_FILES["new-item-img"]["name"][1];
+    if (str_contains($_FILES["item-img"]["name"], "'")) {
+        $_FILES["item-img"]["name"] = explode("'", $_FILES["item-img"]["name"]);
+        $_FILES["item-img"]["name"] = $_FILES["item-img"]["name"][0] . $_FILES["item-img"]["name"][1];
     }
 
 
@@ -28,7 +28,7 @@ if (isset($_POST["add-item-img"])) {
     foreach ($sel as $r) {
         if ($r["item_img"] != null) {
             foreach (unserialize($r["item_img"]) as $img) {
-                if ($_FILES["new-item-img"]["name"] == $img) {
+                if ($_FILES["item-img"]["name"] == $img) {
                     $contain = true;
                 }
             }
@@ -53,12 +53,12 @@ if (isset($_POST["add-item-img"])) {
                 }
             }
         }
-        array_push($item_img, $_FILES["new-item-img"]["name"]);
+        array_push($item_img, $_FILES["item-img"]["name"]);
 
         $up = $conn->prepare("UPDATE `products` SET `item_img`='" . serialize($item_img) . "' WHERE `product_id`='" . $_SESSION["product_id"] . "'");
 
         if ($up->execute()) {
-            move_uploaded_file($_FILES["new-item-img"]["tmp_name"], "C:/xampp/htdocs/php/medicine_website/user_panel/shop/imgs/" . $_FILES["new-item-img"]["name"] . "");
+            move_uploaded_file($_FILES["item-img"]["tmp_name"], "C:/xampp/htdocs/php/medicine_website/user_panel/shop/imgs/" . $_FILES["item-img"]["name"] . "");
 
             $_SESSION["pr_img_suc"] = "Product Image Added Successfully";
         } //
@@ -103,6 +103,8 @@ if (isset($_POST["delete-item-img"])) {
     $up = $conn->prepare("UPDATE `products` SET `item_img`='" . serialize($item_img) . "' WHERE `product_id`='" . $_SESSION["product_id"] . "'");
     $up->execute();
 
+    $_SESSION["pr_img_suc"] = "Product Image Deleted Successfully";
+
 
     if (isset($_SERVER['HTTP_REFERER'])) {
         header("Location: " . $_SERVER['HTTP_REFERER'] . "");;
@@ -113,9 +115,9 @@ if (isset($_POST["delete-item-img"])) {
 
 //* Update Product Images
 if (isset($_POST["update-item-img"])) {
-    if ($_FILES["item-img"]["name"] == null) {
-        $_SESSION["pr_img_error"] = "Please! Select the File";
 
+    if ($_FILES["item-img"]["name"]==null) {
+        $_SESSION["pr_img_error"] = "Please! Select the File";
 
         if (isset($_SERVER['HTTP_REFERER'])) {
             header("Location: " . $_SERVER['HTTP_REFERER'] . "");;
@@ -127,7 +129,7 @@ if (isset($_POST["update-item-img"])) {
         $_FILES["item-img"]["name"] = $_FILES["item-img"]["name"][0] . $_FILES["item-img"]["name"][1];
     }
 
-    $sel = $conn->prepare("SELECT * FROM `products`");
+    $sel = $conn->prepare("SELECT * FROM `products` WHERE `product_id`!=".$_SESSION["product_id"]."");
     $sel->execute();
     $sel = $sel->fetchAll();
 
@@ -162,13 +164,13 @@ if (isset($_POST["update-item-img"])) {
 
         if ($up->execute()) {
             move_uploaded_file($_FILES["item-img"]["tmp_name"], "C:/xampp/htdocs/php/medicine_website/user_panel/shop/imgs/" . $_FILES["item-img"]["name"] . "");
-            $_SESSION["pr_img_suc"] = "Product Image Deleted Successfully";
+
+            $_SESSION["pr_img_suc"] = "Product Image Updated Successfully";
         } //
         else {
             $_SESSION["pr_img_error"] = "Please! Change name of the Image";
         }
     }
-
 
     if (isset($_SERVER['HTTP_REFERER'])) {
         header("Location: " . $_SERVER['HTTP_REFERER'] . "");;

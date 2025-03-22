@@ -3,49 +3,35 @@ if (window.history.replaceState) {
 }
 
 $(document).ready(() => {
-  let checked = false;
   $(".product-list").DataTable();
 
   $("input[type='checkbox']").change(function () {
-    if (checked) {
-      $("input[type='file']").attr("disabled", "true");
-      checked = false;
-    } else {
-      checked = true;
-      $("input[type='file']").removeAttr("disabled");
-    }
+    $(this)
+      .siblings("input[type='file']")
+      .attr("disabled", function (index, attr) {
+        return attr ? false : true;
+      });
   });
 
-  // var file = false;
+  let index = $(".add-item-img").val();
 
-  // $(".new-cat").keyup(function () {
-  //   if ($(".old-cat").val() == $(".new-cat").val()) {
-  //     $(".update-category").attr("disabled", true);
-  //   } else if ($(".old-cat").val() != $(".new-cat").val() && file) {
-  //     $(".update-category").attr("disabled", false);
-  //   }
-  //   //
-  //   else if ($(".old-cat").val() != $(".new-cat").val()) {
-  //     $(".update-category").attr("disabled", true);
-  //   }
-  // });
-
-  // $("input[type='file']").change(function (e) {
-  //   if (e.target.files[0].name != null) {
-  //     file = true;
-  //     $(".update-category").attr("disabled", true);
-  //   }
-  //   if ($(".old-cat-img").val() == e.target.files[0].name) {
-  //     file = false;
-  //     $(".update-category").attr("disabled", true);
-  //   }
-  //   //
-  //   if (
-  //     $(".old-cat").val() != $(".new-cat").val() &&
-  //     e.target.files[0].name != null
-  //   ) {
-  //     file = true;
-  //     $(".update-category").attr("disabled", false);
-  //   }
-  // });
+  $(".add-item-img").click(function () {
+    $(
+      `<div class='row border-bottom py-4'>
+            <div class='col-md-1'>${index})</div>
+            <div class='col-md-3'></div>
+            <div class='col-md-4'>
+                Select the Image
+                <input type='file' name='item-img' class='form-control mt-4' accept='image/*' />
+            </div>
+            <div class='col-md-2'>
+                <button class='btn btn-light' name='add-item-img'>Add</button>
+            </div>
+            <div class='col-md-2'>
+                <button class='btn btn-light' disabled>Delete</button>
+            </div>
+        </div>`
+    ).appendTo(".item-imgs-form");
+    index++;
+  });
 });

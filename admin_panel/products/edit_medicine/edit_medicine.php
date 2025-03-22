@@ -94,6 +94,84 @@ if (isset($_GET["product_id"])) {
                     </div>
 
 
+                    <!-- //! Product Images -->
+                    <div class="card p-5 mt-5">
+                        <!-- //** Error -->
+                        <?php if (isset($_SESSION["pr_img_error"])) { ?>
+                            <div class="alert" style="background-color: #ff1a1a;" role="alert">
+                                <?php echo $_SESSION["pr_img_error"];
+                                if (isset($_SESSION["pr_img_suc"])) {
+                                    unset($_SESSION["pr_img_suc"]);
+                                } ?>
+                                <script>
+                                    $(document).ready(function() {
+                                        $('html, body').animate({
+                                            scrollTop: $(".item-imgs-form").parent(".card").offset().top
+                                        }, 100);
+                                        $(".alert").fadeOut(10000);
+                                        <?php unset($_SESSION["pr_img_error"]); ?>
+                                    });
+                                </script>
+                            </div>
+                        <?php } ?>
+
+                        <!-- //** Success -->
+                        <?php if (isset($_SESSION["pr_img_suc"])) { ?>
+                            <div class="alert" style="background-color: #00b300;" role="alert">
+                                <?php echo $_SESSION["pr_img_suc"]; ?>
+                                <script>
+                                    $(document).ready(function() {
+                                        $('html, body').animate({
+                                            scrollTop: $(".item-imgs-form").parent(".card").offset().top
+                                        }, 100);
+                                    });
+                                </script>
+                            </div>
+                        <?php } ?>
+                        <h5 class="text-danger">Product Images</h5>
+                        <hr>
+                        <div class="row border-bottom py-3">
+                            <div class="col-md-1">Sr. no.</div>
+                            <div class="col-md-3 text-center">Images</div>
+                            <div class="col-md-4">Select Image <b style="color: red;">*</b></div>
+                            <div class="col-md-2">Add / Update</div>
+                            <div class="col-md-2">Delete</div>
+                        </div>
+
+                        <form action="http://localhost/php/medicine_website/admin_panel/products/add_product/item_img.php" class="item-imgs-form" method="post" enctype="multipart/form-data">
+                            <?php if (isset($sel)) {
+                                $i = 1;
+                                foreach ($sel as $r) {
+                                    if ($r["item_img"] != null) {
+
+                                        foreach (unserialize($r["item_img"]) as $img) { ?>
+                                            <div class='row border-bottom py-4'>
+                                                <div class='col-md-1'><?php echo $i ?>)</div>
+                                                <div class='col-md-3 d-flex justify-content-center'><img src="http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo $img; ?>" /></div>
+                                                <div class='col-md-4'>
+                                                    <p class="text-danger mb-1">File Name:</p>
+                                                    <?php echo $img; ?>
+                                                    <input type="file" name="item-img" class="form-control mt-4" accept="image/*" disabled="true" required />
+                                                    <input type="checkbox" class="mt-3 mx-2" /> Are you want to change the image?
+                                                </div>
+                                                <div class='col-md-2'>
+                                                    <button class='btn btn-light' name='update-item-img' value="<?php echo $i; ?>">Update</button>
+                                                </div>
+                                                <div class='col-md-2'>
+                                                    <button class='btn btn-light bg-danger' name='delete-item-img' value="<?php echo $i; ?>">Delete</button>
+                                                </div>
+                                            </div>
+                            <?php
+                                            $i++;
+                                        }
+                                    }
+                                }
+                            } ?>
+                        </form>
+                        <button class="btn btn-danger add-item-img" value="<?php echo $i; ?>">ADD Product Image</button>
+                    </div>
+
+
                     <!-- //! Product Details -->
                     <div class="card p-5 mt-5">
                         <!-- //** Success -->
@@ -116,42 +194,47 @@ if (isset($_GET["product_id"])) {
                         <hr>
                         <div class="row product-details">
                             <div class="col-md-6">
-                                <div id="carouselExampleIndicators" class="carousel slide border">
+                                <?php
+                                if ($count_img <= 0) { ?> <div class="alert" style="background-color: red;">Please! Add Product Images</div>
+                                <?php
+                                } else { ?>
+                                    <div id="carouselExampleIndicators" class="carousel slide border">
 
-                                    <!-- //! Change Product Images btn -->
-                                    <p class="text-danger fs-3 mx-3 m-0 d-inline">Change Product Images</p>
-                                    <a href="http://localhost/php/medicine_website/admin_panel/products/additional_info/item_imgs/item_imgs.php" class="btn btn-light">Change</a>
+                                        <!-- //! Change Product Images btn -->
+                                        <p class="text-danger fs-3 mx-3 m-0 d-inline">Change Product Images</p>
+                                        <a href="http://localhost/php/medicine_website/admin_panel/products/additional_info/item_imgs/item_imgs.php" class="btn btn-light">Change</a>
 
-                                    <div class="carousel-indicators">
-                                        <?php for ($i = 0; $i < $count_img; $i++) { ?>
-                                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="<?php echo $i; ?>" class="active border-0" aria-current="true" aria-label="Slide 1"></button>
-                                        <?php } ?>
+                                        <div class="carousel-indicators">
+                                            <?php for ($i = 0; $i < $count_img; $i++) { ?>
+                                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="<?php echo $i; ?>" class="active border-0" aria-current="true" aria-label="Slide 1"></button>
+                                            <?php } ?>
+                                        </div>
+                                        <div class="carousel-inner">
+                                            <?php $i = 0;
+                                            if ($row["item_img"] != null) {
+                                                foreach (unserialize($row["item_img"]) as $img) {
+                                                    if ($i == 0) { ?>
+                                                        <div class="carousel-item active">
+                                                            <img src="http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo $img; ?>" />
+                                                        </div>
+                                                    <?php $i++;
+                                                    } //
+                                                    else { ?>
+                                                        <div class="carousel-item">
+                                                            <img src="http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo $img; ?>" />
+                                                        </div>
+                                            <?php }
+                                                }
+                                            } ?>
+                                        </div>
+                                        <button class="carousel-control-prev border-0 bg-transparent" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                                            <span class="carousel-control-prev-icon bg-dark rounded" aria-hidden="true"></span>
+                                        </button>
+                                        <button class="carousel-control-next border-0 bg-transparent" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                                            <span class="carousel-control-next-icon bg-dark rounded" aria-hidden="true"></span>
+                                        </button>
                                     </div>
-                                    <div class="carousel-inner">
-                                        <?php $i = 0;
-                                        if ($row["item_img"] != null) {
-                                            foreach (unserialize($row["item_img"]) as $img) {
-                                                if ($i == 0) { ?>
-                                                    <div class="carousel-item active">
-                                                        <img src="http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo $img; ?>" />
-                                                    </div>
-                                                <?php $i++;
-                                                } //
-                                                else { ?>
-                                                    <div class="carousel-item">
-                                                        <img src="http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo $img; ?>" />
-                                                    </div>
-                                        <?php }
-                                            }
-                                        } ?>
-                                    </div>
-                                    <button class="carousel-control-prev border-0 bg-transparent" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                                        <span class="carousel-control-prev-icon bg-dark rounded" aria-hidden="true"></span>
-                                    </button>
-                                    <button class="carousel-control-next border-0 bg-transparent" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                                        <span class="carousel-control-next-icon bg-dark rounded" aria-hidden="true"></span>
-                                    </button>
-                                </div>
+                                <?php } ?>
                             </div>
 
                             <div class="col-md-6">

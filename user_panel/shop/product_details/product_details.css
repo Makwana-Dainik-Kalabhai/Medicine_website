@@ -16,7 +16,7 @@ main {
 }
 
 .full-img {
-    display: none;
+    opacity: 0;
     position: absolute;
     top: 1%;
     right: 2%;
@@ -367,6 +367,9 @@ iframe {
         font-size: 28px;
         padding: 7% 0;
     }
+    .full-img {
+        right: 6%;
+    }
 
     #product_container {
         height: 71.5vh;
@@ -394,6 +397,9 @@ iframe {
 @media (max-width: 1150px) {
     main {
         font-size: 26px;
+    }
+    .full-img {
+        display: none;
     }
 
     #product_container {

@@ -23,6 +23,7 @@ if (isset($_POST["update-category"])) {
         move_uploaded_file($_FILES["cat-img"]["tmp_name"], "C:/xampp/htdocs/php/medicine_website/user_panel/shop/category_img/" . $_FILES["cat-img"]["name"] . "");
     }
     $update->execute();
+    $_SESSION["cat_success"] = "Product Category Details are Updated Successfully";
 
     if (isset($_SERVER['HTTP_REFERER'])) {
         header("Location: " . $_SERVER['HTTP_REFERER'] . "");;
