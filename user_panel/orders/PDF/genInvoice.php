@@ -6,7 +6,7 @@ use Dompdf\Dompdf;
 
 $pdf = new Dompdf();
 
-include("C:/xampp/htdocs/php/medicine_website/user_panel/orders/PDF/Invoice.php");
+include("Invoice.php");
 
 $pdf->load_html($html);
 $pdf->set_option("isRemoteEnabled", true);

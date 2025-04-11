@@ -23,7 +23,7 @@ if (isset($_POST["cancel_yes"])) {
             $upPro->execute();
             
 
-            $upTime = $conn->prepare("UPDATE `orders` SET `time`=NOW WHERE `order_id`='" . $_POST["order_id"] . "'");
+            $upTime = $conn->prepare("UPDATE `orders` SET `time`=NOW() WHERE `order_id`='" . $_POST["order_id"] . "'");
             $upTime->execute();
         }
     }

@@ -89,27 +89,22 @@ if (isset($_GET["status"])) {
                         <span id="discount">-<?php echo $row["discount"]; ?>%</span>
                     <?php } ?>
 
+                    
                     <!-- //! Like btn -->
                     <?php if (!isset($_SESSION["email"])) { ?>
                         <a href="http://localhost/php/medicine_website/user_panel/form/login_form.php" id="like"><i class="fa-solid fa-heart"></i></a>
                         <?php }
 
                     if (isset($_SESSION["email"])) {
-                        $sel_item = $conn->prepare("SELECT * FROM `wishlist`");
+                        $sel_item = $conn->prepare("SELECT * FROM `wishlist` WHERE `email`='" . $_SESSION["email"] . "' AND `product_id`=" . $_SESSION["product_id"] . "");
                         $sel_item->execute();
                         $sel_item = $sel_item->fetchAll();
 
-                        foreach ($sel_item as $row_item) {
-                            if ($_SESSION["product_id"] == $row_item["product_id"]) {
-                                $con_item = $row_item["product_id"];
-                            }
-                        }
-
-                        if (isset($con_item)) { ?>
+                        if (isset($sel_item[0])) { ?>
                             <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/verify_like.php?type=delete" id="like" style="color:red;"><i class="fa-solid fa-heart"></i></a>
                         <?php }
                         //
-                        if (!isset($con_item)) { ?>
+                        else { ?>
                             <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/verify_like.php?type=insert" id="like" style="color:gray;"><i class="fa-solid fa-heart"></i></a>
                         <?php }
                     }

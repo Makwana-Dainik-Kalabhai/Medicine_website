@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <!-- //! Jquery Link -->
-<script src="http://localhost/php/mysql/icecream_website/jquery-3.7.1.js"></script>
+<script src="http://localhost/php/icecream_website/jquery-3.7.1.js"></script>
 
 <!-- //! Favicon -->
 <link rel="shortcut icon" href="http://localhost/php/medicine_website/logo.ico" type="image/x-icon" />

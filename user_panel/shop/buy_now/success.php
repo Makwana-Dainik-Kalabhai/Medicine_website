@@ -102,18 +102,36 @@ class Data
         );
 
         $this->del_date = date("Y-m-d 00:00:00.000000", $_POST["form_del_date"]);
+
+        //! Sessions
+        $_SESSION["order_id"] = $_POST["form_order_id"];
+        $_SESSION["name"] = $_POST["form_name"];
+        $_SESSION["email"] = $_POST["form_email"];
+        $_SESSION["phone"] = $_POST["form_phone"];
+        $_SESSION["items"] = serialize($_POST["form_items"]);
+        $_SESSION["off_price"] = serialize($_POST["form_off_price"]);
+        $_SESSION["price"] = serialize($_POST["form_price"]);
+        $_SESSION["quantity"] = serialize($_POST["form_quantity"]);
+        $_SESSION["payment_type"] = $_POST["form_pay_type"];
+        $_SESSION["payment_status"] = $_POST["form_pay_status"];
+        $_SESSION["status"] = "Processing";
+        $_SESSION["total"] = $_POST["form_total"];
+        $_SESSION["del_address"] = array(
+            "house_no" => $_POST["form_house_no"],
+            "street" => $_POST["form_street"],
+            "suite" => $_POST["form_suite"],
+            "city" => $_POST["form_city"],
+            "state" => $_POST["form_state"],
+            "pincode" => $_POST["form_pincode"]
+        );
+        $_SESSION["del_date"] = date("Y-m-d 00:00:00.000000", $_POST["form_del_date"]);
     }
 
     function insertValues()
     {
         global $conn;
-        if (isset($_POST["items"][2])) {
-            $in = $conn->prepare("INSERT INTO `orders` VALUES('" . $this->order_id . "','" . $this->name . "','" . $this->email . "','" . $this->phone . "','" . $this->items . "','" . $this->off_price . "','" . $this->price . "','" . $this->quantity . "',NOW(),'" . $this->payment_type . "','" . $this->payment_status . "','" . $this->status . "','" . $this->total . "','" . serialize($this->del_address) . "','" . $this->del_date . "','Your Order is Processing for Shipping')");
-            $in->execute();
-        } else {
-            $in = $conn->prepare("INSERT INTO `orders` VALUES('" . $this->order_id . "','" . $this->name . "','" . $this->email . "','" . $this->phone . "','" . $this->items . "','" . $this->off_price . "','" . $this->price . "','" . $this->quantity . "',NOW(),'" . $this->payment_type . "','" . $this->payment_status . "','" . $this->status . "','" . $this->total . "','" . serialize($this->del_address) . "','" . $this->del_date . "','Your Order is Processing for Shipping')");
-            $in->execute();
-        }
+        $in = $conn->prepare("INSERT INTO `orders` VALUES('" . $this->order_id . "','" . $this->name . "','" . $this->email . "','" . $this->phone . "','" . $this->items . "','" . $this->off_price . "','" . $this->price . "','" . $this->quantity . "',NOW(),'" . $this->payment_type . "','" . $this->payment_status . "','" . $this->status . "','" . $this->total . "','" . serialize($this->del_address) . "','" . $this->del_date . "','Your Order is Processing for Shipping')");
+        $in->execute();
     }
 
     function updateValues()
@@ -190,12 +208,7 @@ if (isset($_POST["pay_now"]) && $_POST["pay_now"] == "razorpay") {
                 "image": "http://localhost/php/medicine_website/user_panel/header/logo1.png",
                 "order_id": "<?php echo $res["id"]; ?>",
                 "handler": function(response) {
-                    <?php $data->insertValues();
-                    $data->updateValues();
-                    if (isset($_SESSION["cart"])) $data->deleteValues(); ?>
-
-                    window.location.href = "http://localhost/php/medicine_website/user_panel/orders/orders.php";
-                    alert("Order Placed Successfully");
+                    window.location.href = "insert.php";
                 },
                 "prefill": {
                     "name": "<?php echo $data->name; ?>",

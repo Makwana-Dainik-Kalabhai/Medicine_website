@@ -103,7 +103,7 @@ include("C:/xampp/htdocs/php/medicine_website/database.php");
                                 <div>
                                     <!-- //! Quantity -->
                                     <label class="form-label mx-2 mt-3">Quantity:</label>
-                                    <?php if (isset($_GET["product"]) && $_GET["product"] == "multiple") { ?>
+                                    <?php if (isset($_GET["product"])) { ?>
                                         <div class="quantity-form">
                                             <input type="hidden" class="available-quantity" value="<?php echo $prod_qua; ?>" />
                                             <button class="form-control minus-quantity">-</button>

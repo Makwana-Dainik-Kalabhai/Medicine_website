@@ -43,7 +43,7 @@ if (!isset($_SESSION["email"])) { ?>
                 // Database
                 include("C:/xampp/htdocs/php/medicine_website/database.php");
 
-                $sel = $conn->prepare("SELECT * FROM `wishlist` INNER JOIN `products` ON wishlist.product_id=products.product_id");
+                $sel = $conn->prepare("SELECT * FROM `wishlist` INNER JOIN `products` ON wishlist.product_id=products.product_id WHERE `email`='".$_SESSION["email"]."'");
                 $sel->execute();
                 $sel = $sel->fetchAll();
 
