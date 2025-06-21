@@ -28,32 +28,31 @@ if (isset($_POST["category"])) {
     $_SESSION["category"] = $_POST["category"];
 }
 
-if (isset($_POST["price_range"]) && isset($_POST["discount_range"])) {
+if (isset($_POST["price_range"])) {
     $_SESSION["price_range"] = $_POST["price_range"];
-    $_SESSION["discount_range"] = $_POST["discount_range"];
 }
 
-$query = "SELECT * FROM `products` WHERE `offer_price`<=" . $_SESSION["price_range"] . " AND `discount`<=" . $_SESSION["discount_range"] . "";
+$query = "SELECT * FROM `products` WHERE `offer_price`<=" . $_SESSION["price_range"] . "";
 if (isset($_SESSION["category"])) {
-    $query = "SELECT * FROM `products` WHERE `offer_price`<=" . $_SESSION["price_range"] . " AND `discount`<=" . $_SESSION["discount_range"] . " AND `category`='" . $_SESSION["category"] . "'";
+    $query = "SELECT * FROM `products` WHERE `offer_price`<=" . $_SESSION["price_range"] . " AND `category`='" . $_SESSION["category"] . "'";
 }
 if (isset($_SESSION["status"])) {
-    $query = "SELECT * FROM `products` WHERE `offer_price`<=" . $_SESSION["price_range"] . " AND `discount`<=" . $_SESSION["discount_range"] . " AND `status`='" . $_SESSION["status"] . "'";
+    $query = "SELECT * FROM `products` WHERE `offer_price`<=" . $_SESSION["price_range"] . " AND `status`='" . $_SESSION["status"] . "'";
 }
 if (isset($_SESSION["filter"])) {
-    $query = "SELECT * FROM `products` WHERE `offer_price`<=" . $_SESSION["price_range"] . " AND `discount`<=" . $_SESSION["discount_range"] . " ORDER BY " . $_SESSION["filter"] . "";
+    $query = "SELECT * FROM `products` WHERE `offer_price`<=" . $_SESSION["price_range"] . " ORDER BY " . $_SESSION["filter"] . "";
 }
 if (isset($_SESSION["category"]) && isset($_SESSION["status"])) {
-    $query = "SELECT * FROM `products` WHERE `offer_price`<=" . $_SESSION["price_range"] . " AND `discount`<=" . $_SESSION["discount_range"] . " AND `category`='" . $_SESSION["category"] . "' AND `status`='" . $_SESSION["status"] . "'";
+    $query = "SELECT * FROM `products` WHERE `offer_price`<=" . $_SESSION["price_range"] . " AND `category`='" . $_SESSION["category"] . "' AND `status`='" . $_SESSION["status"] . "'";
 }
 if (isset($_SESSION["category"]) && isset($_SESSION["filter"])) {
-    $query = "SELECT * FROM `products` WHERE `offer_price`<=" . $_SESSION["price_range"] . " AND `discount`<=" . $_SESSION["discount_range"] . " AND `category`='" . $_SESSION["category"] . "' ORDER BY " . $_SESSION["filter"] . "";
+    $query = "SELECT * FROM `products` WHERE `offer_price`<=" . $_SESSION["price_range"] . " AND `category`='" . $_SESSION["category"] . "' ORDER BY " . $_SESSION["filter"] . "";
 }
 if (isset($_SESSION["status"]) && isset($_SESSION["filter"])) {
-    $query = "SELECT * FROM `products` WHERE `offer_price`<=" . $_SESSION["price_range"] . " AND `discount`<=" . $_SESSION["discount_range"] . " AND `status`='" . $_SESSION["status"] . "' ORDER BY " . $_SESSION["filter"] . "";
+    $query = "SELECT * FROM `products` WHERE `offer_price`<=" . $_SESSION["price_range"] . " AND `status`='" . $_SESSION["status"] . "' ORDER BY " . $_SESSION["filter"] . "";
 }
 if (isset($_SESSION["filter"]) && isset($_SESSION["status"]) && isset($_SESSION["category"])) {
-    $query = "SELECT * FROM `products` WHERE `offer_price`<=" . $_SESSION["price_range"] . " AND `discount`<=" . $_SESSION["discount_range"] . " AND `category`='" . $_SESSION["category"] . "' AND `status`='" . $_SESSION["status"] . "' ORDER BY " . $_SESSION["filter"] . "";
+    $query = "SELECT * FROM `products` WHERE `offer_price`<=" . $_SESSION["price_range"] . " AND `category`='" . $_SESSION["category"] . "' AND `status`='" . $_SESSION["status"] . "' ORDER BY " . $_SESSION["filter"] . "";
 }
 
 
@@ -73,7 +72,7 @@ foreach ($sel as $row) {
                 if ($row["discount"] != 0) { ?>
                     <span id="discount">&ensp;-<?php echo $row["discount"]; ?>%</span>
                 <?php } ?>
-                <img src="http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo unserialize($row["item_img"])[0]; ?>" alt="" />
+                <img src="<?php echo (str_contains(unserialize($row["item_img"])[0], "https")) ? unserialize($row["item_img"])[0] : "http://localhost/php/medicine_website/user_panel/shop/imgs/" . unserialize($row["item_img"])[0] . ""; ?>" alt="" />
             </div>
             <div id="product_details">
                 <span id="name"><?php echo $row["name"]; ?></span>

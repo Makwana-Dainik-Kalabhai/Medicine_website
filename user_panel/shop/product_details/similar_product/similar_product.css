@@ -82,7 +82,7 @@
 }
 
 #similar_products #price {
-    color: gray;
+    color: #d9d9d9;
     font-size: 0.55em;
     margin: 0;
     text-decoration: line-through;
@@ -90,8 +90,8 @@
 
 #similar_products #save {
     display: block;
-    color: green;
-    font-size: 0.6em;
+    color: #00ff00;
+    font-size: 0.55em;
     font-weight: 500;
     line-height: 1;
 }

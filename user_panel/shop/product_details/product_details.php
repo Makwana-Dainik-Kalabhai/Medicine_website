@@ -48,7 +48,7 @@ if (isset($_GET["status"])) {
                         <figure class="fig">
                             <?php foreach (unserialize($row["item_img"]) as $img) { ?>
                                 <div id="img" class="<?php echo ($count_img == 0) ? "active-sub-img" : ""; ?>">
-                                    <img src="http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo $img; ?>" />
+                                    <img src="<?php echo (str_contains($img, "https")) ? $img : "http://localhost/php/medicine_website/user_panel/shop/imgs/$img"; ?>" />
                                 </div>
                             <?php $count_img++;
                             } ?>
@@ -81,7 +81,7 @@ if (isset($_GET["status"])) {
 
                 <div id="main_imgs">
                     <?php foreach (unserialize($row["item_img"]) as $img) { ?>
-                        <a id="full" href="http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo $img; ?>"><img src="http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo $img; ?>" /></a>
+                        <a id="full" href="http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo $img; ?>"><img src="<?php echo (str_contains($img, "https")) ? $img : "http://localhost/php/medicine_website/user_panel/shop/imgs/$img"; ?>" /></a>
                     <?php } ?>
 
                     <!-- //! Discount btn -->

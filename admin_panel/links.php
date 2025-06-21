@@ -1,4 +1,11 @@
-<!-- //! Fonts and icons     -->
+<style>
+    input[type=checkbox] {
+        zoom: 1.5;
+        cursor: pointer;
+    }
+</style>
+
+<!-- //! Fonts and icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
 
 <!-- //! CSS Files -->
@@ -8,7 +15,7 @@
 <!-- //! Favicon -->
 <link rel="shortcut icon" href="http://localhost/php/medicine_website/logo.ico" type="image/x-icon" />
 
-<!-- //! Core JS Files   -->
+<!-- //! Core JS Files -->
 <script src="http://localhost/php/medicine_website/admin_panel/assets/js/core/jquery.min.js"></script>
 <script src="http://localhost/php/medicine_website/admin_panel/assets/js/core/popper.min.js"></script>
 <script src="http://localhost/php/medicine_website/admin_panel/assets/js/core/bootstrap.min.js"></script>
@@ -18,7 +25,7 @@
 <?php include("C:/xampp/htdocs/php/medicine_website/database.php"); ?>
 
 <!-- //! Jquery Link -->
-<script src="http://localhost/php/mysql/icecream_website/jquery-3.7.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <!-- //! Data Table Links -->
 <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css">

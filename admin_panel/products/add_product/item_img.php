@@ -5,46 +5,68 @@ include("C:/xampp/htdocs/php/medicine_website/database.php");
 
 //* Add Product Images
 if (isset($_POST["add-item-img"])) {
-    if ($_FILES["item-img"]["name"] == null) {
-        $_SESSION["pr_img_error"] = "Please! Select the File";
+    if (isset($_FILES["item-img"]) && $_FILES["item-img"]["name"] != null) {
 
-
-        if (isset($_SERVER['HTTP_REFERER'])) {
-            header("Location: " . $_SERVER['HTTP_REFERER'] . "");
+        if (str_contains($_FILES["item-img"]["name"], "'")) {
+            $_FILES["item-img"]["name"] = explode("'", $_FILES["item-img"]["name"]);
+            $_FILES["item-img"]["name"] = $_FILES["item-img"]["name"][0] . $_FILES["item-img"]["name"][1];
         }
-        return;
-    }
-
-    if (str_contains($_FILES["item-img"]["name"], "'")) {
-        $_FILES["item-img"]["name"] = explode("'", $_FILES["item-img"]["name"]);
-        $_FILES["item-img"]["name"] = $_FILES["item-img"]["name"][0] . $_FILES["item-img"]["name"][1];
-    }
 
 
-    $sel = $conn->prepare("SELECT * FROM `products` WHERE `product_id`='" . $_SESSION["product_id"] . "'");
-    $sel->execute();
-    $sel = $sel->fetchAll();
+        $sel = $conn->prepare("SELECT * FROM `products` WHERE `product_id`='" . $_SESSION["product_id"] . "'");
+        $sel->execute();
+        $sel = $sel->fetchAll();
 
-    foreach ($sel as $r) {
-        if ($r["item_img"] != null) {
-            foreach (unserialize($r["item_img"]) as $img) {
-                if ($_FILES["item-img"]["name"] == $img) {
-                    $contain = true;
+        foreach ($sel as $r) {
+            if ($r["item_img"] != null) {
+                foreach (unserialize($r["item_img"]) as $img) {
+                    if ($_FILES["item-img"]["name"] == $img) {
+                        $contain = true;
+                    }
                 }
             }
         }
-    }
-    if (isset($contain)) {
-        $_SESSION["pr_img_error"] = "Please! Check that Image is already exist this Product";
+        if (isset($contain)) {
+            $_SESSION["pr_img_error"] = "Please! Check that Image is already exist this Product";
 
 
-        if (isset($_SERVER['HTTP_REFERER'])) {
-            header("Location: " . $_SERVER['HTTP_REFERER'] . "");;
+            if (isset($_SERVER['HTTP_REFERER'])) {
+                header("Location: " . $_SERVER['HTTP_REFERER'] . "");;
+            }
+            return;
+        } //
+        else {
+            $item_img = array();
+
+            foreach ($sel as $r) {
+                if ($r["item_img"] != null) {
+                    foreach (unserialize($r["item_img"]) as $img) {
+                        array_push($item_img, $img);
+                    }
+                }
+            }
+            array_push($item_img, $_FILES["item-img"]["name"]);
+
+            $up = $conn->prepare("UPDATE `products` SET `item_img`='" . serialize($item_img) . "' WHERE `product_id`='" . $_SESSION["product_id"] . "'");
+
+            if ($up->execute()) {
+                move_uploaded_file($_FILES["item-img"]["tmp_name"], "C:/xampp/htdocs/php/medicine_website/user_panel/shop/imgs/" . $_FILES["item-img"]["name"] . "");
+
+                $_SESSION["pr_img_suc"] = "Product Image Added Successfully";
+            } //
+            else {
+                $_SESSION["pr_img_error"] = "Something went Wrong";
+            }
         }
-        return;
-    } //
-    else {
+    }
+
+    //
+    else if (isset($_POST["item-img"]) && $_POST["item-img"] != null) {
+
         $item_img = array();
+        $sel = $conn->prepare("SELECT * FROM `products` WHERE `product_id`='" . $_SESSION["product_id"] . "'");
+        $sel->execute();
+        $sel = $sel->fetchAll();
 
         foreach ($sel as $r) {
             if ($r["item_img"] != null) {
@@ -53,18 +75,18 @@ if (isset($_POST["add-item-img"])) {
                 }
             }
         }
-        array_push($item_img, $_FILES["item-img"]["name"]);
+        array_push($item_img, $_POST["item-img"]);
 
         $up = $conn->prepare("UPDATE `products` SET `item_img`='" . serialize($item_img) . "' WHERE `product_id`='" . $_SESSION["product_id"] . "'");
 
         if ($up->execute()) {
-            move_uploaded_file($_FILES["item-img"]["tmp_name"], "C:/xampp/htdocs/php/medicine_website/user_panel/shop/imgs/" . $_FILES["item-img"]["name"] . "");
-
             $_SESSION["pr_img_suc"] = "Product Image Added Successfully";
         } //
         else {
             $_SESSION["pr_img_error"] = "Something went Wrong";
         }
+    } else {
+        $_SESSION["pr_img_error"] = "Please! Select the file";
     }
 
 
@@ -113,39 +135,68 @@ if (isset($_POST["delete-item-img"])) {
 
 
 
+
+
+
+
+
 //* Update Product Images
 if (isset($_POST["update-item-img"])) {
 
-    if ($_FILES["item-img"]["name"]==null) {
-        $_SESSION["pr_img_error"] = "Please! Select the File";
+    if (isset($_FILES["item-img"]) && $_FILES["item-img"]["name"] != null) {
 
-        if (isset($_SERVER['HTTP_REFERER'])) {
-            header("Location: " . $_SERVER['HTTP_REFERER'] . "");;
+        if (str_contains($_FILES["item-img"]["name"], "'")) {
+            $_FILES["item-img"]["name"] = explode("'", $_FILES["item-img"]["name"]);
+            $_FILES["item-img"]["name"] = $_FILES["item-img"]["name"][0] . $_FILES["item-img"]["name"][1];
         }
-        return;
-    }
-    if (str_contains($_FILES["item-img"]["name"], "'")) {
-        $_FILES["item-img"]["name"] = explode("'", $_FILES["item-img"]["name"]);
-        $_FILES["item-img"]["name"] = $_FILES["item-img"]["name"][0] . $_FILES["item-img"]["name"][1];
-    }
 
-    $sel = $conn->prepare("SELECT * FROM `products` WHERE `product_id`!=".$_SESSION["product_id"]."");
-    $sel->execute();
-    $sel = $sel->fetchAll();
+        $sel = $conn->prepare("SELECT * FROM `products` WHERE `product_id`!=" . $_SESSION["product_id"] . "");
+        $sel->execute();
+        $sel = $sel->fetchAll();
 
-    foreach ($sel as $r) {
-        if ($r["item_img"] != null) {
-            foreach (unserialize($r["item_img"]) as $key => $img) {
-                if ($_FILES["item-img"]["name"] == $img && $_POST["update-item-img"] != $key+1) {
-                    $contain = true;
+        foreach ($sel as $r) {
+            if ($r["item_img"] != null) {
+                foreach (unserialize($r["item_img"]) as $key => $img) {
+                    if ($_FILES["item-img"]["name"] == $img && $_POST["update-item-img"] != $key + 1) {
+                        $contain = true;
+                    }
                 }
             }
         }
+        if (isset($contain)) {
+            $_SESSION["pr_img_error"] = "Please! Change name of the Image, Name is already exist";
+        } //
+        else {
+            $item_img = array();
+            $sel = $conn->prepare("SELECT * FROM `products` WHERE `product_id`='" . $_SESSION["product_id"] . "'");
+            $sel->execute();
+            $sel = $sel->fetchAll();
+
+            foreach ($sel as $r) {
+                if ($r["item_img"] != null) {
+                    foreach (unserialize($r["item_img"]) as $img) {
+                        array_push($item_img, $img);
+                    }
+                }
+            }
+            $item_img[$_POST["update-item-img"] - 1] = $_FILES["item-img"]["name"];
+
+            $up = $conn->prepare("UPDATE `products` SET `item_img`='" . serialize($item_img) . "' WHERE `product_id`='" . $_SESSION["product_id"] . "'");
+
+            if ($up->execute()) {
+                move_uploaded_file($_FILES["item-img"]["tmp_name"], "C:/xampp/htdocs/php/medicine_website/user_panel/shop/imgs/" . $_FILES["item-img"]["name"] . "");
+
+                $_SESSION["pr_img_suc"] = "Product Image Updated Successfully";
+            } //
+            else {
+                $_SESSION["pr_img_error"] = "Please! Change name of the Image";
+            }
+        }
     }
-    if (isset($contain)) {
-        $_SESSION["pr_img_error"] = "Please! Change name of the Image, Name is already exist";
-    } //
-    else {
+
+    //
+    else if (isset($_POST["item-img"]) && $_POST["item-img"] != null) {
+
         $item_img = array();
         $sel = $conn->prepare("SELECT * FROM `products` WHERE `product_id`='" . $_SESSION["product_id"] . "'");
         $sel->execute();
@@ -158,18 +209,15 @@ if (isset($_POST["update-item-img"])) {
                 }
             }
         }
-        $item_img[$_POST["update-item-img"] - 1] = $_FILES["item-img"]["name"];
+        $item_img[$_POST["update-item-img"] - 1] = $_POST["item-img"];
 
         $up = $conn->prepare("UPDATE `products` SET `item_img`='" . serialize($item_img) . "' WHERE `product_id`='" . $_SESSION["product_id"] . "'");
+        $up->execute();
 
-        if ($up->execute()) {
-            move_uploaded_file($_FILES["item-img"]["tmp_name"], "C:/xampp/htdocs/php/medicine_website/user_panel/shop/imgs/" . $_FILES["item-img"]["name"] . "");
-
-            $_SESSION["pr_img_suc"] = "Product Image Updated Successfully";
-        } //
-        else {
-            $_SESSION["pr_img_error"] = "Please! Change name of the Image";
-        }
+        $_SESSION["pr_img_suc"] = "Product Image Updated Successfully";
+        //
+    } else {
+        $_SESSION["pr_img_error"] = "Please! Select the file";
     }
 
     if (isset($_SERVER['HTTP_REFERER'])) {

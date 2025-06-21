@@ -81,22 +81,29 @@
 
                         <form action="http://localhost/php/medicine_website/admin_panel/products/additional_info/desc_imgs/update.php" class="desc-imgs-form" method="post" enctype="multipart/form-data">
                             <?php
-                            $i=0;
+                            $i = 0;
                             if (isset(unserialize($row["desc_img"])[0])) {
                                 foreach (unserialize($row["desc_img"]) as $desc_img) { ?>
                                     <div class="row border-bottom py-4">
-                                        <div class="col-md-1"><?php echo $i+1 . ")"; ?></div>
+                                        <div class="col-md-1"><?php echo $i + 1 . ")"; ?></div>
                                         <div class="col-md-4 d-flex justify-content-center">
-                                            <img class="desc-img" src="http://localhost/php/medicine_website/user_panel/shop/desc_imgs/<?php echo $desc_img; ?>" />
+                                            <img class="desc-img" src="<?php echo (str_contains($desc_img, "https")) ? $desc_img : "http://localhost/php/medicine_website/user_panel/shop/desc_imgs/$desc_img"; ?>" />
                                         </div>
+
                                         <div class="col-md-4">
                                             <p class="text-danger mb-1">File Name:</p>
                                             <?php echo $desc_img; ?>
-                                            <input type="file" name="desc-img" class="form-control mt-4" accept="image/*" disabled="true" value="<?php echo $desc_img; ?>" required />
-                                            <input type="checkbox" class="mt-3 mx-2" /> Are you want to change the image?
+
+                                            <input type="file" name="desc-img" class="form-control mt-4" accept="image/*" disabled="true" required />
+
+                                            <input type="checkbox" class="file-checkbox mt-1 mx-1" />Are you want to upload file?
+                                            <p class="text-center mt-2">OR</p>
+                                            <input type="text" name="desc-img" class="form-control" placeholder="Enter HTTP URL here" disabled="true" required />
+                                            <input type="checkbox" class="url-checkbox mt-1 mx-1" />Are you want to use online img URL?
                                         </div>
+
                                         <div class="col-md-2">
-                                            <button class="btn btn-light change-btn" disabled="true" name="change" value="<?php echo $i; ?>">Change</button>
+                                            <button class="btn btn-light change-btn" disabled="true" name="change" value="<?php echo $i; ?>">Update</button>
                                         </div>
                                         <div class="col-md-1">
                                             <button class="btn btn-danger" name="delete" value="<?php echo $i; ?>">Delete</button>

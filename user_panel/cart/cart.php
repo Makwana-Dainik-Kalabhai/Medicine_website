@@ -78,7 +78,7 @@ if (!isset($_SESSION["email"])) { ?>
                                                         echo "disable";
                                                     } ?>">
                             <div id='product_img'>
-                                <img src='http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo unserialize($row["item_img"])[0]; ?>'>
+                                <img src="<?php echo (str_contains(unserialize($row["item_img"])[0], "https")) ? unserialize($row["item_img"])[0] : "http://localhost/php/medicine_website/user_panel/shop/imgs/" . unserialize($row["item_img"])[0] . ""; ?>">
 
                                 <?php if ($prod_qua != 0) { ?>
                                     <form action='update_qua.php' method='post'>

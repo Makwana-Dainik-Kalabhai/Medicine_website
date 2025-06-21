@@ -9,7 +9,8 @@ if ($_POST["search_val"] != null) {
 
     foreach ($select as $row) { ?>
         <a href='http://localhost/php/medicine_website/user_panel/shop/pr_main_page/pr_main_page.php?category=<?php echo $row["category"]; ?>&status=<?php echo $row["status"]; ?>'>
-            <div class="search-img"><img src="http://localhost/php/medicine_website/user_panel/shop/category_img/<?php echo $row["cat_img"]; ?>" alt="" /></div>
+            
+            <div class="search-img"><img src="<?php echo (str_contains($row["cat_img"], "https")) ? $row["cat_img"] : "http://localhost/php/medicine_website/user_panel/shop/category_img/" . $row["cat_img"] . ""; ?>" alt="" /></div>
             <div class="search-name">
                 <?php $j = 0;
                 $category = strtolower($row["category"]);
@@ -41,7 +42,7 @@ if ($_POST["search_val"] != null) {
 
     foreach ($select as $row) { ?>
         <a href='http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php?product_id=<?php echo $row["product_id"]; ?>&status=<?php echo $row["status"]; ?>'>
-            <div class="search-img"><img src="http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo unserialize($row["item_img"])[0]; ?>" alt="" /></div>
+            <div class="search-img"><img src="<?php echo (str_contains(unserialize($row["item_img"])[0], "https")) ? unserialize($row["item_img"])[0] : "http://localhost/php/medicine_website/user_panel/shop/imgs/" . unserialize($row["item_img"])[0] . ""; ?>" alt="" /></div>
 
             <div class="search-name">
                 <?php $j = 0;

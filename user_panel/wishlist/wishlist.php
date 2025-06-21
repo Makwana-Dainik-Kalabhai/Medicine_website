@@ -82,7 +82,7 @@ function displayItems($row)
         <div id='products'>
             <a href='http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php?status=<?php echo $row["status"]; ?>&product_id=<?php echo $row['product_id']; ?>' id='box'>
                 <div id='product_img'>
-                    <img src='http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo unserialize($row['item_img'])[0]; ?>' />
+                    <img src="<?php echo (str_contains(unserialize($row["item_img"])[0], "https")) ? unserialize($row["item_img"])[0] : "http://localhost/php/medicine_website/user_panel/shop/imgs/" . unserialize($row["item_img"])[0] . ""; ?>" />
                 </div>
 
                 <div id='product_details'>

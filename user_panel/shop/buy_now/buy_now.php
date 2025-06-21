@@ -93,7 +93,7 @@ include("C:/xampp/htdocs/php/medicine_website/database.php");
                                 <?php } ?>
 
                                 <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php?status=<?php echo $row["status"]; ?>&product_id=<?php echo $row['product_id']; ?>">
-                                    <img src="http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo unserialize($row["item_img"])[0]; ?>" alt="...">
+                                    <img src="<?php echo (str_contains(unserialize($row["item_img"])[0], "https")) ? unserialize($row["item_img"])[0] : "http://localhost/php/medicine_website/user_panel/shop/imgs/" . unserialize($row["item_img"])[0] . ""; ?>" alt="...">
 
                                     <div class="card-body p-2">
                                         <h5 class="card-title m-0"><?php echo $row["name"]; ?></h5>

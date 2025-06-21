@@ -110,12 +110,12 @@
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li>
-                        <a href="http://localhost/php/medicine_website/admin_panel/products/medicine_list.php" class="dropdown-item" type="button">
+                        <a href="http://localhost/php/medicine_website/admin_panel/products/product_list.php?type=medicine" class="dropdown-item" type="button">
                             <i class="fa-solid fa-tablets"></i> Medicines
                         </a>
                     </li>
                     <li>
-                        <a href="http://localhost/php/medicine_website/admin_panel/products/device_list.php" class="dropdown-item" type="button">
+                        <a href="http://localhost/php/medicine_website/admin_panel/products/product_list.php?type=device" class="dropdown-item" type="button">
                             <i class="fa-solid fa-list"></i> Medical Devices
                         </a>
                     </li>

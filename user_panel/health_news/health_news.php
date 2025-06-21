@@ -9,7 +9,7 @@
     <link rel="shortcut icon" href="http://localhost/php/medicine_website/logo.ico" type="image/x-icon" />
 
     <!-- //! Jquery Link -->
-    <script src="http://localhost/php/icecream_website/jquery-3.7.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <!-- //! Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -48,7 +48,7 @@
         overflow: hidden;
         text-overflow: ellipsis;
         display: -webkit-box;
-        -webkit-line-clamp: 4;
+        -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;
     }
 
@@ -119,7 +119,7 @@
                         <div class="card">
                             <img src="${e.urlToImage}" style="width: 100%;" alt="Image Not Found" />
                             <div class="card-body">
-                                <h5 class="card-title">${(e.title!=null)?e.title:""}
+                                <h5 class="card-title">${(e.title!=null)?((e.title).length>100?(e.title).substring(0, 100)+"...":e.title):""}   
                                 </h5>
                                 <p class="card-text mb-2">
                                     ${(e.description!=null)?e.description:""}

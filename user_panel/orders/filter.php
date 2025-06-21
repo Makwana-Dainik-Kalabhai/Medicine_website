@@ -153,7 +153,7 @@ function itemDetails($row, $r, $quantity)
         <?php if ($r["discount"] > 0) { ?>
             <span id="discount">-<?php echo $r["discount"]; ?></span>
         <?php } ?>
-        <img src="http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo unserialize($r["item_img"])[0]; ?>" />
+        <img src="<?php echo (str_contains(unserialize($r["item_img"])[0], "https")) ? unserialize($r["item_img"])[0] : "http://localhost/php/medicine_website/user_panel/shop/imgs/" . unserialize($r["item_img"])[0] . ""; ?>" />
     </div>
     <div class="item_details">
         <span class="name"><?php echo $r["name"]; ?></span>

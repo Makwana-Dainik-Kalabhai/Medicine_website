@@ -70,12 +70,12 @@ body::-webkit-scrollbar-thumb {
     justify-content: space-between;
     height: 80px;
     background-color: #30819c;
-    font-size: 30px;
+    font-size: 27px;
 }
 
 
 #nav1 #logo {
-    width: 20rem;
+    width: 17rem;
     font-size: 0.95em;
     font-weight: 600;
     margin-left: 2%;
@@ -150,7 +150,7 @@ body::-webkit-scrollbar-thumb {
     display: flex;
     align-items: center;
     height: 70px;
-    font-size: 25px;
+    font-size: 20px;
     background-color: white;
     filter: brightness(99%);
 }
@@ -195,7 +195,7 @@ body::-webkit-scrollbar-thumb {
     margin: 0 1.5rem;
     padding: 5% 0;
     color: #1e5162;
-    font-size: 2em;
+    font-size: 1.75em;
     font-weight: 500;
     text-decoration: none;
 }
@@ -225,7 +225,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 #nav2_btns i {
-    font-size: 0.85em;
+    font-size: 1em;
 }
 
 
@@ -303,7 +303,7 @@ body::-webkit-scrollbar-thumb {
     height: 60px;
     padding: 0.5% 3%;
     color: black;
-    font-size: 0.65em;
+    font-size: 0.7em;
     text-decoration: none;
     border-bottom: 1px solid #d9d9d9;
 }

@@ -21,7 +21,7 @@
                 <div class="similar-box">
                     <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php?product_id=<?php echo $row_rel["product_id"]; ?>">
                         <div id="product_img">
-                            <img src="http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo unserialize($row_rel["item_img"])[0]; ?>" />
+                            <img src="<?php echo (str_contains(unserialize($row_rel["item_img"])[0], "https")) ? unserialize($row_rel["item_img"])[0] : "http://localhost/php/medicine_website/user_panel/shop/imgs/" . unserialize($row_rel["item_img"])[0] . ""; ?>" />
                         </div>
                         <div id="details">
                             <span id="name"><?php echo $row_rel["name"]; ?></span>

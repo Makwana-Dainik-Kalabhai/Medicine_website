@@ -7,7 +7,6 @@ $(document).ready(function () {
   var filter;
   var category;
   var price_range;
-  var discount_range;
 
   //!Sort using filtering methods giving on top-right(products main page) in website
   $("#sort_products div button").click(function () {
@@ -16,7 +15,6 @@ $(document).ready(function () {
 
     filter = $(this).val();
     price_range = $("#price_range input[type='range']").val();
-    discount_range = $("#discount_range input[type='range']").val();
 
     $("#sort_products div button").css({
       color: "#ff0000",
@@ -27,7 +25,6 @@ $(document).ready(function () {
     setTimeout(() => {
       $("#top_load").css("width", "40%");
     }, 200);
-
     setTimeout(() => {
       $("#top_load").css("width", "80%");
       $.ajax({
@@ -36,7 +33,6 @@ $(document).ready(function () {
         data: {
           filter: filter,
           price_range: price_range,
-          discount_range: discount_range,
         },
         success: function (data) {
           $("#top_load").css("width", "100%");
@@ -57,7 +53,6 @@ $(document).ready(function () {
 
     category = $(this).val();
     price_range = $("#price_range input[type='range']").val();
-    discount_range = $("#discount_range input[type='range']").val();
 
     setTimeout(() => {
       $("#top_load").css("width", "40%");
@@ -74,7 +69,6 @@ $(document).ready(function () {
         data: {
           category: category,
           price_range: price_range,
-          discount_range: discount_range,
         },
         success: function (data) {
           $("#products").html(data);
@@ -87,7 +81,6 @@ $(document).ready(function () {
         url: "http://localhost/php/medicine_website/user_panel/shop/pr_main_page/sort_products.php",
         data: {
           price_range: price_range,
-          discount_range: discount_range,
         },
         success: function (data) {
           $("#products").html(data);
@@ -107,7 +100,6 @@ $(document).ready(function () {
 
     category = $(this).val();
     price_range = $("#price_range input[type='range']").val();
-    discount_range = $("#discount_range input[type='range']").val();
 
     setTimeout(() => {
       $("#top_load").css("width", "40%");
@@ -125,7 +117,6 @@ $(document).ready(function () {
       data: {
         category: category,
         price_range: price_range,
-        discount_range: discount_range,
       },
       success: function (data) {
         $("#products").html(data);
@@ -142,7 +133,6 @@ $(document).ready(function () {
     $("#top_load").css("width", "20%");
 
     price_range = $("#price_range input").val();
-    discount_range = $("#discount_range input").val();
 
     setTimeout(() => {
       $("#top_load").css("width", "40%");
@@ -157,7 +147,6 @@ $(document).ready(function () {
       url: "http://localhost/php/medicine_website/user_panel/shop/pr_main_page/sort_products.php",
       data: {
         price_range: price_range,
-        discount_range: discount_range,
       },
       success: function (data) {
         $("#products").html(data);

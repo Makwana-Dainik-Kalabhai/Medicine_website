@@ -24,7 +24,7 @@
 
             foreach ($sel as $row) { ?>
                 <a href="http://localhost/php/medicine_website/user_panel/shop/pr_main_page/pr_main_page.php?status=device&category=<?php echo $row["category"]; ?>" class="box">
-                    <img src="http://localhost/php/medicine_website/user_panel/shop/category_img/<?php echo $row["cat_img"]; ?>" alt="Img not Found" />
+                    <img src="<?php echo (str_contains($row["cat_img"], "https")) ? $row["cat_img"] : "http://localhost/php/medicine_website/user_panel/shop/category_img/" . $row["cat_img"] . ""; ?>" alt="Img not Found" />
                     <span class="category"><?php echo $row["category"]; ?></span>
                 </a>
             <?php } ?>
@@ -51,7 +51,8 @@
                         <span id="discount">-<?php echo $row["discount"]; ?>%</span>
                     <?php } ?>
                     <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php?product_id=<?php echo $row["product_id"]; ?>&status=device">
-                        <img src="http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo unserialize($row["item_img"])[0]; ?>" />
+
+                        <img src="<?php echo (str_contains(unserialize($row["item_img"])[0], "https")) ? unserialize($row["item_img"])[0] : "http://localhost/php/medicine_website/user_panel/shop/imgs/" . unserialize($row["item_img"])[0] . ""; ?>" />
                         <div>
                             <span id="name"><?php echo $row["name"]; ?></span>
                             <span id="off_price">&#8377;<?php echo $row["offer_price"]; ?></span>

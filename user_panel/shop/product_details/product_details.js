@@ -4,11 +4,11 @@ $(document).ready(() => {
 
   //! Hover on Main Image, then Zoom it
   $("#main_imgs a").mouseenter(function () {
-    $(".full-img").css("opacity", 1);
+    $(".full-img").css("display", "block");
     $(".full-img img").attr("src", $(this).children("img").attr("src"));
   });
   $("#main_imgs a").mouseleave(function () {
-    $(".full-img").css("opacity", 0);
+    $(".full-img").css("display", "none");
   });
 
   // ! Click on image to change

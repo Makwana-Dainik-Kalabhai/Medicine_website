@@ -18,7 +18,7 @@
         $sel = $sel->fetchAll();
 
         foreach ($sel as $row) { ?>
-            <a href="http://localhost/php/medicine_website/user_panel/shop/pr_main_page/pr_main_page.php?category=<?php echo $row["category"]; ?>&status=medicine"><img src="http://localhost/php/medicine_website/user_panel/shop/category_img/<?php echo $row["cat_img"]; ?>" /></a>
+            <a href="http://localhost/php/medicine_website/user_panel/shop/pr_main_page/pr_main_page.php?category=<?php echo $row["category"]; ?>&status=medicine"><img src="<?php echo (str_contains($row["cat_img"], "https")) ? $row["cat_img"] : "http://localhost/php/medicine_website/user_panel/shop/category_img/" . $row["cat_img"] . ""; ?>" /></a>
         <?php } ?>
     </div>
 </div>
@@ -35,7 +35,7 @@
             <div id="box">
                 <a href="http://localhost/php/medicine_website/user_panel/shop/product_details/product_details.php?product_id=<?php echo $row["product_id"]; ?>&status=medicine">
                     <div id="product_img">
-                        <img src="http://localhost/php/medicine_website/user_panel/shop/imgs/<?php echo unserialize($row["item_img"])[0]; ?>" />
+                        <img src="<?php echo (str_contains(unserialize($row["item_img"])[0], "https")) ? unserialize($row["item_img"])[0] : "http://localhost/php/medicine_website/user_panel/shop/imgs/" . unserialize($row["item_img"])[0] . ""; ?>" />
 
                         <?php if (!isset($_SESSION["email"])) { ?>
                             <a href="http://localhost/php/medicine_website/user_panel/form/login_form.php"><i class="fa-solid fa-heart"></i></a>
